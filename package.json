@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "rhases-app",
   "version": "1.1.1",
   "description": "rhases-app: An Ionic project",
@@ -14,7 +14,42 @@
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0"
   },
-  "cordovaPlugins": [],
+  "cordovaPlugins": [
+    "cordova-plugin-statusbar",
+    "cordova-plugin-contacts",
+    "cordova-plugin-camera",
+    "cordova-plugin-vibration",
+    "cordova-plugin-device",
+    "cordova-plugin-console",
+    "cordova-plugin-transport-security",
+    "cordova-plugin-inappbrowser",
+    "cordova-plugin-splashscreen",
+    "cordova-plugin-admobpro",
+    "cordova-plugin-x-socialsharing",
+    "cordova-plugin-email-composer",
+    "ionic-plugin-keyboard",
+    "cordova-sms-plugin",
+    {
+      "locator": "https://github.com/devgeeks/Canvas2ImagePlugin.git",
+      "id": "org.devgeeks.Canvas2ImagePlugin"
+    },
+    {
+      "locator": "https://github.com/wymsee/cordova-imagePicker.git",
+      "id": "cordova-plugin-image-picker"
+    },
+    {
+      "locator": "https://github.com/litehelpers/Cordova-sqlite-storage.git#0.7.14",
+      "id": "cordova-sqlite-storage"
+    },
+    {
+      "locator": "https://github.com/EddyVerbruggen/Flashlight-PhoneGap-Plugin",
+      "id": "cordova-plugin-flashlight"
+    },
+    {
+      "locator": "https://github.com/katzer/cordova-plugin-local-notifications",
+      "id": "de.appplant.cordova.plugin.local-notification"
+    }
+  ],
   "cordovaPlatforms": [
     "ios",
     "android"
