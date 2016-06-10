@@ -42,34 +42,6 @@ window.globalVariable = {
 angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova'])
     .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
 
-        //Create database table of contracts by using sqlite database.
-        //Table schema :
-        //Column	   Type	     Primary key
-        //  id	        Integer	    Yes
-        //  firstName	Text	    No
-        //  lastName	Text	    No
-        //  telephone	Text	    No
-        //  email	    Text	    No
-        //  note	    Text	    No
-        //  createDate	DateTime	No
-        //  age	        Integer	    No
-        //  isEnable	Boolean	    No
-
-        function initialSQLite() {
-            db = window.cordova ? $cordovaSQLite.openDB("contract.db") : window.openDatabase("contract.db", "1.0", "IonicMaterialDesignDB", -1);
-            $cordovaSQLite.execute(db, "CREATE TABLE IF NOT EXISTS contracts " +
-                "( id           integer primary key   , " +
-                "  firstName    text                  , " +
-                "  lastName     text                  , " +
-                "  telephone    text                  , " +
-                "  email        text                  , " +
-                "  note         text                  , " +
-                "  createDate   dateTime              , " +
-                "  age          integer               , " +
-                "  isEnable     Boolean)                ");
-        };
-        // End creating SQLite database table.
-
         // Create custom defaultStyle.
         function getDefaultStyle() {
             return "" +
@@ -81,74 +53,6 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 "   color                     : " + appPrimaryColor + " !important;" +
                 "}";
         }// End create custom defaultStyle
-
-        // Create custom style for product view.
-        function getProductStyle() {
-            return "" +
-                ".material-background-nav-bar { " +
-                "   background-color        : " + appPrimaryColor + " !important;" +
-                "   border-style            : none;" +
-                "   background-image        : url('img/background_cover_pixels.png') !important;" +
-                "   background-size         : initial !important;" +
-                "}" +
-                ".md-primary-color {" +
-                "   color                     : " + appPrimaryColor + " !important;" +
-                "}";
-        }// End create custom style for product view.
-
-        // Create custom style for contract us view.
-        function getContractUsStyle() {
-            return "" +
-                ".material-background-nav-bar { " +
-                "   background-color        : transparent !important;" +
-                "   border-style            : none;" +
-                "   background-image        : none !important;" +
-                "   background-position-y   : 4px !important;" +
-                "   background-size         : initial !important;" +
-                "}" +
-                ".md-primary-color {" +
-                "   color                     : " + appPrimaryColor + " !important;" +
-                "}";
-        } // End create custom style for contract us view.
-
-        // Create custom style for Social Network view.
-        function getSocialNetworkStyle(socialColor) {
-            return "" +
-                ".material-background-nav-bar {" +
-                "   background              : " + socialColor + " !important;" +
-                "   border-style            : none;" +
-                "} " +
-                "md-ink-bar {" +
-                "   color                   : " + socialColor + " !important;" +
-                "   background              : " + socialColor + " !important;" +
-                "}" +
-                "md-tab-item {" +
-                "   color                   : " + socialColor + " !important;" +
-                "}" +
-                " md-progress-circular.md-warn .md-inner .md-left .md-half-circle {" +
-                "   border-left-color       : " + socialColor + " !important;" +
-                "}" +
-                " md-progress-circular.md-warn .md-inner .md-left .md-half-circle, md-progress-circular.md-warn .md-inner .md-right .md-half-circle {" +
-                "    border-top-color       : " + socialColor + " !important;" +
-                "}" +
-                " md-progress-circular.md-warn .md-inner .md-gap {" +
-                "   border-top-color        : " + socialColor + " !important;" +
-                "   border-bottom-color     : " + socialColor + " !important;" +
-                "}" +
-                "md-progress-circular.md-warn .md-inner .md-right .md-half-circle {" +
-                "  border-right-color       : " + socialColor + " !important;" +
-                " }" +
-                ".spinner-android {" +
-                "   stroke                  : " + socialColor + " !important;" +
-                "}" +
-                ".md-primary-color {" +
-                "   color                   : " + socialColor + " !important;" +
-                "}" +
-                "a.md-button.md-primary, .md-button.md-primary {" +
-                "   color                   : " + socialColor + " !important;" +
-                "}";
-        }// End create custom style for Social Network view.
-
 
         function initialRootScope() {
             $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.
@@ -238,7 +142,6 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 StatusBar.styleDefault();
             }
 
-            initialSQLite();
             initialRootScope();
 
             //Checking if view is changing it will go to this function.
@@ -321,39 +224,28 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
             })
             .state('app.dashboard', {
                 url: "/dashboard",
+				cache: false,
                 params:{
                     isAnimated: false
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/material-user-interface/dashboard/html/dashboard.html",
+                        templateUrl: "templates/dashboard/html/dashboard.html",
                         controller: 'dashboardCtrl'
                     }
                 }
             })
-            .state('app.dashboardSetting', {
-                url: "/dashboardSetting",
+            .state('app.setting', {
+                url: "/setting",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/material-user-interface/dashboard/html/dashboard-setting.html",
-                        controller: "dashboardSettingCtrl"
+                        templateUrl: "templates/setting/html/setting.html",
+                        controller: "settingCtrl"
                     }
-                }
-            })
-			.state('app.defaultUI', {
-                url: "/defaultUI",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/material-user-interface/default-user-interface/html/default-user-interface.html",
-                        controller: 'defaultUserInterfaceCtrl'
-                    }
-
                 }
             })
 			.state('app.scheduleAppointment', {
                 url: "/scheduleAppointment",
-                cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: "templates/schedule-appointment/html/schedule-appointment.html",
@@ -362,13 +254,13 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
 
                 }
             })
-			.state('app.aboutUs', {
-                url: "/aboutUs",
-                cache: false,
+			.state('app.talkWithUs', {
+                url: "/talkWithUs",
+                cache: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/about-us/html/about-us.html",
-                        controller: 'aboutUsCtrl'
+                        templateUrl: "templates/talk-with-us/html/talk-with-us.html",
+                        controller: 'talkWithUsCtrl'
                     }
 
                 }
@@ -382,15 +274,6 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                     'menuContent': {
                         templateUrl: "templates/user-profile/html/user-profile.html",
                         controller: "userProfileCtrl"
-                    }
-                }
-            })
-            .state('app.userProfileSetting', {
-                url: "/userProfileSetting",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/user-profile/html/user-profile-setting.html",
-                        controller: "userProfileSettingCtrl"
                     }
                 }
             })

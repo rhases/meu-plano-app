@@ -45,7 +45,7 @@ $font_arial: Arial;
 
 //urls variable section
 $url_background_cover_pixels: url(../img/background_cover_pixels.png);
-$url_background_cover_contract_us: url(../img/contract_us_bg.jpg);
+$url_background_cover_contract_us: url(http://www.mederi.com.br/imagens/Brasilia.jpg);
 $url_background_cover_try_app_01: url(../img/slide_01.png);
 $url_background_cover_try_app_02: url(../img/slide_02.png);
 $url_background_cover_try_app_03: url(../img/slide_03.png);
@@ -1671,7 +1671,7 @@ md-sidenav {
 //dashboard section
 #dashboard-content {
   // margin-top: 164px;
-  .menu-more {	
+  .menu-more {
     text-align: right;
   }
   .menu-list {

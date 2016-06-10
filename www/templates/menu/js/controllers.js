@@ -2,11 +2,11 @@
 // Learn more about Sidenav directive of angular material
 // https://material.angularjs.org/latest/#/demo/material.components.sidenav
 appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect) {
-    
+
     $scope.toggleLeft = buildToggler('left');
 
     // buildToggler is for create menu toggle.
-    // Parameter :  
+    // Parameter :
     // navID = id of navigation bar.
     function buildToggler(navID) {
         var debounceFn = $mdUtil.debounce(function () {
@@ -15,9 +15,9 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
         return debounceFn;
     };// End buildToggler.
 
-    // navigateTo is for navigate to other page 
-    // by using targetPage to be the destination state. 
-    // Parameter :  
+    // navigateTo is for navigate to other page
+    // by using targetPage to be the destination state.
+    // Parameter :
     // stateNames = target state to go
     $scope.navigateTo = function (stateName) {
         $timeout(function () {
@@ -31,6 +31,10 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
             }
         }, ($scope.isAndroid == false ? 300 : 0));
     };// End navigateTo.
+
+	$scope.openMarket = function(src){
+		$cordovaInAppBrowserSource.open(src, target, options)
+	}
 
     //closeSideNav is for close side navigation
     //It will use with event on-swipe-left="closeSideNav()" on-drag-left="closeSideNav()"

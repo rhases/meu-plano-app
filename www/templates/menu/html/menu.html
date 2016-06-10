@@ -5,7 +5,7 @@
 <!--State name : app-->
 <!--URL : #app-->
 
-<ion-side-menus enable-menu-with-back-views="false">
+<ion-side-menus enable-menu-with-back-views="true">
     <ion-side-menu-content>
         <ion-nav-bar class="bar-balanced  material-background-nav-bar">
             <ion-nav-buttons side="left">
@@ -55,22 +55,62 @@
                         <span>Agendar Consulta</span>
                     </div>
                 </div>
-                <div class="row menu-item" ng-click="navigateTo('app.aboutUs')">
+				<div class="row menu-item"  ng-click="navigateTo('app.whatAppointment')">
                     <div class="col-33">
-                        <i class="fa fa-info"></i>
+                        <i class="fa fa-question"></i>
                     </div>
                     <div class="col-66">
-                        <span>Sobre nós</span>
+                        <span>Qual consulta fazer?</span>
                     </div>
                 </div>
-                <div class="row menu-item" ng-click="navigateTo('app.defaultUI')">
+				<div class="row menu-item" href="openMarket('https://play.google.com/store/apps/details?id=br.com.esec.icpm.android')">
+                    <div class="col-33">
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Classifique a Rhases</span>
+                    </div>
+                </div>
+				<div class="row menu-item" ng-click="navigateTo('app.news')">
+                    <div class="col-33">
+                        <i class="fa fa-newspaper-o "></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Novidades</span>
+                    </div>
+                </div>
+				<div class="row menu-item" ng-click="navigateTo('app.setting')">
+                    <div class="col-33">
+                        <i class="fa fa-cog"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Configurações</span>
+                    </div>
+                </div>
+                <div class="row menu-item" ng-click="navigateTo('app.talkWithUs')">
+                    <div class="col-33">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Fale com a gente</span>
+                    </div>
+                </div>
+				<div class="row menu-item" ng-click="logout()">
+                    <div class="col-33">
+                        <i class="fa fa-sign-out"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Sair</span>
+                    </div>
+                </div>
+                <!-- <div class="row menu-item" ng-click="navigateTo('app.defaultUI')">
                     <div class="col-33">
                         <i class="fa fa-phone"></i>
                     </div>
                     <div class="col-66">
                         <span>Default UI</span>
                     </div>
-                </div>
+                </div> -->
             </div>
 
 
@@ -86,12 +126,49 @@
                     <i class="fa fa-user-md"></i>
                     <span>Agendar Consulta</span>
                 </md-list-item>
-                <md-list-item class="menu-list-item" ng-click="navigateTo('app.aboutUs')">
-                    <i class="fa fa-info"></i>
-                    <span>Sobre nós</span>
+                <md-list-item class="menu-list-item" ng-click="navigateTo('app.a')">
+                    <i class="fa fa-question"></i>
+                    <span>Qaul consulta fazer</span>
+                </md-list-item>
+				<md-list-item class="menu-list-item" ng-click="openMarket('https://play.google.com/store/apps/details?id=br.com.esec.icpm.android')">
+                    <i class="fa fa-star"></i>
+                    <span>Classifique a rhases</span>
+                </md-list-item>
+				<md-list-item class="menu-list-item" ng-click="navigateTo('app.news')">
+                    <i class="fa fa-newspaper-o"></i>
+                    <span>Novidades</span>
+                </md-list-item>
+				<md-list-item class="menu-list-item" ng-click="navigateTo('app.setting')">
+                    <i class="fa fa-cog"></i>
+                    <span>Configurações</span>
+                </md-list-item>
+				<md-list-item class="menu-list-item" ng-click="navigateTo('app.talkWithUs')">
+                    <i class="fa fa-envelope"></i>
+                    <span>Fale com a gente</span>
+                </md-list-item>
+				<md-list-item class="menu-list-item" ng-click="logout()">
+                    <i class="fa fa-sign-out"></i>
+                    <span>Sair</span>
                 </md-list-item>
             </md-list>
             <!--end list section-->
+
+			<br>
+			<div class="row menu-item" ng-click="logout()">
+				<p>
+					Feito com amor em Brasília, DF, Brasil.
+					<br>
+					<small>
+						Todos os direitos reservados
+						<br>
+						© Rhases Soluções em Tecnologia LTDA
+						<br>
+						<small>CNPJ 23.821.354/0001-00</small>
+						<br>
+						v1.0
+					</small>
+				</p>
+			</div>
         </ion-content><!--end menu content section-->
         <!--end menu section-->
 

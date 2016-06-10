@@ -1,7 +1,7 @@
 <!--View Information-->
 <!--View name : Dashboard-->
 <!--Controller name : dashboardCtrl-->
-<!--Controller path : www/templates/material-user-interface/dashboard/js/controllers.js-->
+<!--Controller path : www/templates/dashboard/js/controllers.js-->
 <!--State name : app.dashboard-->
 <!--URL : #app/dashboard-->
 
@@ -50,20 +50,24 @@
 			</div>
 
 			<div class="item item-body">
-				<p>Você tem uma consulta para daqui dois dias.</p>
+				<p>Você tem uma consulta para daqui <strong>um dia</strong>.</p>
 				<p><strong>13/05/04 ás 13:00</strong></p>
 			</div>
 
-			<a class="item item-icon-left assertive" ng-click="cancelAppointment()">
-				<i class="icon ion-close"></i>
-				<!-- <i class="fa fa-close fa-2x"></i> -->
-				Desmarcar
-			</a>
-			<a class="item item-icon-left balanced" href="#">
-				<i class="icon ion-checkmark"></i>
-				Confirmar
-			</a>
-
+			<div class="row">
+				<div class="col-50">
+					<a class="item item-icon-left assertive" ng-click="cancelAppointment()">
+						<i class="icon ion-close"></i>
+						Desmarcar
+					</a>
+				</div>
+				<div class="col-50">
+					<a class="item item-icon-left balanced" href="#">
+						<i class="icon ion-checkmark"></i>
+						Confirmar
+					</a>
+				</div>
+			</div>
 		</div>
 
 		<div class="list card">
@@ -76,7 +80,7 @@
 			</div>
 
 			<div class="item item-body">
-				<p>Você tem uma consulta para daqui treze dias.</p>
+				<p>Você tem uma consulta para daqui <strong>treze dias</strong>.</p>
 				<p><strong>24/05/04 ás 17:00</strong></p>
 			</div>
 
@@ -84,10 +88,6 @@
 				<i class="icon ion-close"></i>
 				<!-- <i class="fa fa-close fa-2x"></i> -->
 				Desmarcar
-			</a>
-			<a class="item item-icon-left balanced" href="#">
-				<i class="icon ion-checkmark"></i>
-				Confirmar
 			</a>
 
 		</div>
