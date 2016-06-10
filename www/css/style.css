@@ -1035,7 +1035,7 @@ md-sidenav {
       width: 64%; }
 
 #dashboard-content {
-  margin-top: 164px; }
+/*margin-top: 164px;*/ }
   #dashboard-content .menu-more {
     text-align: right; }
   #dashboard-content .menu-list {

@@ -1,6 +1,6 @@
-﻿{
-  "name": "rhases-app",
-  "app_id": "0f212851"
+{
+  "name": "RhasesApp",
+  "app_id": "0f212851",
   "gulpStartupTasks": [
     "sass",
     "watch"
