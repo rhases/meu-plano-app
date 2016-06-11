@@ -22,7 +22,7 @@
 // <access origin="tel:*" launch-external="yes"/>
 //
 // Controller of contract us page.
-appControllers.controller('aboutUsCtrl', function ($scope, $cordovaSocialSharing, $cordovaSms) {
+appControllers.controller('talkWithUsCtrl', function ($scope, $cordovaSocialSharing, $cordovaSms) {
 
     // This function is the first activity in the controller.
     // It will initial all variable data and let the function works when page load.

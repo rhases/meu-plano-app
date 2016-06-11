@@ -30,7 +30,7 @@ window.globalVariable = {
     },
     oAuth: {
       dropbox: "your_api_key",//Use for Dropbox API clientID.
-      facebook: "your_api_key",//Use for Facebook API appID.
+      facebook: "1702791466664692",//Use for Facebook API appID.
       foursquare: "your_api_key", //Use for Foursquare API clientID.
       instagram: "your_api_key",//Use for Instagram API clientID.
       googlePlus: "your_api_key",//Use for Google API clientID.
@@ -80,52 +80,8 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 "   stroke                    : " + appPrimaryColor + " !important;" +
                 "}";
 
-            switch (stateName) {
-                case "app.productList" :
-                case "app.productDetail":
-                case "app.productCheckout":
-                case "app.clothShop" :
-                case "app.catalog" :
-                    customStyle += getProductStyle();
-                    break;
-                case "app.dropboxLogin" :
-                case "app.dropboxProfile":
-                case "app.dropboxFeed" :
-                    customStyle += getSocialNetworkStyle(window.globalVariable.color.dropboxColor);
-                    break;
-                case "app.facebookLogin" :
-                case "app.facebookProfile":
-                case "app.facebookFeed" :
-                case "app.facebookFriendList":
-                    customStyle += getSocialNetworkStyle(window.globalVariable.color.facebookColor);
-                    break;
-                case "app.foursquareLogin" :
-                case "app.foursquareProfile":
-                case "app.foursquareFeed" :
-                    customStyle += getSocialNetworkStyle(window.globalVariable.color.foursquareColor);
-                    break;
-                case "app.googlePlusLogin" :
-                case "app.googlePlusProfile":
-                case "app.googlePlusFeed" :
-                    customStyle += getSocialNetworkStyle(window.globalVariable.color.googlePlusColor);
-                    break;
-                case "app.instagramLogin" :
-                case "app.instagramProfile":
-                case "app.instagramFeed" :
-                    customStyle += getSocialNetworkStyle(window.globalVariable.color.instagramColor);
-                    break;
-                case "app.wordpressLogin" :
-                case "app.wordpressFeed":
-                case "app.wordpressPost" :
-                    customStyle += getSocialNetworkStyle(window.globalVariable.color.wordpressColor);
-                    break;
-                case "app.contractUs":
-                    customStyle += getContractUsStyle();
-                    break;
-                default:
-                    customStyle += getDefaultStyle();
-                    break;
-            }
+
+            customStyle += getDefaultStyle();
             return customStyle;
         }// End createCustomStyle
 
@@ -219,7 +175,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
             .state('app', {
                 url: "/app",
                 abstract: true,
-                templateUrl: "templates/menu/html/menu.html",
+                templateUrl: "templates/menu/menu.html",
                 controller: 'menuCtrl'
             })
             .state('app.dashboard', {
@@ -230,7 +186,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/html/dashboard.html",
+                        templateUrl: "templates/dashboard/dashboard.html",
                         controller: 'dashboardCtrl'
                     }
                 }
@@ -239,7 +195,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 url: "/setting",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/setting/html/setting.html",
+                        templateUrl: "templates/setting/setting.html",
                         controller: "settingCtrl"
                     }
                 }
@@ -248,7 +204,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 url: "/scheduleAppointment",
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/html/schedule-appointment.html",
+                        templateUrl: "templates/schedule-appointment/schedule-appointment.html",
                         controller: 'scheduleAppointmentCtrl'
                     }
 
@@ -259,7 +215,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 cache: true,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/talk-with-us/html/talk-with-us.html",
+                        templateUrl: "templates/talk-with-us/talk-with-us.html",
                         controller: 'talkWithUsCtrl'
                     }
 
@@ -272,8 +228,60 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/user-profile/html/user-profile.html",
+                        templateUrl: "templates/user-profile/user-profile.html",
                         controller: "userProfileCtrl"
+                    }
+                }
+            })
+			.state('app.tryApp', {
+                url: "/tryApp",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/try-app/html/try-app.html"
+                    }
+                }
+            })
+			.state('app.facebookLogin', {
+                url: "/facebookLogin",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/facebook/html/facebook-login.html",
+                        controller: 'facebookLoginCtrl'
+                    }
+                }
+            })
+            .state('app.facebookProfile', {
+                url: "/facebookProfile",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/facebook/html/facebook-profile.html",
+                        controller: 'facebookProfileCtrl'
+                    }
+                }
+            })
+            .state('app.facebookFeed', {
+                url: "/facebookFeed",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/facebook/html/facebook-feed.html",
+                        controller: 'facebookFeedCtrl'
+                    }
+                }
+            })
+            .state('app.facebookFriendList', {
+                url: "/facebookFriendList",
+                cache: false,
+                params: {
+                    access_token: null,
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/facebook/html/facebook-friend-list.html",
+                        controller: 'facebookFriendListCtrl'
                     }
                 }
             })
