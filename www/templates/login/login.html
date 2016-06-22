@@ -1,0 +1,35 @@
+<!--View Information-->
+<!--View name : Facebook Login-->
+<!--Controller name : facebookLoginCtrl-->
+<!--Controller path : www/templates/social-network-connect/facebook/js/controllers.js-->
+<!--State name : app.facebookLogin-->
+<!--URL : #app/facebookLogin-->
+
+<ion-view title="Rhases Login">
+    <!--login content section-->
+    <ion-content scroll="false" id="social-login">
+        <form>
+
+            <div>
+                <i class="fa fa-facebook facebook-color"></i>
+            </div>
+            <div class="sub-header">Conecte-se com o Facebook</div>
+
+            <div class="ng-hide" ng-show="!user">
+                <a class="md-raised social-button md-button md-default-theme facebook-background" ng-click="facebookSignIn()">
+                    Continuar com o Facebook
+                </a>
+            </div>
+						<div class="ng-hide" ng-show="user">
+							<div>
+									<img src="{{user.picture}}" class="user-img"/>
+
+									<h1>{{user.name}}</h1>
+
+									<h2>{{user.email}}</h2>
+							</div>
+            </div>
+        </form>
+
+    </ion-content><!--end login content section-->
+</ion-view>

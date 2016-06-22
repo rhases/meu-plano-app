@@ -178,9 +178,22 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 templateUrl: "templates/menu/menu.html",
                 controller: 'menuCtrl'
             })
+						.state('app.login', {
+                url: "/login",
+								cache: false,
+                params:{
+                    isAnimated: false
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/login/login.html",
+                        controller: 'loginCtrl'
+                    }
+                }
+            })
             .state('app.dashboard', {
                 url: "/dashboard",
-				cache: false,
+								cache: false,
                 params:{
                     isAnimated: false
                 },

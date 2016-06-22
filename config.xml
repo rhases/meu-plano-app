@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.ionicmaterialdesign392344" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.com.rhases.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Rhases</name>
   <description>
 		Um aplicativo para você cuidar da sua saúde.
@@ -9,6 +9,7 @@
 	</author>
   <content src="index.html"/>
   <allow-navigation href="tel:*"/>
+	<allow-navigation href="https://graph.facebook.com/*" />
   <access origin="*"/>
   <access launch-external="yes" origin="tel:*"/>
   <access launch-external="yes" origin="maps:*"/>
