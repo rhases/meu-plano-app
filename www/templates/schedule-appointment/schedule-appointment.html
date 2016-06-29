@@ -8,13 +8,10 @@
 <ion-view title="Agendar">
 	<ion-content>
 	    <form name="appointmentForm">
-			
+
 			<label for="specialtyCombo">Com qual médico você quer se consultar?</label>
-            <select name="specialtyCombo" ng-model="specialtySelected">
-	            <option ng-repeat="specialty in specialties"
-				    ng-value="specialty.toLowerCase()">
-					{{ specialty }}
-				</option>
+            <select name="specialtyCombo" ng-model="specialtySelected"
+				ng-options="specialty for specialty in specialties">
 			</select>
 
 			<a ui-sref="app.dashboard" class="button button-block button-positive">Agendar</a>
