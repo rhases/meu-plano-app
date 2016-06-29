@@ -7,4 +7,7 @@ appControllers.controller('scheduleAppointmentCtrl', function ($scope, $mdBottom
         // Evitando que a opcao em branco apareca na combobox.
         $scope.specialtySelected = $scope.specialties[0];
 
+        $scope.availableDays = ['segunda-feira', 'terça-feira', 'quarta-feira',
+          'quinta-feira', 'sexta-feira', 'sábado', 'domingo'];
+
 }); // End of defaultUserInterface controller.
