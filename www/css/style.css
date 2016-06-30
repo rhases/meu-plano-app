@@ -326,7 +326,8 @@ md-sidenav {
   right: 25px;
   padding: 15px;
   line-height: 0 !important;
-  margin-top: -29px; }
+  margin-top: -29px;
+  position: absolute; }
   .md-button.md-accent.md-fab.fab-toolbar-medium i {
     vertical-align: text-top;
     font-size: x-large;
