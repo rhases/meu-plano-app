@@ -4,9 +4,9 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 		return $http.put(window.globalVariable.backend.authServerUri + "/api/users/" + userId, updateData)
 	}
 
-	function _updateAppointment(appointmentId, updateData) {
-		return $http.put(window.globalVariable.backend.schedulerServerUri + "/api/appointments/" + appointmentId, updateData)
-	}
+	// function _updateAppointment(appointmentId, updateData) {
+	// 	return $http.put(window.globalVariable.backend.schedulerServerUri + "/api/appointments/" + appointmentId, updateData)
+	// }
 
 	function _register() {
 		if (ionic.Platform.is('browser')) {
@@ -44,7 +44,7 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 
 					// TODO: Get autorization id
 					// TODO: Get real user logged
-					// var user = { _id: 'abc'}
+					var user = localStorage.user;
 					_updateUser(user._id,
 						{
 							appInfo: {
@@ -69,21 +69,13 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 				appointment: {
 					accept: function(pushMessage) {
 						console.log("\n>>> ACCEPT " + JSON.stringify(pushMessage) + "\n");
-						_updateAppointment(pushMessage.additionalData.appointmentId, { status: 'ACCEPTED' })
-							.then(function (res) {
-								console.log("Appointment accepted.");
-								$state.go('app.dashboard');
-								$rootScope.emit('rhases:refresh'); // send event to refresh the home
-							});
+						$rootScope.$emit('rhases:appointment:accept', pushMessage.additionalData.appointmentId); // send event to refresh the home
+						$state.go('app.dashboard');
 					},
 					reject: function(pushMessage) {
 						console.log("\n>>> REJECT " + JSON.stringify(pushMessage) + "\n");
-						_updateAppointment(pushMessage.additionalData.appointmentId, { status: 'REFUSED' })
-							.then(function (res) {
-								console.log("Appointment rejected.");
-								$state.go('app.dashboard');
-								$rootScope.emit('rhases:refresh'); // send event to refresh the home
-							});
+						$rootScope.$emit('rhases:appointment:reject', pushMessage.additionalData.appointmentId); // send event to refresh the home
+						$state.go('app.dashboard');
 					},
 				}
 			}
@@ -97,7 +89,12 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 			console.log('\n>>> NOTIFICATION ' + JSON.stringify(data))
 
 			// Tell to app he need to update yout infos
-			$rootScope.emit('rhases:refresh')
+			if (pushMessage.additionalData.appointmentId) {
+				$rootScope.$emit('rhases:appointment:refresh', pushMessage.additionalData.appointmentId)
+			} else {
+				$rootScope.$emit('rhases:refresh')
+			}
+
 
 			// needed by IOS
 			$cordovaPushV5.finish()
