@@ -11,16 +11,6 @@
 //Global variable use for setting color, start page, message, oAuth key.
 var db = null; //Use for SQLite database.
 window.globalVariable = {
-    //custom color style variable
-    color: {
-        appPrimaryColor: "",
-        dropboxColor: "#017EE6",
-        facebookColor: "#3C5C99",
-        foursquareColor: "#F94777",
-        googlePlusColor: "#D73D32",
-        instagramColor: "#517FA4",
-        wordpressColor: "#0087BE"
-    },// End custom color style variable
     startPage: {
         url: "/app/dashboard",//Url of start page.
         state: "app.dashboard"//State name of start page.
@@ -29,22 +19,31 @@ window.globalVariable = {
         errorMessage: "Technical error please try again later." //Default error message.
     },
     oAuth: {
-      dropbox: "your_api_key",//Use for Dropbox API clientID.
       facebook: "1702791466664692",//Use for Facebook API appID.
-      foursquare: "your_api_key", //Use for Foursquare API clientID.
-      instagram: "your_api_key",//Use for Instagram API clientID.
       googlePlus: "your_api_key",//Use for Google API clientID.
     },
-    adMob: "your_api_key" //Use for AdMob API clientID.
+	push: {
+		gcmSenderId: "835746108347"
+	},
+	backend: {
+		authServerUri: "http://auth.api.rhases.com.br/",
+		schedulerServerUri: "http://scheduler.api.rhases.com.br/",
+	}
+
 };// End Global variable
 
-
 angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers', 'starter.services', 'ngMaterial', 'ngMessages', 'ngCordova'])
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, pushService) {
 
         // Create custom defaultStyle.
         function getDefaultStyle() {
-            return "" +
+            return ".material-background {" +
+                "   background-color          : " + appPrimaryColor + " !important;" +
+                "   border-style              : none;" +
+                "}" +
+                ".spinner-android {" +
+                "   stroke                    : " + appPrimaryColor + " !important;" +
+                "}" +
                 ".material-background-nav-bar { " +
                 "   background-color        : " + appPrimaryColor + " !important; " +
                 "   border-style            : none;" +
@@ -67,26 +66,9 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
         };
 
 
-        // createCustomStyle will change a style of view while view changing.
-        // Parameter :
-        // stateName = name of state that going to change for add style of that page.
-        function createCustomStyle(stateName) {
-            var customStyle =
-                ".material-background {" +
-                "   background-color          : " + appPrimaryColor + " !important;" +
-                "   border-style              : none;" +
-                "}" +
-                ".spinner-android {" +
-                "   stroke                    : " + appPrimaryColor + " !important;" +
-                "}";
-
-
-            customStyle += getDefaultStyle();
-            return customStyle;
-        }// End createCustomStyle
 
         // Add custom style while initial application.
-        $rootScope.customStyle = createCustomStyle(window.globalVariable.startPage.state);
+        $rootScope.customStyle = getDefaultStyle(window.globalVariable.startPage.state);
 
         $ionicPlatform.ready(function () {
             ionic.Platform.isFullScreen = true;
@@ -105,8 +87,11 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 //hide Action Control for android back button.
                 hideActionControl();
                 // Add custom style ti view.
-                $rootScope.customStyle = createCustomStyle($ionicHistory.currentStateName());
+                $rootScope.customStyle = getDefaultStyle($ionicHistory.currentStateName());
             });
+
+			pushService.register();
+			pushService.startListeners();
         });
 
     })
@@ -178,9 +163,9 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 templateUrl: "templates/menu/menu.html",
                 controller: 'menuCtrl'
             })
-						.state('app.login', {
+			.state('app.login', {
                 url: "/login",
-								cache: false,
+				cache: false,
                 params:{
                     isAnimated: false
                 },
@@ -193,7 +178,7 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
             })
             .state('app.dashboard', {
                 url: "/dashboard",
-								cache: false,
+				cache: false,
                 params:{
                     isAnimated: false
                 },
