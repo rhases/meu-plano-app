@@ -1,0 +1,25 @@
+<!--View Information-->
+<!--View name : Schedule Appointment-->
+<!--Controller name : scheduleAppointmentCtrl-->
+<!--Controller path : www/templates/scheduleAppointment/js/controllers.js-->
+<!--State name : app.scheduleAppointment-->
+<!--URL : #app/scheduleAppointment-->
+
+<ion-view title="Agendar - Escolher dias">
+	<ion-content>
+	    <form name="appointmentForm" ng-controller:"scheduleAppointmentCtrl">
+			Especialidade: {{ appointment.specialty }}
+
+			<br />
+
+			<label for="availableDaysList">Em quais dias você tem disponibilidade?</label>
+			<ion-list name="availableDaysList">
+				<ion-item ng-repeat="day in availableDays" item="day">
+					<ion-checkbox ng-model="appointment.days">{{ day }}</ion-checkbox>
+				</ion-item>
+			</ion-list>
+
+			<a ui-sref="app.dashboard" class="button button-block button-positive">Confirmar dias</a>
+	    </form>
+	</ion-content>
+</ion-view>

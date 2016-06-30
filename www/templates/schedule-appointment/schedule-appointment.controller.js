@@ -1,11 +1,11 @@
 // Controller of defaultUserInterface.
-appControllers.controller('scheduleAppointmentCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog) {
+appControllers.controller('scheduleAppointmentCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
+    appointmentService, specialtiesService) {
 
-        // FIXME: service para pegar do banco as especialidades
-        $scope.specialties = ['Cardiologista', 'Dermatologista', 'Urologista', 'Oftamologista'];
+        $scope.appointment = appointmentService;
+        console.log($scope.appointment.specialty);
 
-        // Evitando que a opcao em branco apareca na combobox.
-        $scope.specialtySelected = $scope.specialties[0];
+        $scope.specialties = specialtiesService.getAll();
 
         $scope.availableDays = ['segunda-feira', 'terça-feira', 'quarta-feira',
           'quinta-feira', 'sexta-feira', 'sábado', 'domingo'];

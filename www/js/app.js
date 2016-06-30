@@ -214,24 +214,18 @@ angular.module('starter', ['ionic','ngIOS9UIWebViewPatch', 'starter.controllers'
                 }
             })
 			.state('app.scheduleAppointment', {
-                url: "/scheduleAppointment/specialty",
+                url: "/scheduleAppointment",
                 views: {
                     'menuContent': {
                         templateUrl: "templates/schedule-appointment/specialty.html",
                         controller: 'scheduleAppointmentCtrl'
                     }
-
                 }
             })
             .state('app.scheduleAppointment.days', {
-                url: "/scheduleAppointment/days",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/schedule-appointment/days.html",
-                        controller: 'scheduleAppointmentCtrl'
-                    }
-
-                }
+                url: "/days",
+                templateUrl: "templates/schedule-appointment/days.html",
+                controller: 'scheduleAppointmentCtrl'
             })
 			.state('app.talkWithUs', {
                 url: "/talkWithUs",
