@@ -1,103 +1,172 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading) {
+// Controller of Register Page.
+appControllers.controller('registerCtrl', function ($mdBottomSheet, $mdToast, $scope, $stateParams, $filter, $mdDialog, $ionicHistory) {
 
-  // This is the success callback from the login method
-  var fbLoginSuccess = function(response) {
-    if (!response.authResponse){
-      fbLoginError("Cannot find the authResponse");
-      return;
-    }
+    // initialForm is the first activity in the controller.
+    // It will initial all variable data and let the function works when page load.
+    $scope.initialForm = function () {
 
-  	var authResponse = response.authResponse;
+    }; //End initialForm.
 
-    getFacebookProfileInfo(authResponse)
-    .then(function(profileInfo) {
-      // For the purpose of this example I will store user data on local storage
-      $scope.user = {
-        authResponse: authResponse,
-				userID: profileInfo.id,
-				name: profileInfo.name,
-				email: profileInfo.email,
-        picture : "https://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
-      };
-      $ionicLoading.hide();
-			console.log('Facebook user ' + JSON.stringify($scope.user));
-      //$state.go('app.home');
-    }, function(fail){
-      // Fail get profile info
-      console.log('profile info fail', fail);
-    });
-  };
+    // getContractData is for get contract detail data.
+    $scope.getContractData = function (actionDelete, contractDetail) {
+        // tempContract is  temporary contract data detail.
+        var tempContract = {
+            id: null,
+            firstName: '',
+            lastName: '',
+            telephone: '',
+            email: '',
+            createDate: $filter('date')(new Date(), 'MMM dd yyyy'),
+            age: null,
+            isEnable: false
+        }
+        // If actionDelete is true Contract Detail Page will show contract detail that receive form contract list page.
+        // else it will show tempContract for user to add new data.
+        return (actionDelete ? angular.copy(contractDetail) : tempContract);
+    };//End get contract detail data.
 
-  // This is the fail callback from the login method
-  var fbLoginError = function(error){
-    console.log('fbLoginError', error);
-    $ionicLoading.hide();
-  };
+    // saveContract is for save contract.
+    // Parameter :
+    // contract(object) = contract object that presenting on the view.
+    // $event(object) = position of control that user tap.
+    $scope.saveContract = function (contract, $event) {
+        //$mdBottomSheet.hide() use for hide bottom sheet.
+        $mdBottomSheet.hide();
+        //mdDialog.show use for show alert box for Confirm to save data.
+        $mdDialog.show({
+            controller: 'DialogController',
+            templateUrl: 'confirm-dialog.html',
+            targetEvent: $event,
+            locals: {
+                displayOption: {
+                    title: "Confirm to save data?",
+                    content: "Data will save to SQLite.",
+                    ok: "Confirm",
+                    cancel: "Close"
+                }
+            }
+        }).then(function () {
 
-  // This method is to get the user profile info from the facebook api
-  var getFacebookProfileInfo = function (authResponse) {
-    var info = $q.defer();
+            // For confirm button to save data.
+            try {
+                // To update data by calling ContractDB.update(contract) service.
+                if ($scope.actionDelete) {
+                    if ($scope.contract.id == null) {
+                        $scope.contract.id = $scope.contractList[$scope.contractList.length - 1].id;
+                    }
+                    //ContractDB.update(contract);
+                } // End update data.
 
-    facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
-      function (response) {
-				console.log(response);
-        info.resolve(response);
-      },
-      function (response) {
-				console.log(response);
-        info.reject(response);
-      }
-    );
-    return info.promise;
-  };
+                // To add new data by calling ContractDB.add(contract) service.
+                else {
+                    //ContractDB.add(contract);
+                    //$scope.contractList = ContractDB.all();
+                    $scope.actionDelete = true;
+                }// End  add new  data.
 
-  //This method is executed when the user press the "Login with facebook" button
-  $scope.facebookSignIn = function() {
-    facebookConnectPlugin.getLoginStatus(function(success){
-      if(success.status === 'connected'){
-        // The user is logged in and has authenticated your app, and response.authResponse supplies
-        // the user's ID, a valid access token, a signed request, and the time the access token
-        // and signed request each expire
-        console.log('getLoginStatus', success.status);
+                // Showing toast for save data is success.
+                $mdToast.show({
+                    controller: 'toastController',
+                    templateUrl: 'toast.html',
+                    hideDelay: 400,
+                    position: 'top',
+                    locals: {
+                        displayOption: {
+                            title: "Data Saved !"
+                        }
+                    }
+                });//End showing toast.
+            }
+            catch (e) {
+                // Showing toast for unable to save data.
+                $mdToast.show({
+                    controller: 'toastController',
+                    templateUrl: 'toast.html',
+                    hideDelay: 800,
+                    position: 'top',
+                    locals: {
+                        displayOption: {
+                            title: window.globalVariable.message.errorMessage
+                        }
+                    }
+                });//End showing toast.
+            }
+        }, function () {
+            // For cancel button to save data.
+        });// End alert box.
+    };// End save contract.
 
-    		// Check if we have our user saved
-    		if(!$scope.user || !$scope.user.userID){
-					getFacebookProfileInfo(success.authResponse)
-					.then(function(profileInfo) {
-						// For the purpose of this example I will store user data on local storage
-						$scope.user = {
-							authResponse: success.authResponse,
-							userID: profileInfo.id,
-							name: profileInfo.name,
-							email: profileInfo.email,
-							picture : "https://graph.facebook.com/" + success.authResponse.userID + "/picture?type=large"
-						};
+    // deleteContract is for remove contract.
+    // Parameter :
+    // contract(object) = contract object that presenting on the view.
+    // $event(object) = position of control that user tap.
+    $scope.deleteContract = function (contract, $event) {
+        //$mdBottomSheet.hide() use for hide bottom sheet.
+        $mdBottomSheet.hide();
+        //mdDialog.show use for show alert box for Confirm to delete data.
+        $mdDialog.show({
+            controller: 'DialogController',
+            templateUrl: 'confirm-dialog.html',
+            targetEvent: $event,
+            locals: {
+                displayOption: {
+                    title: "Confirm to remove data?",
+                    content: "Data will remove form SQLite.",
+                    ok: "Confirm",
+                    cancel: "Close"
+                }
+            }
+        }).then(function () {
+            // For confirm button to remove data.
+            try {
+                // Remove contract by calling ContractDB.remove(contract)service.
+                if ($scope.contract.id == null) {
+                    $scope.contract.id = $scope.contractList[$scope.contractList.length - 1].id;
+                }
+                //ContractDB.remove(contract);
+                $ionicHistory.goBack();
+            }// End remove contract.
+            catch (e) {
+                // Showing toast for unable to remove data.
+                $mdToast.show({
+                    controller: 'toastController',
+                    templateUrl: 'toast.html',
+                    hideDelay: 800,
+                    position: 'top',
+                    locals: {
+                        displayOption: {
+                            title: window.globalVariable.message.errorMessage
+                        }
+                    }
+                });// End showing toast.
+            }
+        }, function () {
+            // For cancel button to remove data.
+        });// End alert box.
+    };// End remove contract.
 
-						console.log('Facebook user ' + JSON.stringify($scope.user));
-						//$state.go('app.home');
-					}, function(fail){
-						// Fail get profile info
-						console.log('profile info fail', fail);
-					});
-				}else{
-					$state.go('app.home');
-				}
-      } else {
-        // If (success.status === 'not_authorized') the user is logged in to Facebook,
-				// but has not authenticated your app
-        // Else the person is not logged into Facebook,
-				// so we're not sure if they are logged into this app or not.
+    // validateRequiredField is for validate the required field.
+    // Parameter :
+    // form(object) = contract object that presenting on the view.
+    $scope.validateRequiredField = function (form) {
+        return !(   (form.firstName.$error.required == undefined)
+        && (form.lastName.$error.required == undefined)
+        && (form.telephone.$error.required == undefined));
+    };// End validate the required field.
 
-				console.log('getLoginStatus', success.status);
-
-				$ionicLoading.show({
-          template: 'Logging in...'
+    // showListBottomSheet is for showing the bottom sheet.
+    // Parameter :
+    // $event(object) = position of control that user tap.
+    // contractForm(object) = contract object that presenting on the view.
+    $scope.showListBottomSheet = function ($event, contractForm) {
+        $scope.disableSaveBtn = $scope.validateRequiredField(contractForm);
+        $mdBottomSheet.show({
+            templateUrl: 'contract-actions-template',
+            targetEvent: $event,
+            scope: $scope.$new(false),
         });
+    };// End showing the bottom sheet.
 
-				// Ask the permissions you need. You can learn more about
-				// FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
-        facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
-      }
-    });
-  };
-});// End of facebook friend list controller.
+    $scope.initialForm();
+
+});// End  Contract Detail page Controller.
