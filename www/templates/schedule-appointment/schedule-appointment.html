@@ -8,11 +8,11 @@
 <ion-view title="Agendar">
 	<ion-content>
 	    <form name="appointmentForm">
-            <md-radio-group ng-model="specialis">
-                <md-radio-button value="cadiologista">Cadiologista</md-radio-button>
-                <md-radio-button value="dermatologista">Dermatologista</md-radio-button>
-                <md-radio-button value="urologista">Urologista</md-radio-button>
-            </md-radio-group>
+
+			<label for="specialtyCombo">Com qual médico você quer se consultar?</label>
+            <select name="specialtyCombo" ng-model="specialtySelected"
+				ng-options="specialty for specialty in specialties">
+			</select>
 
 			<a ui-sref="app.dashboard" class="button button-block button-positive">Agendar</a>
 	    </form>
