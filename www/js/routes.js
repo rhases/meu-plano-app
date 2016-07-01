@@ -72,14 +72,14 @@ angular.module('starter')
                 views: {
                     'menuContent': {
                         templateUrl: "templates/schedule-appointment/specialty.html",
-                        controller: 'scheduleAppointmentCtrl'
+                        controller: 'specialtyCtrl'
                     }
                 }
             })
             .state('app.scheduleAppointment.days', {
                 url: "/days",
                 templateUrl: "templates/schedule-appointment/days.html",
-                controller: 'scheduleAppointmentCtrl'
+                controller: 'daysCtrl'
             })
 			.state('app.talkWithUs', {
                 url: "/talkWithUs",
