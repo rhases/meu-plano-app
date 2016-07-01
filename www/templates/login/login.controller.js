@@ -1,4 +1,4 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast) {
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, userService) {
 
   // This is the success callback from the login method
   var fbLoginSuccess = function(response) {
@@ -12,18 +12,11 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
     getFacebookProfileInfo(authResponse)
     .then(function(profileInfo) {
       // For the purpose of this example I will store user data on local storage
-      $scope.user = {
-        authResponse: authResponse,
-				userID: profileInfo.id,
-				name: profileInfo.name,
-				email: profileInfo.email,
-        picture : "https://graph.facebook.com/" + authResponse.userID + "/picture?type=large"
-      };
-
-      $ionicLoading.hide();
-			console.log('Facebook user: ' + JSON.stringify($scope.user));
+      var user = userService.facebookSignUp(profileInfo)
+			$ionicLoading.hide();
+			console.log('User Signed in: ' + JSON.stringify(user));
       $state.go('app.register');
-
+			
     }, function(fail){
       fbLoginError(fail);
     });
@@ -55,11 +48,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
     return deferred.promise;
   };
 
-	var calls = 0;
-
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
-		console.log('Calls count ' + (++calls));
 
     facebookConnectPlugin.getLoginStatus(function(success){
 			$ionicLoading.show({

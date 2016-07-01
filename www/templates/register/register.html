@@ -16,28 +16,26 @@
     <!--contract detail section-->
     <form name="registerForm">
         <ion-content id="contract-details-content">
+					<md-content>
             <!--contract detail input section-->
             <md-input-container md-no-float>
                 <i class="ion-android-person"></i>
-                <input ng-model="contract.firstName" name="name" required placeholder="* Nome completo">
+                <input ng-model="user.name" name="name" required placeholder="* Nome completo">
             </md-input-container>
 						<md-input-container md-no-float>
                 <i class="ion-android-mail"></i>
-                <input ng-model="contract.email" name="email" placeholder="* Email">
+                <input ng-model="user.email" name="email" required placeholder="* Email" type="email">
             </md-input-container>
             <md-input-container md-no-float>
                 <i class="ion-android-phone-portrait"></i>
-                <input ng-model="contract.telephone" name="telephone" required placeholder="* Telefone"
-                       type="tel">
+                <input ng-model="user.telephone" name="telephone" required placeholder="* Telefone" type="tel">
             </md-input-container>
-            <md-input-container md-no-float>
-                <i class="ion-android-calendar"></i>
-                <input ng-model="contract.birth" numbers-only name="birth" placeholder="* Data de nascimento" type="date">
-            </md-input-container><!--end contract detail input section-->
-
+            <md-datepicker md-no-float ng-model="user.birth" name="birth" required md-placeholder="* Data de nascimento">
+            </md-datepicker>
+					<md-content>
         </ion-content>
         <div class="footer-fab-bar">
-            <a class="md-button md-accent md-fab fab-footer" ng-click="showListBottomSheet($event,contractForm)"
+            <a class="md-button md-accent md-fab fab-footer" ng-click=""
                aria-label="Contract Form Actions">
                 <i class="ion-android-star"></i>
             </a>
