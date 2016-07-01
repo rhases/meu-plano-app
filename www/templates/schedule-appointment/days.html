@@ -5,19 +5,19 @@
 <!--State name : app.scheduleAppointment.days-->
 <!--URL : #app/scheduleAppointment/days-->
 
-<ion-view title="Agendar - Escolher dias">
+<ion-view title="Quais dias?">
 	<ion-content>
 	    <form name="appointmentForm">
-			<br />
 
-			<label>Em quais dias você tem disponibilidade?</label>
 			<ion-checkbox ng-repeat="item in appointment.days"
                   ng-model="item.checked"
                   ng-checked="item.checked">
-	         	{{ item.label }}
+	        	{{ item.label }}
 	        </ion-checkbox>
 
-			<a ui-sref="app.scheduleAppointment.daysPeriods" class="button button-block button-positive">Confirmar dias</a>
+			<a ui-sref="app.scheduleAppointment.daysPeriods" class="button button-block button-positive">
+				<md-button>Continuar</md-button>
+			</a>
 	    </form>
 	</ion-content>
 </ion-view>
