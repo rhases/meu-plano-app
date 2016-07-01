@@ -8,15 +8,13 @@
 <ion-view title="Agendar - Escolher dias">
 	<ion-content>
 	    <form name="appointmentForm">
-			Especialidade: {{ appointment.specialty }}
-			Dias: {{ appointment.days }}
 			<br />
 
 			<label>Em quais dias você tem disponibilidade?</label>
 			<ion-checkbox ng-repeat="item in appointment.days"
                   ng-model="item.checked"
                   ng-checked="item.checked">
-	          {{ item.label }}
+	         	{{ item.label }}
 	        </ion-checkbox>
 
 			<a ui-sref="app.dashboard" class="button button-block button-positive">Confirmar dias</a>
