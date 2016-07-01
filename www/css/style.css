@@ -611,7 +611,7 @@ md-sidenav {
   #social-login.bg-white {
     background-color: white; }
   #social-login form {
-    margin-top: 33%; }
+    margin-top: 10px; }
     #social-login form.fakeLogin-form {
       margin-top: 22%; }
     #social-login form div i {

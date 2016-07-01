@@ -10,9 +10,21 @@
 	    <form name="appointmentForm">
 
 			<label for="specialtyCombo">Com qual médico você quer se consultar?</label>
+			<br />
             <select name="specialtyCombo" ng-model="specialtySelected"
 				ng-options="specialty for specialty in specialties">
 			</select>
+
+			<br /><br />
+
+			<label for="availableDaysList">Em quais dias você tem disponibilidade?</label>
+			<ion-list name="availableDaysList">
+				<ion-item ng-repeat="day in availableDays" item="day">
+					<ion-checkbox ng-model="selectedDays">{{ day }}</ion-checkbox>
+				</ion-item>
+			</ion-list>
+
+
 
 			<a ui-sref="app.dashboard" class="button button-block button-positive">Agendar</a>
 	    </form>

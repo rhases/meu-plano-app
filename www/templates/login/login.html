@@ -5,31 +5,23 @@
 <!--State name : app.facebookLogin-->
 <!--URL : #app/facebookLogin-->
 
-<ion-view title="Rhases Login">
+<ion-view title="Bem vindo à Rhases">
+		<!--left button on navigation bar-->
+		<ion-nav-buttons side="left">
+		</ion-nav-buttons> <!--end left button on navigation bar-->
     <!--login content section-->
     <ion-content scroll="false" id="social-login">
         <form>
-
             <div>
-                <i class="fa fa-facebook facebook-color"></i>
+              <img src="img/logo.png" style="width: 80%; max-width: 200px;" />
             </div>
-            <div class="sub-header">Conecte-se com o Facebook</div>
+            <h3>Podemos agendar a sua consulta?</h3>
 
-            <div class="ng-hide" ng-show="!user">
-                <a class="md-raised social-button md-button md-default-theme facebook-background" ng-click="facebookSignIn()">
+            <div class="padding-top">
+                <a class="button button-block icon ion-social-facebook button-positive facebook-background" ng-click="facebookSignIn()">
                     Continuar com o Facebook
                 </a>
             </div>
-						<div class="ng-hide" ng-show="user">
-							<div>
-									<img src="{{user.picture}}" class="user-img"/>
-
-									<h1>{{user.name}}</h1>
-
-									<h2>{{user.email}}</h2>
-							</div>
-            </div>
         </form>
-
     </ion-content><!--end login content section-->
 </ion-view>
