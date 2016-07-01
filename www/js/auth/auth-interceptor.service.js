@@ -1,6 +1,6 @@
 'use strict';
 angular.module('starter')
-	.factory('authInterceptor', function authInterceptor() {
+	.factory('authInterceptor', function() {
 		var state;
 		return {
 			// Add authorization token to headers
