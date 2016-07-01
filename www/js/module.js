@@ -1,0 +1,11 @@
+angular.module('starter',
+	[
+		'ionic',
+		'ngIOS9UIWebViewPatch',
+		'starter.controllers',
+		'starter.services',
+		'ngMaterial',
+		'ngMessages',
+		'ngCordova'
+	]
+)

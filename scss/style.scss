@@ -544,6 +544,7 @@ md-sidenav {
     padding: 15px;
     line-height: 0 !important;
     margin-top: -29px;
+	position: absolute;
 
     i {
       vertical-align: text-top;
@@ -972,7 +973,7 @@ md-sidenav {
   }
   //fake login form section
   form {
-    margin-top: 33%;
+    margin-top: 10px;
     &.fakeLogin-form {
       margin-top: 22%;
     }
