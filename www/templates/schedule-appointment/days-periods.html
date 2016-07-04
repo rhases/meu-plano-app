@@ -9,35 +9,11 @@
 	<ion-content>
 	    <form name="appointmentForm">
 
-			<ion-list>
-				<ion-item ng-repeat="day in daysSelected">
-					<div class="item item-button-right item-divider-with-button">
-						{{ day.label }}
-						<button class="button icon">
-					    	<i class="ion-android-add-circle"></i>
-					    </button>
-					</div>
-
-					<ion-list>
-						<ion-item>
-							<div class="item item-button-right">
-								periodo 1
-								<button class="button-icon">
-							    	<i class="ion-android-remove-circle"></i>
-							    </button>
-							</div>
-						</ion-item>
-						<ion-item>
-							<div class="item item-button-right">
-								periodo 2
-								<button class="button-icon">
-							    	<i class="ion-android-remove-circle"></i>
-							    </button>
-							</div>
-						</ion-item>
-					</ion-list>
-				</ion-item>
-			</ion-list>
+			<ion-checkbox ng-repeat="item in appointment.periods"
+                  ng-model="item.checked"
+                  ng-checked="item.checked">
+	        	{{ item.label }}
+	        </ion-checkbox>
 
 			<a ui-sref="app.dashboard" class="button button-block button-positive">Continuar</a>
 	    </form>
