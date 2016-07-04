@@ -86,6 +86,16 @@ angular.module('starter')
                 templateUrl: "templates/schedule-appointment/days-periods.html",
                 controller: 'daysPeriodsCtrl'
             })
+            .state('app.scheduleAppointment.locations', {
+                url: "/locations",
+                templateUrl: "templates/schedule-appointment/locations.html",
+                controller: 'locationsCtrl'
+            })
+            .state('app.scheduleAppointment.confirmation', {
+                url: "/confirmation",
+                templateUrl: "templates/schedule-appointment/confirmation.html",
+                controller: 'confirmationCtrl'
+            })
 			.state('app.talkWithUs', {
                 url: "/talkWithUs",
                 cache: true,

@@ -1,0 +1,36 @@
+<!--View Information-->
+<!--View name : Schedule Appointment-->
+<!--Controller name : locationsCtrl-->
+<!--Controller path : www/templates/scheduleAppointment/js/controllers.js-->
+<!--State name : app.scheduleAppointment.locations-->
+<!--URL : #app/scheduleAppointment/locations-->
+
+<ion-view title="Quais locais?">
+	<ion-content>
+	    <form name="appointmentForm">
+
+			<ion-list>
+				<ion-checkbox ng-repeat="item in appointment.locations"
+	                  ng-model="item.checked"
+	                  ng-checked="item.checked">
+		        	{{ item.label }}
+		        </ion-checkbox>
+
+				<ion-item>
+					<div class="item item-input-inset">
+						<ion-checkbox ng-model="appointment.otherLocation.checked"
+							ng-checked="appointment.otherLocation.checked"
+							class="item">
+						</ion-checkbox>
+						<label class="item-input">
+						    <span class="input-label">Outro:</span>
+						    <input type="text" ng-model="appointment.otherLocation.value">
+	  					</label>
+					</div>
+				</ion-item>
+		  	</ion-list>
+
+			<a ui-sref="app.scheduleAppointment.confirmation" class="button button-block button-positive">Continuar</a>
+	    </form>
+	</ion-content>
+</ion-view>
