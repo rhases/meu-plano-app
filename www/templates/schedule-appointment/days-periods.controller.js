@@ -3,8 +3,4 @@ appControllers.controller('daysPeriodsCtrl', function ($scope, $mdBottomSheet, $
 
         $scope.appointment = appointmentService.appointment;
 
-        $scope.daysSelected = $scope.appointment.days.filter(function(day) { return day.checked });
-
-        
-
 });
