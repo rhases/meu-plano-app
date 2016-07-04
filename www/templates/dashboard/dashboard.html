@@ -5,7 +5,7 @@
 <!--State name : app.dashboard-->
 <!--URL : #app/dashboard-->
 
-<ion-view view-title="Rhases">
+<ion-view view-title="Suas consultas">
 
     <!--right button on navigation bar-->
     <ion-nav-buttons side="right">
@@ -18,28 +18,33 @@
 
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
-	    <!--toolbar section-->
-	    <md-toolbar class="bar-subheader md-medium-tall md-primary toolbar-medium toolbar-in-content">
-	        <div class="row" style="padding-top: 10px;">
-				<div class="col-20">
-					<img class="full-image" src="http://2.bp.blogspot.com/-cy4hKhxD7GA/UH2uYshecsI/AAAAAAAABgc/mav-oS6Vtjc/s1600/0000010800-touro.gif">
-				</div>
-				<div class="col-80">
-					<h2>
-						<strong>Forte como um touro</strong>
-					</h2>
-					<small>Sua saúde está ótima. Continue se cuidando!</small>
-				</div>
-	        </div>
-	        <a class="md-button md-accent md-fab fab-toolbar-medium"
-	           aria-label="Add" ui-sref="app.scheduleAppointment">
-	            <i class="icon ion-plus"></i>
-	        </a>
-	    </md-toolbar><!--end toolbar section-->
-
 		<br>
 
         <!--cards section-->
+		<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
+        <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline">Card with image</span>
+            <span class="md-subhead">Large</span>
+          </md-card-title-text>
+          <md-card-title-media>
+            <div class="md-media-lg card-media"></div>
+          </md-card-title-media>
+        </md-card-title>
+        <md-card-actions layout="row" layout-align="end center">
+          <md-button>Action 1</md-button>
+          <md-button>Action 2</md-button>
+        </md-card-actions>
+      </md-card>
+
+		<div class="list card">
+
+			<div class="item item-body">
+				<p>Procurando o melhor cardiologista para você.</p>
+				<p>Consulta para terça e quarta no inicio da manhã.</p>
+			</div>
+		</div>
+
 		<div class="list card">
 
 			<div class="item item-avatar">
@@ -58,7 +63,7 @@
 				<div class="col-50">
 					<a class="item item-icon-left assertive" ng-click="cancelAppointment()">
 						<i class="icon ion-close"></i>
-						Desmarcar
+						Recusar
 					</a>
 				</div>
 				<div class="col-50">
