@@ -10,16 +10,21 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
   	var authResponse = response.authResponse;
 
     getFacebookProfileInfo(authResponse)
-    .then(function(profileInfo) {
-      // For the purpose of this example I will store user data on local storage
-      var user = userService.facebookSignUp(profileInfo)
-			$ionicLoading.hide();
-			console.log('User Signed in: ' + JSON.stringify(user));
-      $state.go('app.register');
-
-    }, function(fail){
-      fbLoginError(fail);
-    });
+	    .then(function(profileInfo) {
+	      return userService.facebookSignUp(profileInfo)
+					.then(function(user) {
+						console.log('User Signed in: ' + JSON.stringify(user));
+						if(user.status == "invited") {
+							$state.go('app.register');
+						}
+					})
+					.then(function() {
+						$ionicLoading.hide();
+					});
+	    })
+			.catch(function(fail) {
+      	fbLoginError(fail);
+    	});
   };
 
   // This is the fail callback from the login method
