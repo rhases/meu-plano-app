@@ -27,17 +27,17 @@
 		</section>
 
 		<section ng-if="appUser.hasHealthPlan == true">
-	    	<form name="registerForm">
+	    	<form name="registerUserProfile">
 	  			<md-content class="md-no-momentum">
 					<h4 class="text-center">Qual?</h4>
 					<md-input-container class="md-block">
-						<input ng-model="appUser.healthPlan.name" name="name" required placeholder="Nome do plano">
+						<input ng-model="appUser.healthPlan.name" name="healthPlanName" required placeholder="Nome do plano (ex.: Amil 400, Unimed Básico, ...)">
 					</md-input-container>
 					<md-input-container class="md-block">
-						<input ng-model="appUser.healthPlan.number" required placeholder="Número da carteirinha">
+						<input ng-model="appUser.healthPlan.number" name="healthPlanNumber" required placeholder="Número da carteirinha">
 					</md-input-container>
 				</md-content>
-				<a class="button button-block button-positive button-balanced" ng-click="save()">
+				<a class="button button-block button-positive button-balanced" ng-disabled="!(registerUserProfile.healthPlanName.$valid && registerUserProfile.healthPlanNumber.$valid)" ng-click="save()">
 					Continuar
 				</a>
 
