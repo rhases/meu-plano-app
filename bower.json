@@ -18,5 +18,11 @@
     "medical-specializations": "git+ssh://git@bitbucket.org/rhases/medical-specializations.git#^0.0.2",
     "scheduler-utils": "git+ssh://git@bitbucket.org/rhases/scheduler-utils.git#^0.0.1",
     "ng-lodash": "^0.5.0"
+  },
+  "resolutions": {
+    "angular": "^1.5.7",
+    "angular-animate": "^1.5.7",
+    "angular-sanitize": "^1.5.7",
+    "angular-aria": "^1.5.7"
   }
 }

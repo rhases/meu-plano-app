@@ -1,5 +1,5 @@
 appControllers.controller('specialtyCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    appointmentService, specialtiesService) {
+    specialtiesService) {
 
         $scope.specialties = specialtiesService.getAll();
 

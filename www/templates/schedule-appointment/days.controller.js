@@ -1,7 +1,7 @@
 appControllers.controller('daysCtrl', function ($scope, $stateParams, $mdBottomSheet, $mdToast, $mdDialog,
-    appointmentService) {
+    scheduleAppointmentService) {
 
-        $scope.appointment = appointmentService.appointment;
+        $scope.appointment = scheduleAppointmentService.appointment;
 
         $scope.appointment.specialty = $stateParams.specialtyChosen;
 
