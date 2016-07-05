@@ -19,7 +19,7 @@ angular.module('starter')
                 templateUrl: "templates/menu/menu.html",
                 controller: 'menuCtrl'
             })
-						.state('app.login', {
+			.state('app.login', {
                 url: "/login",
 								cache: false,
                 params:{
@@ -55,17 +55,6 @@ angular.module('starter')
                     'menuContent': {
                         templateUrl: "templates/register/profile/profile.html",
                         controller: 'profileCtrl'
-                    }
-                }
-            })
-				cache: false,
-                params:{
-                    isAnimated: false
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/register/register.html",
-                        controller: 'registerCtrl'
                     }
                 }
             })
