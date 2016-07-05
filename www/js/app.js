@@ -65,4 +65,8 @@ angular.module('starter')
         $ionicConfigProvider.spinner.icon("android");
         $ionicConfigProvider.views.swipeBackEnabled(false);
 
-    });
+    })
+
+	.constant('$ionicLoadingConfig', {
+		template: '<ion-spinner />'
+	});

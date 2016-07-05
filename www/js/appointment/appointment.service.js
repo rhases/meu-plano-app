@@ -1,8 +1,8 @@
 angular.module("starter")
     .factory("appointmentService", function($http, $cacheFactory, $q, userService, lodash, SCHEDULER_HOST) {
-        var _appointmentList = [];
+        var _appointmentList;
         var _defaultKey = "default";
-        var _cache = {};
+        var _cache;
 
         function _getAppointmentList() {
             var deferred = $q.defer();
@@ -10,15 +10,13 @@ angular.module("starter")
             _initCache();
 
             if (lodash.isNil(_cache.get("appointment"))) {
-                return $http.get(SCHEDULER_HOST + "/api/appointment")
+                $http.get(SCHEDULER_HOST + "/api/appointments")
                     .success(function(appointments) {
-                        if (!lodash.isEmpty(appointments)) {
-                            _appointmentList = appointments;
+                        _appointmentList = appointments;
 
-                            _updateChace(appointments);
+                        _updateChace(appointments);
 
-                            deferred.resolve(_appointmentList);
-                        }
+                        deferred.resolve(_appointmentList);
                     })
                     .error(function(error) {
                         deferred.reject(error);
@@ -33,11 +31,9 @@ angular.module("starter")
         function _refresh() {
             $http.get(SCHEDULER_HOST + "/api/appointments")
                 .success(function(appointment) {
-                    if (!lodash.isEmpty(appointment)) {
-                        _appointmentList = appointment;
+                    _appointmentList = appointment;
 
-                        _updateChace(appointment);
-                    }
+                    _updateChace(appointment);
                 })
                 .error(function(ignore) {
                     console.log(error);
@@ -55,7 +51,7 @@ angular.module("starter")
 
         function _initCache() {
             if (lodash.isNil(_cache)) {
-                var key = lodash.isNil(userService.getCurrentUser().name) ? _defaultKey : userService.getCurrentUser().name;
+                var key = lodash.isNil(userService.getAppUser()) ? _defaultKey : userService.getAppUser().name;
 
                 _cache = $cacheFactory(key, number=10);
             }

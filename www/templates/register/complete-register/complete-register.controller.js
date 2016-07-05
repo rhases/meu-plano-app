@@ -1,6 +1,19 @@
 // Controller of Register Page.
-appControllers.controller('registerCtrl', function ($mdBottomSheet, $mdToast, $scope, $stateParams, $filter, $mdDialog, $ionicHistory, userService) {
+appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, userService, $ionicLoading) {
 
-	$scope.user = userService.getCurrentUser();
-	console.log('Current User: ' + JSON.stringify($scope.user));
+	$scope.appUser = userService.getAppUser() || {};
+
+	$scope.save = function() {
+		$ionicLoading.show();
+		userService.save($scope.appUser)
+			.then(function() {
+				$state.go('app.profile');
+			})
+			.catch(function() {
+				$mdToast.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');
+			})
+			.then(function() {
+				$ionicLoading.hide();
+			});
+	}
 });

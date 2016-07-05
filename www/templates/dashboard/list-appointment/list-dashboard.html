@@ -28,35 +28,45 @@
 			</div>
 		</div>
 
-		<div class="list card">
+        <div class="list card" ng-if="appointments.length == 0">
+            <div class="item item-body">
+                <p>Você não possuí consultas marcadas</p>
+            </div>
+        </div>
 
-			<div class="item item-avatar">
-				<img src="http://www.telelaudo.com.br/wp/wp-content/uploads/2014/03/medico-1.png">
-				<h2><strong>Maúricio Sales</strong></h2>
-				<p>Dermatologista</p>
-				<p><a href="maps:Biocardio" /><i class="ion-location"></i> Cliníca AEPIT</a></p>
-			</div>
+        <!-- appointments -->
+        <div ng-if="appointments.length != 0">
 
-			<div class="item item-body">
-				<p>Você tem uma consulta para daqui <strong>um dia</strong>.</p>
-				<p><strong>13/05/04 ás 13:00</strong></p>
-			</div>
+    		<div class="list card">
+    			<div class="item item-avatar">
+    				<img src="http://www.telelaudo.com.br/wp/wp-content/uploads/2014/03/medico-1.png">
+    				<h2><strong>Maúricio Sales</strong></h2>
+    				<p>Dermatologista</p>
+    				<p><a href="maps:Biocardio" /><i class="ion-location"></i> Cliníca AEPIT</a></p>
+    			</div>
 
-			<div class="row">
-				<div class="col-50">
-					<a class="item item-icon-left button-light" ng-click="cancelAppointment()">
-						<i class="icon ion-close"></i>
-						Recusar
-					</a>
-				</div>
-				<div class="col-50">
-					<a class="item item-icon-left button-light" href="#">
-						<i class="icon ion-checkmark"></i>
-						Confirmar
-					</a>
-				</div>
-			</div>
-		</div>
+    			<div class="item item-body">
+    				<p>Você tem uma consulta para daqui <strong>um dia</strong>.</p>
+    				<p><strong>13/05/04 ás 13:00</strong></p>
+    			</div>
+
+    			<div class="row">
+    				<div class="col-50">
+    					<a class="item item-icon-left button-light" ng-click="cancelAppointment()">
+    						<i class="icon ion-close"></i>
+    						Recusar
+    					</a>
+    				</div>
+    				<div class="col-50">
+    					<a class="item item-icon-left button-light" href="#">
+    						<i class="icon ion-checkmark"></i>
+    						Confirmar
+    					</a>
+    				</div>
+    			</div>
+    		</div>
+            
+        </div>
 
 		<div class="list card">
 
