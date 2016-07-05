@@ -39,16 +39,25 @@
     <script src="cordova.js"></script>
     <!-- end Cordova script -->
 
+    <!-- Utils section -->
+    <script src="lib/ng-lodash/build/ng-lodash.min.js"></script>
+    <!-- end Utils section -->
+
     <!--ionic framework ngIOS9UIWebViewPatch-->
     <!--Learn more about ngIOS9UIWebViewPatch at : http://blog.ionic.io/ios-9-potential-breaking-change/-->
     <script src="ngIOS9UIWebViewPatch/angular-ios9-uiwebview.patch.js"></script>
     <!--end ionic framework ngIOS9UIWebViewPatch-->
 
+	<script src="lib/scheduler-utils/index.js"></script>
+	<script src="lib/medical-specializations/index.js"></script>
+
     <!-- app.js section-->
 	<script src="js/module.js"></script>
+    <script src="js/app.constants.js"></script>
     <script src="js/app.js"></script>
     <script src="js/md-config.js"></script>
 	<script src="js/routes.js"></script>
+	<script src="js/local-storage.js"></script>
     <!-- end app.js section-->
 
     <!-- Controllers section-->
@@ -59,9 +68,10 @@
 	<script src="js/shared/number-suffix.filter.js"></script>
 	<script src="js/shared/toast.controller.js"></script>
     <script src="templates/menu/menu.controller.js"></script>
-    <script src="templates/dashboard/dashboard.controller.js"></script>
+    <script src="templates/dashboard/list-appointment/list-dashboard.controller.js"></script>
 	<script src="templates/login/login.controller.js"></script>
-	<script src="templates/register/register.controller.js"></script>
+	<script src="templates/register/complete-register/complete-register.controller.js"></script>
+	<script src="templates/register/profile/profile.controller.js"></script>
     <script src="templates/setting/setting.controller.js"></script>
 
     <script src="templates/schedule-appointment/specialty.controller.js"></script>
@@ -76,7 +86,10 @@
 	<script src="templates/user-profile/user-profile.controller.js"></script>
 	<script src="templates/facebook/js/controllers.js"></script>
 
+	<script src="js/user/user-profile.service.js"></script>
 	<script src="js/user/user.service.js"></script>
+
+    <script src="js/appointment/appointment.service.js"></script>
 
 	<script src="js/auth/auth-interceptor.service.js"></script>
 	<script src="js/auth/auth.js"></script>
@@ -87,6 +100,8 @@
     <!-- jQuery section-->
     <script src="lib/jquery/dist/jquery.js"></script>
     <!-- end jQuery section-->
+
+
 
 </head><!-- end head section-->
 

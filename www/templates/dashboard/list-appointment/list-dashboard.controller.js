@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('dashboardCtrl', function ($scope, $timeout, $state, $stateParams, $ionicHistory, $mdDialog) {
+appControllers.controller('dashboardListCtrl', function ($scope, $timeout, $state, $stateParams, $ionicHistory, $mdDialog, appointmentService) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -28,21 +28,6 @@ appControllers.controller('dashboardCtrl', function ($scope, $timeout, $state, $
 
     // cancel appointment
     $scope.cancelAppointment = function ($event) {
-        $mdDialog.show({
-            controller: 'DialogController',
-            templateUrl: 'confirm-dialog.html',
-            targetEvent: $event,
-            locals: {
-                displayOption: {
-                    title: "Desmarcar Consulta",
-                    content: "Tem certeza que deseja desmarcar esta consulta?",
-					cancel: "Cancelar",
-                    ok: "Confirmar"
-                }
-            }
-        }).then(function () {
-            $scope.dialogResult = "You choose Confirm!"
-        });
     }// End cancel appointment.
 
 }); // End of dashboard controller.

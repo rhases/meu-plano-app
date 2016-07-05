@@ -19,7 +19,7 @@ angular.module('starter')
                 templateUrl: "templates/menu/menu.html",
                 controller: 'menuCtrl'
             })
-						.state('app.login', {
+			.state('app.login', {
                 url: "/login",
 								cache: false,
                 params:{
@@ -32,32 +32,58 @@ angular.module('starter')
                     }
                 }
             })
-						.state('app.register', {
-			                url: "/register",
-							cache: false,
-			                params:{
-			                    isAnimated: false
-			                },
-			                views: {
-			                    'menuContent': {
-			                        templateUrl: "templates/register/register.html",
-			                        controller: 'registerCtrl'
-			                    }
-			                }
-			            })
-            .state('app.dashboard', {
-                url: "/dashboard",
+			.state('app.register', {
+                url: "/complete-register",
 				cache: false,
                 params:{
                     isAnimated: false
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/dashboard.html",
-                        controller: 'dashboardCtrl'
+                        templateUrl: "templates/register/complete-register/complete-register.html",
+                        controller: 'registerCtrl'
                     }
                 }
             })
+			.state('app.profile', {
+                url: "/profile",
+				cache: false,
+                params:{
+                    isAnimated: false
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/register/profile/profile.html",
+                        controller: 'profileCtrl'
+                    }
+                }
+            })
+            .state('app.dashboard-list', {
+                url: "/list-dashboard",
+				cache: false,
+                params:{
+                    isAnimated: true
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "../templates/dashboard/list-appointment/list-dashboard.html",
+                        controller: 'dashboardListCtrl'
+                    }
+                }
+            })
+            // .state('app.dashboard-detail', {
+            //     url: "/detail-dashboard",
+			// 	cache: false,
+            //     params:{
+            //         isAnimated: false
+            //     },
+            //     views: {
+            //         'menuContent': {
+            //             templateUrl: "templates/dashboard/list-appointment/dashboard.html",
+            //             controller: 'dashboardListCtrl'
+            //         }
+            //     }
+            // })
             .state('app.setting', {
                 url: "/setting",
                 views: {

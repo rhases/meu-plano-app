@@ -55,7 +55,7 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 							}
 						})
 						.then(function (res) {
-							console.log("PushId sent to auth server.", err);
+							console.log("PushId sent to auth server.", res);
 						});
 				}, function (err) {
 					console.log("Error on push register." + err);
