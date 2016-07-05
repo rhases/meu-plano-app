@@ -5,7 +5,7 @@ appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, us
 
 	$scope.save = function() {
 		$ionicLoading.show();
-		userService.save($scope.appUser)
+		userService.saveAppUser($scope.appUser)
 			.then(function() {
 				$state.go('app.profile');
 			})

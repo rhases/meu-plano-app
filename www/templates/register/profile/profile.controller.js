@@ -9,7 +9,7 @@ appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, use
 
 	$scope.save = function() {
 		$ionicLoading.show();
-		userService.save($scope.appUser)
+		userService.saveAppUser($scope.appUser)
 			.then(function() {
 				$state.go('app.dashboard-list');
 			})

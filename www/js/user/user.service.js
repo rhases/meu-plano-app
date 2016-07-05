@@ -17,6 +17,9 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 		return _saveAuthUser(user)
 			.then(function() {
 				return userProfileService.save(user);
+			})
+			.then(function() {
+				_storeAppUser(user);
 			});
 	}
 
@@ -48,8 +51,8 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 		console.log('Saving user into rhases-auth... ');
 		// envia para o rhases-auth.
 		return $http.post(window.globalVariable.backend.authServerUri + "api/users/", authUser)
-			.then(function(token) {
-				_storeAuthToken(token);
+			.then(function(res) {
+				_storeAuthToken(res.data.token);
 			});
 	}
 
@@ -82,7 +85,7 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 			})
 			// Salva o usuario localmente
 			.then(function(user){
-				_storeUser(user);
+				_storeAppUser(user);
 				return _user;
 			});
 	}
