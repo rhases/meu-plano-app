@@ -19,7 +19,7 @@ angular.module('starter')
                 templateUrl: "templates/menu/menu.html",
                 controller: 'menuCtrl'
             })
-						.state('app.login', {
+			.state('app.login', {
                 url: "/login",
 								cache: false,
                 params:{
@@ -33,15 +33,28 @@ angular.module('starter')
                 }
             })
 			.state('app.register', {
-                url: "/register",
+                url: "/complete-register",
 				cache: false,
                 params:{
                     isAnimated: false
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/register/register.html",
+                        templateUrl: "templates/register/complete-register/complete-register.html",
                         controller: 'registerCtrl'
+                    }
+                }
+            })
+			.state('app.profile', {
+                url: "/profile",
+				cache: false,
+                params:{
+                    isAnimated: false
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/register/profile/profile.html",
+                        controller: 'profileCtrl'
                     }
                 }
             })

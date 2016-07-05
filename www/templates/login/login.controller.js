@@ -10,22 +10,37 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
   	var authResponse = response.authResponse;
 
     getFacebookProfileInfo(authResponse)
-    .then(function(profileInfo) {
-      // For the purpose of this example I will store user data on local storage
-      var user = userService.facebookSignUp(profileInfo)
-			$ionicLoading.hide();
-			console.log('User Signed in: ' + JSON.stringify(user));
-      $state.go('app.register');
-
-    }, function(fail){
-      fbLoginError(fail);
-    });
+	    .then(function(profileInfo) {
+	      return userService.facebookSignUp(profileInfo)
+					.then(function(user) {
+						rhasesLoginSuccess(user);
+					});
+	    })
+			.catch(function(fail) {
+      	fbLoginError(fail);
+    	});
   };
+
+	var rhasesLoginSuccess = function(user) {
+		console.log('User Signed in: ' + JSON.stringify(user));
+		switch(user.status) {
+			case 'invited':
+			case 'not_invited':
+				$state.go('app.register');
+				break;
+			case 'registered':
+				$state.go('app.dashboard');
+				break;
+		}
+		$ionicLoading.hide();
+		waitResponse = false;
+	};
 
   // This is the fail callback from the login method
   var fbLoginError = function(error){
     console.log('fbLoginError ' + JSON.stringify(error), error);
     $ionicLoading.hide();
+		waitResponse = false;
 
 		// User Cancelled (4201)
 		$mdToast.showSimple('Não foi possível acessar o seu perfil.\n Feche o app do Facebook e tente novamente!');
@@ -48,14 +63,21 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
     return deferred.promise;
   };
 
+	var waitResponse = false;
+
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
+		if(waitResponse) {
+			console.log('facebookSignIn: wait response!');
+			return;
+		}
+
+		waitResponse = true;
+		$ionicLoading.show({
+			template: 'Conectando com o Facebook...'
+		});
 
     facebookConnectPlugin.getLoginStatus(function(success){
-			$ionicLoading.show({
-				template: 'Conectando com o Facebook...'
-			});
-
       if(success.status === 'connected'){
         // The user is logged in and has authenticated your app, and response.authResponse supplies
         // the user's ID, a valid access token, a signed request, and the time the access token
@@ -65,7 +87,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
     		// Check if we have our user saved
     		if(userService.getCurrentUser()){
 					console.log('Usuario ja logado. Redirecionando...');
-					$state.go('app.home');
+					rhasesLoginSuccess(userService.getCurrentUser());
 				} else {
 					console.log('Efetuando login...');
 					fbLoginSuccess(success);
