@@ -66,5 +66,5 @@ angular.module('starter')
     })
 
 	.constant('$ionicLoadingConfig', {
-		template: '<ion-spinner />'
+		template: '<ion-spinner icon="ripple" class="spinner-balanced" />'
 	});
