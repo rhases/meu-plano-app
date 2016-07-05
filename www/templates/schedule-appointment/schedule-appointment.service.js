@@ -1,4 +1,4 @@
-appServices.factory('appointmentService', function (specialtiesService) {
+appServices.factory('scheduleAppointmentService', function (specialtiesService) {
 
     var service = {
 

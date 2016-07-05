@@ -1,6 +1,11 @@
 appControllers.controller('confirmationCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    appointmentService) {
+    scheduleAppointmentService) {
 
-        $scope.appointment = appointmentService.appointment;
+        $scope.appointment = scheduleAppointmentService.appointment;
 
+        $scope.selectedDays = scheduleAppointmentService.getSelectedDays();
+
+        $scope.selectedPeriods = scheduleAppointmentService.getSelectedPeriods();
+
+        $scope.selectedLocations = scheduleAppointmentService.getSelectedLocations();
 });
