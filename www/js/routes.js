@@ -32,19 +32,32 @@ angular.module('starter')
                     }
                 }
             })
-						.state('app.register', {
-			                url: "/register",
-							cache: false,
-			                params:{
-			                    isAnimated: false
-			                },
-			                views: {
-			                    'menuContent': {
-			                        templateUrl: "templates/register/register.html",
-			                        controller: 'registerCtrl'
-			                    }
-			                }
-			            })
+			.state('app.register', {
+                url: "/complete-register",
+				cache: false,
+                params:{
+                    isAnimated: false
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/register/complete-register/complete-register.html",
+                        controller: 'registerCtrl'
+                    }
+                }
+            })
+			.state('app.profile', {
+                url: "/profile",
+				cache: false,
+                params:{
+                    isAnimated: false
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/register/profile/profile.html",
+                        controller: 'profileCtrl'
+                    }
+                }
+            })
             .state('app.dashboard', {
                 url: "/dashboard",
 				cache: false,
