@@ -1,13 +1,23 @@
 angular.module('starter').service('userService', function($rootScope, $q, $http, localStorage, userProfileService) {
 
+	// Merge do user do rhases-auth e do user-profile do scheduler-ws.
 	var _user;
+
+	// Token de autenticacao retornado pelo rhases-auth
 	var _authToken;
 
-	function _getCurrentUser() {
+	function _getAppUser() {
 		if(!_user) {
 			_user = localStorage.get("user");
 		}
 		return _user;
+	}
+
+	function _saveAppUser(user) {
+		return _saveAuthUser(user)
+			.then(function() {
+				return userProfileService.save(user);
+			});
 	}
 
 	function _getAuthToken() {
@@ -20,21 +30,21 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 			return _user;
 		}
 
-		// Salva o authUser lá no rhases-auth.
-		return _saveAuthUser(facebookInfo)
-		// carrega o modelo user e seu status no servidor.
-			.then(function() {
-				return _loadUserFromFacebookInfo(facebookInfo);
-			});
-	}
-
-	function _saveAuthUser(facebookInfo) {
 		var authUser = {
 		    name: facebookInfo.name,
 		    email: facebookInfo.email,
 		    facebook: facebookInfo
 		};
 
+		// Salva o authUser lá no rhases-auth.
+		return _saveAuthUser(authUser)
+		// carrega o modelo user e seu status no servidor.
+			.then(function() {
+				return _loadUserFromFacebookInfo(facebookInfo);
+			});
+	}
+
+	function _saveAuthUser(authUser) {
 		console.log('Saving user into rhases-auth... ');
 		// envia para o rhases-auth.
 		return $http.post(window.globalVariable.backend.authServerUri + "api/users/", authUser)
@@ -49,7 +59,7 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 		console.log('Auth Token stored: ' + JSON.stringify(_authToken));
 	}
 
-	function _storeUser(user) {
+	function _storeAppUser(user) {
 		localStorage.set("user", user);
 		_user = user;
 		console.log('User stored: ' + JSON.stringify(_user));
@@ -103,8 +113,9 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 	}
 
 	return {
-		getCurrentUser: _getCurrentUser,
+		getAppUser: _getAppUser,
 		getAuthToken: _getAuthToken,
 		facebookSignUp: _facebookSignUp,
+		saveAppUser: _saveAppUser
 	}
 })

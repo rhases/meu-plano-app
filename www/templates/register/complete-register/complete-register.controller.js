@@ -1,7 +1,7 @@
 // Controller of Register Page.
 appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, userService, $ionicLoading) {
 
-	$scope.appUser = userService.getCurrentUser() || {};
+	$scope.appUser = userService.getAppUser() || {};
 
 	$scope.save = function() {
 		$ionicLoading.show();

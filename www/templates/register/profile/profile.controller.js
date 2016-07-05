@@ -1,7 +1,7 @@
 // Controller of Register Page.
 appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, userService, $ionicLoading) {
 
-	$scope.appUser = userService.getCurrentUser() || {};
+	$scope.appUser = userService.getAppUser() || {};
 
 	if(!$scope.appUser.healthPlan) {
 		$scope.appUser.healthPlan = {};

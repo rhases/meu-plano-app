@@ -85,9 +85,9 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
         console.log('getLoginStatus ' + success.status);
 
     		// Check if we have our user saved
-    		if(userService.getCurrentUser()){
+    		if(userService.getAppUser()){
 					console.log('Usuario ja logado. Redirecionando...');
-					rhasesLoginSuccess(userService.getCurrentUser());
+					rhasesLoginSuccess(userService.getAppUser());
 				} else {
 					console.log('Efetuando login...');
 					fbLoginSuccess(success);
