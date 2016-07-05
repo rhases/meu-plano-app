@@ -1,9 +1,18 @@
 // Controller of dashboard.
-appControllers.controller('dashboardListCtrl', function ($scope, $timeout, $state, $stateParams, $ionicHistory, $mdDialog) {
+appControllers.controller('dashboardListCtrl', function ($scope, $timeout, $state, $stateParams, $ionicHistory, $mdDialog, appointmentService) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
+    $scope.appointments = [];
+
+    appointmentService.getAppointmentList()
+        .then(function(appointments) {
+            $scope.appointments = appointments;
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 
     // navigateTo is for navigate to other page
     // by using targetPage to be the destination state.

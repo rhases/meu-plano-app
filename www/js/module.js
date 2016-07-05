@@ -6,7 +6,8 @@ angular.module('starter',
 		'starter.services',
 		'ngMaterial',
 		'ngMessages',
-		'ngCordova'
+		'ngCordova',
+		'ngLodash'
 	]
 )
 
