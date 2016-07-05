@@ -7,27 +7,54 @@
 
     <form name="registerForm">
         <ion-content id="register-content">
-					<md-content>
-            <md-input-container md-no-float>
-                <i class="ion-android-person"></i>
-                <input ng-model="user.name" name="name" required placeholder="* Nome completo">
-            </md-input-container>
-						<md-input-container md-no-float>
-                <i class="ion-android-mail"></i>
-                <input ng-model="user.email" name="email" required placeholder="* Email" type="email">
-            </md-input-container>
-            <md-input-container md-no-float>
-                <i class="ion-android-phone-portrait"></i>
-                <input ng-model="user.telephone" name="telephone" required placeholder="* Telefone" type="tel">
-            </md-input-container>
-						<md-input-container md-no-float>
-                <i class="ion-android-calendar"></i>
-                <input ng-model="user.birth" name="birthday" required placeholder="* Nascimento" type="date">
-            </md-input-container>
-					<md-content>
-					<a class="button button-block button-positive">
-						<md-button>Registrar</md-button>
-					</a>
+  			<md-content class="md-no-momentum">
+	            <!-- <md-input-container md-no-float>
+	                <i class="ion-android-person"></i>
+	                <input ng-model="user.name" name="name" required placeholder="* Nome completo">
+	            </md-input-container>
+				<md-input-container md-no-float>
+	            	<i class="ion-android-mail"></i>
+	                <input ng-model="user.email" name="email" required placeholder="* Email" type="email">
+	            </md-input-container>
+	            <md-input-container md-no-float>
+	                <i class="ion-android-phone-portrait"></i>
+	                <input ng-model="user.telephone" name="telephone" required placeholder="* Telefone" type="tel">
+	            </md-input-container>
+				<md-input-container md-no-float>
+	                <i class="ion-android-calendar"></i>
+	                <input ng-model="user.birth" name="birthday" required placeholder="* Nascimento" type="date">
+	            </md-input-container> -->
+
+
+
+				<md-input-container class="md-block">
+					<!-- Use floating placeholder instead of label -->
+					<md-icon md-font-icon="ion-android-person" class=" fa-2x"></md-icon>
+					<input ng-model="user.name" name="name" required placeholder="* Nome completo" style="font-size:">
+				</md-input-container>
+				<md-input-container class="md-block">
+					<!-- Use floating placeholder instead of label -->
+					<md-icon md-font-icon="ion-android-mail" class=" fa-2x"></md-icon>
+					<input ng-model="user.email" name="email" required placeholder="* Email" type="email">
+				</md-input-container>
+			<md-content>
+			<div class="list">
+			<label class="item item-input item-stacked-label">
+			<span class="input-label">First Name</span>
+			<input type="text" placeholder="John">
+			</label>
+			<label class="item item-input item-stacked-label">
+			<span class="input-label">Last Name</span>
+			<input type="text" placeholder="Suhr">
+			</label>
+			<label class="item item-input item-stacked-label">
+			<span class="input-label">Email</span>
+			<input type="text" placeholder="john@suhr.com">
+			</label>
+			</div>
+			<a class="button button-block button-positive">
+				<md-button>Registrar</md-button>
+			</a>
         </ion-content>
     </form>
 </ion-view>

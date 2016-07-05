@@ -16,18 +16,25 @@
 		        	{{ item.label }}
 		        </ion-checkbox>
 
-				<ion-item>
-					<div class="item item-input-inset">
-						<ion-checkbox ng-model="appointment.otherLocation.checked"
+				<label class="item item-checkbox ng-not-empty ng-valid"
+					aria-checked="false" aria-invalid="false">
+					<div class="checkbox checkbox-input-hidden disable-pointer-events checkbox-circle">
+						<input type="checkbox"
+							ng-model="appointment.otherLocation.checked"
 							ng-checked="appointment.otherLocation.checked"
-							class="item">
-						</ion-checkbox>
-						<label class="item-input">
-						    <span class="input-label">Outro:</span>
-						    <input type="text" ng-model="appointment.otherLocation.value">
-	  					</label>
+							class="ng-pristine ng-untouched ng-valid ng-empty" aria-invalid="false">
+
+							<i class="checkbox-icon"></i>
+
 					</div>
-				</ion-item>
+					<div class="item-content" ng-transclude="">
+					    <input type="text" class="md-input-container.input"
+							ng-model="appointment.otherLocation.value"
+							placeholder="Outro"
+							style="margin-right: 0; margin-left: 0; border-color: #ddd; border-width: 1px; border-style: solid; width: 100%;">
+					</div>
+				</label>
+
 		  	</ion-list>
 
 			<a ui-sref="app.scheduleAppointment.confirmation" class="button button-block button-positive">Continuar</a>

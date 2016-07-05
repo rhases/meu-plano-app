@@ -55,6 +55,14 @@
                         <span>Login</span>
                     </div>
                 </div>
+				<div class="row menu-item"  ng-click="navigateTo('app.register')">
+                    <div class="col-33">
+                        <i class="fa fa-user-md"></i>
+                    </div>
+                    <div class="col-66">
+                        <span>Register</span>
+                    </div>
+                </div>
                 <div class="row menu-item"  ng-click="navigateTo('app.scheduleAppointment')">
                     <div class="col-33">
                         <i class="fa fa-user-md"></i>
@@ -138,9 +146,13 @@
                     <i class="fa fa-th-list"></i>
                     <span>Dashboard</span>
                 </md-list-item>
-								<md-list-item class="menu-list-item" ng-click="navigateTo('app.login')">
+				<md-list-item class="menu-list-item" ng-click="navigateTo('app.login')">
                     <i class="fa fa-th-list"></i>
                     <span>Login</span>
+                </md-list-item>
+				<md-list-item class="menu-list-item" ng-click="navigateTo('app.register')">
+                    <i class="fa fa-th-list"></i>
+                    <span>Register</span>
                 </md-list-item>
                 <md-list-item class="menu-list-item" ng-click="navigateTo('app.scheduleAppointment')">
                     <i class="fa fa-user-md"></i>
