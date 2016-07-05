@@ -13,6 +13,9 @@
     "angular-sanitize": "^1.5.7",
     "angular-aria": "^1.5.7",
     "font-awesome": "^4.6.3",
-    "ngCordova": "^0.1.26-alpha"
+    "ngCordova": "^0.1.26-alpha",
+    "brazilian-cities": "^1.1.3",
+    "medical-specializations": "git+ssh://git@bitbucket.org/rhases/medical-specializations.git#^0.0.1",
+    "scheduler-utils": "git+ssh://git@bitbucket.org/rhases/scheduler-utils.git#^0.0.1"
   }
 }
