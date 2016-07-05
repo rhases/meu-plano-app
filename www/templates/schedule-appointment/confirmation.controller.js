@@ -3,4 +3,9 @@ appControllers.controller('confirmationCtrl', function ($scope, $mdBottomSheet, 
 
         $scope.appointment = appointmentService.appointment;
 
+        $scope.selectedDays = appointmentService.getSelectedDays();
+
+        $scope.selectedPeriods = appointmentService.getSelectedPeriods();
+
+        $scope.selectedLocations = appointmentService.getSelectedLocations();
 });
