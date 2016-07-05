@@ -55,7 +55,7 @@ angular.module("starter")
 
         function _initCache() {
             if (lodash.isNil(_cache)) {
-                var key = lodash.isNil(userService.getCurrentUser().name) ? _defaultKey : userService.getCurrentUser().name;
+                var key = lodash.isNil(userService.getAppUser().name) ? _defaultKey : userService.getAppUser().name;
 
                 _cache = $cacheFactory(key, number=10);
             }
