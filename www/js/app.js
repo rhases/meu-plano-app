@@ -12,8 +12,8 @@
 var db = null; //Use for SQLite database.
 window.globalVariable = {
     startPage: {
-        url: "/app/dashboard",//Url of start page.
-        state: "app.dashboard"//State name of start page.
+        url: "/app/list-dashboard",//Url of start page.
+        state: "app.dashboard-list"//State name of start page.
     },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
@@ -33,7 +33,7 @@ window.globalVariable = {
 };// End Global variable
 
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, ngLodash) {
 
         function initialRootScope() {
             $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.

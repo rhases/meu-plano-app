@@ -58,19 +58,43 @@ angular.module('starter')
                     }
                 }
             })
-            .state('app.dashboard', {
-                url: "/dashboard",
 				cache: false,
                 params:{
                     isAnimated: false
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/dashboard.html",
-                        controller: 'dashboardCtrl'
+                        templateUrl: "templates/register/register.html",
+                        controller: 'registerCtrl'
                     }
                 }
             })
+            .state('app.dashboard-list', {
+                url: "/list-dashboard",
+				cache: false,
+                params:{
+                    isAnimated: true
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "../templates/dashboard/list-appointment/list-dashboard.html",
+                        controller: 'dashboardListCtrl'
+                    }
+                }
+            })
+            // .state('app.dashboard-detail', {
+            //     url: "/detail-dashboard",
+			// 	cache: false,
+            //     params:{
+            //         isAnimated: false
+            //     },
+            //     views: {
+            //         'menuContent': {
+            //             templateUrl: "templates/dashboard/list-appointment/dashboard.html",
+            //             controller: 'dashboardListCtrl'
+            //         }
+            //     }
+            // })
             .state('app.setting', {
                 url: "/setting",
                 views: {

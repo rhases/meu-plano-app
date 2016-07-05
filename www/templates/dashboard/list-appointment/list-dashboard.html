@@ -21,24 +21,7 @@
 		<br>
 
         <!--cards section-->
-		<md-card md-theme="{{ showDarkTheme ? 'dark-grey' : 'default' }}" md-theme-watch>
-        <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline">Card with image</span>
-            <span class="md-subhead">Large</span>
-          </md-card-title-text>
-          <md-card-title-media>
-            <div class="md-media-lg card-media"></div>
-          </md-card-title-media>
-        </md-card-title>
-        <md-card-actions layout="row" layout-align="end center">
-          <md-button>Action 1</md-button>
-          <md-button>Action 2</md-button>
-        </md-card-actions>
-      </md-card>
-
 		<div class="list card">
-
 			<div class="item item-body">
 				<p>Procurando o melhor cardiologista para você.</p>
 				<p>Consulta para terça e quarta no inicio da manhã.</p>
@@ -61,13 +44,13 @@
 
 			<div class="row">
 				<div class="col-50">
-					<a class="item item-icon-left assertive" ng-click="cancelAppointment()">
+					<a class="item item-icon-left button-light" ng-click="cancelAppointment()">
 						<i class="icon ion-close"></i>
 						Recusar
 					</a>
 				</div>
 				<div class="col-50">
-					<a class="item item-icon-left balanced" href="#">
+					<a class="item item-icon-left button-light" href="#">
 						<i class="icon ion-checkmark"></i>
 						Confirmar
 					</a>
@@ -89,29 +72,12 @@
 				<p><strong>24/05/04 ás 17:00</strong></p>
 			</div>
 
-			<a class="item item-icon-left assertive" ng-click="cancelAppointment()">
+			<a class="item item-icon-left" ng-click="cancelAppointment()">
 				<i class="icon ion-close"></i>
 				<!-- <i class="fa fa-close fa-2x"></i> -->
 				Desmarcar
 			</a>
 
-		</div>
-		<div class="list card">
-			<div class="item item-avatar">
-				<img src="http://www.atlasdocorpohumano.com/?act=printThumbImage&desk=2&image=1312">
-				<h2><strong>Urologista</strong></h2>
-			</div>
-
-			<div class="item item-body">
-				<p>Devido a sua idade e alguns fatores de risco identificados é necessário que você visite um urologista a cada 6 meses.</p>
-				<a class="pull-right" href="#">Saiba mais</a>
-			</div>
-
-			<a class="item item-icon-left balanced" ui-sref="app.scheduleAppointment">
-				<i class="icon ion-calendar"></i>
-				<!-- <i class="fa fa-close fa-2x"></i> -->
-				Agendar
-			</a>
 		</div>
 		<!--end cards section-->
 
