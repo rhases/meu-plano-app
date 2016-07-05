@@ -16,7 +16,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 			$ionicLoading.hide();
 			console.log('User Signed in: ' + JSON.stringify(user));
       $state.go('app.register');
-			
+
     }, function(fail){
       fbLoginError(fail);
     });
@@ -63,12 +63,12 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
         console.log('getLoginStatus ' + success.status);
 
     		// Check if we have our user saved
-    		if(!$scope.user || !$scope.user.userID){
-					console.log('Efetuando login...');
-					fbLoginSuccess(success);
-				} else {
+    		if(userService.getCurrentUser()){
 					console.log('Usuario ja logado. Redirecionando...');
 					$state.go('app.home');
+				} else {
+					console.log('Efetuando login...');
+					fbLoginSuccess(success);
 				}
       } else {
         // If (success.status === 'not_authorized') the user is logged in to Facebook,
