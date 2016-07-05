@@ -1,2 +1,2 @@
 angular.module("starter")
-    .constants("SCHEDULER_HOST", "localhost:9002");
+    .constant("SCHEDULER_HOST", "localhost:9002");

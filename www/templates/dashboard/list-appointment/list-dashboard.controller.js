@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('dashboardListCtrl', function ($scope, $timeout, $state, $stateParams, $ionicHistory, $mdDialog) {
+appControllers.controller('dashboardListCtrl', function ($scope, $timeout, $state, $stateParams, $ionicHistory, $mdDialog, appointmentService) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
