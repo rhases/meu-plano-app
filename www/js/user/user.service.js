@@ -13,29 +13,63 @@ angular.module('starter').service('userService', function($rootScope, $cordovaPu
 
 	function _facebookSignUp(facebookInfo) {
 
-		// verifica se o usuario ja esta registrado
-		// Se esta, somente carrega suas informacoes.
+		// Salva o authUser lá no rhases-auth
+		_saveAuthUser(facebookInfo)
+			.then();
+		// verifica se o usuario ja esta registrado ou se possui convite.
+		status = _getPersonStatus(facebookInfo.email)
+		.then(function(status) {
+
+			// Cria model do usuario no app
+			user = _fbProfileToUser(facebookInfo, status);
+
+			if(status === "invited") {
+			}
+
+		})
+		.catch(function(error) {
+			console.log('facebookSignUp error ' + JSON.stringify(error), error);
+		});
+		// TODO Se esta, somente carrega suas informacoes.
 		// Se nao, salva no auth-ws e cria o usuario no schedule-ws
-		return _newUser(facebookInfo);
+		return
 	}
 
-	function _newUser(facebookInfo) {
+	function _getPersonStatus(email) {
+		var deferred = $q.defer();
+
+		// TODO consulta status no schedule-ws
+		deferred.resolve("invited");
+		// invited, not_invited, registered
+		return deferred.promise;
+	}
+
+	function _fbProfileToUser(facebookInfo, status) {
 		_user = {
 			name: facebookInfo.name,
 			email: facebookInfo.email,
-			picture : "https://graph.facebook.com/" + facebookInfo.id + "/picture?type=large"
+			picture : "https://graph.facebook.com/" + facebookInfo.id + "/picture?type=large",
+			status: status
 		};
-		_saveAuthUser(_user, facebookInfo);
 		return _user;
 	}
 
-	function _saveAuthUser(user, facebookInfo) {
+	function _saveAuthUser(facebookInfo) {
 		var authUser = {
-		    name: user.name,
-		    email: user.email,
+		    name: facebookInfo.name,
+		    email: facebookInfo.email,
 		    facebook: facebookInfo
 		};
-		// TODO envia para o rhases-auth.
+		// envia para o rhases-auth.
+		return $http.put(window.globalVariable.backend.authServerUri + "/api/users/", authUser)
+			.then(function(token) {
+				_storeAuthToken(token);
+			});
+	}
+
+	function _storeAuthToken(token) {
+		localStorage.put("authToken", token);
+		_authToken = token;
 	}
 
 	function _saveUserProfile(user) {
@@ -46,12 +80,12 @@ angular.module('starter').service('userService', function($rootScope, $cordovaPu
 			healthPlanNumber: user.healthPlanNumber,
 			healthPlanOperator: user.healthPlanOperator
 		};
-		// TODO envia para o rhases-auth.
+		// TODO envia para o scheduler-ws.
 	}
 
 	return {
-		currentUser: _getCurrentUser,
-		authToken: _getAuthToken,
+		getCurrentUser: _getCurrentUser,
+		getAuthToken: _getAuthToken,
 		facebookSignUp: _facebookSignUp,
 	}
 })
