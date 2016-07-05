@@ -33,7 +33,9 @@ window.globalVariable = {
 };// End Global variable
 
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http) {
+    .run(function ($ionicPlatform, $ionicAnalytics, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http) {
+
+        $ionicAnalytics.register();
 
         function initialRootScope() {
             $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.
@@ -66,5 +68,5 @@ angular.module('starter')
     })
 
 	.constant('$ionicLoadingConfig', {
-		template: '<ion-spinner />'
+		template: '<ion-spinner icon="ripple" class="spinner-balanced" />'
 	});
