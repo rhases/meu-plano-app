@@ -1,7 +1,11 @@
 angular.module('starter').service('userProfileService', function($rootScope, $q, $http) {
 
+	function _invitationStatus(email) {
+		return $http.get(window.globalVariable.backend.schedulerServerUri + "api/invites/status/" + email);
+	}
+
 	function _get(email) {
-		return $http.get(window.globalVariable.backend.schedulerServerUri + "/api/user-profiles/" + email);
+		return $http.get(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/" + email);
 	}
 
 
@@ -14,13 +18,14 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 			healthPlanOperator: user.healthPlanOperator
 		};
 		// envia para o scheduler-ws.
-		return $http.put(window.globalVariable.backend.schedulerServerUri + "/api/user-profiles/" + userProfile._id, userProfile)
+		return $http.put(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/" + userProfile._id, userProfile)
 			.catch(function(error) {
-				return $http.post('/proxy-service/hi/api/health-insurance/user-profiles', userProfile);
+				return $http.post(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/", userProfile);
 			});
 	}
 
 	return {
+		invitationStatus: _invitationStatus,
 		get: _get,
 		save: _save
 	}
