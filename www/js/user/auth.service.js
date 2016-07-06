@@ -1,6 +1,6 @@
 angular.module('starter').service('authService', function($rootScope, $q, $http, localStorage, userService, userProfileService, lodash) {
 
-	var AUTH_TOKEN_LOCALSTORAGE_KEY = "AUTH_TOKEN";
+	var AUTH_TOKEN_KEY = "AUTH_TOKEN";
 
 	// Token de autenticacao retornado pelo rhases-auth
 	var _authToken;
@@ -8,14 +8,14 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// Save auth toke
 	function _storeAuthToken(token) {
 		_authToken = token;
-		localStorage.set(AUTH_TOKEN_LOCALSTORAGE_KEY, _authToken);
+		localStorage.set(AUTH_TOKEN_KEY, _authToken);
 		console.log('Auth Token stored: ' + JSON.stringify(_authToken));
 	}
 
 	// Get/Recovery auth token
 	function _getAuthToken() {
 		if(!_authToken) {
-			_authToken = localStorage.get(AUTH_TOKEN_LOCALSTORAGE_KEY);
+			_authToken = localStorage.get(AUTH_TOKEN_KEY);
 		}
 		return lodash.clone(_authToken);
 	}
@@ -119,24 +119,9 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// 	return user;
 	// }
 
-	function __isLoggedIn() {
-		if(!_getAuthToken()) {
-			return false;
-		}
-
-		if(!_getAppUser()) {
-			return false;
-		}
-
-		return true;
-	}
-
 	function _isLoggedIn() {
+		console.log(_getAuthToken());
 		if(!_getAuthToken()) {
-			return false;
-		}
-
-		if(!_getAppUser()) {
 			return false;
 		}
 

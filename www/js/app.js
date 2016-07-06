@@ -55,8 +55,10 @@ angular.module('starter')
 
             initialRootScope();
 
-			if (!authService.isLoggedIn())
+			if (!authService.isLoggedIn()) {
 				$state.go('app.login');
+				console.log("User not logged!");
+			}
         });
 
     })
