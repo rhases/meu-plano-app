@@ -88,18 +88,18 @@
         <splash density="port-xxxhdpi" src="resources\android\splash\drawable-port-xxxhdpi-screen.png" />
     </platform>
     <icon src="resources\android\icon\drawable-xhdpi-icon.png" />
+    <plugin name="cordova-plugin-facebook4" spec="~1.7.1">
+        <variable name="APP_ID" value="1716198125324026" />
+        <variable name="APP_NAME" value="Rhases" />
+    </plugin>
+    <plugin name="cordova-plugin-console" spec="~1.0.3" />
     <plugin name="cordova-plugin-splashscreen" spec="~3.2.2" />
     <plugin name="cordova-plugin-email-composer" spec="~0.8.3" />
     <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
     <plugin name="phonegap-plugin-push" spec="~1.7.3">
         <variable name="SENDER_ID" value="835746108347" />
     </plugin>
-    <plugin name="cordova-plugin-facebook4" spec="~1.7.1">
-        <variable name="APP_ID" value="1716198125324026" />
-        <variable name="APP_NAME" value="Rhases" />
-    </plugin>
     <plugin name="cordova-plugin-device" spec="~1.1.2" />
     <plugin name="cordova-plugin-transport-security" spec="~0.1.2" />
     <plugin name="cordova-plugin-statusbar" spec="~2.1.3" />
-    <plugin name="cordova-plugin-console" spec="~1.0.3" />
 </widget>

@@ -68,6 +68,13 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 		console.log('User stored: ' + JSON.stringify(_user));
 	}
 
+	function _logout() {
+		_user = undefined;
+		_authToken = undefined;
+		localStorage.removeAll();
+		console.log('User logged out!');
+	}
+
 	function _loadUserFromFacebookInfo(facebookInfo) {
 		return userProfileService.invitationStatus(facebookInfo.email)
 			.then(function(response) {
@@ -119,6 +126,7 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 		getAppUser: _getAppUser,
 		getAuthToken: _getAuthToken,
 		facebookSignUp: _facebookSignUp,
-		saveAppUser: _saveAppUser
+		saveAppUser: _saveAppUser,
+		logout: _logout
 	}
 })
