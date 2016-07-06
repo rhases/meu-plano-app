@@ -23,7 +23,6 @@ ionic plugin add cordova-plugin-transport-security --save # IOS transport securi
 ionic plugin add cordova-plugin-statusbar --save # IOS status bar
 
 #analytics
-ionic add ionic-platform-web-client
 ionic plugin add cordova-plugin-google-analytics
 
 echo "Instalando browser CROSSWALK..."​
