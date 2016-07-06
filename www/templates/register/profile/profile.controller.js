@@ -11,7 +11,7 @@ appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, use
 		$ionicLoading.show();
 		userService.saveAppUser($scope.appUser)
 			.then(function() {
-				$state.go('app.dashboard-list');
+				$state.go('app.dashboard');
 			})
 			.catch(function() {
 				$mdToast.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');

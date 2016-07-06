@@ -13,7 +13,7 @@ var db = null; //Use for SQLite database.
 window.globalVariable = {
     startPage: {
         url: "/app/list-dashboard",//Url of start page.
-        state: "app.dashboard-list"//State name of start page.
+        state: "app.dashboard"//State name of start page.
     },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
