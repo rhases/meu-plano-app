@@ -33,7 +33,7 @@ window.globalVariable = {
 };// End Global variable
 
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, authService) {
 		// , $ionicAnalytics
         // $ionicAnalytics.register();
 
@@ -55,6 +55,8 @@ angular.module('starter')
 
             initialRootScope();
 
+			if (!authService.isLoggedIn())
+				$state.go('app.login');
         });
 
     })
