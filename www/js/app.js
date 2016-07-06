@@ -33,9 +33,7 @@ window.globalVariable = {
 };// End Global variable
 
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http) {
-		// , $ionicAnalytics
-        // $ionicAnalytics.register();
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, analyticsService) {
 
         function initialRootScope() {
             $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.
@@ -44,6 +42,7 @@ angular.module('starter')
         };
 
         $ionicPlatform.ready(function () {
+
             ionic.Platform.isFullScreen = true;
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -54,7 +53,7 @@ angular.module('starter')
             }
 
             initialRootScope();
-
+            analyticsService.setup();
         });
 
     })

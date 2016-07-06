@@ -22,6 +22,10 @@ ionic plugin add cordova-plugin-device --save # This plugin defines a global dev
 ionic plugin add cordova-plugin-transport-security --save # IOS transport security
 ionic plugin add cordova-plugin-statusbar --save # IOS status bar
 
+#analytics
+ionic add ionic-platform-web-client
+ionic plugin add cordova-plugin-google-analytics
+
 echo "Instalando browser CROSSWALK..."​
 ionic browser add crosswalk # https://crosswalk-project.org/
 
