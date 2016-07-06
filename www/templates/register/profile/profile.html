@@ -6,35 +6,35 @@
     </ion-nav-buttons>
 
 	<ion-content padding="true" scrollbar-x="false">
-		<!-- <code>{{ appUser }} adsasd </code> -->
+		<code>{{ appUser }} adsasd </code>
 		<section class="text-center">
 			<md-content class="md-no-momentum">
 				<md-input-container class="md-block">
 					<h4>Tem plano de saúde?</h4>
-					<md-button ng-click="appUser.hasHealthPlan = false" class="md-raised" ng-class="{'md-primary': appUser.hasHealthPlan == false}">Não</md-button>
-					<md-button ng-click="appUser.hasHealthPlan = true" class="md-raised" ng-class="{'md-primary': appUser.hasHealthPlan == true}">Sim</md-button>
+					<md-button ng-click="appUser.profile.hasHealthPlan = false" class="md-raised" ng-class="{'md-primary': appUser.profile.hasHealthPlan == false}">Não</md-button>
+					<md-button ng-click="appUser.profile.hasHealthPlan = true" class="md-raised" ng-class="{'md-primary': appUser.profile.hasHealthPlan == true}">Sim</md-button>
 				</md-input-container>
 			</md-content>
 		</section>
 
 		<br />
 
-		<section ng-if="appUser.hasHealthPlan == false" class="text-center">
+		<section ng-if="appUser.profile.hasHealthPlan == false" class="text-center">
 			<h4 class="text-center">:(</h4>
 			<h5>Atualmente nosso aplicativo só trabalha com usuário de planos de saúde.</h5>
 			<br />
 			<md-button class="md-primary" href="https://www.rhases.com.br">Encontrar plano de saúde</md-button>
 		</section>
 
-		<section ng-if="appUser.hasHealthPlan == true">
+		<section ng-if="appUser.profile.hasHealthPlan == true">
 	    	<form name="registerUserProfile">
 	  			<md-content class="md-no-momentum">
 					<h4 class="text-center">Qual?</h4>
 					<md-input-container class="md-block">
-						<input ng-model="appUser.healthPlan.name" name="healthPlanName" required placeholder="Nome do plano (ex.: Amil 400, Unimed Básico, ...)">
+						<input ng-model="appUser.profile.healthPlan.name" name="healthPlanName" required placeholder="Nome do plano (ex.: Amil 400, Unimed Básico, ...)">
 					</md-input-container>
 					<md-input-container class="md-block">
-						<input ng-model="appUser.healthPlan.number" name="healthPlanNumber" required placeholder="Número da carteirinha">
+						<input ng-model="appUser.profile.healthPlan.number" name="healthPlanNumber" required placeholder="Número da carteirinha">
 					</md-input-container>
 				</md-content>
 				<a class="button button-block button-positive button-balanced" ng-disabled="!(registerUserProfile.healthPlanName.$valid && registerUserProfile.healthPlanNumber.$valid)" ng-click="save()">

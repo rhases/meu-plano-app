@@ -11,10 +11,8 @@
     <allow-navigation href="tel:*" />
     <allow-navigation href="https://graph.facebook.com/*" />
     <access origin="*" />
-    <access launch-external="yes" origin="tel:*" />
-    <access launch-external="yes" origin="maps:*" />
-    <access launch-external="yes" origin="geo:*" />
     <allow-intent href="maps:*" />
+    <allow-intent href="geo:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="tel:*" />
     <allow-intent href="http://*/*" />
