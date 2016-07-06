@@ -21,7 +21,7 @@ angular.module('starter')
             })
 			.state('app.login', {
                 url: "/login",
-								cache: false,
+				cache: false,
                 params:{
                     isAnimated: false
                 },
@@ -58,7 +58,7 @@ angular.module('starter')
                     }
                 }
             })
-            .state('app.dashboard-list', {
+            .state('app.dashboard', {
                 url: "/list-dashboard",
 				cache: false,
                 params:{
@@ -66,7 +66,7 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "../templates/dashboard/list-appointment/list-dashboard.html",
+                        templateUrl: "templates/dashboard/list-appointment/list-dashboard.html",
                         controller: 'dashboardListCtrl'
                     }
                 }
