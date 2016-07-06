@@ -1,7 +1,6 @@
 angular.module('starter',
 	[
 		'ionic',
-		'ionic.service.core',
 		'ngIOS9UIWebViewPatch',
 		'starter.controllers',
 		'starter.services',
