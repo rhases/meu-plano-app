@@ -42,7 +42,6 @@ angular.module('starter')
         };
 
         $ionicPlatform.ready(function () {
-
             ionic.Platform.isFullScreen = true;
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -54,6 +53,11 @@ angular.module('starter')
 
             initialRootScope();
             analyticsService.setup();
+			
+			if (!authService.isLoggedIn()) {
+				$state.go('app.login');
+				console.log("User not logged!");
+			}
         });
 
     })

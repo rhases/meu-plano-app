@@ -1,7 +1,7 @@
 // Controller of menu toggle.
 // Learn more about Sidenav directive of angular material
 // https://material.angularjs.org/latest/#/demo/material.components.sidenav
-appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect) {
+appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect, authService) {
 
     $scope.toggleLeft = buildToggler('left');
 
@@ -34,6 +34,11 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
 
 	$scope.openMarket = function(src){
 		$cordovaInAppBrowserSource.open(src, target, options)
+	}
+
+	$scope.logout = function() {
+		authService.logout();
+		$scope.navigateTo('app.login');
 	}
 
     //closeSideNav is for close side navigation

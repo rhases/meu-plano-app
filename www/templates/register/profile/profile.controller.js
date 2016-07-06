@@ -1,15 +1,29 @@
 // Controller of Register Page.
-appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, userService, $ionicLoading) {
+appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, authService, $ionicLoading) {
 
-	$scope.appUser = userService.getAppUser() || {};
+	$ionicLoading.show();
+	authService.getAppUser()
+		.then(function(appUser) {
+			$scope.appUser = appUser || {};
 
-	if(!$scope.appUser.healthPlan) {
-		$scope.appUser.healthPlan = {};
-	}
+			if(!$scope.appUser.profile)
+			$scope.appUser.profile = {};
+			if(!$scope.appUser.profile.healthPlan)
+			$scope.appUser.profile.healthPlan = {};
+		})
+		.catch(function() {
+			$scope.appUser = {};
+			$mdToast.showSimple('Algum erro aconteceu! :(');
+		})
+		.then(function() {
+			$ionicLoading.hide();
+		});
+
 
 	$scope.save = function() {
 		$ionicLoading.show();
-		userService.saveAppUser($scope.appUser)
+		console.log($scope.appUser)
+		authService.saveAppUser($scope.appUser)
 			.then(function() {
 				$state.go('app.dashboard');
 			})
