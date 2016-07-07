@@ -1,38 +1,50 @@
-angular.module('starter').service('analyticsService', function(GA_TRACKING_ID) { //$ionicAnalytics
+angular.module('starter').service('analyticsService',
+function(GA_TRACKING_ID) {
 
   //setup
-  var _track = {
+  var _analyticsTrack = {
     view: function(screenTitle){
       analytics.trackView(screenTitle)
     },
-    lifeCyleAction: function(action, label, value){
+    lifeCyle: function(action, label, value){
       analytics.trackEvent('lifecyle', action, label, value)
     },
-    accountAction: function(action, label, value){
+    account: function(action, label, value){
       analytics.trackEvent('account', action, label, value)
     },
-    appointmentAction: function(action, label, value){
+    appointment: function(action, label, value){
       analytics.trackEvent('appointments', action, label, value)
     },
     user: function(userId){
       analytics.analytics.setUserId(userId);
+    },
+    logError: function(message){
+      analytics.trackEvent('error handler',message)
+    },
+  }
+
+
+  // log in console if can access analytics (browser, for example)
+  function _log(group, ...params){
+    return function(...params){
+        console.log(group, params);
     }
   }
 
-  function log(param){
-    console.log(param);
-  }
-
   var _dummyTrack = {
-    view: function(pram){log(param)},
-    accountAction: function(pram){log(param)},
-    appointmentAction: function(pram){log(param)},
-    user: function(pram){log(param)},
+    lifeCyle: _log('lifeCyle'),
+    view: _log('view'),
+    nav: _log('nav'),
+    account: _log('account'),
+    appointment: _log('appointment'),
+    user: _log('user'),
+    logError: _log('logError')
   }
 
   var _trackFnc = _dummyTrack;
 
   function _setup(){
+
     //ionic analytics setup
     // $ionicAnalytics.register();
 
@@ -40,15 +52,20 @@ angular.module('starter').service('analyticsService', function(GA_TRACKING_ID) {
     if (typeof analytics !== 'undefined'){
         analytics.startTrackerWithId(GA_TRACKING_ID);
         //defined analytics. Start real tracking.
-        _trackFnc = _track;
-        _track.lifeCyleAction('started', 'app');
+        _trackFnc = _analyticsTrack;
+        _analyticsTrack.lifeCyle('started', 'app');
     }else{
       console.log('analytics not defined! It is only available in Android and iOS devices');
     }
   }
 
+  function _onView(event, data){
+    _trackFnc.view(data.stateName);
+  }
+
 	return {
     setup: _setup,
-    track: _track
+    track: _trackFnc,
+    onView:_onView,
 	}
-})
+});
