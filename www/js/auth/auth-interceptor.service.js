@@ -1,13 +1,13 @@
 'use strict';
 angular.module('starter')
-	.factory('authInterceptor', function() {
+	.factory('authInterceptor', function(localStorage) {
 		var state;
 		return {
 			// Add authorization token to headers
 			request: function(config) {
 				config.headers = config.headers || {};
 
-				config.headers.Authorization = 'Bearer ' + localStorage.authToken;
+				config.headers.Authorization = 'Bearer ' + localStorage.get('AUTH_TOKEN');
 
 				return config;
 			},

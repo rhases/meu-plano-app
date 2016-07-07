@@ -1,4 +1,4 @@
-angular.module('starter').service('authService', function($rootScope, $q, $http, localStorage, userService, userProfileService, lodash) {
+angular.module('starter').service('authService', function($rootScope, $q, $http, localStorage, userService, userProfileService, inviteService, lodash) {
 
 	var AUTH_TOKEN_KEY = "AUTH_TOKEN";
 
@@ -25,10 +25,10 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// * Created to make control of user easy
 	// *********************************************************
 
-	function _storeAppUser(appUser) {
-		userService.store(appUser);
-		userProfileService.store(appUser);
-	}
+	// function _storeAppUser(appUser) {
+	// 	userService.store(appUser);
+	// 	userProfileService.store(appUser);
+	// }
 
 	function _getAppUser() {
 		return userService.get()
@@ -66,11 +66,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// *********************************************************
 
 	function _facebookSignUp(facebookInfo) {
-		if(_appUser) {
-			console.log('User already logged in: ' + JSON.stringify(_appUser));
-			return _appUser;
-		}
-
 		var authUser = {
 		    name: facebookInfo.name,
 		    email: facebookInfo.email,
