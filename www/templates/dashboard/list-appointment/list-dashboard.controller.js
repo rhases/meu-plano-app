@@ -1,14 +1,15 @@
 // Controller of dashboard.
-appControllers.controller('dashboardListCtrl', function ($scope, $timeout, $state, $stateParams, $ionicHistory, $mdDialog, appointmentService) {
+appControllers.controller('dashboardListCtrl', function ($scope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, appointmentService, APPOINTMENT_STATUS) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
-    $scope.appointments = [];
+    $scope.acceptedAppointment = [];
+    $scope.scheduledAppointment = [];
 
     appointmentService.getAppointmentList()
         .then(function(appointments) {
-            $scope.appointments = appointments;
+            divideByStatus(appointments);
         })
         .catch(function(error) {
             console.log(error);
@@ -38,5 +39,21 @@ appControllers.controller('dashboardListCtrl', function ($scope, $timeout, $stat
     // cancel appointment
     $scope.cancelAppointment = function ($event) {
     }// End cancel appointment.
+
+    function divideByStatus(listAppointment) {
+        var scheduledAppointment = listAppointment.filter(function(appointment) {
+            return appointment.status === APPOINTMENT_STATUS.SCHEDULED;
+        });
+
+        if (!lodash.isNil(scheduledAppointment))
+            $scope.scheduledAppointment = scheduledAppointment;
+
+        var acceptedAppointment = listAppointment.filter(function(appointment) {
+            return appointment.status === APPOINTMENT_STATUS.ACCEPTED;
+        });
+
+        if (!lodash.isNil(acceptedAppointment))
+            $scope.acceptedAppointment = acceptedAppointment;
+    }
 
 }); // End of dashboard controller.
