@@ -1,4 +1,4 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, userService) {
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService) {
 
   // This is the success callback from the login method
   var fbLoginSuccess = function(response) {
@@ -11,7 +11,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 
     getFacebookProfileInfo(authResponse)
 	    .then(function(profileInfo) {
-	      return userService.facebookSignUp(profileInfo)
+	      return authService.facebookSignUp(profileInfo)
 					.then(function(user) {
 						rhasesLoginSuccess(user);
 					});
@@ -85,9 +85,9 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
         console.log('getLoginStatus ' + success.status);
 
     		// Check if we have our user saved
-    		if(userService.getAppUser()){
+    		if(authService.getAppUser()){
 					console.log('Usuario ja logado. Redirecionando...');
-					rhasesLoginSuccess(userService.getAppUser());
+					rhasesLoginSuccess(authService.getAppUser());
 				} else {
 					console.log('Efetuando login...');
 					fbLoginSuccess(success);
