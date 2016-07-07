@@ -1784,15 +1784,12 @@ md-sidenav {
     margin-top: 24px; }
 
 p.big-text {
-    font-size: 16px;
-    line-height: 150%;
-    color: #616977;
-}
+  font-size: 16px;
+  line-height: 150%;
+  color: #616977; }
 
 h2.big-text {
-    color: #616977;
-}
+  color: #616977; }
 
 i.fa-big-icon {
-    font-size: 10em;
-}
+  font-size: 10em; }
