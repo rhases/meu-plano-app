@@ -1,5 +1,4 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService) {
-
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService, analyticsService) {
 	// This is the success callback from the login method
 	var fbLoginSuccess = function(response) {
 		if (!response.authResponse) {
@@ -22,6 +21,9 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 	};
 
 	var rhasesLoginSuccess = function(user) {
+    analyticsService.track.account('login', 'fb success', user);
+    analyticsService.track.user(user)
+
 		console.log('User Signed in: ' + JSON.stringify(user));
 		switch(user.status) {
 			case 'invited':
@@ -39,6 +41,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
   // This is the fail callback from the login method
   var fbLoginError = function(error){
     console.log('fbLoginError ' + JSON.stringify(error), error);
+    analyticsService.track.account('login', 'fb error', error);
+
     $ionicLoading.hide();
 		waitResponse = false;
 
@@ -65,8 +69,10 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 
 	var waitResponse = false;
 
-	//This method is executed when the user press the "Login with facebook" button
-	$scope.facebookSignIn = function() {
+  //This method is executed when the user press the "Login with facebook" button
+  $scope.facebookSignIn = function() {
+    analyticsService.track.account('login', 'fb signin init');
+
 		if(waitResponse) {
 			console.log('facebookSignIn: wait response!');
 			return;

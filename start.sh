@@ -21,6 +21,7 @@ ionic plugin add cordova-plugin-facebook4 --save --variable APP_ID="171619812532
 ionic plugin add cordova-plugin-device --save # This plugin defines a global device object, which describes the device's hardware and software.
 ionic plugin add cordova-plugin-transport-security --save # IOS transport security
 ionic plugin add cordova-plugin-statusbar --save # IOS status bar
+ionic plugin add cordova-plugin-google-analytics --save # Google Analytics
 
 echo "Instalando browser CROSSWALK..."​
 ionic browser add crosswalk # https://crosswalk-project.org/

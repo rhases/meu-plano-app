@@ -33,9 +33,7 @@ window.globalVariable = {
 };// End Global variable
 
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, authService) {
-		// , $ionicAnalytics
-        // $ionicAnalytics.register();
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, authService, analyticsService) {
 
         function initialRootScope() {
             $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.
@@ -55,10 +53,10 @@ angular.module('starter')
 
             initialRootScope();
 
-			if (!authService.isLoggedIn()) {
-				$state.go('app.login');
-				console.log("User not logged!");
-			}
+      			if (!authService.isLoggedIn()) {
+      				$state.go('app.login');
+      				console.log("User not logged!");
+      			}
         });
 
     })
