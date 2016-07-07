@@ -52,7 +52,6 @@ angular.module('starter')
             }
 
             initialRootScope();
-            analyticsService.setup();
 
       			if (!authService.isLoggedIn()) {
       				$state.go('app.login');

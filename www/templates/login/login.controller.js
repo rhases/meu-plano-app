@@ -1,5 +1,4 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService) {
-
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, userService, analyticsService) {
   // This is the success callback from the login method
   var fbLoginSuccess = function(response) {
     if (!response.authResponse){
@@ -11,7 +10,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 
     getFacebookProfileInfo(authResponse)
 	    .then(function(profileInfo) {
-	      return authService.facebookSignUp(profileInfo)
+	      return userService.facebookSignUp(profileInfo)
 					.then(function(user) {
 						rhasesLoginSuccess(user);
 					});
@@ -22,6 +21,9 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
   };
 
 	var rhasesLoginSuccess = function(user) {
+    analyticsService.track.account('login', 'fb success', user);
+    analyticsService.track.user(user)
+
 		console.log('User Signed in: ' + JSON.stringify(user));
 		switch(user.status) {
 			case 'invited':
@@ -39,6 +41,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
   // This is the fail callback from the login method
   var fbLoginError = function(error){
     console.log('fbLoginError ' + JSON.stringify(error), error);
+    analyticsService.track.account('login', 'fb error', error);
+
     $ionicLoading.hide();
 		waitResponse = false;
 
@@ -67,6 +71,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
+    analyticsService.track.account('login', 'fb signin init');
+
 		if(waitResponse) {
 			console.log('facebookSignIn: wait response!');
 			return;
@@ -85,9 +91,9 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
         console.log('getLoginStatus ' + success.status);
 
     		// Check if we have our user saved
-    		if(authService.getAppUser()){
+    		if(userService.getAppUser()){
 					console.log('Usuario ja logado. Redirecionando...');
-					rhasesLoginSuccess(authService.getAppUser());
+					rhasesLoginSuccess(userService.getAppUser());
 				} else {
 					console.log('Efetuando login...');
 					fbLoginSuccess(success);
