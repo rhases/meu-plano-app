@@ -5,14 +5,7 @@ appServices.factory('scheduleAppointmentService', function () {
         appointment: {
             specialty: '',
             weekDays: [],
-            periods: [
-                    {label: 'Início da manhã (7h-10h)', checked: false},
-                    {label: 'Fim da manhã (10h-12h)', checked: false},
-                    {label: 'Horário do almoço (12h-14h)', checked: false},
-                    {label: 'Início da tarde (14h-16h)', checked: false},
-                    {label: 'Fim da tarde (16h-18h)', checked: false},
-                    {label: 'Início da noite (18h-20h)', checked: false}
-            ],
+            periods: [],
             locations: [
                     {label: 'Asa Norte', checked: false},
                     {label: 'Asa Sul', checked: false},
@@ -25,10 +18,6 @@ appServices.factory('scheduleAppointmentService', function () {
         return list.filter(function(element) { return element.checked });
     }
 
-    service.getSelectedPeriods = function() {
-        return retrieveCheckedFromList(service.appointment.periods);
-    }
-
     service.getSelectedLocations = function() {
         return retrieveCheckedFromList(service.appointment.locations);
     }
@@ -39,6 +28,10 @@ appServices.factory('scheduleAppointmentService', function () {
 
     service.setWeekDays = function(days) {
         service.appointment.weekDays = days;
+    }
+
+    service.setPeriods = function(periods) {
+        service.appointment.periods = periods;
     }
 
     return service;
