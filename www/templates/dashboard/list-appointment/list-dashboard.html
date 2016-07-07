@@ -18,9 +18,16 @@
 
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
-        <code>
-            {{ appointments }}
-        </code>
+        <div class="list card" ng-repeat="request in appointmentRequests">
+            <div class="item item-text-wrap">
+                Estamos procurando o melhor {{  medicalInfos.getByCod(request.speciality) }} para você
+            </div>
+
+            <a class="item item-icon-left" ng-click="moreDetails(request)">
+                <i class="icon ion-close"></i>
+                Mais detalhes
+            </a>
+        </div>
         <!-- <code>
             {{ acceptedAppointment }}
         </code>
@@ -66,7 +73,7 @@
 
                 <div class="row">
                     <div class="col-50">
-                        <a class="item item-icon-left button-light" ng-click="cancelScheduledAppointment(appointment._id)">
+                        <a class="item item-icon-left button-light" ng-click="cancelAppointment(appointment)">
                             <i class="icon ion-close"></i>
                             Recusar
                         </a>
@@ -109,7 +116,7 @@
                     <p><strong>{{ formatDate() }}</strong></p>
                 </div>
 
-                <a class="item item-icon-left" ng-click="cancelAcceptedAppointment(appointment._id)">
+                <a class="item item-icon-left" ng-click="cancelAppointment(appointment)">
     				<i class="icon ion-close"></i>
     				<!-- <i class="fa fa-close fa-2x"></i> -->
     				Desmarcar

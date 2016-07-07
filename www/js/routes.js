@@ -84,16 +84,16 @@ angular.module('starter')
                     }
                 }
             })
-            .state('app.dashboard-detail', {
-                url: "/detail-appointment",
+            .state('app.dashboard-cancel', {
+                url: "/cancel-appointment",
 				cache: false,
                 params:{
                     isAnimated: true
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/detail-appointment/detail-appointment.html",
-                        controller: 'detailAppointmentController'
+                        templateUrl: "../templates/dashboard/cancel-appointment/cancel-appointment.html",
+                        controller: 'cancelAppointmentController'
                     }
                 }
             })
