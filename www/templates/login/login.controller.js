@@ -1,4 +1,4 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService, analyticsService) {
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService, analyticsService, $rootScope) {
 	// This is the success callback from the login method
 	var fbLoginSuccess = function(response) {
 		if (!response.authResponse) {
@@ -25,47 +25,39 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 	    analyticsService.track.user(user)
 
 		console.log('User Signed in: ' + JSON.stringify(user));
-		switch(user.status) {
-			case 'invited':
-			case 'not_invited':
-				$state.go('app.register');
-				break;
-			case 'registered':
-				$state.go('app.dashboard');
-				break;
-		}
+		$rootScope.$emit('login:successful', user._id);
 		$ionicLoading.hide();
 		waitResponse = false;
 	};
 
-  // This is the fail callback from the login method
-  var fbLoginError = function(error){
-    console.log('fbLoginError ' + JSON.stringify(error), error);
-    analyticsService.track.account('login', 'fb error', error);
+	// This is the fail callback from the login method
+	var fbLoginError = function(error) {
+		console.log('fbLoginError ' + JSON.stringify(error), error);
+		analyticsService.track.account('login', 'fb error', error);
 
-    $ionicLoading.hide();
+		$ionicLoading.hide();
 		waitResponse = false;
 
 		// User Cancelled (4201)
 		$mdToast.showSimple('Não foi possível acessar o seu perfil.\n Feche o app do Facebook e tente novamente!');
-  };
+	};
 
-  // This method is to get the user profile info from the facebook api
-  var getFacebookProfileInfo = function (authResponse) {
-    var deferred = $q.defer();
+	// This method is to get the user profile info from the facebook api
+	var getFacebookProfileInfo = function (authResponse) {
+		var deferred = $q.defer();
 
-    facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
-      function (response) {
+		facebookConnectPlugin.api('/me?fields=email,name&access_token=' + authResponse.accessToken, null,
+			function (response) {
 				console.log('GetProfileInfo success:  ' + JSON.stringify(response));
-        deferred.resolve(response);
-      },
-      function (response) {
+				deferred.resolve(response);
+			},
+			function (response) {
 				console.log('GetProfileInfo failed: ' + JSON.stringify(response));
-        deferred.reject(response);
-      }
-    );
-    return deferred.promise;
-  };
+				deferred.reject(response);
+			});
+
+		return deferred.promise;
+	};
 
 	var waitResponse = false;
 
@@ -80,8 +72,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 			template: 'Login de teste...'
 		});
 
-		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho",id:"1045650235523854"};
-		//profileInfo = {email:"talesap@gmail.com",name:"Tales Porto",id:"10201554128091239"};
+		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho",_id:"1045650235523854"};
+		//profileInfo = {email:"talesap@gmail.com",name:"Tales Porto",_id:"10201554128091239"};
 		authService.facebookSignUp(profileInfo)
 			.then(function(user) {
 				rhasesLoginSuccess(user);

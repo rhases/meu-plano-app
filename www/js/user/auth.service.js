@@ -36,12 +36,15 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 			.then(function(user) {
 				return userProfileService.get(user.email)
 					.then(function(userProfile) {
-						// user profile
-						user.profile = userProfile;
+						user.profile = userProfile; // user profile
+						return inviteService.status(user.email);
+					})
+					.then(function(status) {
+						user.status = status;
 						return user;
 					})
 					.catch(function(err) {
-						user.profile = { _id: user.email }
+						user.profile = { _id: user.email };
 						return user;
 					})
 			})
@@ -68,8 +71,7 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 			.then(function() {
 				return _getAppUser();
 			})
-			// TODO melhor fazer isso com evento.
-			.then(function(appUser) {
+			.then(function(appUser) { // TODO melhor fazer isso com evento.
 				$rootScope.appUser = appUser;
 				return appUser;
 			})
@@ -89,22 +91,14 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 		return userService.save(authUser)
 			.then(function(token) {
 				_storeAuthToken(token);
-				return userService.load(); // Garante que foi realmente criado salvo e está realmente logado
+				return userService.load(); // NECESSÁRIO!!! Garante que foi realmente criado salvo e está realmente logado
 			})
 			.then(function(user) {
-				$rootScope.$emit('login:successful', user._id);
-				return inviteService.status(facebookInfo.email)
+				return _getAppUser();
 			})
-			.then(function(status) {
-				return _getAppUser()
-					.then(function(appUser) {
-						appUser.status = status
-						if(status == "registered") {
-							// TODO melhor fazer isso com evento.
-							$rootScope.appUser = appUser;
-						}
-						return appUser;
-					})
+			.then(function(appUser) {
+				$rootScope.appUser = appUser;
+				return appUser;
 			})
 	}
 

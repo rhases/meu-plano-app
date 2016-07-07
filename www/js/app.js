@@ -12,8 +12,8 @@
 var db = null; //Use for SQLite database.
 window.globalVariable = {
     startPage: {
-        url: "/app/login",//Url of start page.
-        state: "app.login"//State name of start page.
+        url: "/app/login", //Url of start page.
+        state: "app.login" //State name of start page.
     },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
@@ -41,6 +41,50 @@ angular.module('starter')
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
         };
 
+		function checkLogin() {
+			return authService.getAppUser()
+				.then(function(appUser) {
+					// If can not load app user
+					if(!appUser) {
+						authService.logout();
+						$state.go('app.login');
+						console.log("App User not found! Go to login.");
+						return;
+					}
+
+					// Need to complete the registration
+					if (!appUser.name
+						|| !appUser.email
+						|| !appUser.telephone
+						|| !appUser.bithdate
+						|| !appUser.gender) {
+						$state.go('app.register');
+					}
+
+					// Need to complete the profile
+					else if(!appUser.profile.state
+						|| !appUser.profile.city
+						|| !appUser.profile.hasHealthPlan
+						|| !appUser.profile.healthPlan
+						|| !appUser.profile.healthPlan.name
+						|| !appUser.profile.healthPlan.number) {
+						$state.go('app.profile');
+					}
+
+					// Check invite status status
+					else if (appUser.status == "not_invited") {
+						$state.go('app.notInvited');
+					}
+
+					// Go to dashboard
+					else {
+						$rootScope.appUser = appUser;
+						$state.go('app.dashboard');
+						console.log("User successful logged! " + appUser.name);
+					}
+				})
+		}
+
         $ionicPlatform.ready(function () {
             ionic.Platform.isFullScreen = true;
             if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -53,28 +97,24 @@ angular.module('starter')
 
             initialRootScope();
 
-      			if (!authService.isLoggedIn()) {
-      				$state.go('app.login');
-      				console.log("User not logged!");
-      			} else {
-							$ionicLoading.show();
-							authService.getAppUser()
-								.then(function(appUser) {
-									if(appUser) {
-										// TODO melhor fazer isso com evento.
-										$rootScope.appUser = appUser;
-										$state.go('app.dashboard');
-										console.log("User logged! " + appUser.name);
-									} else {
-										authService.logout();
-										$state.go('app.login');
-										console.log("App User not found! Go to login.");
-									}
-								})
-								.then(function() {
-									$ionicLoading.hide();
-								});
-						}
+			if (!authService.isLoggedIn()) {
+				$state.go('app.login');
+				console.log("User not logged!");
+			} else {
+				$ionicLoading.show();
+				checkLogin()
+					.then(function() {
+						$ionicLoading.hide();
+					});
+			}
+
+			$rootScope.$on("login:successful", function(userId) {
+				$ionicLoading.show();
+				checkLogin()
+					.then(function() {
+						$ionicLoading.hide();
+					});
+			})
         });
 
     })
