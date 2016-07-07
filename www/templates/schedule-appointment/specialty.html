@@ -14,8 +14,8 @@
 	    <form name="appointmentForm">
 
 			<ion-list>
-				<ion-item ng-repeat="specialty in specialties" ui-sref="app.scheduleAppointment.days({specialtyChosen: specialty})">
-					{{ specialty }}
+				<ion-item ng-repeat="specialty in specialties" ng-click="selectSpecialty(specialty)">
+					{{ specialty.label }}
 				</ion-item>
 			</ion-list>
 
