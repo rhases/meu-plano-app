@@ -52,6 +52,8 @@ angular.module('starter')
 						return;
 					}
 
+					$rootScope.appUser = appUser;
+
 					// Need to complete the registration
 					if (!appUser.name
 						|| !appUser.email
@@ -78,7 +80,6 @@ angular.module('starter')
 
 					// Go to dashboard
 					else {
-						$rootScope.appUser = appUser;
 						$state.go('app.dashboard');
 						console.log("User successful logged! " + appUser.name);
 					}

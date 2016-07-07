@@ -1,7 +1,18 @@
 // Controller of Register Page.
 appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, authService, $ionicLoading, $rootScope) {
 
-	$scope.appUser = $rootScope.appUser || {};
+	$ionicLoading.show();
+	authService.getAppUser()
+		.then(function(appUser) {
+			$scope.appUser = appUser || {};
+		})
+		.catch(function() {
+			$scope.appUser = {};
+			$mdToast.showSimple('Algum erro aconteceu! :(');
+		})
+		.then(function() {
+			$ionicLoading.hide();
+		});
 
 	$scope.save = function() {
 		$ionicLoading.show();
