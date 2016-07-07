@@ -1,4 +1,4 @@
-angular.module('starter').service('pushService', function($rootScope, $cordovaPushV5, $http) {
+angular.module('starter').service('pushService', function($rootScope, $cordovaPushV5, $http, authService) {
 
 	function _updateUser(userId, updateData) {
 		return $http.put(window.globalVariable.backend.authServerUri + "/api/users/" + userId, updateData)
@@ -41,22 +41,27 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 				.then(function (deviceToken) {
 					console.log("Push registered. " + deviceToken);
 
-					// localStorage.pushId = deviceToken;
+					var sendPushIdToServer = function(userId) {
+						_updateUser(userId,
+							{
+								appInfo: {
+									pushId: deviceToken,
+									platform: ionic.Platform.platform(),
+									platformVersion: ionic.Platform.version()
+								}
+							})
+							.then(function (res) {
+								console.log("PushId sent to auth server.", res);
+							});
+					}
 
-					// TODO: Get autorization id
-					// TODO: Get real user logged
-					var user = localStorage.user;
-					_updateUser(user._id,
-						{
-							appInfo: {
-								pushId: deviceToken,
-								platform: ionic.Platform.platform(),
-								platformVersion: ionic.Platform.version()
-							}
-						})
-						.then(function (res) {
-							console.log("PushId sent to auth server.", res);
-						});
+					$rootScope.$on('login:successful', sendPushIdToServer)
+					if (authService.isLoggedIn()) {
+						authService.getAppUser
+							.then(function(appUser) {
+								sendPushIdToServer(appUser._id);
+							})
+					}
 				}, function (err) {
 					console.log("Error on push register." + err);
 				});
