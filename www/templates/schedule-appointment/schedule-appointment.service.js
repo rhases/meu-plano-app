@@ -4,15 +4,7 @@ appServices.factory('scheduleAppointmentService', function () {
 
         appointment: {
             specialty: '',
-            days: [
-                    {label: 'segunda-feira', checked: false},
-                    {label: 'terça-feira', checked: false},
-                    {label: 'quarta-feira', checked: false},
-                    {label: 'quinta-feira', checked: false},
-                    {label: 'sexta-feira', checked: false},
-                    {label: 'sábado', checked: false},
-                    {label: 'domingo', checked: false}
-                ],
+            weekDays: [],
             periods: [
                     {label: 'Início da manhã (7h-10h)', checked: false},
                     {label: 'Fim da manhã (10h-12h)', checked: false},
@@ -29,10 +21,6 @@ appServices.factory('scheduleAppointmentService', function () {
         }
     }
 
-    service.getSelectedDays = function() {
-        return retrieveCheckedFromList(service.appointment.days);
-    }
-
     function retrieveCheckedFromList(list) {
         return list.filter(function(element) { return element.checked });
     }
@@ -47,6 +35,10 @@ appServices.factory('scheduleAppointmentService', function () {
 
     service.setSpecialty = function(specialty) {
         service.appointment.specialty = specialty;
+    }
+
+    service.setWeekDays = function(days) {
+        service.appointment.weekDays = days;
     }
 
     return service;

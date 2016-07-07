@@ -12,13 +12,13 @@
 	<ion-content>
 	    <form name="appointmentForm">
 
-			<ion-checkbox ng-repeat="item in appointment.days"
+			<ion-checkbox ng-repeat="item in weekdays"
                   ng-model="item.checked"
                   ng-checked="item.checked">
 	        	{{ item.label }}
 	        </ion-checkbox>
 
-			<a ui-sref="app.scheduleAppointment.daysPeriods" class="button button-block button-positive">
+			<a ng-click="continue()" class="button button-block button-positive">
 				<md-button>Continuar</md-button>
 			</a>
 	    </form>
