@@ -12,7 +12,7 @@ appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, aut
 		$ionicLoading.show();
 		console.log($scope.appUser)
 		authService.saveAppUser($scope.appUser)
-			.then(function() {
+			.then(function(appUser) {
 				if (appUser.status == "not_invited") {
 					$state.go('app.notInvited');
 				} else {

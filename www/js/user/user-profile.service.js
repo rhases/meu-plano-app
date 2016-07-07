@@ -1,7 +1,7 @@
 // User on rhases-auth
 angular.module('starter').service('userProfileService', function($rootScope, $q, $http, localStorage, lodash) {
 
-	var USER_PROFILE_LOCALSTORAGE_KEY = "USER_PROFILE";
+	var USER_PROFILE_KEY = "USER_PROFILE";
 
 	var _userProfile;
 
@@ -42,8 +42,8 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 			if (_userProfile) {
 				resolve(lodash.clone(_userProfile));
 			} else {
-				if (localStorage.exist(USER_PROFILE_LOCALSTORAGE_KEY)) {
-					_userProfile = localStorage.get(USER_PROFILE_LOCALSTORAGE_KEY);
+				if (localStorage.exist(USER_PROFILE_KEY)) {
+					_userProfile = localStorage.get(USER_PROFILE_KEY);
 					resolve(lodash.clone(_userProfile));
 				} else {
 					_load(id)
@@ -58,7 +58,7 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 
 	function _store(userProfile) {
 		_userProfile = lodash.clone(userProfile);
-		localStorage.set(USER_PROFILE_LOCALSTORAGE_KEY, _userProfile);
+		localStorage.set(USER_PROFILE_KEY, _userProfile);
 		console.log('User profile stored locally: ' + JSON.stringify(_userProfile));
 	}
 

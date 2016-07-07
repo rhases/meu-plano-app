@@ -58,6 +58,19 @@ angular.module('starter')
                     }
                 }
             })
+			.state('app.notInvited', {
+                url: "/not-invited",
+				cache: false,
+                params:{
+                    isAnimated: false
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/not-invited/not-invited.html",
+                        controller: 'notInvitedCtrl'
+                    }
+                }
+            })
             .state('app.dashboard', {
                 url: "/list-dashboard",
 				cache: false,
