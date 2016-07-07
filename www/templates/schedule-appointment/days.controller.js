@@ -1,8 +1,15 @@
 appControllers.controller('daysCtrl', function ($scope, $stateParams, $mdBottomSheet, $mdToast, $mdDialog,
-    scheduleAppointmentService) {
+    $state, scheduleAppointmentRequestService) {
 
-        $scope.appointment = scheduleAppointmentService.appointment;
+        $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
 
-        $scope.appointment.specialty = $stateParams.specialtyChosen;
+        var weekdays = schedulerInfos.weekdays;
+        weekdays.forEach( function (day) { day.checked = false });
+        $scope.weekdays = weekdays;
 
+        $scope.continue = function() {
+            var selectedDays = weekdays.filter(function(element) { return element.checked });
+            scheduleAppointmentRequestService.setWeekDays(selectedDays);
+            $state.go('app.scheduleAppointment.daysPeriods');
+        }
 });

@@ -58,6 +58,19 @@ angular.module('starter')
                     }
                 }
             })
+			.state('app.notInvited', {
+                url: "/not-invited",
+				cache: false,
+                params:{
+                    isAnimated: false
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/not-invited/not-invited.html",
+                        controller: 'notInvitedCtrl'
+                    }
+                }
+            })
             .state('app.dashboard', {
                 url: "/list-appointment",
 				cache: false,
@@ -95,6 +108,7 @@ angular.module('starter')
             })
             .state('app.scheduleAppointment', {
                 url: "/scheduleAppointment",
+                cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: "templates/schedule-appointment/specialty.html",
@@ -103,7 +117,7 @@ angular.module('starter')
                 }
             })
             .state('app.scheduleAppointment.days', {
-                url: "/days?specialtyChosen",
+                url: "/days",
                 templateUrl: "templates/schedule-appointment/days.html",
                 controller: 'daysCtrl'
             })

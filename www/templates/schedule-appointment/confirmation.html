@@ -14,13 +14,13 @@
 		<div class="list card">
 			<div class="item item-icon-left">
 			    <i class="icon fa fa-stethoscope"></i>
-			    {{ appointment.specialty }}
+			    {{ appointment.specialty.label }}
 		  </div>
 
 		  <div class="item item-icon-left">
 			    <i class="icon ion-calendar"></i>
 				<ion-list>
-					<ion-item ng-repeat="day in selectedDays">
+					<ion-item ng-repeat="day in appointment.weekdays">
 						{{ day.label }}
 					</ion-item>
 				</ion-list>
@@ -29,7 +29,7 @@
 		  <div class="item item-icon-left">
 			    <i class="icon fa fa-clock-o"></i>
 				<ion-list>
-					<ion-item ng-repeat="period in selectedPeriods">
+					<ion-item ng-repeat="period in appointment.periods">
 						{{ period.label }}
 					</ion-item>
 				</ion-list>
@@ -38,7 +38,7 @@
 		  <div class="item item-icon-left">
 			    <i class="icon fa fa-map-marker"></i>
 				<ion-list>
-					<ion-item ng-repeat="location in selectedLocations">
+					<ion-item ng-repeat="location in appointment.locations">
 						{{ location.label }}
 					</ion-item>
 				</ion-list>
@@ -48,7 +48,7 @@
 		</div>
 
 	    <form name="appointmentForm">
-			<a ui-sref="app.scheduleAppointment.locations" class="button button-block button-positive">Confirmar</a>
+			<a ng-click="submit()" class="button button-block button-positive">Confirmar</a>
 	    </form>
 	</ion-content>
 </ion-view>

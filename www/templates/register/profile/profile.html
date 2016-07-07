@@ -6,15 +6,15 @@
     </ion-nav-buttons>
 
 	<ion-content padding="true" scrollbar-x="false">
-		<code>{{ appUser }}</code>
+		<!-- <code>{{ appUser }}</code> -->
 		<section class="text-center">
 			<md-content class="md-no-momentum">
-				<md-input-container class="md-block">
-					<span>Mora em </span>
+				<h4>
+					<span style="margin-right: 20px;">Mora em?</span>
 					<md-input-container style="margin-right: 10px;">
 						<label>Estado</label>
 						<md-select ng-model="appUser.profile.state">
-							<md-option ng-repeat="state in states" value="{{ state.cod }}">{{ state.label }}</md-option>
+							<md-option ng-repeat="state in states" value="{{ state.cod }}">{{ state.cod | uppercase }}</md-option>
 						</md-select>
 					</md-input-container>
 					<md-input-container style="margin-right: 10px;" ng-if="appUser.profile.state">
@@ -23,7 +23,7 @@
 							<md-option ng-repeat="city in cities()" value="{{ city.cod }}">{{ city.label }}</md-option>
 						</md-select>
 					</md-input-container>
-				</md-input-container>
+				</h4>
 			</md-content>
 		</section>
 

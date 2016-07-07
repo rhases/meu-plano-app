@@ -1,49 +1,66 @@
-appServices.factory('scheduleAppointmentService', function (specialtiesService) {
+appServices.factory('scheduleAppointmentRequestService', function ($http, $rootScope) {
 
-    var service = {
+    var service = { };
 
-        appointment: {
-            specialty: '',
-            days: [
-                    {label: 'segunda-feira', checked: false},
-                    {label: 'terça-feira', checked: false},
-                    {label: 'quarta-feira', checked: false},
-                    {label: 'quinta-feira', checked: false},
-                    {label: 'sexta-feira', checked: false},
-                    {label: 'sábado', checked: false},
-                    {label: 'domingo', checked: false}
-                ],
-            periods: [
-                    {label: 'Início da manhã (7h-10h)', checked: false},
-                    {label: 'Fim da manhã (10h-12h)', checked: false},
-                    {label: 'Horário do almoço (12h-14h)', checked: false},
-                    {label: 'Início da tarde (14h-16h)', checked: false},
-                    {label: 'Fim da tarde (16h-18h)', checked: false},
-                    {label: 'Início da noite (18h-20h)', checked: false}
-            ],
-            locations: [
-                    {label: 'Asa Norte', checked: false},
-                    {label: 'Asa Sul', checked: false},
-                    {label: 'Taguatinga', checked: false},
-            ],
-            otherLocation: {label: 'Outro:', value: '', checked: false}
+    cleanRequest();
+
+    service.getAppointmentRequest = function() {
+        return service.appointmentRequest;
+    }
+
+    service.setSpecialty = function(specialty) {
+        service.appointmentRequest.specialty = specialty;
+    }
+
+    service.setWeekDays = function(days) {
+        service.appointmentRequest.weekdays = days;
+    }
+
+    service.setPeriods = function(periods) {
+        service.appointmentRequest.periods = periods;
+    }
+
+    service.setLocations = function(locations) {
+        service.appointmentRequest.locations = locations;
+    }
+
+    service.submit = function(successHandler, errorHandler) {
+        var request = getRequest();
+        return $http.post(window.globalVariable.backend.schedulerServerUri + 'api/appointment-requests', request)
+			.catch(function(error) {
+                // TODO tratar o erro
+				errorHandler('Erro inesperado. Tente novamente em alguns segundos.');
+			})
+			.then(function(res) {
+				console.log('Schedule appointment request sent with success.');
+                cleanRequest();
+                successHandler();
+			});
+    }
+
+    function getRequest() {
+        var weekdaysCods = service.appointmentRequest.weekdays.map(function(day) { return day.cod });
+        var periodsCods = service.appointmentRequest.periods.map(function(period) { return period.cod });
+        var locationsLabels = service.appointmentRequest.locations.map(function(location) { return location.label });
+        var request = {
+            userProfile: $rootScope.appUser.email,
+            speciality: service.appointmentRequest.specialty.cod,
+            weekday: weekdaysCods,
+            timerange: periodsCods,
+            area: locationsLabels,
+            comment: 'Rápido, viu?',
+            status: 'NEW'
         }
+        return request;
     }
 
-    service.getSelectedDays = function() {
-        return retrieveCheckedFromList(service.appointment.days);
-    }
-
-    function retrieveCheckedFromList(list) {
-        return list.filter(function(element) { return element.checked });
-    }
-
-    service.getSelectedPeriods = function() {
-        return retrieveCheckedFromList(service.appointment.periods);
-    }
-
-    service.getSelectedLocations = function() {
-        return retrieveCheckedFromList(service.appointment.locations);
+    function cleanRequest() {
+        service.appointmentRequest = {
+            specialty: '',
+            weekdays: [],
+            periods: [],
+            locations: []
+        }
     }
 
     return service;
