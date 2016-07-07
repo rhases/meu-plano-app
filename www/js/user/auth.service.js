@@ -31,21 +31,28 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// }
 
 	function _getAppUser() {
+		// user
 		return userService.get()
 			.then(function(user) {
 				return userProfileService.get(user.email)
 					.then(function(userProfile) {
+						// user profile
 						user.profile = userProfile;
 						return user;
 					})
 					.catch(function(err) {
+						user.profile = { _id: user.email }
 						return user;
 					})
 			})
 	}
 
 	function _saveAppUser(appUser) {
+		// user profile
 		var userProfile = lodash.clone(appUser.profile);
+		userProfile._id = appUser.email;
+
+		// user
 		var user = lodash.clone(appUser);
 		delete user.profile;
 
@@ -85,7 +92,7 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 				return userService.load(); // Garante que foi realmente criado salvo e está realmente logado
 			})
 			.then(function(user) {
-				$rootScope.emit('login:successful', user._id);
+				$rootScope.$emit('login:successful', user._id);
 				return inviteService.status(facebookInfo.email)
 			})
 			.then(function(status) {

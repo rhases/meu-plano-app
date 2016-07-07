@@ -10,11 +10,11 @@
 		<section class="text-center">
 			<md-content class="md-no-momentum">
 				<h4>
-					<span>Mora em </span>
+					<span style="margin-right: 20px;">Mora em?</span>
 					<md-input-container style="margin-right: 10px;">
 						<label>Estado</label>
 						<md-select ng-model="appUser.profile.state">
-							<md-option ng-repeat="state in states" value="{{ state.cod }}">{{ state.label }}</md-option>
+							<md-option ng-repeat="state in states" value="{{ state.cod }}">{{ state.cod | uppercase }}</md-option>
 						</md-select>
 					</md-input-container>
 					<md-input-container style="margin-right: 10px;" ng-if="appUser.profile.state">
