@@ -1,4 +1,4 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, userService, analyticsService) {
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService, analyticsService) {
   // This is the success callback from the login method
   var fbLoginSuccess = function(response) {
     if (!response.authResponse){
@@ -10,7 +10,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 
     getFacebookProfileInfo(authResponse)
 	    .then(function(profileInfo) {
-	      return userService.facebookSignUp(profileInfo)
+	      return authService.facebookSignUp(profileInfo)
 					.then(function(user) {
 						rhasesLoginSuccess(user);
 					});
@@ -69,6 +69,28 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 
 	var waitResponse = false;
 
+	$scope.testLogin = function() {
+		if(waitResponse) {
+			console.log('facebookSignIn: wait response!');
+			return;
+		}
+
+		waitResponse = true;
+		$ionicLoading.show({
+			template: 'Login de teste...'
+		});
+
+		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho",id:"1045650235523854"};
+		authService.facebookSignUp(profileInfo)
+			.then(function(user) {
+				rhasesLoginSuccess(user);
+			})
+			.catch(function(fail) {
+				fbLoginError(fail);
+			});
+	};
+
+
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
     analyticsService.track.account('login', 'fb signin init');
@@ -91,9 +113,9 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
         console.log('getLoginStatus ' + success.status);
 
     		// Check if we have our user saved
-    		if(userService.getAppUser()){
+    		if(authService.getAppUser()){
 					console.log('Usuario ja logado. Redirecionando...');
-					rhasesLoginSuccess(userService.getAppUser());
+					rhasesLoginSuccess(authService.getAppUser());
 				} else {
 					console.log('Efetuando login...');
 					fbLoginSuccess(success);

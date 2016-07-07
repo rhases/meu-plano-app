@@ -66,9 +66,10 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// *********************************************************
 
 	function _facebookSignUp(facebookInfo) {
-		if(_appUser) {
-			console.log('User already logged in: ' + JSON.stringify(_appUser));
-			return _appUser;
+		user = userService.get();
+		if(user) {
+			console.log('User already logged in: ' + JSON.stringify(user));
+			return user;
 		}
 
 		var authUser = {
