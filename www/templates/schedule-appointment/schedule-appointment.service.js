@@ -41,7 +41,7 @@ appServices.factory('scheduleAppointmentRequestService', function ($http, $rootS
     function getRequest() {
         var weekdaysCods = service.appointmentRequest.weekdays.map(function(day) { return day.cod });
         var periodsCods = service.appointmentRequest.periods.map(function(period) { return period.cod });
-        var locationsLabels = service.appointmentRequest.locations.map(function(location) { return location.labels });
+        var locationsLabels = service.appointmentRequest.locations.map(function(location) { return location.label });
         var request = {
             userProfile: $rootScope.appUser.email,
             speciality: service.appointmentRequest.specialty.cod,
