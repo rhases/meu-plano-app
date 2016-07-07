@@ -25,8 +25,7 @@ appServices.factory('scheduleAppointmentService', function (specialtiesService) 
                     {label: 'Asa Norte', checked: false},
                     {label: 'Asa Sul', checked: false},
                     {label: 'Taguatinga', checked: false},
-            ],
-            otherLocation: {label: 'Outro:', value: '', checked: false}
+            ]
         }
     }
 
