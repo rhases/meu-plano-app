@@ -6,20 +6,8 @@ appServices.factory('scheduleAppointmentService', function () {
             specialty: '',
             weekDays: [],
             periods: [],
-            locations: [
-                    {label: 'Asa Norte', checked: false},
-                    {label: 'Asa Sul', checked: false},
-                    {label: 'Taguatinga', checked: false},
-            ]
+            locations: []
         }
-    }
-
-    function retrieveCheckedFromList(list) {
-        return list.filter(function(element) { return element.checked });
-    }
-
-    service.getSelectedLocations = function() {
-        return retrieveCheckedFromList(service.appointment.locations);
     }
 
     service.setSpecialty = function(specialty) {
@@ -32,6 +20,10 @@ appServices.factory('scheduleAppointmentService', function () {
 
     service.setPeriods = function(periods) {
         service.appointment.periods = periods;
+    }
+
+    service.setLocations = function(locations) {
+        service.appointment.locations = locations;
     }
 
     return service;

@@ -29,7 +29,7 @@
 		  <div class="item item-icon-left">
 			    <i class="icon fa fa-clock-o"></i>
 				<ion-list>
-					<ion-item ng-repeat="period in selectedPeriods">
+					<ion-item ng-repeat="period in appointment.periods">
 						{{ period.label }}
 					</ion-item>
 				</ion-list>
@@ -38,7 +38,7 @@
 		  <div class="item item-icon-left">
 			    <i class="icon fa fa-map-marker"></i>
 				<ion-list>
-					<ion-item ng-repeat="location in selectedLocations">
+					<ion-item ng-repeat="location in appointment.locations">
 						{{ location.label }}
 					</ion-item>
 				</ion-list>
