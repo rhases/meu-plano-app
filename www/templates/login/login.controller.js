@@ -1,27 +1,29 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, userService) {
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService, analyticsService) {
+	// This is the success callback from the login method
+	var fbLoginSuccess = function(response) {
+		if (!response.authResponse) {
+			fbLoginError("Cannot find the authResponse");
+			return;
+		}
 
-  // This is the success callback from the login method
-  var fbLoginSuccess = function(response) {
-    if (!response.authResponse){
-      fbLoginError("Cannot find the authResponse");
-      return;
-    }
+		var authResponse = response.authResponse;
 
-  	var authResponse = response.authResponse;
-
-    getFacebookProfileInfo(authResponse)
-	    .then(function(profileInfo) {
-	      return userService.facebookSignUp(profileInfo)
+		getFacebookProfileInfo(authResponse)
+			.then(function(profileInfo) {
+				return authService.facebookSignUp(profileInfo)
 					.then(function(user) {
 						rhasesLoginSuccess(user);
 					});
-	    })
+			})
 			.catch(function(fail) {
-      	fbLoginError(fail);
-    	});
-  };
+				fbLoginError(fail);
+			});
+	};
 
 	var rhasesLoginSuccess = function(user) {
+	    analyticsService.track.account('login', 'fb success', user);
+	    analyticsService.track.user(user)
+
 		console.log('User Signed in: ' + JSON.stringify(user));
 		switch(user.status) {
 			case 'invited':
@@ -39,6 +41,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
   // This is the fail callback from the login method
   var fbLoginError = function(error){
     console.log('fbLoginError ' + JSON.stringify(error), error);
+    analyticsService.track.account('login', 'fb error', error);
+
     $ionicLoading.hide();
 		waitResponse = false;
 
@@ -65,8 +69,32 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 
 	var waitResponse = false;
 
+	$scope.testLogin = function() {
+		if(waitResponse) {
+			console.log('facebookSignIn: wait response!');
+			return;
+		}
+
+		waitResponse = true;
+		$ionicLoading.show({
+			template: 'Login de teste...'
+		});
+
+		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho",id:"1045650235523854"};
+		//profileInfo = {email:"talesap@gmail.com",name:"Tales Porto",id:"10201554128091239"};
+		authService.facebookSignUp(profileInfo)
+			.then(function(user) {
+				rhasesLoginSuccess(user);
+			})
+			.catch(function(fail) {
+				fbLoginError(fail);
+			});
+	};
+
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
+    analyticsService.track.account('login', 'fb signin init');
+
 		if(waitResponse) {
 			console.log('facebookSignIn: wait response!');
 			return;
@@ -77,33 +105,39 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 			template: 'Conectando com o Facebook...'
 		});
 
-    facebookConnectPlugin.getLoginStatus(function(success){
-      if(success.status === 'connected'){
-        // The user is logged in and has authenticated your app, and response.authResponse supplies
-        // the user's ID, a valid access token, a signed request, and the time the access token
-        // and signed request each expire
-        console.log('getLoginStatus ' + success.status);
+		facebookConnectPlugin.getLoginStatus(
+			function(success) {
+				if(success.status === 'connected') {
+					// The user is logged in and has authenticated your app, and response.authResponse supplies
+					// the user's ID, a valid access token, a signed request, and the time the access token
+					// and signed request each expire
+					console.log('getLoginStatus ' + success.status);
 
-    		// Check if we have our user saved
-    		if(userService.getAppUser()){
-					console.log('Usuario ja logado. Redirecionando...');
-					rhasesLoginSuccess(userService.getAppUser());
+					// Check if we have our user saved
+					authService.getAppUser()
+						.then(function(appUser) {
+							if(!appUser) {
+								throw new Error('Can not foun app user.')
+							}
+							console.log('Usuario ja logado. Redirecionando...');
+							rhasesLoginSuccess(appUser);
+						})
+						.catch(function(err) {
+							console.log('Efetuando login...');
+							fbLoginSuccess(success);
+						})
 				} else {
-					console.log('Efetuando login...');
-					fbLoginSuccess(success);
+					// If (success.status === 'not_authorized') the user is logged in to Facebook,
+					// but has not authenticated your app
+					// Else the person is not logged into Facebook,
+					// so we're not sure if they are logged into this app or not.
+
+					console.log('getLoginStatus (status != connected) ' + success.status);
+
+					// Ask the permissions you need. You can learn more about
+					// FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
+					facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
 				}
-      } else {
-        // If (success.status === 'not_authorized') the user is logged in to Facebook,
-				// but has not authenticated your app
-        // Else the person is not logged into Facebook,
-				// so we're not sure if they are logged into this app or not.
-
-				console.log('getLoginStatus (status != connected) ' + success.status);
-
-				// Ask the permissions you need. You can learn more about
-				// FB permissions here: https://developers.facebook.com/docs/facebook-login/permissions/v2.4
-        facebookConnectPlugin.login(['email', 'public_profile'], fbLoginSuccess, fbLoginError);
-      }
-    });
-  };
-});// End of facebook friend list controller.
+			});
+		};
+	});// End of facebook friend list controller.

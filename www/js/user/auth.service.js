@@ -1,4 +1,4 @@
-angular.module('starter').service('authService', function($rootScope, $q, $http, localStorage, userService, userProfileService, lodash) {
+angular.module('starter').service('authService', function($rootScope, $q, $http, localStorage, userService, userProfileService, inviteService, lodash) {
 
 	var AUTH_TOKEN_KEY = "AUTH_TOKEN";
 
@@ -25,10 +25,10 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// * Created to make control of user easy
 	// *********************************************************
 
-	function _storeAppUser(appUser) {
-		userService.store(appUser);
-		userProfileService.store(appUser);
-	}
+	// function _storeAppUser(appUser) {
+	// 	userService.store(appUser);
+	// 	userProfileService.store(appUser);
+	// }
 
 	function _getAppUser() {
 		return userService.get()
@@ -61,16 +61,17 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 			.then(function() {
 				return _getAppUser();
 			})
+			// TODO melhor fazer isso com evento.
+			.then(function(appUser) {
+				$rootScope.appUser = appUser;
+				return appUser;
+			})
+
 	}
 
 	// *********************************************************
 
 	function _facebookSignUp(facebookInfo) {
-		if(_appUser) {
-			console.log('User already logged in: ' + JSON.stringify(_appUser));
-			return _appUser;
-		}
-
 		var authUser = {
 		    name: facebookInfo.name,
 		    email: facebookInfo.email,
@@ -89,35 +90,15 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 			.then(function(status) {
 				return _getAppUser()
 					.then(function(appUser) {
-						return appUser.status = status;
+						appUser.status = status
+						if(status == "registered") {
+							// TODO melhor fazer isso com evento.
+							$rootScope.appUser = appUser;
+						}
+						return appUser;
 					})
 			})
 	}
-
-	// function _appUserProfileToUser(userProfile, status) {
-	// 	user = {
-	// 		name: userProfile.name,
-	// 		email: userProfile.email,
-	// 		picture : "https://graph.facebook.com/" + userProfile.facebook.id + "/picture?type=large",
-	// 		hasHealthPlan: userProfile.hasHealthPlan,
-	// 		healthPlanNumber: userProfile.healthPlanNumber,
-	// 		healthPlanOperator: userProfile.healthPlanOperator,
-	// 		status: status
-	// 	};
-	// 	console.log('User Profile -> User: ' + JSON.stringify(user));
-	// 	return user;
-	// }
-	//
-	// function _fbInfoToUser(facebookInfo, status) {
-	// 	user = {
-	// 		name: facebookInfo.name,
-	// 		email: facebookInfo.email,
-	// 		picture : "https://graph.facebook.com/" + facebookInfo.id + "/picture?type=large",
-	// 		status: status
-	// 	};
-	// 	console.log('Facebook Info -> User: ' + JSON.stringify(user));
-	// 	return user;
-	// }
 
 	function _isLoggedIn() {
 		console.log(_getAuthToken());
@@ -130,6 +111,9 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 
 	function _logout() {
 		localStorage.removeAll();
+
+		// TODO melhor fazer isso com evento.
+		$rootScope.appUser = undefined;
 	}
 
 	return {

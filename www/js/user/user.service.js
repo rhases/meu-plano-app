@@ -13,11 +13,11 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 				var user = res.data;
 				console.log("User loaded. " + JSON.stringify(user));
 				if (user) {
-					_store();
-				} else {
-					throw new Error('Can not found user.');
+					_store(user);
+					return user;
 				}
-				return user;
+
+				throw new Error('Can not found user.');
 			});
 	}
 
@@ -30,7 +30,7 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 				return $http.post(window.globalVariable.backend.authServerUri + "api/users/", user);
 			})
 			.then(function(res) {
-				console.log('User saved on server: ' + JSON.stringify(_user));
+				console.log('User saved on server');
 
 				//_store(user); // work well save locally
 				return res.data.token;

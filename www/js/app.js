@@ -12,8 +12,8 @@
 var db = null; //Use for SQLite database.
 window.globalVariable = {
     startPage: {
-        url: "/app/list-dashboard",//Url of start page.
-        state: "app.dashboard"//State name of start page.
+        url: "/app/login",//Url of start page.
+        state: "app.login"//State name of start page.
     },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
@@ -52,12 +52,29 @@ angular.module('starter')
             }
 
             initialRootScope();
-            analyticsService.setup();
 
       			if (!authService.isLoggedIn()) {
       				$state.go('app.login');
       				console.log("User not logged!");
-      			}
+      			} else {
+							$ionicLoading.show();
+							authService.getAppUser()
+								.then(function(appUser) {
+									if(appUser) {
+										// TODO melhor fazer isso com evento.
+										$rootScope.appUser = appUser;
+										$state.go('app.dashboard');
+										console.log("User logged! " + appUser.name);
+									} else {
+										authService.logout();
+										$state.go('app.login');
+										console.log("App User not found! Go to login.");
+									}
+								})
+								.then(function() {
+									$ionicLoading.hide();
+								});
+						}
         });
 
     })

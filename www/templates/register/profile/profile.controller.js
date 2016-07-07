@@ -34,4 +34,11 @@ appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, aut
 				$ionicLoading.hide();
 			});
 	}
+
+	$scope.states = brazilianInfos.statesAndCities;
+	$scope.cities = function() {
+		if (!$scope.appUser || !$scope.appUser.profile || !$scope.appUser.profile.state)
+			return [];
+		return brazilianInfos.getStateByCod($scope.appUser.profile.state).cities;
+	}
 });
