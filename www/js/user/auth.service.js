@@ -84,7 +84,8 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 			.then(function(status) {
 				return _getAppUser()
 					.then(function(appUser) {
-						return appUser.status = status;
+						appUser.status = status
+						return appUser;
 					})
 			})
 	}
