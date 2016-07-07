@@ -1,4 +1,4 @@
-appServices.factory('scheduleAppointmentService', function (specialtiesService) {
+appServices.factory('scheduleAppointmentService', function () {
 
     var service = {
 
@@ -43,6 +43,10 @@ appServices.factory('scheduleAppointmentService', function (specialtiesService) 
 
     service.getSelectedLocations = function() {
         return retrieveCheckedFromList(service.appointment.locations);
+    }
+
+    service.setSpecialty = function(specialty) {
+        service.appointment.specialty = specialty;
     }
 
     return service;

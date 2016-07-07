@@ -103,7 +103,7 @@ angular.module('starter')
                 }
             })
             .state('app.scheduleAppointment.days', {
-                url: "/days?specialtyChosen",
+                url: "/days",
                 templateUrl: "templates/schedule-appointment/days.html",
                 controller: 'daysCtrl'
             })

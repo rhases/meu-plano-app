@@ -3,6 +3,4 @@ appControllers.controller('daysCtrl', function ($scope, $stateParams, $mdBottomS
 
         $scope.appointment = scheduleAppointmentService.appointment;
 
-        $scope.appointment.specialty = $stateParams.specialtyChosen;
-
 });
