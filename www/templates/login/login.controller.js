@@ -69,6 +69,28 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 
 	var waitResponse = false;
 
+	$scope.testLogin = function() {
+		if(waitResponse) {
+			console.log('facebookSignIn: wait response!');
+			return;
+		}
+
+		waitResponse = true;
+		$ionicLoading.show({
+			template: 'Login de teste...'
+		});
+
+		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho",id:"1045650235523854"};
+		//profileInfo = {email:"talesap@gmail.com",name:"Tales Porto",id:"10201554128091239"};
+		authService.facebookSignUp(profileInfo)
+			.then(function(user) {
+				rhasesLoginSuccess(user);
+			})
+			.catch(function(fail) {
+				fbLoginError(fail);
+			});
+	};
+
   //This method is executed when the user press the "Login with facebook" button
   $scope.facebookSignIn = function() {
     analyticsService.track.account('login', 'fb signin init');
