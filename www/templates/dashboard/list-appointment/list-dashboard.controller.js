@@ -1,11 +1,20 @@
 // Controller of dashboard.
-appControllers.controller('listAppointmentController', function ($scope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, appointmentService, APPOINTMENT_STATUS) {
+appControllers.controller('listAppointmentController', function ($http, $scope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, appointmentService, APPOINTMENT_STATUS, SCHEDULER_HOST, appointmentRequestService) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
     $scope.acceptedAppointment = [];
     $scope.scheduledAppointment = [];
+    $scope.appointments = [];
+
+    appointmentRequestService.getAppointmentRequestList()
+        .then(function(appointments) {
+            $scope.appointments = appointments;
+        })
+        .catch(function(error) {
+            console.log(error);
+        });
 
     appointmentService.getAppointmentList()
         .then(function(appointments) {
