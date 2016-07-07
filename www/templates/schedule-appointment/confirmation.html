@@ -6,12 +6,49 @@
 <!--URL : #app/scheduleAppointment/locations-->
 
 <ion-view title="Confirmar">
+	<ion-nav-title>
+    	<i class="icon ion-checkmark"></i>  Confirmar
+    </ion-nav-title>
 	<ion-content>
+
+		<div class="list card">
+			<div class="item item-icon-left">
+			    <i class="icon fa fa-stethoscope"></i>
+			    {{ appointment.specialty }}
+		  </div>
+
+		  <div class="item item-icon-left">
+			    <i class="icon ion-calendar"></i>
+				<ion-list>
+					<ion-item ng-repeat="day in selectedDays">
+						{{ day.label }}
+					</ion-item>
+				</ion-list>
+		  </div>
+
+		  <div class="item item-icon-left">
+			    <i class="icon fa fa-clock-o"></i>
+				<ion-list>
+					<ion-item ng-repeat="period in selectedPeriods">
+						{{ period.label }}
+					</ion-item>
+				</ion-list>
+		  </div>
+
+		  <div class="item item-icon-left">
+			    <i class="icon fa fa-map-marker"></i>
+				<ion-list>
+					<ion-item ng-repeat="location in selectedLocations">
+						{{ location.label }}
+					</ion-item>
+				</ion-list>
+		  </div>
+
+
+		</div>
+
 	    <form name="appointmentForm">
-
-			{{ appointment }}
-
-			<a ui-sref="app.scheduleAppointment.locations" class="button button-block button-positive">Continuar</a>
+			<a ui-sref="app.scheduleAppointment.locations" class="button button-block button-positive">Confirmar</a>
 	    </form>
 	</ion-content>
 </ion-view>

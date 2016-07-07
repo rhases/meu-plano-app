@@ -13,7 +13,7 @@ var db = null; //Use for SQLite database.
 window.globalVariable = {
     startPage: {
         url: "/app/list-dashboard",//Url of start page.
-        state: "app.dashboard-list"//State name of start page.
+        state: "app.dashboard"//State name of start page.
     },
     message: {
         errorMessage: "Technical error please try again later." //Default error message.
@@ -33,7 +33,7 @@ window.globalVariable = {
 };// End Global variable
 
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, authService, analyticsService) {
 
         function initialRootScope() {
             $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.
@@ -52,7 +52,12 @@ angular.module('starter')
             }
 
             initialRootScope();
+            analyticsService.setup();
 
+      			if (!authService.isLoggedIn()) {
+      				$state.go('app.login');
+      				console.log("User not logged!");
+      			}
         });
 
     })
@@ -66,5 +71,5 @@ angular.module('starter')
     })
 
 	.constant('$ionicLoadingConfig', {
-		template: '<ion-spinner />'
+		template: '<ion-spinner icon="ripple" class="spinner-balanced" />'
 	});

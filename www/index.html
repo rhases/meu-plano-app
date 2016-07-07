@@ -26,6 +26,7 @@
 
     <!-- Ionic javascript lib -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+	<!-- <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script> -->
     <!-- end Ionic javascript lib -->
 
     <!-- Angular javascript lib -->
@@ -36,11 +37,13 @@
 
     <!-- Cordova script (this will be a 404 during development) -->
     <script src="lib/ngCordova/dist/ng-cordova.js"></script>
-    <script src="cordova.js"></script>
+	<script src="cordova.js"></script>
     <!-- end Cordova script -->
 
     <!-- Utils section -->
     <script src="lib/ng-lodash/build/ng-lodash.min.js"></script>
+	<script src="lib/scheduler-utils/index.js"></script>
+	<script src="lib/medical-specializations/index.js"></script>
     <!-- end Utils section -->
 
     <!--ionic framework ngIOS9UIWebViewPatch-->
@@ -48,16 +51,12 @@
     <script src="ngIOS9UIWebViewPatch/angular-ios9-uiwebview.patch.js"></script>
     <!--end ionic framework ngIOS9UIWebViewPatch-->
 
-	<script src="lib/scheduler-utils/index.js"></script>
-	<script src="lib/medical-specializations/index.js"></script>
-
     <!-- app.js section-->
 	<script src="js/module.js"></script>
     <script src="js/app.constants.js"></script>
     <script src="js/app.js"></script>
     <script src="js/md-config.js"></script>
 	<script src="js/routes.js"></script>
-	<script src="js/local-storage.js"></script>
     <!-- end app.js section-->
 
     <!-- Controllers section-->
@@ -79,17 +78,20 @@
     <script src="templates/schedule-appointment/days-periods.controller.js"></script>
     <script src="templates/schedule-appointment/locations.controller.js"></script>
     <script src="templates/schedule-appointment/confirmation.controller.js"></script>
-    <script src="templates/schedule-appointment/appointment.service.js"></script>
+    <script src="templates/schedule-appointment/schedule-appointment.service.js"></script>
     <script src="templates/schedule-appointment/specialties.service.js"></script>
 
 	<script src="templates/talk-with-us/talk-with-us.controller.js"></script>
 	<script src="templates/user-profile/user-profile.controller.js"></script>
 	<script src="templates/facebook/js/controllers.js"></script>
 
+  <script src="js/analytics/analytics.service.js"></script>
 	<script src="js/user/user-profile.service.js"></script>
 	<script src="js/user/user.service.js"></script>
+	<script src="js/user/invite.service.js"></script>
+	<script src="js/user/auth.service.js"></script>
 
-    <script src="js/appointment/appointment.service.js"></script>
+  <script src="js/appointment/appointment.service.js"></script>
 
 	<script src="js/auth/auth-interceptor.service.js"></script>
 	<script src="js/auth/auth.js"></script>

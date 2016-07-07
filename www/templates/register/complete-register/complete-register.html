@@ -6,30 +6,31 @@
     </ion-nav-buttons>
 
 	<ion-content id="register-content" padding="true" scrollbar-x="false">
-    	<form name="registerForm">
+    	<form name="registerUser">
   			<md-content class="md-no-momentum">
 				<md-input-container class="md-block">
 					<md-icon md-font-icon="ion-android-person" class="fa-2x"></md-icon>
-					<input ng-model="user.name" name="name" required placeholder="Nome completo">
+					<input ng-model="appUser.name" name="name" required placeholder="Nome completo">
 				</md-input-container>
 				<md-input-container class="md-block">
 					<md-icon md-font-icon="ion-android-mail" class="fa-2x"></md-icon>
-					<input ng-model="user.email" name="email" required placeholder="Email" type="email">
+					<input ng-model="appUser.email" name="email" required placeholder="Email" type="email">
 				</md-input-container>
 				<md-input-container class="md-block">
 					<md-icon md-font-icon="ion-android-phone-portrait" class="fa-2x"></md-icon>
-					<input ng-model="user.telephone" name="telephone" required placeholder="Telefone" type="tel">
+					<input ng-model="appUser.telephone" name="phone" required placeholder="Telefone" type="tel">
 				</md-input-container>
 				<md-input-container class="md-block">
 					<md-icon md-font-icon="ion-android-calendar" class="fa-2x"></md-icon>
-					<input ng-model="user.birth" name="birth" required placeholder="Nascimento" type="date">
+					<input ng-model="appUser.birth" name="birthdate" required placeholder="Nascimento" type="date">
 				</md-input-container>
-				<md-radio-group ng-model="user.gender">
+				<md-radio-group ng-model="appUser.gender" required name="gender">
 					<md-radio-button value="male">Homem</md-radio-button>
 					<md-radio-button value="female">Mulher</md-radio-button>
 				</md-radio-group>
 			</md-content>
-			<a class="button button-block button-positive button-balanced" ng-click="save()">
+
+			<a class="button button-block button-positive button-balanced" ng-disabled="!(registerUser.name.$valid && registerUser.email.$valid && registerUser.phone.$valid && registerUser.birthdate.$valid && registerUser.gender.$valid)" ng-click="save()">
 				Continuar
 			</a>
 

@@ -10,6 +10,13 @@
 // }]
 appServices.factory('localStorage', function ($filter, $window) {
     return {
+        // Check if this key exist
+        // Parameter :
+        // key = reference of object in localStorage.
+        exist: function (key) {
+            return $window.localStorage[key] != undefined;
+        },
+
         // Get data from localStorage it will use data key for getting the data.
         // Parameter :
         // key = reference of object in localStorage.
@@ -23,6 +30,8 @@ appServices.factory('localStorage', function ($filter, $window) {
         // key = reference of object in localStorage.
         // value = data that will store in localStorage.
         set: function (key, value) {
+			if (!value)
+				return;
             $window.localStorage[key] = JSON.stringify(value);
         },
 

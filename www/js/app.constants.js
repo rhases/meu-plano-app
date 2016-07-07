@@ -7,4 +7,5 @@ angular.module("starter")
         CONFIRMED: "CONFIRMED",
         CANCELED: "CANCELED",
         RESCHEDULED: "RESCHEDULED"
-    });
+    })
+    .constant('GA_TRACKING_ID', 'UA-51103102-3');

@@ -1,5 +1,5 @@
 angular.module("starter")
-    .factory("appointmentService", function($http, $cacheFactory, $q, userService, lodash, SCHEDULER_HOST) {
+    .factory("appointmentService", function($http, $cacheFactory, $q, authService, lodash, SCHEDULER_HOST) {
         var _appointmentList;
         var _defaultKey = "default";
         var _cache;
@@ -51,7 +51,7 @@ angular.module("starter")
 
         function _initCache() {
             if (lodash.isNil(_cache)) {
-                var key = lodash.isNil(userService.getCurrentUser()) ? _defaultKey : userService.getCurrentUser().name;
+                var key = lodash.isNil(authService.getAppUser()) ? _defaultKey : authService.getAppUser().name;
 
                 _cache = $cacheFactory(key, number=10);
             }

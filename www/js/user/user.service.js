@@ -1,110 +1,77 @@
-angular.module('starter').service('userService', function($rootScope, $q, $http, localStorage, userProfileService) {
+// User on rhases-auth
+angular.module('starter').service('userService', function($rootScope, $q, $http, localStorage, lodash) {
+
+	var USER_KEY = "USER";
 
 	var _user;
-	var _authToken;
 
-	function _getCurrentUser() {
-		if(!_user) {
-			_user = localStorage.get("user");
-		}
-		return _user;
-	}
-
-	function _getAuthToken() {
-		return _authToken;
-	}
-
-	function _facebookSignUp(facebookInfo) {
-		if(_user) {
-			console.log('User already logged in: ' + JSON.stringify(_user));
-			return _user;
-		}
-
-		// Salva o authUser lá no rhases-auth.
-		return _saveAuthUser(facebookInfo)
-		// carrega o modelo user e seu status no servidor.
-			.then(function() {
-				return _loadUserFromFacebookInfo(facebookInfo);
-			});
-	}
-
-	function _saveAuthUser(facebookInfo) {
-		var authUser = {
-		    name: facebookInfo.name,
-		    email: facebookInfo.email,
-		    facebook: facebookInfo
-		};
-
-		console.log('Saving user into rhases-auth... ');
-		// envia para o rhases-auth.
-		return $http.post(window.globalVariable.backend.authServerUri + "api/users/", authUser)
-			.then(function(token) {
-				_storeAuthToken(token);
-			});
-	}
-
-	function _storeAuthToken(token) {
-		localStorage.set("authToken", token);
-		_authToken = token;
-		console.log('Auth Token stored: ' + JSON.stringify(_authToken));
-	}
-
-	function _storeUser(user) {
-		localStorage.set("user", user);
-		_user = user;
-		console.log('User stored: ' + JSON.stringify(_user));
-	}
-
-	function _loadUserFromFacebookInfo(facebookInfo) {
-		return userProfileService.invitationStatus(facebookInfo.email)
-			.then(function(response) {
-				userStatus = response.data.status;
-				if(userStatus == "registered") {
-
-					// Se ja esta registrado, obtem os dados do usuario do servidor
-					return userProfileService.get(facebookInfo.email)
-						.then(function(userProfile) {
-							return _userProfileToUser(userProfile, userStatus);
-						});
+	// Load from server (save locally info too)
+	function _load() {
+		console.log("Loading user...")
+		return $http.get(window.globalVariable.backend.authServerUri + "api/users/me")
+			.then(function(res) {
+				var user = res.data;
+				console.log("User loaded. " + JSON.stringify(user));
+				if (user) {
+					_store();
 				} else {
-					return _fbInfoToUser(facebookInfo, userStatus);
+					throw new Error('Can not found user.');
 				}
-			})
-			// Salva o usuario localmente
-			.then(function(user){
-				_storeUser(user);
-				return _user;
+				return user;
 			});
 	}
 
-	function _userProfileToUser(userProfile, status) {
-		user = {
-			name: userProfile.name,
-			email: userProfile.email,
-			picture : "https://graph.facebook.com/" + userProfile.facebook.id + "/picture?type=large",
-			hasHealthPlan: userProfile.hasHealthPlan,
-			healthPlanNumber: userProfile.healthPlanNumber,
-			healthPlanOperator: userProfile.healthPlanOperator,
-			status: status
-		};
-		console.log('User Profile -> User: ' + JSON.stringify(user));
-		return user;
+	// Save or update on server (OBS.: return a token) (save locally info too)
+	function _save(user) {
+		console.log("Saving user... " + JSON.stringify(user));
+		// envia para o scheduler-ws.
+		return $http.put(window.globalVariable.backend.authServerUri + "api/users/" + user._id, user)
+			.catch(function(error) {
+				return $http.post(window.globalVariable.backend.authServerUri + "api/users/", user);
+			})
+			.then(function(res) {
+				console.log('User saved on server: ' + JSON.stringify(_user));
+
+				//_store(user); // work well save locally
+				return res.data.token;
+			});
 	}
 
-	function _fbInfoToUser(facebookInfo, status) {
-		user = {
-			name: facebookInfo.name,
-			email: facebookInfo.email,
-			picture : "https://graph.facebook.com/" + facebookInfo.id + "/picture?type=large",
-			status: status
-		};
-		console.log('Facebook Info -> User: ' + JSON.stringify(user));
-		return user;
+	// Get the user saved locally
+	function _get() {
+		return $q(function(resolve, reject) {
+			if (_user) {
+				resolve(lodash.clone(_user));
+			} else {
+				if (localStorage.exist(USER_KEY)) {
+					_user = localStorage.get(USER_KEY);
+					resolve(lodash.clone(_user));
+				} else {
+					_load()
+						.then(function(user) {
+							_user = user;
+							resolve(lodash.clone(_user));
+						})
+						.catch(function(err) { reject(err) });
+				}
+			}
+		})
 	}
+
+	// Store the user on local store [SYNCH]
+	function _store(user) {
+		if (!user._id)
+			throw new Error('Can not store a user without id.');
+		_user = lodash.clone(user);
+		localStorage.set(USER_KEY, _user);
+		console.log('User stored locally: ' + JSON.stringify(_user));
+	}
+
 
 	return {
-		getCurrentUser: _getCurrentUser,
-		getAuthToken: _getAuthToken,
-		facebookSignUp: _facebookSignUp,
+		load: _load,
+		save: _save,
+		get: _get,
+		store: _store
 	}
 })
