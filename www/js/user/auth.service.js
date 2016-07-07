@@ -79,6 +79,7 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 				return userService.load(); // Garante que foi realmente criado salvo e está realmente logado
 			})
 			.then(function(user) {
+				$rootScope.emit('login:successful', user._id);
 				return inviteService.status(facebookInfo.email)
 			})
 			.then(function(status) {
