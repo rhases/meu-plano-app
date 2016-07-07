@@ -72,31 +72,31 @@ angular.module('starter')
                 }
             })
             .state('app.dashboard', {
-                url: "/list-dashboard",
+                url: "/list-appointment",
+				cache: false,
+                params: {
+                    isAnimated: true
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/dashboard/list-appointment/list-dashboard.html",
+                        controller: 'listAppointmentController'
+                    }
+                }
+            })
+            .state('app.dashboard-detail', {
+                url: "/detail-appointment",
 				cache: false,
                 params:{
                     isAnimated: true
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/list-appointment/list-dashboard.html",
-                        controller: 'dashboardListCtrl'
+                        templateUrl: "templates/dashboard/detail-appointment/detail-appointment.html",
+                        controller: 'detailAppointmentController'
                     }
                 }
             })
-            // .state('app.dashboard-detail', {
-            //     url: "/detail-dashboard",
-			// 	cache: false,
-            //     params:{
-            //         isAnimated: false
-            //     },
-            //     views: {
-            //         'menuContent': {
-            //             templateUrl: "templates/dashboard/list-appointment/dashboard.html",
-            //             controller: 'dashboardListCtrl'
-            //         }
-            //     }
-            // })
             .state('app.setting', {
                 url: "/setting",
                 views: {

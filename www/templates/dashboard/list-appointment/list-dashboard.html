@@ -28,35 +28,36 @@
 		</div> -->
 
         <!-- scheduled appointment notification -->
-        <div class="list card" ng-if="scheduledAppointment.length === 0">
+        <!-- <div class="list card" ng-if="scheduledAppointment.length === 0">
             <div class="item item-body">
                 <p class="item item-icon-left">
                     <i class="icon ion-information-circled balanced"></i>
                     Você não possui consultas para agendamento
                 </p>
             </div>
-        </div>
+        </div> -->
 
         <!-- scheduled appointment container -->
         <div ng-if="scheduledAppointment.length !== 0">
 
-            <div class="list card">
+            <div class="list card" ng-repeat="appointment in scheduledAppointment">
 
                 <div class="item item-avatar">
                     <img src="http://www.telelaudo.com.br/wp/wp-content/uploads/2014/03/medico-1.png">
-                    <h2><strong>Maúricio Sales</strong></h2>
-                    <p>Dermatologista</p>
-                    <p><a href="maps:Biocardio" /><i class="ion-location"></i> Cliníca AEPIT</a></p>
+                    <h2><strong>{{ appointment.doctor.name }}</strong></h2>
+                    <p>{{ medicalInfos.getByCod(appointment.doctor.speciality) }}</p>
+                    <p><i class="ion-hospital"></i> {{ appointment.clinic.name }}</p>
+                    <p><a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" /><i class="ion-location"></i> {{ appointment.clinic.address }} </a></p>
                 </div>
 
                 <div class="item item-body">
-                    <p>Você tem uma consulta para daqui <strong>um dia</strong>.</p>
-                    <p><strong>13/05/04 ás 13:00</strong></p>
+                    <p>Você tem uma consulta para daqui <strong>{{ relativeDateFormat(appointment.when) }}</strong>.</p>
+                    <p><strong>{{ formatDate() }}</strong></p>
                 </div>
 
                 <div class="row">
                     <div class="col-50">
-                        <a class="item item-icon-left button-light" ng-click="cancelAppointment()">
+                        <a class="item item-icon-left button-light" ng-click="cancelScheduledAppointment(appointment._id)">
                             <i class="icon ion-close"></i>
                             Recusar
                         </a>
@@ -73,37 +74,38 @@
         </div>
 
         <!-- accepted appointments notification -->
-        <div class="list card" ng-if="acceptedAppointment.length === 0">
+        <!-- <div class="list card" ng-if="acceptedAppointment.length === 0">
             <div class="item item-body">
                 <p class="item item-icon-left positive">
                     <i class="icon ion-information-circled balanced"></i>
                     Você não possui consultas confirmadas
                 </p>
             </div>
-        </div>
+        </div> -->
 
         <!-- accepted appointments container -->
         <div ng-if="acceptedAppointment.length !== 0">
 
-            <div class="list card">
-    			<div class="item item-avatar">
-    				<img src="http://drcarlosaugusto.com.br/centraldaobesidade/imgs/imgPerfil.jpg">
-    				<h2><strong>João Sabino</strong></h2>
-    				<p>Cardiologista</p>
-    				<p><a href="maps:Biocardio" /><i class="ion-location"></i> Cliníca Biocardio</a></p>
-    			</div>
+            <div class="list card" ng-repeat="appointment in scheduledAppointment">
+                <div class="item item-avatar">
+                    <img src="http://www.telelaudo.com.br/wp/wp-content/uploads/2014/03/medico-1.png">
+                    <h2><strong>{{ appointment.doctor.name }}</strong></h2>
+                    <p>{{ medicalInfos.getByCod(appointment.doctor.speciality) }}</p>
+                    <p><i class="ion-hospital"></i> {{ appointment.clinic.name }}</p>
+                    <p><a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" /><i class="ion-location"></i> {{ appointment.clinic.address }} </a></p>
+                </div>
 
-    			<div class="item item-body">
-    				<p>Você tem uma consulta para daqui <strong>treze dias</strong>.</p>
-    				<p><strong>24/05/04 ás 17:00</strong></p>
-    			</div>
+                <div class="item item-body">
+                    <p>Você tem uma consulta para daqui <strong>{{ relativeDateFormat(appointment.when) }}</strong>.</p>
+                    <p><strong>{{ formatDate() }}</strong></p>
+                </div>
 
-    			<a class="item item-icon-left" ng-click="cancelAppointment()">
+                <a class="item item-icon-left" ng-click="cancelAcceptedAppointment(appointment._id)">
     				<i class="icon ion-close"></i>
     				<!-- <i class="fa fa-close fa-2x"></i> -->
     				Desmarcar
     			</a>
-    		</div>
+            </div>
 
         </div>
 
