@@ -61,6 +61,12 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 			.then(function() {
 				return _getAppUser();
 			})
+			// TODO melhor fazer isso com evento.
+			.then(function(appUser) {
+				$rootScope.appUser = appUser;
+				return appUser;
+			})
+
 	}
 
 	// *********************************************************
@@ -86,35 +92,14 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 				return _getAppUser()
 					.then(function(appUser) {
 						appUser.status = status
+						if(status == "registered") {
+							// TODO melhor fazer isso com evento.
+							$rootScope.appUser = appUser;
+						}
 						return appUser;
 					})
 			})
 	}
-
-	// function _appUserProfileToUser(userProfile, status) {
-	// 	user = {
-	// 		name: userProfile.name,
-	// 		email: userProfile.email,
-	// 		picture : "https://graph.facebook.com/" + userProfile.facebook.id + "/picture?type=large",
-	// 		hasHealthPlan: userProfile.hasHealthPlan,
-	// 		healthPlanNumber: userProfile.healthPlanNumber,
-	// 		healthPlanOperator: userProfile.healthPlanOperator,
-	// 		status: status
-	// 	};
-	// 	console.log('User Profile -> User: ' + JSON.stringify(user));
-	// 	return user;
-	// }
-	//
-	// function _fbInfoToUser(facebookInfo, status) {
-	// 	user = {
-	// 		name: facebookInfo.name,
-	// 		email: facebookInfo.email,
-	// 		picture : "https://graph.facebook.com/" + facebookInfo.id + "/picture?type=large",
-	// 		status: status
-	// 	};
-	// 	console.log('Facebook Info -> User: ' + JSON.stringify(user));
-	// 	return user;
-	// }
 
 	function _isLoggedIn() {
 		console.log(_getAuthToken());
@@ -127,6 +112,9 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 
 	function _logout() {
 		localStorage.removeAll();
+
+		// TODO melhor fazer isso com evento.
+		$rootScope.appUser = undefined;
 	}
 
 	return {
