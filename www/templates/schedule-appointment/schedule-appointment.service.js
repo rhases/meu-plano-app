@@ -1,8 +1,8 @@
-appServices.factory('scheduleAppointmentService', function () {
+appServices.factory('scheduleAppointmentRequestService', function () {
 
     var service = {
 
-        appointment: {
+        appointmentRequest: {
             specialty: '',
             weekDays: [],
             periods: [],
@@ -10,20 +10,24 @@ appServices.factory('scheduleAppointmentService', function () {
         }
     }
 
+    service.getAppointmentRequest = function() {
+        return service.appointmentRequest;
+    }
+
     service.setSpecialty = function(specialty) {
-        service.appointment.specialty = specialty;
+        service.appointmentRequest.specialty = specialty;
     }
 
     service.setWeekDays = function(days) {
-        service.appointment.weekDays = days;
+        service.appointmentRequest.weekDays = days;
     }
 
     service.setPeriods = function(periods) {
-        service.appointment.periods = periods;
+        service.appointmentRequest.periods = periods;
     }
 
     service.setLocations = function(locations) {
-        service.appointment.locations = locations;
+        service.appointmentRequest.locations = locations;
     }
 
     return service;

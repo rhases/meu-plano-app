@@ -1,6 +1,6 @@
 appControllers.controller('confirmationCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    scheduleAppointmentService) {
+    scheduleAppointmentRequestService) {
 
-        $scope.appointment = scheduleAppointmentService.appointment;
+        $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
 
 });

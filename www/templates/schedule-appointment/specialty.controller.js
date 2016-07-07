@@ -1,10 +1,10 @@
 appControllers.controller('specialtyCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    $state, scheduleAppointmentService) {
+    $state, scheduleAppointmentRequestService) {
 
         $scope.specialties = medicalInfos.specializations;
 
         $scope.selectSpecialty = function(specialty) {
-            scheduleAppointmentService.setSpecialty(specialty);
+            scheduleAppointmentRequestService.setSpecialty(specialty);
             $state.go('app.scheduleAppointment.days');
         }
 });

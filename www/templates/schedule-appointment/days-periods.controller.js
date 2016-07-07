@@ -1,7 +1,7 @@
 appControllers.controller('daysPeriodsCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    $state, scheduleAppointmentService) {
+    $state, scheduleAppointmentRequestService) {
 
-        $scope.appointment = scheduleAppointmentService.appointment;
+        $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
 
         var periods = schedulerInfos.period;
         periods.forEach (function(period) { period.checked = false; });
@@ -9,7 +9,7 @@ appControllers.controller('daysPeriodsCtrl', function ($scope, $mdBottomSheet, $
 
         $scope.continue = function() {
             var selectedPeriods = periods.filter(function(element) { return element.checked });
-            scheduleAppointmentService.setPeriods(selectedPeriods);
+            scheduleAppointmentRequestService.setPeriods(selectedPeriods);
             $state.go('app.scheduleAppointment.locations');
         }
 });
