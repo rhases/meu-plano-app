@@ -20,7 +20,7 @@
 		  <div class="item item-icon-left">
 			    <i class="icon ion-calendar"></i>
 				<ion-list>
-					<ion-item ng-repeat="day in appointment.weekDays">
+					<ion-item ng-repeat="day in appointment.weekdays">
 						{{ day.label }}
 					</ion-item>
 				</ion-list>
@@ -48,7 +48,7 @@
 		</div>
 
 	    <form name="appointmentForm">
-			<a ui-sref="app.scheduleAppointment.locations" class="button button-block button-positive">Confirmar</a>
+			<a ng-click="submit()" class="button button-block button-positive">Confirmar</a>
 	    </form>
 	</ion-content>
 </ion-view>
