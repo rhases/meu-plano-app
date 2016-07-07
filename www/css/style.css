@@ -1782,3 +1782,17 @@ md-sidenav {
         color: gray; }
   #map-and-location div.map-input-option div.footer {
     margin-top: 24px; }
+
+p.big-text {
+    font-size: 16px;
+    line-height: 150%;
+    color: #616977;
+}
+
+h2.big-text {
+    color: #616977;
+}
+
+i.fa-big-icon {
+    font-size: 10em;
+}

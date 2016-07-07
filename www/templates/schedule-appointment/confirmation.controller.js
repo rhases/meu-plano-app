@@ -8,10 +8,10 @@ appControllers.controller('confirmationCtrl', function ($scope, $mdBottomSheet, 
         }
 
         var handleRequestSuccess = function() {
-            $state.go('app.dashboard');
+            $state.go('app.scheduleAppointment.happy-end');
         }
 
         var handleRequestError = function(msg) {
-            
+
         }
 });
