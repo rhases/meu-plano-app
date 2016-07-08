@@ -13,8 +13,18 @@ angular.module('starter').service('inviteService', function($rootScope, $q, $htt
 			});
 	}
 
-	function _requestInvite(email) {
-		// TODO: Implementar isto!!!
+	function _requestInvite(appUser) {
+		var inviteRequest = {
+			name: appUser.name,
+			email: appUser.email,
+			phone: appUser.phone,
+			healthIssurance: (app && appUser.profile && appUser.profile.healthPlan ? appUser.profile.healthPlan.name : ''),
+		}
+
+		return $http.post(window.globalVariable.backend.schedulerServerUri + "api/invites/request", inviteRequest)
+			.then(function(res) {
+				return res.data;
+			});
 	}
 
 	return {

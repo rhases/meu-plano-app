@@ -21,7 +21,8 @@ appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, au
 	$scope.save = function() {
 		$ionicLoading.show();
 
-		$scope.appUser.birthdate = $scope.birthdate.toISOString();
+		if ($scope.birthdate)
+			$scope.appUser.birthdate = $scope.birthdate.toISOString();
 
 		authService.saveAppUser($scope.appUser)
 			.then(function() {
