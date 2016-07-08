@@ -4,9 +4,10 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
-    $scope.acceptedAppointment = [];
-    $scope.scheduledAppointment = [];
     $scope.appointmentRequests = [];
+	$scope.appointments = [];
+	//$scope.acceptedAppointment = [];
+    //$scope.scheduledAppointment = [];
 
     appointmentRequestService.getAppointmentRequestList()
         .then(function(appointments) {
@@ -18,7 +19,8 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 
     appointmentService.getAppointmentList()
         .then(function(appointments) {
-            divideByStatus(appointments);
+			$scope.appointments = appointments;
+            //divideByStatus(appointments);
         })
         .catch(function(error) {
             console.log(error);
@@ -47,24 +49,25 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 
     $scope.relativeDateFormat = function(data) {
         return moment(String(data)).locale('pt-BR').fromNow();
-    }
+    };
 
     $scope.formatDate = function(data) {
         return moment(String(data)).locale("pt-BR").format("DD/MM/YY [às] HH:mm");
-    }
+    };
 
     $scope.cancelAppointment = function(appointment) {
         $state.go("app.dashboard-detail", {
             "appointment": appointment
         });
-    }
+    };
 
     $scope.getMedicalSpecialization = function(specialityId) {
 				console.log(medicalInfos.getByCod(String(specialityId)).label);
         return medicalInfos.getByCod(String(specialityId)).label;
-    }
+    };
 
-    function divideByStatus(listAppointment) {
+    /* Por enquanto listar sem separar
+	function divideByStatus(listAppointment) {
         var scheduledAppointment = listAppointment.filter(function(appointment) {
             return appointment.status === APPOINTMENT_STATUS.SCHEDULED;
         });
@@ -78,7 +81,7 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 
         if (!lodash.isNil(acceptedAppointment))
             $scope.acceptedAppointment = acceptedAppointment;
-    }
+    } */
 
     // function filterRequest(requestList) {
     //     var requestList = requestList.filter(function(request) {
