@@ -55,18 +55,30 @@
                 <p>Você tem uma consulta para daqui <strong>{{ relativeDateFormat(appointment.when) }}</strong>.</p>
                 <p><strong>{{ formatDate() }}</strong></p>
             </div>
-				<div class="row text-center">
-						<div class="col-50">
-								<a class="item icon-left ion-close">
-										&nbsp; Recusar
-								</a>
-						</div>
-						<div class="col-50">
-								<a class="item icon-left ion-checkmark">
-										&nbsp; Confirmar
-								</a>
-						</div>
+			<div class="row text-center" ng-if="appointment.status == 'SCHEDULED'">
+				<div class="col-50">
+					<a class="item icon-left ion-close" ng-click="refuse(appointment)">
+						&nbsp; Recusar
+					</a>
 				</div>
+				<div class="col-50">
+					<a class="item icon-left ion-checkmark" ng-click="confirm(appointment)">
+						&nbsp; Aceitar
+					</a>
+				</div>
+			</div>
+			<div class="row text-center" ng-if="appointment.status == 'ACCEPTED'">
+				<div class="col-50">
+					<a class="item icon-left ion-close" ng-click="cancel(appointment)">
+						&nbsp; Desmarcar
+					</a>
+				</div>
+				<div class="col-50" ng-if='canConfirm(appointment)'>
+					<a class="item icon-left ion-close" ng-click="confirm(appointment)">
+						&nbsp; Confirmar
+					</a>
+				</div>
+			</div>
         </div>
     </ion-content><!--end dashboard section-->
 </ion-view>

@@ -1,4 +1,4 @@
-appControllers.controller("commentModalController", function ($mdDialog) {
+appControllers.controller("commentModalController", function ($scope, $mdDialog) {
 
     $scope.comment = '';
 

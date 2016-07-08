@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('listAppointmentController', function ($http, $scope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
+appControllers.controller('listAppointmentController', function ($http, $scope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -55,21 +55,22 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
         return moment(String(data)).locale("pt-BR").format("DD/MM/YY [às] HH:mm");
     };
 
-    $scope.cancelAppointment = function(appointment) {
-        $state.go("app.dashboard-detail", {
-            "appointment": appointment
-        });
-    };
+    // $scope.cancelAppointment = function(appointment) {
+    //     $state.go("app.dashboard-detail", {
+    //         "appointment": appointment
+    //     });
+    // };
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
 	// put the appointment in state ACCEPTED
-	$scope.acceptedAppointment = function(appointment) {
-		changeState(appointment, "ACCEPTED");
+	$scope.accept = function(appointment) {
+		changeState(appointment, "ACCEPTED")
+			.then(function() { $mdToast.showSimple('Consulta aceitada!') });
 	}
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
 	// put the appointment in state REFUSED
-	$scope.rejectAppointment = function(appointment) {
+	$scope.refuse = function(appointment) {
 		$mdDialog.show({
 			controller: 'commentModalController',
 			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
@@ -80,19 +81,33 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 		})
 		.then(
 			function(comment) {
-				changeState(appointment, "REFUSED", comment);
+				changeState(appointment, "REFUSED", comment)
+					.then(function() { $mdToast.showSimple('Consulta recusada!') });
 			});
 	}
 
 	// when the user accept the appointment at any time he can cancel it
 	// put the appointment in state CANCELED
-	$scope.cancelAppointment = function(appointment) {
-		changeState(appointment, "CANCELED");
+	$scope.cancel = function(appointment) {
+		$mdDialog.show({
+			controller: 'commentModalController',
+			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
+			parent: angular.element(document.body),
+			// targetEvent: ev,
+			// clickOutsideToClose:true,
+			// fullscreen: false
+		})
+		.then(
+			function(comment) {
+				changeState(appointment, "CANCELED", comment)
+					.then(function() { $mdToast.showSimple('Consulta cancelada!') });
+			});
 	}
 
 	// One or two days before the appointment the user can really confirm it
-	$scope.confirmAppointment = function(appointment) {
-		changeState(appointment, "CONFIRMED");
+	$scope.confirm = function(appointment) {
+		changeState(appointment, "CONFIRMED")
+			.then(function() { $mdToast.showSimple('Consulta confirmada!') });
 	}
 
 	// Only can confirm 48h before the appointment
@@ -107,7 +122,9 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 		appointment.state = state;
 
 		return appointmentService.update(appointment)
-			.then(function() { console.log('Appointment state change from ' + oldState + ' to ' + state + '.'); })
+			.then(function() {
+				console.log('Appointment state change from ' + oldState + ' to ' + state + '.');
+			})
 			.catch(function(err) { appointment.state = oldState; })
 			.then(function() { $ionicLoading.hide(); })
 	}
