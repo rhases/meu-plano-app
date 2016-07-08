@@ -6,48 +6,48 @@
     </ion-nav-buttons>
 
 	<ion-content padding="true" scrollbar-x="false">
-		<!-- <code>{{ appUser }}</code> -->
-		<section class="text-center">
-			<md-content class="md-no-momentum">
-				<h4>
-					<span style="margin-right: 20px;">Mora em?</span>
-					<md-input-container style="margin-right: 10px;">
-						<label>Estado</label>
-						<md-select ng-model="appUser.profile.state">
-							<md-option ng-repeat="state in states" value="{{ state.cod }}">{{ state.cod | uppercase }}</md-option>
-						</md-select>
+		<form name="registerUserProfile">
+			<!-- <code>{{ appUser }}</code> -->
+			<section class="text-center">
+				<md-content class="md-no-momentum">
+					<h4>
+						<span style="margin-right: 20px;">Mora em?</span>
+						<md-input-container style="margin-right: 10px;">
+							<label>Estado</label>
+							<md-select ng-model="appUser.profile.state" name="state" required>
+								<md-option ng-repeat="state in states" value="{{ state.cod }}">{{ state.cod | uppercase }}</md-option>
+							</md-select>
+						</md-input-container>
+						<md-input-container style="margin-right: 10px;" ng-if="appUser.profile.state">
+							<label>Cidade</label>
+							<md-select ng-model="appUser.profile.city" name="city" required>
+								<md-option ng-repeat="city in cities()" value="{{ city.cod }}">{{ city.label }}</md-option>
+							</md-select>
+						</md-input-container>
+					</h4>
+				</md-content>
+			</section>
+
+			<section class="text-center" ng-if="appUser.profile.city">
+				<md-content class="md-no-momentum">
+					<md-input-container class="md-block">
+						<h4>Tem plano de saúde?</h4>
+						<md-button ng-click="appUser.profile.hasHealthPlan = false" class="md-raised" ng-class="{'md-primary': appUser.profile.hasHealthPlan == false}">Não</md-button>
+						<md-button ng-click="appUser.profile.hasHealthPlan = true" class="md-raised" ng-class="{'md-primary': appUser.profile.hasHealthPlan == true}">Sim</md-button>
 					</md-input-container>
-					<md-input-container style="margin-right: 10px;" ng-if="appUser.profile.state">
-						<label>Cidade</label>
-						<md-select ng-model="appUser.profile.city">
-							<md-option ng-repeat="city in cities()" value="{{ city.cod }}">{{ city.label }}</md-option>
-						</md-select>
-					</md-input-container>
-				</h4>
-			</md-content>
-		</section>
+				</md-content>
+			</section>
 
-		<section class="text-center">
-			<md-content class="md-no-momentum">
-				<md-input-container class="md-block">
-					<h4>Tem plano de saúde?</h4>
-					<md-button ng-click="appUser.profile.hasHealthPlan = false" class="md-raised" ng-class="{'md-primary': appUser.profile.hasHealthPlan == false}">Não</md-button>
-					<md-button ng-click="appUser.profile.hasHealthPlan = true" class="md-raised" ng-class="{'md-primary': appUser.profile.hasHealthPlan == true}">Sim</md-button>
-				</md-input-container>
-			</md-content>
-		</section>
-
-		<br />
-
-		<section ng-if="appUser.profile.hasHealthPlan == false" class="text-center">
-			<h4 class="text-center">:(</h4>
-			<h5>Atualmente nosso aplicativo só trabalha com usuário de planos de saúde.</h5>
 			<br />
-			<md-button class="md-primary" href="https://www.rhases.com.br">Encontrar plano de saúde</md-button>
-		</section>
 
-		<section ng-if="appUser.profile.hasHealthPlan == true">
-	    	<form name="registerUserProfile">
+			<section ng-if="appUser.profile.city && appUser.profile.hasHealthPlan == false" class="text-center">
+				<h4 class="text-center">:(</h4>
+				<h5>Atualmente nosso aplicativo só trabalha com usuário de planos de saúde.</h5>
+				<br />
+				<md-button class="md-primary" href="https://www.rhases.com.br">Encontrar plano de saúde</md-button>
+			</section>
+
+			<section ng-if="appUser.profile.city && appUser.profile.hasHealthPlan == true">
 	  			<md-content class="md-no-momentum">
 					<h4 class="text-center">Qual?</h4>
 					<md-input-container class="md-block">
@@ -57,11 +57,10 @@
 						<input ng-model="appUser.profile.healthPlan.number" name="healthPlanNumber" required placeholder="Número da carteirinha">
 					</md-input-container>
 				</md-content>
-				<a class="button button-block button-positive button-balanced" ng-disabled="!(registerUserProfile.healthPlanName.$valid && registerUserProfile.healthPlanNumber.$valid)" ng-click="save()">
+				<a class="button button-block button-positive button-balanced" ng-disabled="!(registerUserProfile.state.$valid && registerUserProfile.city.$valid && registerUserProfile.healthPlanName.$valid && registerUserProfile.healthPlanNumber.$valid)" ng-click="save()">
 					Continuar
 				</a>
-
-	    	</form>
-		</section>
+			</section>
+		</form>
 	</ion-content>
 </ion-view>
