@@ -110,15 +110,6 @@ angular.module('starter')
                     }
                 }
             })
-            .state('app.setting', {
-                url: "/setting",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/setting/setting.html",
-                        controller: "settingCtrl"
-                    }
-                }
-            })
             .state('app.scheduleAppointment', {
                 url: "/scheduleAppointment",
                 cache: false,
@@ -169,58 +160,6 @@ angular.module('starter')
                     'menuContent': {
                         templateUrl: "templates/user-profile/user-profile.html",
                         controller: "userProfileCtrl"
-                    }
-                }
-            })
-			.state('app.tryApp', {
-                url: "/tryApp",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/try-app/html/try-app.html"
-                    }
-                }
-            })
-			.state('app.facebookLogin', {
-                url: "/facebookLogin",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/facebook/html/facebook-login.html",
-                        controller: 'facebookLoginCtrl'
-                    }
-                }
-            })
-            .state('app.facebookProfile', {
-                url: "/facebookProfile",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/facebook/html/facebook-profile.html",
-                        controller: 'facebookProfileCtrl'
-                    }
-                }
-            })
-            .state('app.facebookFeed', {
-                url: "/facebookFeed",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/facebook/html/facebook-feed.html",
-                        controller: 'facebookFeedCtrl'
-                    }
-                }
-            })
-            .state('app.facebookFriendList', {
-                url: "/facebookFriendList",
-                cache: false,
-                params: {
-                    access_token: null,
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/facebook/html/facebook-friend-list.html",
-                        controller: 'facebookFriendListCtrl'
                     }
                 }
             })

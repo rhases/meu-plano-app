@@ -13,7 +13,12 @@ angular.module('starter').service('inviteService', function($rootScope, $q, $htt
 			});
 	}
 
+	function _requestInvite(email) {
+		// TODO: Implementar isto!!!
+	}
+
 	return {
 		status: _status,
+		requestInvite: _requestInvite
 	}
 })
