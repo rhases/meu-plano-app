@@ -19,51 +19,27 @@
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
         <div class="list card" ng-repeat="request in appointmentRequests">
-					<div class="item">
-							<h2>{{ getMedicalSpecialization(request.speciality) }} Solicitado<h2>
+					<div class="item item-icon-left">
+							<i class="icon ion-clock positive"></i>
+							<h2 class="positive"><strong>{{ getMedicalSpecialization(request.speciality) }} Solicitado</strong><h2>
 					</div>
 					<div class="item item-body">
 							<h3>Sua consulta será agendada em até 1 dia útil.</h3>
 							<p><i class="icon ion-clock"></i> Pedido feito em <strong>{{ formatDate(request.createdAt) }}</strong>.</p>
 					</div>
-					<div class="row">
+					<div class="row text-center">
 							<div class="col-50">
-									<a class="button button-outline button-balanced">
-											<i class="icon ion-close"></i>
-											Cancelar
+									<a class="item icon-left ion-close">
+											&nbsp; Cancelar
 									</a>
 							</div>
 							<div class="col-50">
-									<a class="item" ng-click="moreDetails(request)">
-											<i class="icon ion-ios-information-outline"></i>
-											Detalhes
+									<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
+											&nbsp; Detalhes
 									</a>
 							</div>
 					</div>
         </div>
-        <!-- <code>
-            {{ acceptedAppointment }}
-        </code>
-        <code>
-            {{ scheduledAppointment }}
-        </code> -->
-        <!--cards section-->
-		<!-- <div class="list card">
-			<div class="item item-body">
-				<p>Procurando o melhor cardiologista para você.</p>
-				<p>Consulta para terça e quarta no inicio da manhã.</p>
-			</div>
-		</div> -->
-
-        <!-- scheduled appointment notification -->
-        <!-- <div class="list card" ng-if="scheduledAppointment.length === 0">
-            <div class="item item-body">
-                <p class="item item-icon-left">
-                    <i class="icon ion-information-circled balanced"></i>
-                    Você não possui consultas para agendamento
-                </p>
-            </div>
-        </div> -->
 
         <!-- scheduled appointment container -->
         <div ng-if="scheduledAppointment.length == 0">
@@ -72,8 +48,8 @@
             <div class="list card">
 
                 <div class="item item-icon-left">
-                    <i class="icon ion-medkit"></i>
-                    <h2><strong>{{ appointment.doctor.name }}</strong></h2>
+                    <i class="icon ion-medkit balanced"></i>
+                    <h2 class="balanced"><strong>{{ appointment.doctor.name }}</strong></h2>
                     <p>{{ getMedicalSpecialization(appointment.doctor.speciality) }}</p>
                     <p><i class="ion-hospital"></i> {{ appointment.clinic.name }}</p>
                     <p><a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" /><i class="ion-location"></i> {{ appointment.clinic.address }} </a></p>
@@ -84,20 +60,18 @@
                     <p><strong>{{ formatDate() }}</strong></p>
                 </div>
 
-                <div class="row">
-                    <div class="col-50">
-                        <a class="item item-icon-left button-light" ng-click="cancelAppointment(appointment)">
-                            <i class="icon ion-close"></i>
-                            Recusar
-                        </a>
-                    </div>
-                    <div class="col-50">
-                        <a class="item item-icon-left button-light" href="#">
-                            <i class="icon ion-checkmark"></i>
-                            Confirmar
-                        </a>
-                    </div>
-                </div>
+								<div class="row text-center">
+										<div class="col-50">
+												<a class="item icon-left ion-close">
+														&nbsp; Recusar
+												</a>
+										</div>
+										<div class="col-50">
+												<a class="item icon-left ion-checkmark">
+														&nbsp; Confirmar
+												</a>
+										</div>
+								</div>
             </div>
 
         </div>
