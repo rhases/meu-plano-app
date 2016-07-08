@@ -12,7 +12,7 @@ appControllers.controller('locationsCtrl', function ($scope, $mdBottomSheet, $md
         $scope.continue = function() {
             var selectedLocations = $scope.locations.filter(function(element) { return element.checked });
             scheduleAppointmentRequestService.setLocations(selectedLocations);
-            $state.go('app.scheduleAppointment.confirmation');
+            $state.go('app.scheduleAppointment.observations');
         }
 
 });
