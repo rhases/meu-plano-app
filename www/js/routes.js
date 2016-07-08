@@ -127,6 +127,11 @@ angular.module('starter')
                 templateUrl: "templates/schedule-appointment/confirmation.html",
                 controller: 'confirmationCtrl'
             })
+            .state('app.scheduleAppointment.happy-end', {
+                url: "/happy-end",
+                templateUrl: "templates/schedule-appointment/happy-end.html",
+                controller: 'happyEndCtrl'
+            })
 			.state('app.talkWithUs', {
                 url: "/talkWithUs",
                 cache: true,

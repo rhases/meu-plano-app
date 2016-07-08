@@ -7,23 +7,17 @@ angular.module("starter")
         function _getAppointmentList() {
             var deferred = $q.defer();
 
-            _initCache();
+            $http.get(SCHEDULER_HOST + "/api/appointments")
+                .success(function(appointments) {
+                    _appointmentList = appointments;
 
-            if (lodash.isNil(_cache.get("appointment"))) {
-                $http.get(SCHEDULER_HOST + "/api/appointments")
-                    .success(function(appointments) {
-                        _appointmentList = appointments;
+                    // _updateChace(appointments);
 
-                        _updateChace(appointments);
-
-                        deferred.resolve(_appointmentList);
-                    })
-                    .error(function(error) {
-                        deferred.reject(error);
-                    });
-            } else {
-                deferred.resolve(_cache.get("appointment"));
-            }
+                    deferred.resolve(_appointmentList);
+                })
+                .error(function(error) {
+                    deferred.reject(error);
+                });
 
             return deferred.promise;
         }
@@ -33,7 +27,7 @@ angular.module("starter")
                 .success(function(appointment) {
                     _appointmentList = appointment;
 
-                    _updateChace(appointment);
+                    // _updateChace(appointment);
                 })
                 .error(function(ignore) {
                     console.log(error);
@@ -51,7 +45,7 @@ angular.module("starter")
 
         function _initCache() {
             if (lodash.isNil(_cache)) {
-                var key = lodash.isNil(authService.getAppUser()) ? _defaultKey : authService.getAppUser().name;
+                var key = _defaultKey;
 
                 _cache = $cacheFactory(key, number=10);
             }

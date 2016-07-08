@@ -18,7 +18,15 @@
 
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
-
+        <code>
+            {{ appointments }}
+        </code>
+        <!-- <code>
+            {{ acceptedAppointment }}
+        </code>
+        <code>
+            {{ scheduledAppointment }}
+        </code> -->
         <!--cards section-->
 		<!-- <div class="list card">
 			<div class="item item-body">
@@ -38,9 +46,10 @@
         </div> -->
 
         <!-- scheduled appointment container -->
-        <div ng-if="scheduledAppointment.length !== 0">
+        <div ng-if="scheduledAppointment.length == 0">
 
-            <div class="list card" ng-repeat="appointment in scheduledAppointment">
+            <!-- <div class="list card" ng-repeat="appointment in scheduledAppointment"> -->
+            <div class="list card">
 
                 <div class="item item-avatar">
                     <img src="http://www.telelaudo.com.br/wp/wp-content/uploads/2014/03/medico-1.png">
