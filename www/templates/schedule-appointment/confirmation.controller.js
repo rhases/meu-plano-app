@@ -1,4 +1,4 @@
-appControllers.controller('confirmationCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog, $ionicLoading, $state, analyticsService, scheduleAppointmentRequestService) {
+appControllers.controller('confirmationCtrl', function ($scope, $mdToast, $ionicLoading, $state, analyticsService, scheduleAppointmentRequestService) {
 
         $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
 

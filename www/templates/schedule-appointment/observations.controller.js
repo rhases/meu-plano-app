@@ -1,11 +1,12 @@
 appControllers.controller('observationsCtrl', function ($scope, $state, scheduleAppointmentRequestService) {
 
-        var observations = "";
+  $scope.model = {
+    comments:""
+  }
 
-        $scope.observations = observations;
-
-        $scope.continue = function() {
-            scheduleAppointmentRequestService.setObservations(observations);
-            $state.go('app.scheduleAppointment.confirmation');
-        }
+  $scope.continue = function() {
+    console.log('observations:' + $scope.model.comments);
+    scheduleAppointmentRequestService.setObservations($scope.model.comments);
+    $state.go('app.scheduleAppointment.confirmation');
+  }
 });

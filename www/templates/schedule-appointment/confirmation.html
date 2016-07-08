@@ -36,7 +36,7 @@
 		  </div>
 
 		  <div class="item item-icon-left">
-			    <i class="icon fa fa-map-marker"></i>
+			  <i class="icon fa fa-map-marker"></i>
 				<ion-list>
 					<ion-item ng-repeat="location in appointment.locations">
 						{{ location.label }}
@@ -44,6 +44,14 @@
 				</ion-list>
 		  </div>
 
+			<div class="item item-icon-left">
+			  <i class="icon fa fa-comment-o"></i>
+				<ion-list>
+					<ion-item>
+						{{ appointment.observations }}
+					</ion-item>
+				</<ion-list>
+		  </div>
 
 		</div>
 

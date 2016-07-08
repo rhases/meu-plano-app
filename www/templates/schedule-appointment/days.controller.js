@@ -1,7 +1,4 @@
-appControllers.controller('daysCtrl', function ($scope, $stateParams, $mdBottomSheet, $mdToast, $mdDialog,
-    $state, scheduleAppointmentRequestService) {
-
-        $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
+appControllers.controller('daysCtrl', function ($scope, $stateParams, $state, scheduleAppointmentRequestService) {
 
         var weekdays = schedulerInfos.weekdays;
         weekdays.forEach( function (day) { day.checked = false });

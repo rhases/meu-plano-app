@@ -1,7 +1,4 @@
-appControllers.controller('locationsCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    $state, scheduleAppointmentRequestService) {
-
-        $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
+appControllers.controller('locationsCtrl', function ($scope, $state, scheduleAppointmentRequestService) {
 
         $scope.locations = [
                 {label: 'Asa Norte', checked: false},

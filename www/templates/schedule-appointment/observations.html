@@ -1,21 +1,16 @@
-<!--View Information-->
-<!--View name : Schedule Appointment-->
-<!--Controller name : locationsCtrl-->
-<!--Controller path : www/templates/scheduleAppointment/js/controllers.js-->
-<!--State name : app.scheduleAppointment.locations-->
-<!--URL : #app/scheduleAppointment/locations-->
-
 <ion-view>
 	<ion-nav-title>
   	<i class="icon fa fa-comment-o"></i>  Alguma observação?
   </ion-nav-title>
 	<ion-content>
 	    <form name="appointmentForm">
-				<label>Observações</label>
-				<md-input-container>
-					<textarea name="" ng-model="observations" rows="3"  placeholder="Alguma coisa diferente sobre esse agendamento que gostaria de nos comunicar? Escreva aqui.">
-				</md-input-container>
-
+				<md-content class="md-no-momentum" class="layout-row">
+					<md-input-container style="width:100%">
+						<label>Observações</label>
+						<textarea name="observationsField" ng-model="model.comments" rows="6" placeholder="Alguma coisa diferente sobre esse agendamento que gostaria de nos comunicar? Escreva aqui.">
+						</textarea>
+					</md-input-container>
+				</md-content>
 				<a ng-click="continue()" class="button button-block button-positive">Continuar</a>
 	    </form>
 	</ion-content>
