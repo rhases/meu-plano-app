@@ -84,6 +84,19 @@ angular.module('starter')
                     }
                 }
             })
+            .state('app.dashboard-cancel', {
+                url: "/cancel-appointment",
+				cache: false,
+                params:{
+                    isAnimated: true
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "../templates/dashboard/cancel-appointment/cancel-appointment.html",
+                        controller: 'cancelAppointmentController'
+                    }
+                }
+            })
             .state('app.dashboard-detail', {
                 url: "/detail-appointment",
 				cache: false,
@@ -92,7 +105,7 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/detail-appointment/detail-appointment.html",
+                        templateUrl: "../templates/dashboard/detail-appointment/detail-appointment.html",
                         controller: 'detailAppointmentController'
                     }
                 }
@@ -127,11 +140,6 @@ angular.module('starter')
                 templateUrl: "templates/schedule-appointment/confirmation.html",
                 controller: 'confirmationCtrl'
             })
-            .state('app.scheduleAppointment.happy-end', {
-                url: "/happy-end",
-                templateUrl: "templates/schedule-appointment/happy-end.html",
-                controller: 'happyEndCtrl'
-            })
 			.state('app.talkWithUs', {
                 url: "/talkWithUs",
                 cache: true,
@@ -155,6 +163,15 @@ angular.module('starter')
                     }
                 }
             })
+			.state('app.tryApp', {
+                url: "/tryApp",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/try-app/html/try-app.html"
+                    }
+                }
+            });
 
         //Use $urlRouterProvider.otherwise(Url);
         $urlRouterProvider.otherwise(window.globalVariable.startPage.url);
