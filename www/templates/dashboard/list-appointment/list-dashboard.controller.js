@@ -50,7 +50,7 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     }
 
     $scope.formatDate = function(data) {
-        return moment(String(data)).locale("pt-BR").format("DD/MM/YY [as] h:mm");
+        return moment(String(data)).locale("pt-BR").format("DD/MM/YY [às] HH:mm");
     }
 
     $scope.cancelAppointment = function(appointment) {
@@ -60,8 +60,8 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     }
 
     $scope.getMedicalSpecialization = function(specialityId) {
-        // return medicalInfos.getByCod(String(specialityId)).label;
-        console.log(medicalInfos.getByCod(String(specialityId)).label);
+				console.log(medicalInfos.getByCod(String(specialityId)).label);
+        return medicalInfos.getByCod(String(specialityId)).label;
     }
 
     function divideByStatus(listAppointment) {
