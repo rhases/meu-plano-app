@@ -5,9 +5,9 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
     $scope.appointmentRequests = [];
-	$scope.appointments = [];
-	//$scope.acceptedAppointment = [];
-    //$scope.scheduledAppointment = [];
+	$scope.scheduledAppointments = [];
+	$scope.acceptedAppointments = [];
+
 
     appointmentRequestService.getAppointmentRequestList()
         .then(function(appointments) {
@@ -20,7 +20,7 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     appointmentService.getAppointmentList()
         .then(function(appointments) {
 			$scope.appointments = appointments;
-            //divideByStatus(appointments);
+            divideByStatus(appointments);
         })
         .catch(function(error) {
             console.log(error);
@@ -134,22 +134,21 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
         return medicalInfos.getByCod(String(specialityId)).label;
     };
 
-    /* Por enquanto listar sem separar
 	function divideByStatus(listAppointment) {
-        var scheduledAppointment = listAppointment.filter(function(appointment) {
+        var scheduledAppointments = listAppointment.filter(function(appointment) {
             return appointment.status === APPOINTMENT_STATUS.SCHEDULED;
         });
 
-        if (!lodash.isNil(scheduledAppointment))
-            $scope.scheduledAppointment = scheduledAppointment;
+        if (!lodash.isNil(scheduledAppointments))
+            $scope.scheduledAppointments = scheduledAppointments;
 
-        var acceptedAppointment = listAppointment.filter(function(appointment) {
+        var acceptedAppointments = listAppointment.filter(function(appointment) {
             return appointment.status === APPOINTMENT_STATUS.ACCEPTED;
         });
 
-        if (!lodash.isNil(acceptedAppointment))
-            $scope.acceptedAppointment = acceptedAppointment;
-    } */
+        if (!lodash.isNil(acceptedAppointments))
+            $scope.acceptedAppointments = acceptedAppointments;
+    }
 
     // function filterRequest(requestList) {
     //     var requestList = requestList.filter(function(request) {
