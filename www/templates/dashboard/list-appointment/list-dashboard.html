@@ -20,7 +20,7 @@
 	<ion-content id="dashboard-content">
         <div class="list card" ng-repeat="request in appointmentRequests">
 					<div class="item item-icon-left">
-							<i class="icon ion-clock positive"></i>
+							<i class="icon fa fa-check positive"></i>
 							<h2 class="positive"><strong>{{ getMedicalSpecialization(request.speciality) }} Solicitado</strong><h2>
 					</div>
 					<div class="item item-body">
@@ -44,7 +44,7 @@
         <div class="list card" ng-repeat="appointment in appointments">
 
             <div class="item item-icon-left">
-                <i class="icon ion-medkit balanced"></i>
+                <i class="icon fa fa-stethoscope balanced"></i>
                 <h2 class="balanced"><strong>{{ appointment.doctor.name }}</strong></h2>
                 <p>{{ getMedicalSpecialization(appointment.doctor.speciality) }}</p>
                 <p><i class="ion-hospital"></i> {{ appointment.clinic.name }}</p>
