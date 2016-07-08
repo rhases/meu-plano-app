@@ -7,11 +7,13 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 
 	// Load from server (save locally info too)
 	function _load() {
-		console.log("Loading user...")
+		console.log("Loading complete user from server...")
 		return $http.get(window.globalVariable.backend.authServerUri + "api/users/me")
 			.then(function(res) {
 				var user = res.data;
-				console.log("User loaded. " + JSON.stringify(user));
+
+				console.log("User loaded.");
+				console.log(user)
 				if (user) {
 					_store(user);
 					return user;
@@ -23,14 +25,17 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 
 	// Save or update on server (OBS.: return a token) (save locally info too)
 	function _save(user) {
-		console.log("Saving user... " + JSON.stringify(user));
+		console.log("Saving user...");
+
+		delete user.__v;
+
 		// envia para o scheduler-ws.
 		return $http.put(window.globalVariable.backend.authServerUri + "api/users/" + user._id, user)
 			.catch(function(error) {
 				return $http.post(window.globalVariable.backend.authServerUri + "api/users/", user);
 			})
 			.then(function(res) {
-				console.log('User saved on server');
+				console.log('User saved on RHASES AUTH server.');
 
 				//_store(user); // work well save locally
 				return res.data.token;
@@ -64,7 +69,7 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 			throw new Error('Can not store a user without id.');
 		_user = lodash.clone(user);
 		localStorage.set(USER_KEY, _user);
-		console.log('User stored locally: ' + JSON.stringify(_user));
+		console.log('User stored locally.');
 	}
 
 

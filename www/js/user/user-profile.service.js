@@ -7,10 +7,11 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 
 	// Load from server (save locally too)
 	function _load(id) {
+		console.log("Loading user profile from server...")
 		return $http.get(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/" + id)
 			.then(function(res) {
 				var userProfile = res.data;
-				console.log("User profile loaded. " + JSON.stringify(userProfile));
+				console.log("User profile loaded.");
 				if (userProfile) {
 					_store(userProfile);
 				} else {
@@ -22,7 +23,10 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 
 	// Save or update on server
 	function _save(userProfile) {
-		console.log("Saving user profile... " + JSON.stringify(userProfile));
+		console.log("Saving user profile...");
+
+		delete userProfile.__v;
+
 		// envia para o scheduler-ws.
 		return $http.put(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/" + userProfile._id, userProfile)
 			.catch(function(error) {
@@ -59,7 +63,7 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 	function _store(userProfile) {
 		_userProfile = lodash.clone(userProfile);
 		localStorage.set(USER_PROFILE_KEY, _userProfile);
-		console.log('User profile stored locally: ' + JSON.stringify(_userProfile));
+		console.log('User profile stored locally.');
 	}
 
 

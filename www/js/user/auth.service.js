@@ -53,9 +53,8 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	function _saveAppUser(appUser) {
 		// user profile
 		var userProfile = lodash.clone(appUser.profile);
-		if (userProfile) {
+		if (userProfile)
 			userProfile._id = appUser.email;
-		}
 
 		// user
 		var user = lodash.clone(appUser);
@@ -105,7 +104,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	}
 
 	function _isLoggedIn() {
-		console.log(_getAuthToken());
 		if(!_getAuthToken()) {
 			return false;
 		}

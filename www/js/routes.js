@@ -84,6 +84,19 @@ angular.module('starter')
                     }
                 }
             })
+            .state('app.dashboard-cancel', {
+                url: "/cancel-appointment",
+				cache: false,
+                params:{
+                    isAnimated: true
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "../templates/dashboard/cancel-appointment/cancel-appointment.html",
+                        controller: 'cancelAppointmentController'
+                    }
+                }
+            })
             .state('app.dashboard-detail', {
                 url: "/detail-appointment",
 				cache: false,
@@ -92,17 +105,8 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/detail-appointment/detail-appointment.html",
+                        templateUrl: "../templates/dashboard/detail-appointment/detail-appointment.html",
                         controller: 'detailAppointmentController'
-                    }
-                }
-            })
-            .state('app.setting', {
-                url: "/setting",
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/setting/setting.html",
-                        controller: "settingCtrl"
                     }
                 }
             })
@@ -135,11 +139,6 @@ angular.module('starter')
                 url: "/confirmation",
                 templateUrl: "templates/schedule-appointment/confirmation.html",
                 controller: 'confirmationCtrl'
-            })
-            .state('app.scheduleAppointment.happy-end', {
-                url: "/happy-end",
-                templateUrl: "templates/schedule-appointment/happy-end.html",
-                controller: 'happyEndCtrl'
             })
 			.state('app.talkWithUs', {
                 url: "/talkWithUs",

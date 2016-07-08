@@ -1,16 +1,16 @@
 // Controller of dashboard.
-appControllers.controller('listAppointmentController', function ($http, $scope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, appointmentService, APPOINTMENT_STATUS, SCHEDULER_HOST, appointmentRequestService) {
+appControllers.controller('listAppointmentController', function ($http, $scope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
     $scope.acceptedAppointment = [];
     $scope.scheduledAppointment = [];
-    $scope.appointments = [];
+    $scope.appointmentRequests = [];
 
     appointmentRequestService.getAppointmentRequestList()
         .then(function(appointments) {
-            $scope.appointments = appointments;
+            $scope.appointmentRequests = appointments;
         })
         .catch(function(error) {
             console.log(error);
@@ -45,10 +45,6 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
         $state.go("app.setting");
     };// End goToSetting.
 
-    // cancel appointment
-    $scope.cancelAppointment = function($event) {
-    }// End cancel appointment.
-
     $scope.relativeDateFormat = function(data) {
         return moment(String(data)).locale('pt-BR').fromNow();
     }
@@ -57,24 +53,15 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
         return moment(String(data)).locale("pt-BR").format("DD/MM/YY [as] h:mm");
     }
 
-    $scope.cancelScheduledAppointment = function(appointmentId) {
-        var appointment = $scope.scheduledAppointment.filter(function(appointment) {
-            return appointmentId === appointment._id;
-        });
-
+    $scope.cancelAppointment = function(appointment) {
         $state.go("app.dashboard-detail", {
             "appointment": appointment
         });
     }
 
-    $scope.cancelAcceptedAppointment = function(appointmentId) {
-        var appointment = $scope.acceptedAppointment.filter(function(appointment) {
-            return appointmentId === appointment._id;
-        });
-
-        $state.go("app.dashboard-detail", {
-            "appointment": appointment
-        });
+    $scope.getMedicalSpecialization = function(specialityId) {
+        // return medicalInfos.getByCod(String(specialityId)).label;
+        console.log(medicalInfos.getByCod(String(specialityId)).label);
     }
 
     function divideByStatus(listAppointment) {
@@ -92,5 +79,16 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
         if (!lodash.isNil(acceptedAppointment))
             $scope.acceptedAppointment = acceptedAppointment;
     }
+
+    // function filterRequest(requestList) {
+    //     var requestList = requestList.filter(function(request) {
+    //         return request.status === APPOINTMENT_REQUEST_STATUS.NEW;
+    //     });
+    //
+    //     if (!lodash.isNil(requestList))
+    //         $scope.appointmentRequests = requestList;
+    //
+    //     return requestList;
+    // }
 
 }); // End of dashboard controller.
