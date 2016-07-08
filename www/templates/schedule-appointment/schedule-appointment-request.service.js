@@ -1,4 +1,4 @@
-appServices.factory('scheduleAppointmentRequestService', function ($http, $rootScope) {
+appServices.factory('scheduleAppointmentRequestService', function ($http, $rootScope, SCHEDULER_HOST, $q) {
 
     var service = { };
 
@@ -25,17 +25,31 @@ appServices.factory('scheduleAppointmentRequestService', function ($http, $rootS
     }
 
     service.submit = function(successHandler, errorHandler) {
-        var request = getRequest();
-        return $http.post(window.globalVariable.backend.schedulerServerUri + 'api/appointment-requests', request)
-			.catch(function(error) {
-                // TODO tratar o erro
-				errorHandler('Erro inesperado. Tente novamente em alguns segundos.');
-			})
+      var request = getRequest();
+
+      send(request)
 			.then(function(res) {
-				console.log('Schedule appointment request sent with success.');
-                cleanRequest();
-                successHandler();
-			});
+        console.log('Schedule appointment request sent with success.');
+        cleanRequest();
+        successHandler();
+			})
+      .catch(function(error) {
+        errorHandler('Erro inesperado. Tente novamente em alguns segundos.');
+      });
+    }
+
+    function send(request) {
+        var deferred = $q.defer();
+
+        $http.post(SCHEDULER_HOST + "/api/appointment-requests", request)
+          .success(function(result) {
+              deferred.resolve();
+          })
+          .error(function(error) {
+              deferred.reject(error);
+          });
+
+        return deferred.promise;
     }
 
     function getRequest() {
