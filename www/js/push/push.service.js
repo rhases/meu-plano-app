@@ -9,7 +9,7 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 	// }
 
 	function _register() {
-		console.log(ionic.Platform.platform());
+		console.log("The platform recognized is '" + ionic.Platform.platform() + "'.");
 		if (!ionic.Platform.isAndroid() && !ionic.Platform.isIOS()) {
 			console.log("You are running on browser, please switch to your device. Otherwise you won't get notifications");
 			return;

@@ -104,7 +104,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	}
 
 	function _isLoggedIn() {
-		console.log(_getAuthToken());
 		if(!_getAuthToken()) {
 			return false;
 		}

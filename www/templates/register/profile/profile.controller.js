@@ -1,6 +1,7 @@
 // Controller of Register Page.
 appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, authService, $ionicLoading, $rootScope) {
 
+	$scope.appUser = {};
 	$ionicLoading.show();
 	authService.getAppUser()
 		.then(function(appUser) {

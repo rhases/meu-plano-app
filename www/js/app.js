@@ -57,8 +57,8 @@ angular.module('starter')
 					// Need to complete the registration
 					if (!appUser.name
 						|| !appUser.email
-						|| !appUser.telephone
-						|| !appUser.bithdate
+						|| !appUser.phone
+						|| !appUser.birthdate
 						|| !appUser.gender) {
 						$state.go('app.register');
 					}
@@ -81,7 +81,7 @@ angular.module('starter')
 					// Go to dashboard
 					else {
 						$state.go('app.dashboard');
-						console.log("User successful logged! " + appUser.name);
+						console.log("The user '" + appUser.name + "' successful logged!");
 					}
 				})
 		}
@@ -100,7 +100,7 @@ angular.module('starter')
 
 			if (!authService.isLoggedIn()) {
 				$state.go('app.login');
-				console.log("User not logged!");
+				console.log("Don't have user logged yet!");
 			} else {
 				$ionicLoading.show();
 				checkLogin()
