@@ -24,6 +24,10 @@ appServices.factory('scheduleAppointmentRequestService', function ($http, $rootS
         service.appointmentRequest.locations = locations;
     }
 
+    service.setObservations = function(observations) {
+        service.appointmentRequest.observations = observations;
+    }
+
     service.submit = function(successHandler, errorHandler) {
       var request = getRequest();
 
@@ -62,7 +66,7 @@ appServices.factory('scheduleAppointmentRequestService', function ($http, $rootS
             weekday: weekdaysCods,
             timerange: periodsCods,
             area: locationsLabels,
-            comment: 'Rápido, viu?',
+            comment: service.appointmentRequest.observations,
             status: 'NEW'
         }
         return request;
@@ -73,7 +77,8 @@ appServices.factory('scheduleAppointmentRequestService', function ($http, $rootS
             specialty: '',
             weekdays: [],
             periods: [],
-            locations: []
+            locations: [],
+            observations: ''
         }
     }
 

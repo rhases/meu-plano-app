@@ -135,6 +135,11 @@ angular.module('starter')
                 templateUrl: "templates/schedule-appointment/locations.html",
                 controller: 'locationsCtrl'
             })
+            .state('app.scheduleAppointment.observations', {
+                url: "/observations",
+                templateUrl: "templates/schedule-appointment/observations.html",
+                controller: 'observationsCtrl'
+            })
             .state('app.scheduleAppointment.confirmation', {
                 url: "/confirmation",
                 templateUrl: "templates/schedule-appointment/confirmation.html",

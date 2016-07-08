@@ -1,7 +1,4 @@
-appControllers.controller('locationsCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    $state, scheduleAppointmentRequestService) {
-
-        $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
+appControllers.controller('locationsCtrl', function ($scope, $state, scheduleAppointmentRequestService) {
 
         $scope.locations = [
                 {label: 'Asa Norte', checked: false},
@@ -12,7 +9,7 @@ appControllers.controller('locationsCtrl', function ($scope, $mdBottomSheet, $md
         $scope.continue = function() {
             var selectedLocations = $scope.locations.filter(function(element) { return element.checked });
             scheduleAppointmentRequestService.setLocations(selectedLocations);
-            $state.go('app.scheduleAppointment.confirmation');
+            $state.go('app.scheduleAppointment.observations');
         }
 
 });

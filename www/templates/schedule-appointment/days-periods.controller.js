@@ -1,7 +1,4 @@
-appControllers.controller('daysPeriodsCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    $state, scheduleAppointmentRequestService) {
-
-        $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
+appControllers.controller('daysPeriodsCtrl', function ($scope, $state, scheduleAppointmentRequestService) {
 
         var periods = schedulerInfos.period;
         periods.forEach (function(period) { period.checked = false; });
