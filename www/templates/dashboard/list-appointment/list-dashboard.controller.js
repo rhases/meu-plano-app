@@ -61,8 +61,43 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
         });
     };
 
+	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
+	// put the appointment in state ACCEPTED
+	$scope.acceptedAppointment = function(appointment) {
+		changeState(appointment, "ACCEPTED");
+	}
+
+	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
+	// put the appointment in state REFUSED
+	$scope.rejectAppointment = function(appointment) {
+		changeState(appointment, "REFUSED");
+	}
+
+	// when the user accept the appointment at any time he can cancel it
+	// put the appointment in state CANCELED
+	$scope.cancelAppointment = function(appointment) {
+		changeState(appointment, "CANCELED");
+	}
+
+	// One or two days before the appointment the user can really confirm it
+	$scope.confirmAppointment = function(appointment) {
+		changeState(appointment, "CONFIRMED");
+	}
+
+	function changeState(appointment, state) {
+		$ionicLoading.show();
+
+		var oldState = appointment.state;
+		appointment.state = state;
+
+		return appointmentService.update(appointment)
+			.then(function() { console.log('Appointment state change from ' + oldState + ' to ' + state + '.'); })
+			.catch(function(err) { appointment.state = oldState; })
+			.then(function() { $ionicLoading.hide(); })
+	}
+
     $scope.getMedicalSpecialization = function(specialityId) {
-				console.log(medicalInfos.getByCod(String(specialityId)).label);
+		console.log(medicalInfos.getByCod(String(specialityId)).label);
         return medicalInfos.getByCod(String(specialityId)).label;
     };
 
