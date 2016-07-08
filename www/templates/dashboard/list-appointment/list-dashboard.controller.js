@@ -60,7 +60,8 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     }
 
     $scope.getMedicalSpecialization = function(specialityId) {
-        return medicalInfos.getByCod(String(specialityId)).label;
+        // return medicalInfos.getByCod(String(specialityId)).label;
+        console.log(medicalInfos.getByCod(String(specialityId)).label);
     }
 
     function divideByStatus(listAppointment) {
