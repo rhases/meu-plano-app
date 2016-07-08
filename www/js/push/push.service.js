@@ -1,7 +1,7 @@
 angular.module('starter').service('pushService', function($rootScope, $cordovaPushV5, $http, authService) {
 
 	function _updateUser(userId, updateData) {
-		return $http.put(window.globalVariable.backend.authServerUri + "/api/users/" + userId, updateData)
+		return $http.put(window.globalVariable.backend.authServerUri + "api/users/" + userId, updateData)
 	}
 
 	// function _updateAppointment(appointmentId, updateData) {
@@ -59,7 +59,8 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 					if (authService.isLoggedIn()) {
 						authService.getAppUser()
 							.then(function(appUser) {
-								sendPushIdToServer(appUser._id);
+								if (appUser && appUser._id)
+									sendPushIdToServer(appUser._id);
 							})
 					}
 				}, function (err) {

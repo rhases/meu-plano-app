@@ -72,8 +72,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 			template: 'Login de teste...'
 		});
 
-		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho",_id:"1045650235523854"};
-		//profileInfo = {email:"talesap@gmail.com",name:"Tales Porto",_id:"10201554128091239"};
+		// profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho", _id:"1"};
+		profileInfo = {email:"talesap@gmail.com", name:"Tales Porto", _id:"1"};
 		authService.facebookSignUp(profileInfo)
 			.then(function(user) {
 				rhasesLoginSuccess(user);
@@ -109,7 +109,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 					authService.getAppUser()
 						.then(function(appUser) {
 							if(!appUser) {
-								throw new Error('Can not foun app user.')
+								throw new Error('Can not found app user.')
 							}
 							console.log('Usuario ja logado. Redirecionando...');
 							rhasesLoginSuccess(appUser);

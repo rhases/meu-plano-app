@@ -9,6 +9,9 @@ appControllers.controller('notInvitedCtrl', function ($scope, $state, $mdToast, 
 		.then(function(appUser) {
 			return inviteService.requestInvite(appUser.email)
 		})
+		.catch(function(err) {
+			$mdToast.showSimple('Algum erro aconteceu! :(');
+		})
 		.then(function() {
 			$ionicLoading.hide();
 		})

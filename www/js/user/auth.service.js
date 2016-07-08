@@ -25,23 +25,21 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// * Created to make control of user easy
 	// *********************************************************
 
-	// function _storeAppUser(appUser) {
-	// 	userService.store(appUser);
-	// 	userProfileService.store(appUser);
-	// }
-
-	function _getAppUser() {
+	function _getAppUser(params) {
 		// user
-		return userService.get()
+		return userService.get(params)
 			.then(function(user) {
-				return userProfileService.get(user.email)
+				return userProfileService.get(user.email, params)
 					.then(function(userProfile) {
 						user.profile = userProfile; // user profile
-						return inviteService.status(user.email);
-					})
-					.then(function(status) {
-						user.status = status;
-						return user;
+						return inviteService.status(user.email)
+							.then(function(status) {
+								user.status = status;
+								return user;
+							})
+							.catch(function(err) {
+								console.log("Can not load invite status. " + err);
+							});
 					})
 					.catch(function(err) {
 						user.profile = { _id: user.email };
@@ -113,8 +111,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 
 	function _logout() {
 		localStorage.removeAll();
-
-		// TODO melhor fazer isso com evento.
 		$rootScope.appUser = undefined;
 	}
 
@@ -123,6 +119,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 		logout: _logout,
 		isLoggedIn: _isLoggedIn,
 		getAppUser: _getAppUser,
-		saveAppUser: _saveAppUser
+		saveAppUser: _saveAppUser,
 	}
 })
