@@ -68,7 +68,18 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
 	// put the appointment in state REFUSED
 	$scope.rejectAppointment = function(appointment) {
-		changeState(appointment, "REFUSED");
+		$mdDialog.show({
+			controller: 'commentModalController',
+			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
+			parent: angular.element(document.body),
+			// targetEvent: ev,
+			// clickOutsideToClose:true,
+			// fullscreen: false
+		})
+		.then(
+			function(comment) {
+				changeState(appointment, "REFUSED", comment);
+			});
 	}
 
 	// when the user accept the appointment at any time he can cancel it
@@ -80,6 +91,11 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 	// One or two days before the appointment the user can really confirm it
 	$scope.confirmAppointment = function(appointment) {
 		changeState(appointment, "CONFIRMED");
+	}
+
+	// Only can confirm 48h before the appointment
+	$scope.canConfirm = function(appointment) {
+		return new Date(appointment.when).getTime() - new Date().getTime() > 1000 * 60 * 60 * 48;
 	}
 
 	function changeState(appointment, state) {

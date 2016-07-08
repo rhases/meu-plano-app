@@ -1,3 +1,3 @@
-controllerApp.controller("detailAppointmentController", function($scope) {
+appControllers.controller("detailAppointmentController", function($scope) {
 
 });

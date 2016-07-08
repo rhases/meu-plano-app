@@ -9,8 +9,7 @@
 
     <!--right button on navigation bar-->
     <ion-nav-buttons side="right">
-        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
-                   aria-label="Setting">
+        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()" aria-label="Setting">
             <i class="ion-android-more-vertical"></i>
         </md-button>
     </ion-nav-buttons> <!--end right button on navigation bar-->
@@ -19,26 +18,26 @@
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
         <div class="list card" ng-repeat="request in appointmentRequests">
-					<div class="item item-icon-left">
-							<i class="icon ion-clock positive"></i>
-							<h2 class="positive"><strong>{{ getMedicalSpecialization(request.speciality) }} Solicitado</strong><h2>
-					</div>
-					<div class="item item-body">
-							<h3>Sua consulta será agendada em até 1 dia útil.</h3>
-							<p><i class="icon ion-clock"></i> Pedido feito em <strong>{{ formatDate(request.createdAt) }}</strong>.</p>
-					</div>
-					<div class="row text-center">
-							<div class="col-50">
-									<a class="item icon-left ion-close">
-											&nbsp; Cancelar
-									</a>
-							</div>
-							<div class="col-50">
-									<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
-											&nbsp; Detalhes
-									</a>
-							</div>
-					</div>
+			<div class="item item-icon-left">
+				<i class="icon ion-clock positive"></i>
+				<h2 class="positive"><strong>{{ getMedicalSpecialization(request.speciality) }} Solicitado</strong><h2>
+			</div>
+			<div class="item item-body">
+				<h3>Sua consulta será agendada em até 1 dia útil.</h3>
+				<p><i class="icon ion-clock"></i> Pedido feito em <strong>{{ formatDate(request.createdAt) }}</strong>.</p>
+			</div>
+			<div class="row text-center">
+				<div class="col-50">
+					<a class="item icon-left ion-close">
+						&nbsp; Cancelar
+					</a>
+				</div>
+				<div class="col-50">
+					<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
+						&nbsp; Detalhes
+					</a>
+				</div>
+			</div>
         </div>
 
         <!-- scheduled appointment container -->
@@ -103,11 +102,30 @@
                     <p><strong>{{ formatDate() }}</strong></p>
                 </div>
 
-                <a class="item item-icon-left" ng-click="cancelAppointment(appointment)">
-    				<i class="icon ion-close"></i>
-    				<!-- <i class="fa fa-close fa-2x"></i> -->
-    				Desmarcar
-    			</a>
+				<div class="row text-center" ng-if="appointment.status == 'SCHEDULED'">
+					<div class="col-50">
+						<a class="item icon-left ion-close" ng-click="refuse(appointment)">
+							&nbsp; Recusar
+						</a>
+					</div>
+					<div class="col-50">
+						<a class="item icon-left ion-checkmark" ng-click="confirm(appointment)">
+							&nbsp; Aceitar
+						</a>
+					</div>
+				</div>
+				<div class="row text-center" ng-if="appointment.status == 'ACCEPTED'">
+					<div class="col-50">
+						<a class="item icon-left ion-close" ng-click="cancel(appointment)">
+							&nbsp; Desmarcar
+						</a>
+					</div>
+					<div class="col-50" ng-if='canConfirm(appointment)'>
+						<a class="item icon-left ion-close" ng-click="confirm(appointment)">
+							&nbsp; Confirmar
+						</a>
+					</div>
+				</div>
             </div>
 
         </div>
