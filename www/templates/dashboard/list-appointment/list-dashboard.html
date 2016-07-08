@@ -20,7 +20,7 @@
 	<ion-content id="dashboard-content">
         <div class="list card" ng-repeat="request in appointmentRequests">
 					<div class="item item-icon-left">
-							<i class="icon fa fa-check positive"></i>
+							<i class="icon fa fa-clock-o positive"></i>
 							<h2 class="positive"><strong>{{ getMedicalSpecialization(request.speciality) }} Solicitado</strong><h2>
 					</div>
 					<div class="item item-body">
@@ -42,12 +42,14 @@
         </div>
 
         <div class="list card" ng-repeat="appointment in appointments">
-
+			<div class="item item-icon-left">
+					<i class="icon fa fa-question energized"></i>
+					<h2 class="energized"><strong>Confirmação de {{ getMedicalSpecialization(appointment.doctor.speciality) }}</strong><h2>
+			</div>
             <div class="item item-icon-left">
-                <i class="icon fa fa-stethoscope balanced"></i>
-                <h2 class="balanced"><strong>{{ appointment.doctor.name }}</strong></h2>
-                <p>{{ getMedicalSpecialization(appointment.doctor.speciality) }}</p>
-                <p><i class="ion-hospital"></i> {{ appointment.clinic.name }}</p>
+                <i class="icon fa fa-stethoscope"></i>
+                <h2><strong>{{ appointment.doctor.name }}</strong></h2>
+                <p><i class="ion-hospital"></i><strong>{{ appointment.clinic.name }}<strong></p>
                 <p><a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" /><i class="ion-location"></i> {{ appointment.clinic.address }} </a></p>
             </div>
 
