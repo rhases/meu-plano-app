@@ -58,6 +58,7 @@ angular.module("starter")
 
         return {
             getAppointmentList: _getAppointmentList,
-            refresh: _refresh
+            refresh: _refresh,
+			update: _update 
         };
     });
