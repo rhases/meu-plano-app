@@ -97,6 +97,19 @@ angular.module('starter')
                     }
                 }
             })
+            .state('app.dashboard-detail', {
+                url: "/detail-appointment",
+				cache: false,
+                params:{
+                    isAnimated: true
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "../templates/dashboard/detail-appointment/detail-appointment.html",
+                        controller: 'detailAppointmentController'
+                    }
+                }
+            })
             .state('app.setting', {
                 url: "/setting",
                 views: {
@@ -135,11 +148,6 @@ angular.module('starter')
                 url: "/confirmation",
                 templateUrl: "templates/schedule-appointment/confirmation.html",
                 controller: 'confirmationCtrl'
-            })
-            .state('app.scheduleAppointment.happy-end', {
-                url: "/happy-end",
-                templateUrl: "templates/schedule-appointment/happy-end.html",
-                controller: 'happyEndCtrl'
             })
 			.state('app.talkWithUs', {
                 url: "/talkWithUs",

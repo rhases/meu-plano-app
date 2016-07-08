@@ -59,6 +59,10 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
         });
     }
 
+    $scope.getMedicalSpecialization = function(specialityId) {
+        return medicalInfos.getByCod(String(specialityId)).label;
+    }
+
     function divideByStatus(listAppointment) {
         var scheduledAppointment = listAppointment.filter(function(appointment) {
             return appointment.status === APPOINTMENT_STATUS.SCHEDULED;

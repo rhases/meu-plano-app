@@ -20,7 +20,7 @@
 	<ion-content id="dashboard-content">
         <div class="list card" ng-repeat="request in appointmentRequests">
             <div class="item item-text-wrap">
-                Estamos procurando o melhor {{  medicalInfos.getByCod(request.speciality) }} para você
+                Estamos procurando o melhor {{ getMedicalSpecialization(request.speciality) }} para você
             </div>
 
             <a class="item item-icon-left" ng-click="moreDetails(request)">
@@ -61,7 +61,7 @@
                 <div class="item item-avatar">
                     <img src="http://www.telelaudo.com.br/wp/wp-content/uploads/2014/03/medico-1.png">
                     <h2><strong>{{ appointment.doctor.name }}</strong></h2>
-                    <p>{{ medicalInfos.getByCod(appointment.doctor.speciality) }}</p>
+                    <p>{{ getMedicalSpecialization(appointment.doctor.speciality) }}</p>
                     <p><i class="ion-hospital"></i> {{ appointment.clinic.name }}</p>
                     <p><a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" /><i class="ion-location"></i> {{ appointment.clinic.address }} </a></p>
                 </div>
@@ -106,7 +106,7 @@
                 <div class="item item-avatar">
                     <img src="http://www.telelaudo.com.br/wp/wp-content/uploads/2014/03/medico-1.png">
                     <h2><strong>{{ appointment.doctor.name }}</strong></h2>
-                    <p>{{ medicalInfos.getByCod(appointment.doctor.speciality) }}</p>
+                    <p>{{ getMedicalSpecialization(appointment.doctor.speciality) }}</p>
                     <p><i class="ion-hospital"></i> {{ appointment.clinic.name }}</p>
                     <p><a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" /><i class="ion-location"></i> {{ appointment.clinic.address }} </a></p>
                 </div>
