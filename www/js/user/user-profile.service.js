@@ -23,7 +23,10 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 
 	// Save or update on server
 	function _save(userProfile) {
-		console.log("Saving user profile... " + JSON.stringify(userProfile));
+		console.log("Saving user profile...");
+
+		delete userProfile.__v;
+
 		// envia para o scheduler-ws.
 		return $http.put(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/" + userProfile._id, userProfile)
 			.catch(function(error) {

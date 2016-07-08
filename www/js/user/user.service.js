@@ -25,7 +25,9 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 
 	// Save or update on server (OBS.: return a token) (save locally info too)
 	function _save(user) {
-		console.log("Saving user... " + JSON.stringify(user));
+		console.log("Saving user...");
+
+		delete user.__v;
 
 		// envia para o scheduler-ws.
 		return $http.put(window.globalVariable.backend.authServerUri + "api/users/" + user._id, user)

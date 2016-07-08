@@ -57,7 +57,7 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 
 					$rootScope.$on('login:successful', sendPushIdToServer)
 					if (authService.isLoggedIn()) {
-						authService.getAppUser
+						authService.getAppUser()
 							.then(function(appUser) {
 								sendPushIdToServer(appUser._id);
 							})
