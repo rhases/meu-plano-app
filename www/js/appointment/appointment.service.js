@@ -34,6 +34,11 @@ angular.module("starter")
                 });
         }
 
+
+        function _update(appointment) {
+            return $http.put(SCHEDULER_HOST + "/api/appointments/" + appointment._id);
+        }
+
         function _updateChace(cacheData) {
             if (!lodash.isNil(_cache))
                 _initCache();
