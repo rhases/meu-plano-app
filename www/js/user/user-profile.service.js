@@ -3,8 +3,6 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 
 	var USER_PROFILE_KEY = "USER_PROFILE";
 
-	var _userProfile;
-
 	// Load from server (save locally too)
 	function _load(id) {
 		console.log("Loading user profile from server...")
@@ -14,10 +12,9 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 				console.log("User profile loaded.");
 				if (userProfile) {
 					_store(userProfile);
-				} else {
-					throw new Error('Can not found user profile.');
+					return userProfile;
 				}
-				return userProfile;
+				throw new Error('Can not found user profile.');
 			});
 	}
 
@@ -40,30 +37,39 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 			});
 	}
 
-	// Get the user saved locally
-	function _get(id) {
+	// Get the user profile
+	function _get(id, params) {
+		if (!params) params = {};
 		return $q(function(resolve, reject) {
-			if (_userProfile) {
-				resolve(lodash.clone(_userProfile));
+			if (params.tryReloadFirst) {
+				_load(id)
+					.then(function(user) { resolve(user); })
+					.catch(function(err) { return _restore() }) // if not found try load from server
+					.then(function(user) { resolve(user); }) // if server return ok return
+					.catch(function(err) { reject(err) }); // if server error break the chain
 			} else {
-				if (localStorage.exist(USER_PROFILE_KEY)) {
-					_userProfile = localStorage.get(USER_PROFILE_KEY);
-					resolve(lodash.clone(_userProfile));
-				} else {
-					_load(id)
-						.then(function(userProfile) {
-							resolve(lodash.clone(_userProfile));
-						})
-						.catch(function(err) { reject(err) });
-				}
+				_restore() // try restore user from localStorage
+					.then(function(user) { resolve(user); }) // if found return
+					.catch(function(err) { return _load(id) }) // if not found try load from server
+					.then(function(user) { resolve(user); }) // if server return ok return
+					.catch(function(err) { reject(err) }); // if server error break the chain
 			}
 		})
 	}
 
 	function _store(userProfile) {
-		_userProfile = lodash.clone(userProfile);
-		localStorage.set(USER_PROFILE_KEY, _userProfile);
+		localStorage.set(USER_PROFILE_KEY, userProfile);
 		console.log('User profile stored locally.');
+	}
+
+	function _restore() {
+		return $q(function(resolve, reject) {
+			if (localStorage.exist(USER_PROFILE_KEY)) {
+				resolve(localStorage.get(USER_PROFILE_KEY));
+			} else {
+				reject('Can not find "' + USER_PROFILE_KEY + '" on localStorage.');
+			}
+		});
 	}
 
 

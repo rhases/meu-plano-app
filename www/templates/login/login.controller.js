@@ -72,8 +72,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 			template: 'Login de teste...'
 		});
 
-		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho", _id:"57216ea3c7867f0300af405a"};
-		//profileInfo = {email:"talesap@gmail.com",name:"Tales Porto",_id:"10201554128091239"};
+		// profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho", _id:"1"};
+		profileInfo = {email:"talesap@gmail.com", name:"Tales Porto", _id:"1"};
 		authService.facebookSignUp(profileInfo)
 			.then(function(user) {
 				rhasesLoginSuccess(user);

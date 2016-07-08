@@ -42,7 +42,7 @@ angular.module('starter')
         };
 
 		function checkLogin() {
-			return authService.getAppUser()
+			return authService.getAppUser({tryReloadFirst: true})
 				.then(function(appUser) {
 					// If can not load app user
 					if(!appUser) {

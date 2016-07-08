@@ -18,7 +18,7 @@ angular.module('starter').service('inviteService', function($rootScope, $q, $htt
 			name: appUser.name,
 			email: appUser.email,
 			phone: appUser.phone,
-			healthIssurance: (app && appUser.profile && appUser.profile.healthPlan ? appUser.profile.healthPlan.name : ''),
+			healthIssurance: (appUser && appUser.profile && appUser.profile.healthPlan ? appUser.profile.healthPlan.name : ''),
 		}
 
 		return $http.post(window.globalVariable.backend.schedulerServerUri + "api/invites/request", inviteRequest)
