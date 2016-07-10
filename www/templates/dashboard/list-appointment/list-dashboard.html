@@ -6,10 +6,29 @@
 <!--URL : #app/dashboard-->
 
 <ion-view title="Suas consultas">
-
+	<ion-nav-title>
+      <i class="icon fa fa-stethoscope"></i> Suas consultas
+    </ion-nav-title>
+	<ion-nav-view></ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
-        <div class="list card" ng-repeat="request in appointmentRequests | showOnlyIfStatusIs:'NEW'">
+		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="refresh()"></ion-refresher>
+		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 "
+			class="text-center" style="opacity: 0.55; color: gray;">
+			<br />
+			<br />
+			<br />
+			<i class="icon fa fa-stethoscope fa-5x padding-vertical"></i>
+			<br />
+			<br />
+			<br />
+			<h3 style="color: gray;">Marque sua consulta</h3>
+			<br />
+			<br />
+			<p>Clique no + abaixo, escolha a especialidade, o dia da semana e os horários disponíveis e nós encontramos o melhor médico para te atender.</p>
+		</div>
+		<!-- <code>{{ newAppointmentRequests.length }} {{ newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 }}</code> -->
+        <div class="list card" ng-repeat="request in appointmentRequests | showOnlyIfStatusIs:'NEW' as newAppointmentRequests">
 			<div class="item item-icon-left">
 				<i class="icon fa fa-clock-o positive"></i>
 				<h2 class="positive"><strong>{{ getMedicalSpecialization(request.speciality) }} Solicitado</strong><h2>
@@ -20,24 +39,24 @@
 			</div>
 			<div class="row text-center">
 				<div class="col-50">
-					<a class="item icon-left ion-close">
+					<a class="item icon-left ion-close" ng-click="cancelRequest(request)">
 						&nbsp; Cancelar
 					</a>
 				</div>
-				<div class="col-50">
+				<!-- <div class="col-50">
 					<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
 						&nbsp; Detalhes
 					</a>
-				</div>
+				</div> -->
 			</div>
         </div>
 
 		<!-- TODO Criar componente -->
         <!-- <div class="list card" ng-repeat="appointment in scheduledAppointments"> -->
-        <div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'SCHEDULED'">
+        <div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'SCHEDULED' as scheduledAppointments">
 			<div class="item item-icon-left">
-					<i class="icon fa fa-question energized"></i>
-					<h2 class="energized"><strong>Confirmação de {{ getMedicalSpecialization(appointment.doctor.speciality) }}</strong><h2>
+				<i class="icon fa fa-question energized"></i>
+				<h2 class="energized"><strong>Confirmação de {{ getMedicalSpecialization(appointment.doctor.speciality) }}</strong><h2>
 			</div>
 			<div class="item item-body">
 				<h3>Já agendamos sua consulta! Agora só falta confirmar.</h3>
@@ -66,21 +85,22 @@
         </div>
 
 		<!-- TODO Criar componente -->
-		<div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'ACCEPTED'">
+		<div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'ACCEPTED' as acceptedAppointments">
 			<div class="item item-icon-left">
-					<i class="icon fa fa-calendar-check-o balanced"></i>
-					<h2 class="balanced"><strong>{{ getMedicalSpecialization(appointment.doctor.speciality) }} Agendado</strong><h2>
+				<i class="icon fa fa-calendar-check-o balanced"></i>
+				<h2 class="balanced"><strong>{{ getMedicalSpecialization(appointment.doctor.speciality) }} Agendado</strong><h2>
 			</div>
 			<div class="item item-body">
-				<h3>Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</h3>
+				<h3>Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
 				<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }}</strong></h3>
 				<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
 				<h3>Quando</h3>
 				<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
 				<h3>Onde</h3>
 				<p>
-					<a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" />
-					<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.address }} </a>
+					<a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}">
+						<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.address }}
+					</a>
 				</p>
 			</div>
 			<div class="row text-center">
@@ -96,5 +116,12 @@
 				</div>
 			</div>
         </div>
+
+	    <!--footer fab bar-->
+	    <div class="footer-fab-bar">
+	        <a class="md-button md-accent md-fab fab-footer" ui-sref="app.scheduleAppointment" aria-label="Add">
+	            <i class="ion-plus-round"></i>
+	        </a>
+	    </div><!--end footer fab bar-->
     </ion-content><!--end dashboard section-->
 </ion-view>

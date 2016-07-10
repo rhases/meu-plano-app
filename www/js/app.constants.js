@@ -1,6 +1,6 @@
 angular.module("starter")
-    // .constant("SCHEDULER_HOST", "http://scheduler.api.rhases.com.br")
-    .constant("SCHEDULER_HOST", "http://localhost:9002")
+    // .constant("SCHEDULER_HOST", "http://localhost:9002/")
+	.constant("SCHEDULER_HOST", "http://scheduler.api.rhases.com.br/")
     .constant("APPOINTMENT_STATUS", {
         SCHEDULED: "SCHEDULED",
         ACCEPTED: "ACCEPTED",
@@ -12,6 +12,7 @@ angular.module("starter")
     .constant("APPOINTMENT_REQUEST_STATUS", {
         NEW: "NEW",
         SCHEDULED: "SCHEDULED",
+        CANCELED: "CANCELED",
         NOT_POSSIBLE: "NOT_POSSIBLE"
     })
     .constant('GA_TRACKING_ID', 'UA-51103102-3');

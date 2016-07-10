@@ -1,43 +1,26 @@
 angular.module("starter")
-    .factory("appointmentService", function($http, $cacheFactory, $q, authService, lodash, SCHEDULER_HOST) {
-        var _appointmentList;
-        var _defaultKey = "default";
-        var _cache;
+    .factory("appointmentService", function($http, $cacheFactory, $q, authService, lodash, SCHEDULER_HOST, localStorage) {
+        var APPOINTMENT_KEY = "APPOINTMENTS";
 
-        function _getAppointmentList() {
-            var deferred = $q.defer();
-
-            $http.get(SCHEDULER_HOST + "/api/appointments")
-                .success(function(appointments) {
-                    _appointmentList = appointments;
-
-                    // _updateChace(appointments);
-
-                    deferred.resolve(_appointmentList);
-                })
-                .error(function(error) {
-                    deferred.reject(error);
-                });
-
-            return deferred.promise;
-        }
-
-        function _refresh() {
-            $http.get(SCHEDULER_HOST + "/api/appointments")
-                .success(function(appointment) {
-                    _appointmentList = appointment;
-
-                    // _updateChace(appointment);
-                })
-                .error(function(ignore) {
-                    console.log(error);
-                });
-        }
-
+		// Load from server (save locally info too)
+		function _load() {
+			console.log("Loading appointments...")
+			return $http.get(SCHEDULER_HOST + "api/appointments")
+				.then(function(res) {
+					var appointmentRequests = res.data;
+					console.log("Appointments loaded.");
+					// console.log(user)
+					if (appointmentRequests) {
+						_store(appointmentRequests);
+						return appointmentRequests;
+					}
+					throw new Error('Can not found appointments.');
+				});
+		}
 
         function _update(appointment) {
 			console.log(appointment);
-            return $http.put(SCHEDULER_HOST + "/api/appointments/" + appointment._id, appointment)
+            return $http.put(SCHEDULER_HOST + "api/appointments/" + appointment._id, appointment)
 				.then(function(res) {
 					if(res.status >= 300)
 						throw new Error('Something bad happedned. Status: ' + res.status);
@@ -45,26 +28,44 @@ angular.module("starter")
 				});
         }
 
-        function _updateChace(cacheData) {
-            if (!lodash.isNil(_cache))
-                _initCache();
+		// Get the user
+		function _get(params) {
+			if (!params) params = {};
+			return $q(function(resolve, reject) {
+				if (params.tryReloadFirst) {
+					_load()
+						.then(function(user) { resolve(user); })
+						.catch(function(err) { return _restore() }) // if not found try load from server
+						.then(function(user) { resolve(user); }) // if server return ok return
+						.catch(function(err) { reject(err) }); // if server error break the chain
+				} else {
+					_restore() // try restore user from localStorage
+						.then(function(user) { resolve(user); }) // if found return
+						.catch(function(err) { return _load() }) // if not found try load from server
+						.then(function(user) { resolve(user); }) // if server return ok return
+						.catch(function(err) { reject(err) }); // if server error break the chain
+				}
+			})
+		}
 
-            if (!lodash.isEmpty(cacheData) && !lodash.isNil(cacheData)) {
-                _cache.put("appointment", cacheData);
-            }
-        }
+		// Store the user on local store [SYNCH]
+		function _store(appointments) {
+			localStorage.set(APPOINTMENT_KEY, appointments);
+			console.log('Appointments saved locally.');
+		}
 
-        function _initCache() {
-            if (lodash.isNil(_cache)) {
-                var key = _defaultKey;
-
-                _cache = $cacheFactory(key, number=10);
-            }
-        }
+		function _restore() {
+			return $q(function(resolve, reject) {
+				if (localStorage.exist(APPOINTMENT_KEY)) {
+					resolve(localStorage.get(APPOINTMENT_KEY));
+				} else {
+					reject('Can not find "' + APPOINTMENT_KEY + '" on localStorage.');
+				}
+			});
+		}
 
         return {
-            getAppointmentList: _getAppointmentList,
-            refresh: _refresh,
+            get: _get,
 			update: _update
         };
     });
