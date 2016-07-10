@@ -80,8 +80,8 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 						$state.go('app.dashboard');
 					},
 					reject: function(pushMessage) {
-						console.log("\n>>> REJECT " + JSON.stringify(pushMessage) + "\n");
-						$rootScope.$emit('rhases:appointment:reject', pushMessage.additionalData.appointmentId); // send event to refresh the home
+						console.log("\n>>> REFUSE " + JSON.stringify(pushMessage) + "\n");
+						$rootScope.$emit('rhases:appointment:refuse', pushMessage.additionalData.appointmentId); // send event to refresh the home
 						$state.go('app.dashboard');
 					},
 				}

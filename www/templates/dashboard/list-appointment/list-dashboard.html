@@ -5,44 +5,36 @@
 <!--State name : app.dashboard-->
 <!--URL : #app/dashboard-->
 
-<ion-view view-title="Suas consultas">
-
-    <!--right button on navigation bar-->
-    <ion-nav-buttons side="right">
-        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
-                   aria-label="Setting">
-            <i class="ion-android-more-vertical"></i>
-        </md-button>
-    </ion-nav-buttons> <!--end right button on navigation bar-->
-
+<ion-view title="Suas consultas">
 
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
-        <div class="list card" ng-repeat="request in appointmentRequests">
-					<div class="item item-icon-left">
-							<i class="icon fa fa-clock-o positive"></i>
-							<h2 class="positive"><strong>{{ getMedicalSpecialization(request.speciality) }} Solicitado</strong><h2>
-					</div>
-					<div class="item item-body">
-							<h3>Sua consulta será agendada em até 1 dia útil.</h3>
-							<p><i class="icon fa fa-calendar"></i> Pedido feito em <strong>{{ formatDate(request.createdAt) }}</strong>.</p>
-					</div>
-					<div class="row text-center">
-							<div class="col-50">
-									<a class="item icon-left ion-close">
-											&nbsp; Cancelar
-									</a>
-							</div>
-							<div class="col-50">
-									<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
-											&nbsp; Detalhes
-									</a>
-							</div>
-					</div>
+        <div class="list card" ng-repeat="request in appointmentRequests | showOnlyIfStatusIs:'NEW'">
+			<div class="item item-icon-left">
+				<i class="icon fa fa-clock-o positive"></i>
+				<h2 class="positive"><strong>{{ getMedicalSpecialization(request.speciality) }} Solicitado</strong><h2>
+			</div>
+			<div class="item item-body">
+				<h3>Sua consulta será agendada em até 1 dia útil.</h3>
+				<p><i class="icon fa fa-calendar"></i> Pedido feito em <strong>{{ formatDate(request.createdAt) }}</strong>.</p>
+			</div>
+			<div class="row text-center">
+				<div class="col-50">
+					<a class="item icon-left ion-close">
+						&nbsp; Cancelar
+					</a>
+				</div>
+				<div class="col-50">
+					<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
+						&nbsp; Detalhes
+					</a>
+				</div>
+			</div>
         </div>
 
 		<!-- TODO Criar componente -->
-        <div class="list card" ng-repeat="appointment in scheduledAppointments">
+        <!-- <div class="list card" ng-repeat="appointment in scheduledAppointments"> -->
+        <div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'SCHEDULED'">
 			<div class="item item-icon-left">
 					<i class="icon fa fa-question energized"></i>
 					<h2 class="energized"><strong>Confirmação de {{ getMedicalSpecialization(appointment.doctor.speciality) }}</strong><h2>
@@ -66,7 +58,7 @@
 					</a>
 				</div>
 				<div class="col-50">
-					<a class="item icon-left ion-checkmark" ng-click="confirm(appointment)">
+					<a class="item icon-left ion-checkmark" ng-click="accept(appointment)">
 						&nbsp; Aceitar
 					</a>
 				</div>
@@ -74,7 +66,7 @@
         </div>
 
 		<!-- TODO Criar componente -->
-		<div class="list card" ng-repeat="appointment in acceptedAppointments">
+		<div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'ACCEPTED'">
 			<div class="item item-icon-left">
 					<i class="icon fa fa-calendar-check-o balanced"></i>
 					<h2 class="balanced"><strong>{{ getMedicalSpecialization(appointment.doctor.speciality) }} Agendado</strong><h2>

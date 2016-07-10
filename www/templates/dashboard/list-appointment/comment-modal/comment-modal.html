@@ -1,21 +1,29 @@
-<md-dialog aria-label="Mango (Fruit)"  ng-cloak>
-	<form>
-		<md-dialog-content>
+<!-- <md-dialog aria-label="Comente isto">
+	<md-dialog-content>
+
+	</md-dialog-content>
+	<md-dialog-actions>
+
+</md-dialog> -->
+
+<md-dialog aria-label="List dialog">
+  <md-dialog-content>
+    <form name="form">
+		<div class="md-dialog-content">
 			<md-input-container class="md-block">
-				<input ng-model="comment" name="comment" required placeholder="o que aconteceu?">
+				<!-- <input ng-model="comment" name="comment" required placeholder="Motivo" rows="4" md-maxlength="256" md-autofocus style="min-height: 100px;" /> -->
+				<textarea ng-model="comment" name="comment" required placeholder="Motivo" rows="4" md-maxlength="256" md-autofocus style="min-height: 100px;" ></textarea>
+				<div class="hint">Diga nos o porque da desistência para que possamos te ajudar.</div>
 			</md-input-container>
-		</md-dialog-content>
-		<md-dialog-actions layout="row">
-			<!-- <md-button href="http://en.wikipedia.org/wiki/Mango" target="_blank" md-autofocus>
-			More on Wikipedia
-			</md-button>
-			<span flex></span> -->
-			<md-button ng-click="cancel()">
-				Cancel
-			</md-button>
-			<md-button ng-click="ok()">
-				Ok
-			</md-button>
-		</md-dialog-actions>
+		</div>
 	</form>
+  </md-dialog-content>
+  <md-dialog-actions>
+    <md-button ng-click="cancel()">
+		Cancel
+	</md-button>
+	<md-button class="md-primary" ng-disabled="!form.comment.$valid" ng-click="ok()">
+		Ok
+	</md-button>
+  </md-dialog-actions>
 </md-dialog>

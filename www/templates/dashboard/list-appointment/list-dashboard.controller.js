@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('listAppointmentController', function ($http, $scope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
+appControllers.controller('listAppointmentController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -7,6 +7,20 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     $scope.appointmentRequests = [];
 	$scope.scheduledAppointments = [];
 	$scope.acceptedAppointments = [];
+
+	$rootScope.$on('rhases:appointment:accept', function(appointmentId) {
+		// TODO: Get appointment by id
+		$scope.accept(appointment)
+			.then(function() { return $scope.refresh(); });
+	})
+
+	$rootScope.$on('rhases:appointment:refuse', function(appointmentId) {
+		// TODO: Get appointment by id
+		$scope.refuse(appointment)
+			.then(function() { return $scope.refresh(); });
+	})
+	$rootScope.$on('rhases:appointment:refresh', $scope.refresh)
+	$rootScope.$on('rhases:refresh', $scope.refresh);
 
 
     appointmentRequestService.getAppointmentRequestList()
@@ -25,6 +39,11 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
         .catch(function(error) {
             console.log(error);
         });
+
+
+	$scope.refresh = function() {
+		// TODO
+	}
 
     // navigateTo is for navigate to other page
     // by using targetPage to be the destination state.
@@ -62,51 +81,51 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     // };
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
-	// put the appointment in state ACCEPTED
+	// put the appointment in status ACCEPTED
 	$scope.accept = function(appointment) {
-		changeState(appointment, "ACCEPTED")
-			.then(function() { $mdToast.showSimple('Consulta aceitada!') });
+		return changeStatus(appointment, APPOINTMENT_STATUS.ACCEPTED)
+			.then(function() { $mdToast.showSimple('Aguardamos você na sua consulta!') });
 	}
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
-	// put the appointment in state REFUSED
+	// put the appointment in status REFUSED
 	$scope.refuse = function(appointment) {
-		$mdDialog.show({
+		return $mdDialog.show({
 			controller: 'commentModalController',
 			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
-			parent: angular.element(document.body),
+			// parent: angular.element(document.body),
 			// targetEvent: ev,
 			// clickOutsideToClose:true,
-			// fullscreen: false
+			// fullscreen: true
 		})
 		.then(
 			function(comment) {
-				changeState(appointment, "REFUSED", comment)
+				changeStatus(appointment, APPOINTMENT_STATUS.REFUSED, comment)
 					.then(function() { $mdToast.showSimple('Consulta recusada!') });
 			});
 	}
 
 	// when the user accept the appointment at any time he can cancel it
-	// put the appointment in state CANCELED
+	// put the appointment in status CANCELED
 	$scope.cancel = function(appointment) {
-		$mdDialog.show({
+		return $mdDialog.show({
 			controller: 'commentModalController',
 			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
-			parent: angular.element(document.body),
+			// parent: angular.element(document.body),
 			// targetEvent: ev,
 			// clickOutsideToClose:true,
 			// fullscreen: false
 		})
 		.then(
 			function(comment) {
-				changeState(appointment, "CANCELED", comment)
+				changeStatus(appointment, APPOINTMENT_STATUS.CANCELED, comment)
 					.then(function() { $mdToast.showSimple('Consulta cancelada!') });
 			});
 	}
 
 	// One or two days before the appointment the user can really confirm it
 	$scope.confirm = function(appointment) {
-		changeState(appointment, "CONFIRMED")
+		return changeStatus(appointment, APPOINTMENT_STATUS.CONFIRMED)
 			.then(function() { $mdToast.showSimple('Consulta confirmada!') });
 	}
 
@@ -115,23 +134,27 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 		return new Date(appointment.when).getTime() - new Date().getTime() > 1000 * 60 * 60 * 48;
 	}
 
-	function changeState(appointment, state) {
+	function changeStatus(appointment, status, comment) {
 		$ionicLoading.show();
 
-		var oldState = appointment.state;
-		appointment.state = state;
+		var oldStatus = appointment.status;
+		appointment.status = status;
+		appointment.comment = comment
 
 		return appointmentService.update(appointment)
 			.then(function() {
-				console.log('Appointment state change from ' + oldState + ' to ' + state + '.');
+				console.log('Appointment status change from ' + oldStatus + ' to ' + status + '.');
 			})
-			.catch(function(err) { appointment.state = oldState; })
+			.catch(function(err) { appointment.status = oldStatus; $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
 			.then(function() { $ionicLoading.hide(); })
 	}
 
     $scope.getMedicalSpecialization = function(specialityId) {
-		console.log(medicalInfos.getByCod(String(specialityId)).label);
-        return medicalInfos.getByCod(String(specialityId)).label;
+		// console.log(specialityId);
+		var speciality = medicalInfos.getByCod(String(specialityId))
+		if (speciality) {
+	        return speciality.label;
+		}
     };
 
 	function divideByStatus(listAppointment) {

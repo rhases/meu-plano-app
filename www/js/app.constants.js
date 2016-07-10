@@ -1,5 +1,6 @@
 angular.module("starter")
-    .constant("SCHEDULER_HOST", "http://scheduler.api.rhases.com.br")
+    // .constant("SCHEDULER_HOST", "http://scheduler.api.rhases.com.br")
+    .constant("SCHEDULER_HOST", "http://localhost:9002")
     .constant("APPOINTMENT_STATUS", {
         SCHEDULED: "SCHEDULED",
         ACCEPTED: "ACCEPTED",

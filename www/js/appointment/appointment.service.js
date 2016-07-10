@@ -36,7 +36,13 @@ angular.module("starter")
 
 
         function _update(appointment) {
-            return $http.put(SCHEDULER_HOST + "/api/appointments/" + appointment._id);
+			console.log(appointment);
+            return $http.put(SCHEDULER_HOST + "/api/appointments/" + appointment._id, appointment)
+				.then(function(res) {
+					if(res.status >= 300)
+						throw new Error('Something bad happedned. Status: ' + res.status);
+					return res.data;
+				});
         }
 
         function _updateChace(cacheData) {
@@ -59,6 +65,6 @@ angular.module("starter")
         return {
             getAppointmentList: _getAppointmentList,
             refresh: _refresh,
-			update: _update 
+			update: _update
         };
     });
