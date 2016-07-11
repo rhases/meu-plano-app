@@ -1,0 +1,72 @@
+<!-- <ion-view view-title="Detalhes"> -->
+
+    <!--right button on navigation bar-->
+    <!-- <ion-nav-buttons side="right"> -->
+        <!-- <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()" -->
+                   <!-- aria-label="Setting"> -->
+            <!-- <i class="ion-android-more-vertical"></i> -->
+        <!-- </md-button> -->
+    <!-- </ion-nav-buttons>  -->
+    <!--end right button on navigation bar-->
+
+	<!--dashboard section-->
+	<!-- <ion-content id="dashboard-content"> -->
+        <!-- <code>{{ appointmentRequest }}</code> -->
+    <!-- </ion-content> -->
+    <!--end dashboard section-->
+
+<!-- </ion-view> -->
+
+<ion-view>
+	<ion-nav-title>
+    	<i class="icon ion-checkmark"></i>  {{ makeTitle(appointmentRequest) }}
+    </ion-nav-title>
+
+	<ion-content>
+
+		<div class="list card">
+			<div class="item item-icon-left">
+			    <i class="icon fa fa-stethoscope"></i>
+			    {{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointmentRequest.speciality) }}
+		  </div>
+
+		  <div class="item item-icon-left">
+			    <i class="icon ion-calendar"></i>
+				<ion-list>
+					<ion-item ng-repeat="day in appointmentRequest.weekday">
+						{{ TRANSFORM_UTILS.getWeekdayLabelByCod(day) }}
+					</ion-item>
+				</ion-list>
+		  </div>
+
+		  <div class="item item-icon-left">
+			    <i class="icon fa fa-clock-o"></i>
+				<ion-list>
+					<ion-item ng-repeat="period in appointmentRequest.timerange">
+						{{ TRANSFORM_UTILS.getPeriodLabelByCod(period) }}
+					</ion-item>
+				</ion-list>
+		  </div>
+
+		  <div class="item item-icon-left">
+			  <i class="icon fa fa-map-marker"></i>
+				<ion-list>
+					<ion-item ng-repeat="area in appointmentRequest.area">
+						{{ area }}
+					</ion-item>
+				</ion-list>
+		  </div>
+
+			<div class="item item-icon-left">
+			  <i class="icon fa fa-comment-o"></i>
+				<ion-list>
+					<ion-item>
+						{{ appointmentRequest.comment }}
+					</ion-item>
+				</<ion-list>
+		  </div>
+
+		</div>
+
+	</ion-content>
+</ion-view>

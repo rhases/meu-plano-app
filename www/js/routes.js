@@ -88,7 +88,8 @@ angular.module('starter')
                 url: "/cancel-appointment",
 				cache: false,
                 params:{
-                    isAnimated: true
+                    isAnimated: true,
+                    appointment: null
                 },
                 views: {
                     'menuContent': {
@@ -101,7 +102,8 @@ angular.module('starter')
                 url: "/detail-appointment",
 				cache: false,
                 params:{
-                    isAnimated: true
+                    isAnimated: true,
+                    appointmentRequest: null
                 },
                 views: {
                     'menuContent': {

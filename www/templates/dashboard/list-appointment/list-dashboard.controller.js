@@ -12,14 +12,15 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 		// TODO: Get appointment by id
 		$scope.accept(appointment)
 			.then(function() { return $scope.refresh(); });
-	})
+	});
 
 	$rootScope.$on('rhases:appointment:refuse', function(appointmentId) {
 		// TODO: Get appointment by id
 		$scope.refuse(appointment)
 			.then(function() { return $scope.refresh(); });
-	})
-	$rootScope.$on('rhases:appointment:refresh', $scope.refresh)
+	});
+
+	$rootScope.$on('rhases:appointment:refresh', $scope.refresh);
 	$rootScope.$on('rhases:refresh', $scope.refresh);
 
 	$scope.refresh = function() {
@@ -101,12 +102,22 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
     };
 
     $scope.getMedicalSpecialization = function(specialityId) {
-		// console.log(specialityId);
-		var speciality = medicalInfos.getByCod(String(specialityId))
+		var speciality = medicalInfos.getByCod(String(specialityId));
 		if (speciality) {
 	        return speciality.label;
 		}
     };
+
+    $scope.moreDetails = function(request) {
+        if (!request) {
+            $mdToast.showSimple("Algo de errado ocorreu, por favor tente novamente");
+            return;
+        }
+
+        $state.go("app.dashboard-detail", {
+                "appointmentRequest": request
+        });
+    }
 
     // navigateTo is for navigate to other page
     // by using targetPage to be the destination state.
