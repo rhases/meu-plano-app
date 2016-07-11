@@ -27,7 +27,11 @@
 		<div class="list card">
 			<div class="item item-icon-left">
 			    <i class="icon fa fa-stethoscope"></i>
-			    {{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointmentRequest.speciality) }}
+				<ion-list>
+					<ion-item>
+						{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointmentRequest.speciality) }}
+					</ion-item>
+				</ion-list>
 		  </div>
 
 		  <div class="item item-icon-left">
