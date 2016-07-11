@@ -1,4 +1,4 @@
-angular.module('starter').service('pushService', function($rootScope, $cordovaPushV5, $http, authService) {
+angular.module('starter').service('pushService', function($rootScope, $cordovaPushV5, $http, authService, $state) {
 
 	function _updateUser(userId, updateData) {
 		return $http.put(window.globalVariable.backend.authServerUri + "api/users/" + userId, updateData)
@@ -76,12 +76,12 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 				appointment: {
 					accept: function(pushMessage) {
 						console.log("\n>>> ACCEPT " + JSON.stringify(pushMessage) + "\n");
-						$rootScope.$emit('rhases:appointment:accept', pushMessage.additionalData.appointmentId); // send event to refresh the home
+						$rootScope.$emit('rhases:appointment:accept', pushMessage.additionalData.appointmentId.toString()); // send event to refresh the home
 						$state.go('app.dashboard');
 					},
 					reject: function(pushMessage) {
 						console.log("\n>>> REFUSE " + JSON.stringify(pushMessage) + "\n");
-						$rootScope.$emit('rhases:appointment:refuse', pushMessage.additionalData.appointmentId); // send event to refresh the home
+						$rootScope.$emit('rhases:appointment:refuse', pushMessage.additionalData.appointmentId.toString()); // send event to refresh the home
 						$state.go('app.dashboard');
 					},
 				}
@@ -92,8 +92,8 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 		/*
 		 * Push notification events
 		 */
-		$rootScope.$on('$cordovaPushV5:notificationReceived', function(event, data) {  // use two variables here, event and data !!!
-			console.log('\n>>> NOTIFICATION ' + JSON.stringify(data))
+		$rootScope.$on('$cordovaPushV5:notificationReceived', function(event, pushMessage) {  // use two variables here, event and data !!!
+			console.log('\n>>> NOTIFICATION ' + JSON.stringify(pushMessage))
 
 			// Tell to app he need to update yout infos
 			if (pushMessage.additionalData.appointmentId) {
@@ -101,7 +101,6 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 			} else {
 				$rootScope.$emit('rhases:refresh')
 			}
-
 
 			// needed by IOS
 			$cordovaPushV5.finish()

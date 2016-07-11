@@ -2,17 +2,30 @@ angular.module("starter")
     .factory("appointmentService", function($http, $cacheFactory, $q, authService, lodash, SCHEDULER_HOST, localStorage) {
         var APPOINTMENT_KEY = "APPOINTMENTS";
 
+		// Load from server
+		function _loadOne(id) {
+			console.log("Loading appointment with id " + id + "...")
+			return $http.get(SCHEDULER_HOST + "api/appointments/" + id)
+				.then(function(res) {
+					var appointment = res.data;
+					console.log("Appointment with id " + id + " loaded.");
+					if (appointment) {
+						return appointment;
+					}
+					throw new Error('Can not found appointments.');
+				});
+		}
+
 		// Load from server (save locally info too)
 		function _load() {
 			console.log("Loading appointments...")
 			return $http.get(SCHEDULER_HOST + "api/appointments")
 				.then(function(res) {
-					var appointmentRequests = res.data;
+					var appointments = res.data;
 					console.log("Appointments loaded.");
-					// console.log(user)
-					if (appointmentRequests) {
-						_store(appointmentRequests);
-						return appointmentRequests;
+					if (appointments) {
+						_store(appointments);
+						return appointments;
 					}
 					throw new Error('Can not found appointments.');
 				});
@@ -66,6 +79,7 @@ angular.module("starter")
 
         return {
             get: _get,
-			update: _update
+			update: _update,
+			loadOne: _loadOne
         };
     });

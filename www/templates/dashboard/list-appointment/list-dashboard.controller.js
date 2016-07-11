@@ -8,25 +8,38 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 	$scope.scheduledAppointments = [];
 	$scope.acceptedAppointments = [];
 
-	$rootScope.$on('rhases:appointment:accept', function(appointmentId) {
-		// TODO: Get appointment by id
-		$scope.accept(appointment)
-			.then(function() { return $scope.refresh(); });
+	$rootScope.$on('rhases:appointment:accept', function(event, appointmentId) {
+		appointmentService.loadOne(appointmentId) // load from server this appointment
+			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
+			.then(function(appointment) {
+				if (!appointment)
+					throw 'Não foi possível encontrar essa consulta.'
+				return $scope.accept(appointment); // change status to accepted
+			})
+			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Feche o aplicativo e abra novamente.') })
+			.then(function() { return $scope.refresh(); }) // refresh
 	});
 
-	$rootScope.$on('rhases:appointment:refuse', function(appointmentId) {
-		// TODO: Get appointment by id
-		$scope.refuse(appointment)
-			.then(function() { return $scope.refresh(); });
+	$rootScope.$on('rhases:appointment:refuse', function(event, appointmentId) {
+		appointmentService.loadOne(appointmentId) // load from server this appointment
+			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
+			.then(function(appointment) {
+				if (!appointment)
+					throw 'Não foi possível encontrar essa consulta.'
+				return $scope.refuse(appointment); // change status to refused
+			})
+			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Feche o aplicativo e abra novamente.') })
+			.then(function() { return $scope.refresh(); }); // refresh
 	});
 
 	$rootScope.$on('rhases:appointment:refresh', $scope.refresh);
 	$rootScope.$on('rhases:refresh', $scope.refresh);
 
 	$scope.refresh = function() {
+		console.log("Refreshing...");
 	    appointmentRequestService.get({tryReloadFirst: true})
-	        .then(function(appointments) {
-				$scope.appointmentRequests = appointments;
+	        .then(function(appointmentRequests) {
+				$scope.appointmentRequests = appointmentRequests;
 				return appointmentService.get({tryReloadFirst: true});
 			})
 			.then(function(appointments) {
