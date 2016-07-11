@@ -7,10 +7,11 @@ appControllers.controller('notInvitedCtrl', function ($scope, $state, $mdToast, 
 	$ionicLoading.show();
 	authService.getAppUser()
 		.then(function(appUser) {
-			return inviteService.requestInvite(appUser.email)
+			return inviteService.requestInvite(appUser)
 		})
 		.catch(function(err) {
 			$mdToast.showSimple('Algum erro aconteceu! :(');
+			$state.go('app.profile'); //back so user can submit again
 		})
 		.then(function() {
 			$ionicLoading.hide();
