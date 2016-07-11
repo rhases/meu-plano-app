@@ -46,12 +46,12 @@ angular.module('starter').factory('transformUtils', function(lodash) {
     *@return {String} periodLabel
     ***/
     service.getPeriodLabelByCod = function(periodCod) {
-    	var index = lodash.findIndex(schedulerInfos.period, function(s) {
+    	var index = lodash.findIndex(schedulerInfos.periods, function(s) {
             return s.cod.toLowerCase() === periodCod.toLowerCase();
         });
 
     	if (index >= 0)
-    		return schedulerInfos.period[index].label;
+    		return schedulerInfos.periods[index].label;
 
     	return undefined;
     }
