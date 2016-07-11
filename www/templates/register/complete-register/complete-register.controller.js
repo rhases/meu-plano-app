@@ -1,7 +1,9 @@
 // Controller of Register Page.
 appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, authService, $ionicLoading, $rootScope) {
 
-	$scope.birthdate = null;
+	moment().locale('pt-br');
+	moment.tz.setDefault("America/Sao_Paulo");
+
 	$scope.appUser = {};
 	$ionicLoading.show();
 	authService.getAppUser()
@@ -11,8 +13,10 @@ appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, au
 			console.log($scope.appUser)
 			console.log($scope.appUser.birthdate)
 
-			if ($scope.appUser.birthdate)
-				$scope.birthdate = new Date($scope.appUser.birthdate);
+			if ($scope.appUser.birthdate) {
+				console.log(moment(new Date($scope.appUser.birthdate)).format('L'))
+				$scope.birthdate = moment(new Date($scope.appUser.birthdate)).format('L');
+			}
 		})
 		.catch(function() {
 			$scope.appUser = {};
@@ -25,11 +29,7 @@ appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, au
 	$scope.save = function() {
 		$ionicLoading.show();
 
-		console.log($scope.birthdate);
-		if ($scope.birthdate)
-			$scope.appUser.birthdate = $scope.birthdate.toISOString();
-
-		console.log($scope.appUser);
+		$scope.appUser.birthdate = moment($scope.birthdate).format();
 
 		authService.saveAppUser($scope.appUser)
 			.then(function() {

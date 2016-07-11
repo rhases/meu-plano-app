@@ -20,7 +20,8 @@
     "scheduler-utils": "git+https://bitbucket.org/rhases/scheduler-utils.git#^0.0.4",
     "ng-lodash": "^0.5.0",
     "moment": "^2.14.1",
-    "ngMask": "angular-mask#^3.1.1"
+    "ngMask": "angular-mask#^3.1.1",
+    "moment-timezone": "^0.5.4"
   },
   "resolutions": {
     "angular": "^1.5.7",

@@ -18,16 +18,15 @@
         <!--menu section-->
         <div class="material-background" id="toggle-menu-left-header">
             <!--menu header section-->
+			<div class="menu-left-header">
+				<a ng-click="navigateTo('app.userProfile')">
+					<img class="user-img" src="{{ appUser.picture }}">
+				</a>
 
-            <div class="menu-left-header">
-							<a ng-click="navigateTo('app.userProfile')">
-				        <img class="user-img" src="{{appUser.picture}}">
-							</a>
-
-              <p>
-                <span class="title">{{appUser.name}}</span>
-              </p>
-            </div>
+				<p>
+					<span class="title">{{ appUser.name }}</span>
+				</p>
+			</div>
 			<!--end menu header section-->
         </div> <!--menu content section-->
         <ion-content id="toggle-menu-left-content">
@@ -37,7 +36,7 @@
             <!--list section-->
             <div ng-if="isAndroid" class="menu-list">
                 <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
-								<div class="row menu-item"  ng-click="navigateTo('app.dashboard')">
+				<div class="row menu-item" ng-click="navigateTo('app.dashboard', true)">
                     <div class="col-33">
                         <i class="fa fa-home"></i>
                     </div>
@@ -45,7 +44,7 @@
                         <span>Início</span>
                     </div>
                 </div>
-                <div class="row menu-item"  ng-click="navigateTo('app.scheduleAppointment')">
+                <div class="row menu-item" ui-sref="navigateTo('app.scheduleAppointment')">
                     <div class="col-33">
                         <i class="fa fa-user-md"></i>
                     </div>
@@ -53,7 +52,8 @@
                         <span>Agendar consulta</span>
                     </div>
                 </div>
-								<div class="row menu-item" href="openMarket('https://play.google.com/store/apps/details?id=br.com.esec.icpm.android')">
+				<!-- <div class="row menu-item" href="openMarket('https://play.google.com/store/apps/details?id=br.com.esec.icpm.android')"> -->
+				<div class="row menu-item" href="https://play.google.com/store/apps/details?id=br.com.esec.icpm.android">
                     <div class="col-33">
                         <i class="fa fa-star"></i>
                     </div>
@@ -61,7 +61,7 @@
                         <span>Avalie-nos na Store</span>
                     </div>
                 </div>
-                <div class="row menu-item" ng-click="navigateTo('app.talkWithUs')">
+                <div class="row menu-item" ng-click="navigateTo('app.talkWithUs', true)">
                     <div class="col-33">
                         <i class="fa fa-envelope"></i>
                     </div>
@@ -69,7 +69,7 @@
                         <span>Fale com a gente</span>
                     </div>
                 </div>
-								<div class="row menu-item" ng-click="logout()">
+				<div class="row menu-item" ng-click="logout()">
                     <div class="col-33">
                         <i class="fa fa-sign-out"></i>
                     </div>

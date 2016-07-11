@@ -19,14 +19,16 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
     // by using targetPage to be the destination state.
     // Parameter :
     // stateNames = target state to go
-    $scope.navigateTo = function (stateName) {
+    $scope.navigateTo = function (stateName, cleanHistory) {
         $timeout(function () {
             $mdSidenav('left').close();
             if ($ionicHistory.currentStateName() != stateName) {
-                $ionicHistory.nextViewOptions({
-                    disableAnimate: true,
-                    disableBack: true
-                });
+				if (cleanHistory == true) {
+	                $ionicHistory.nextViewOptions({
+	                    disableAnimate: true,
+	                    disableBack: true
+	                });
+				}
                 $state.go(stateName);
             }
         }, ($scope.isAndroid == false ? 300 : 0));
