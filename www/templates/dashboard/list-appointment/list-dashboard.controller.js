@@ -1,6 +1,6 @@
 // Controller of dashboard.
 appControllers.controller('listAppointmentController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
-
+    console.log($rootScope);
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
@@ -99,13 +99,6 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 
     $scope.formatDate = function(data) {
         return moment(String(data)).locale("pt-BR").format("DD/MM/YY [às] HH:mm");
-    };
-
-    $scope.getMedicalSpecialization = function(specialityId) {
-		var speciality = medicalInfos.getByCod(String(specialityId));
-		if (speciality) {
-	        return speciality.label;
-		}
     };
 
     $scope.moreDetails = function(request) {
