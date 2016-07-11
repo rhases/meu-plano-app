@@ -86,6 +86,12 @@ angular.module('starter')
 						console.log("The user '" + appUser.name + "' successful logged!");
 					}
 				})
+				.catch(function(err) {
+					console.log(err);
+					authService.logout();
+					$state.go('app.login');
+					console.log("App User not found! Go to login.");
+				})
 		}
 
         $ionicPlatform.ready(function () {
@@ -100,23 +106,22 @@ angular.module('starter')
 
             initialRootScope();
 
+			// checkInternet()
+			// 	.catch( $mdToast.show("Sem conexão com a internet.") );
+
 			if (!authService.isLoggedIn()) {
 				$state.go('app.login');
 				console.log("Don't have user logged yet!");
 			} else {
 				$ionicLoading.show();
 				checkLogin()
-					.then(function() {
-						$ionicLoading.hide();
-					});
+					.then(function() { $ionicLoading.hide(); });
 			}
 
 			$rootScope.$on("login:successful", function(userId) {
 				$ionicLoading.show();
 				checkLogin()
-					.then(function() {
-						$ionicLoading.hide();
-					});
+					.then(function() { $ionicLoading.hide(); });
 			})
         });
 

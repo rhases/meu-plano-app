@@ -9,35 +9,29 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 	$scope.acceptedAppointments = [];
 
 	$rootScope.$on('rhases:appointment:accept', function(event, appointmentId) {
-		appointmentService.loadOne(appointmentId) // load from server this appointment
-			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
+		$scope.refresh()
+			.then(findAppointment(appointmentId))
 			.then(function(appointment) {
-				if (!appointment)
-					throw 'Não foi possível encontrar essa consulta.'
-				return $scope.accept(appointment); // change status to accepted
+				return $scope.accept(appointment);
 			})
 			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Feche o aplicativo e abra novamente.') })
-			.then(function() { return $scope.refresh(); }) // refresh
 	});
 
 	$rootScope.$on('rhases:appointment:refuse', function(event, appointmentId) {
-		appointmentService.loadOne(appointmentId) // load from server this appointment
-			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
+		$scope.refresh()
+			.then(findAppointment(appointmentId))
 			.then(function(appointment) {
-				if (!appointment)
-					throw 'Não foi possível encontrar essa consulta.'
-				return $scope.refuse(appointment); // change status to refused
+				return $scope.refuse(appointment);
 			})
 			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Feche o aplicativo e abra novamente.') })
-			.then(function() { return $scope.refresh(); }); // refresh
 	});
 
-	$rootScope.$on('rhases:appointment:refresh', $scope.refresh);
-	$rootScope.$on('rhases:refresh', $scope.refresh);
+	$rootScope.$on('rhases:appointment:refresh', function() { $scope.refresh().then(function() { console.log("ok"); }) });
+	$rootScope.$on('rhases:refresh', function() { $scope.refresh().then(function() { console.log("ok") }); });
 
 	$scope.refresh = function() {
 		console.log("Refreshing...");
-	    appointmentRequestService.get({tryReloadFirst: true})
+	    return appointmentRequestService.get({tryReloadFirst: true})
 	        .then(function(appointmentRequests) {
 				$scope.appointmentRequests = appointmentRequests;
 				return appointmentService.get({tryReloadFirst: true});
@@ -49,8 +43,7 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 			.finally(function() {
 				// Stop the ion-refresher from spinning
 				$scope.$broadcast('scroll.refreshComplete');
-			});;
-
+			});
 	}
 	$scope.refresh();
 
@@ -172,31 +165,12 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 			.then(function() { $ionicLoading.hide(); })
 	}
 
-	// function divideByStatus(listAppointment) {
-    //     var scheduledAppointments = listAppointment.filter(function(appointment) {
-    //         return appointment.status === APPOINTMENT_STATUS.SCHEDULED;
-    //     });
-	//
-    //     if (!lodash.isNil(scheduledAppointments))
-    //         $scope.scheduledAppointments = scheduledAppointments;
-	//
-    //     var acceptedAppointments = listAppointment.filter(function(appointment) {
-    //         return appointment.status === APPOINTMENT_STATUS.ACCEPTED;
-    //     });
-	//
-    //     if (!lodash.isNil(acceptedAppointments))
-    //         $scope.acceptedAppointments = acceptedAppointments;
-    // }
-
-    // function filterRequest(requestList) {
-    //     var requestList = requestList.filter(function(request) {
-    //         return request.status === APPOINTMENT_REQUEST_STATUS.NEW;
-    //     });
-    //
-    //     if (!lodash.isNil(requestList))
-    //         $scope.appointmentRequests = requestList;
-    //
-    //     return requestList;
-    // }
+	function findAppointment(appointmentId) {
+		return function() {
+			i = lodash.findIndex($scope.appointments, function(o) { return o._id == appointmentId; });
+			if (i >= 0)
+				return $scope.appointments[i];
+		}
+	}
 
 }); // End of dashboard controller.
