@@ -7,7 +7,8 @@ angular.module('starter',
 		'ngMaterial',
 		'ngMessages',
 		'ngCordova',
-		'ngLodash'
+		'ngLodash',
+		'ngMask'
 	]
 )
 
