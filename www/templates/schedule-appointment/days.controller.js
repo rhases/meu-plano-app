@@ -1,6 +1,6 @@
 appControllers.controller('daysCtrl', function ($scope, $stateParams, $state, scheduleAppointmentRequestService) {
 
-        var weekdays = schedulerInfos.weekdays;
+        var weekdays = schedulerInfos.allBusinessWeekdays();
         weekdays.forEach( function (day) { day.checked = false });
         $scope.weekdays = weekdays;
 

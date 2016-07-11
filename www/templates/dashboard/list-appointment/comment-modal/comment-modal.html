@@ -7,23 +7,28 @@
 </md-dialog> -->
 
 <md-dialog aria-label="List dialog">
-  <md-dialog-content>
-    <form name="form">
-		<div class="md-dialog-content">
-			<md-input-container class="md-block">
-				<!-- <input ng-model="comment" name="comment" required placeholder="Motivo" rows="4" md-maxlength="256" md-autofocus style="min-height: 100px;" /> -->
-				<textarea ng-model="comment" name="comment" required placeholder="Motivo" rows="4" md-maxlength="256" md-autofocus style="min-height: 100px;" ></textarea>
-				<div class="hint">Diga nos o porque da desistência para que possamos te ajudar.</div>
-			</md-input-container>
-		</div>
-	</form>
-  </md-dialog-content>
-  <md-dialog-actions>
-    <md-button ng-click="cancel()">
-		Cancel
-	</md-button>
-	<md-button class="md-primary" ng-disabled="!form.comment.$valid" ng-click="ok()">
-		Ok
-	</md-button>
-  </md-dialog-actions>
-</md-dialog>
+	<style>
+		#comment {
+			min-height: 100px;
+		}
+	</style>
+	<md-dialog-content>
+		<form name="form">
+			<div class="md-dialog-content">
+				<md-input-container class="md-block">
+					<!-- <input ng-model="comment" name="comment" required placeholder="Motivo" rows="4" md-maxlength="256" md-autofocus style="min-height: 100px;" /> -->
+					<textarea id="comment" ng-model="comment" name="comment" required placeholder="Motivo" rows="4" md-maxlength="256" md-autofocus style="min-height: 100px;" ></textarea>
+					<div class="hint">Diga nos o porque da desistência para que possamos te ajudar.</div>
+				</md-input-container>
+			</div>
+		</form>
+	</md-dialog-content>
+	<md-dialog-actions>
+		<md-button ng-click="cancel()">
+			Cancel
+		</md-button>
+		<md-button class="md-primary" ng-disabled="!form.comment.$valid" ng-click="ok()">
+			Ok
+		</md-button>
+	</md-dialog-actions>
+	</md-dialog>

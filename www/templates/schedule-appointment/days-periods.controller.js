@@ -1,6 +1,6 @@
 appControllers.controller('daysPeriodsCtrl', function ($scope, $state, scheduleAppointmentRequestService) {
 
-        var periods = schedulerInfos.period;
+        var periods = schedulerInfos.periods;
         periods.forEach (function(period) { period.checked = false; });
         $scope.periods = periods;
 
