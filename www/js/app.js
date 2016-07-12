@@ -76,7 +76,7 @@ angular.module('starter')
 					}
 
 					// Check invite status status
-					else if (appUser.status == "not_invited") {
+					else if (!appUser.isInvited) {
 						$state.go('app.notInvited');
 					}
 
