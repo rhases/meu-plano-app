@@ -7,4 +7,9 @@ appControllers.controller('specialtyCtrl', function ($scope, $mdBottomSheet, $md
             scheduleAppointmentRequestService.setSpecialty(specialty);
             $state.go('app.scheduleAppointment.days');
         }
+
+        $scope.backToDashboard = function() {
+            scheduleAppointmentRequestService.forceCleanRequest();
+            $state.go("app.dashboard");
+        }
 });

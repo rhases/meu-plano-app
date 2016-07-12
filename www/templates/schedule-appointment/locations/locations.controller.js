@@ -12,4 +12,9 @@ appControllers.controller('locationsCtrl', function ($scope, $state, scheduleApp
             $state.go('app.scheduleAppointment.observations');
         }
 
+        $scope.validateOptions = function() {
+            return $scope.locations.some(function(location) {
+                return location.checked;
+            });
+        }
 });

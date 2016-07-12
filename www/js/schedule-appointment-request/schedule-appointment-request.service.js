@@ -4,6 +4,10 @@ appServices.factory('scheduleAppointmentRequestService', function ($http, $rootS
 
     cleanRequest();
 
+    service.forceCleanRequest = function() {
+        cleanRequest();
+    }
+
     service.getAppointmentRequest = function() {
         return service.appointmentRequest;
     }

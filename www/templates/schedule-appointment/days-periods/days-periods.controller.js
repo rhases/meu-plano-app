@@ -9,4 +9,10 @@ appControllers.controller('daysPeriodsCtrl', function ($scope, $state, scheduleA
             scheduleAppointmentRequestService.setPeriods(selectedPeriods);
             $state.go('app.scheduleAppointment.locations');
         }
+
+        $scope.validateOptions = function() {
+            return $scope.periods.some(function(period) {
+                return period.checked;
+            });
+        }
 });

@@ -9,4 +9,16 @@ appControllers.controller('daysCtrl', function ($scope, $stateParams, $state, sc
             scheduleAppointmentRequestService.setWeekDays(selectedDays);
             $state.go('app.scheduleAppointment.daysPeriods');
         }
+
+        $scope.validateOptions = function() {
+            return $scope.weekdays.some(function(weekday) {
+                return weekday.checked;
+            });
+        }
+
+        $scope.back = function() {
+            console.log("Aqui carai");
+            $state.go("app.scheduleAppointment");
+        }
+
 });
