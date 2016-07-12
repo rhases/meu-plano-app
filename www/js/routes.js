@@ -126,7 +126,7 @@ angular.module('starter')
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/specialty.html",
+                        templateUrl: "templates/schedule-appointment/specialty/specialty.html",
                         controller: 'specialtyCtrl'
                     }
                 }
@@ -135,7 +135,7 @@ angular.module('starter')
                 url: "/schedule-appointment/days",
 				views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/days.html",
+                        templateUrl: "templates/schedule-appointment/days/days.html",
                         controller: 'daysCtrl'
                     }
                 }
@@ -144,7 +144,7 @@ angular.module('starter')
                 url: "/schedule-appointment/daysPeriods",
 				views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/days-periods.html",
+                        templateUrl: "templates/schedule-appointment/days-periods/days-periods.html",
                         controller: 'daysPeriodsCtrl'
                     }
                 }
@@ -153,7 +153,7 @@ angular.module('starter')
                 url: "/schedule-appointment/locations",
 				views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/locations.html",
+                        templateUrl: "templates/schedule-appointment/locations/locations.html",
                         controller: 'locationsCtrl'
                     }
                 }
@@ -162,7 +162,7 @@ angular.module('starter')
                 url: "/schedule-appointment/observations",
 				views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/observations.html",
+                        templateUrl: "templates/schedule-appointment/observations/observations.html",
                         controller: 'observationsCtrl'
                     }
                 }
@@ -171,7 +171,7 @@ angular.module('starter')
                 url: "/schedule-appointment/confirmation",
 				views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/confirmation.html",
+                        templateUrl: "templates/schedule-appointment/confirmation/confirmation.html",
                         controller: 'confirmationCtrl'
                     }
                 }
@@ -179,7 +179,7 @@ angular.module('starter')
                 url: "/schedule-appointment/happy-end",
 				views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/happy-end.html",
+                        templateUrl: "templates/schedule-appointment/happy-end/happy-end.html",
                         controller: 'happyEndCtrl'
                     }
                 }
