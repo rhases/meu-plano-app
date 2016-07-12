@@ -117,38 +117,38 @@ angular.module('starter')
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/specialty.html",
+                        templateUrl: "templates/schedule-appointment/specialty/specialty.html",
                         controller: 'specialtyCtrl'
                     }
                 }
             })
             .state('app.scheduleAppointment.days', {
                 url: "/days",
-                templateUrl: "templates/schedule-appointment/days.html",
+                templateUrl: "templates/schedule-appointment/days/days.html",
                 controller: 'daysCtrl'
             })
             .state('app.scheduleAppointment.daysPeriods', {
                 url: "/daysPeriods",
-                templateUrl: "templates/schedule-appointment/days-periods.html",
+                templateUrl: "templates/schedule-appointment/days-periods/days-periods.html",
                 controller: 'daysPeriodsCtrl'
             })
             .state('app.scheduleAppointment.locations', {
                 url: "/locations",
-                templateUrl: "templates/schedule-appointment/locations.html",
+                templateUrl: "templates/schedule-appointment/locations/locations.html",
                 controller: 'locationsCtrl'
             })
             .state('app.scheduleAppointment.observations', {
                 url: "/observations",
-                templateUrl: "templates/schedule-appointment/observations.html",
+                templateUrl: "templates/schedule-appointment/observations/observations.html",
                 controller: 'observationsCtrl'
             })
             .state('app.scheduleAppointment.confirmation', {
                 url: "/confirmation",
-                templateUrl: "templates/schedule-appointment/confirmation.html",
+                templateUrl: "templates/schedule-appointment/confirmation/confirmation.html",
                 controller: 'confirmationCtrl'
             }).state('app.scheduleAppointment.happy-end', {
                 url: "/happy-end",
-                templateUrl: "templates/schedule-appointment/happy-end.html",
+                templateUrl: "templates/schedule-appointment/happy-end/happy-end.html",
                 controller: 'happyEndCtrl'
             })
 			.state('app.talkWithUs', {
