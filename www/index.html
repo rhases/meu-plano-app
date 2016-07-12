@@ -19,17 +19,20 @@
 
     <!-- CSS reference section -->
     <link rel="stylesheet" href="css/ionic.app.css">
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet prefetch" href="lib/angular-material/angular-material.css">
+	<link rel="stylesheet prefetch" href="lib/angular-material/angular-material.css">
+    <!-- <link rel="stylesheet" href="lib/ionic-material/dist/ionic.material.min.css"> -->
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="css/style.css">
     <!-- end CSS reference section -->
 
     <!-- Ionic javascript lib -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
+	<!-- <script src="lib/ionic-material/dist/ionic.material.min.js"></script> -->
 	<!-- <script src="lib/ionic-platform-web-client/dist/ionic.io.bundle.min.js"></script> -->
     <!-- end Ionic javascript lib -->
 
     <!-- Angular javascript lib -->
+	<script src='lib/ngMask/dist/ngMask.min.js'></script>
     <script src="lib/angular-messages/angular-messages.js"></script>
     <script src="lib/angular-aria/angular-aria.js"></script>
 	<script src="lib/angular-material/angular-material.js"></script>
@@ -47,6 +50,8 @@
     <script src="lib/medical-specializations/index.js"></script>
     <script src="lib/moment/min/moment.min.js"></script>
     <script src="lib/moment/locale/pt-br.js"></script>
+	<script src="lib/moment-timezone/moment-timezone.js"></script>
+
     <!-- end Utils section -->
 
     <!--ionic framework ngIOS9UIWebViewPatch-->
@@ -71,26 +76,25 @@
 	<script src="js/shared/toast.controller.js"></script>
     <script src="templates/menu/menu.controller.js"></script>
 
-    <script src="templates/dashboard/list-appointment/list-dashboard.controller.js"></script>
-    <script src="templates/dashboard/list-appointment/show-only-if-status-is.filter.js"></script>
-    <script src="templates/dashboard/list-appointment/comment-modal/comment-modal.controller.js"></script>
+    <script src="templates/dashboard/dashboard.controller.js"></script>
+    <script src="templates/dashboard/show-only-if-status-is.filter.js"></script>
+    <script src="templates/dashboard/comment-modal/comment-modal.controller.js"></script>
     <script src="templates/dashboard/detail-appointment/detail-appointment.controller.js"></script>
     <!-- <script src="templates/dashboard/cancel-appointment/cancel-appointment.controller.js.js"></script> -->
 
     <script src="templates/login/login.controller.js"></script>
-	<script src="templates/register/complete-register/complete-register.controller.js"></script>
+	<script src="templates/register/infos/infos.controller.js"></script>
 	<script src="templates/register/profile/profile.controller.js"></script>
-	<script src="templates/not-invited/not-invited.controller.js"></script>
-    <script src="templates/setting/setting.controller.js"></script>
+	<script src="templates/register/not-invited/not-invited.controller.js"></script>
 
-    <script src="templates/schedule-appointment/specialty.controller.js"></script>
-    <script src="templates/schedule-appointment/days.controller.js"></script>
-    <script src="templates/schedule-appointment/days-periods.controller.js"></script>
-    <script src="templates/schedule-appointment/locations.controller.js"></script>
-    <script src="templates/schedule-appointment/observations.controller.js"></script>
-    <script src="templates/schedule-appointment/confirmation.controller.js"></script>
-    <script src="templates/schedule-appointment/happy-end.controller.js"></script>
-    <script src="templates/schedule-appointment/schedule-appointment-request.service.js"></script>
+    <script src="templates/schedule-appointment/specialty/specialty.controller.js"></script>
+    <script src="templates/schedule-appointment/days/days.controller.js"></script>
+    <script src="templates/schedule-appointment/days-periods/days-periods.controller.js"></script>
+    <script src="templates/schedule-appointment/locations/locations.controller.js"></script>
+    <script src="templates/schedule-appointment/observations/observations.controller.js"></script>
+    <script src="templates/schedule-appointment/confirmation/confirmation.controller.js"></script>
+    <script src="templates/schedule-appointment/happy-end/happy-end.controller.js"></script>
+    <script src="js/schedule-appointment-request/schedule-appointment-request.service.js"></script>
 
 	<script src="templates/talk-with-us/talk-with-us.controller.js"></script>
 	<script src="templates/user-profile/user-profile.controller.js"></script>
@@ -110,7 +114,7 @@
 	<script src="js/auth/auth.js"></script>
 	<script src="js/push/push.service.js"></script>
     <script src="js/push/push.js"></script>
-    
+
 	<script src="js/utils/transform-utils.service.js"></script>
     <!-- end Controllers section-->
 

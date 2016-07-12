@@ -13,12 +13,15 @@ angular.module('starter')
         //Learn more about ionNavView at http://ionicframework.com/docs/api/directive/ionNavView/
         //Learn more about  AngularUI Router's at https://github.com/angular-ui/ui-router/wiki
         $stateProvider
+			// MENU
             .state('app', {
                 url: "/app",
                 abstract: true,
                 templateUrl: "templates/menu/menu.html",
                 controller: 'menuCtrl'
             })
+
+			// LOGIN
 			.state('app.login', {
                 url: "/login",
 				cache: false,
@@ -32,6 +35,8 @@ angular.module('starter')
                     }
                 }
             })
+
+			// REGISTER
 			.state('app.register', {
                 url: "/complete-register",
 				cache: false,
@@ -40,7 +45,7 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/register/complete-register/complete-register.html",
+                        templateUrl: "templates/register/infos/infos.html",
                         controller: 'registerCtrl'
                     }
                 }
@@ -66,38 +71,40 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/not-invited/not-invited.html",
+                        templateUrl: "templates/register/not-invited/not-invited.html",
                         controller: 'notInvitedCtrl'
                     }
                 }
             })
+
+			// DASHBOARD
             .state('app.dashboard', {
-                url: "/list-appointment",
+                url: "/dashboard",
 				cache: false,
                 params: {
                     isAnimated: true
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/list-appointment/list-dashboard.html",
-                        controller: 'listAppointmentController'
+                        templateUrl: "templates/dashboard/dashboard.html",
+                        controller: 'dashboardController'
                     }
                 }
             })
-            .state('app.dashboard-cancel', {
-                url: "/cancel-appointment",
-				cache: false,
-                params:{
-                    isAnimated: true,
-                    appointment: null
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "../templates/dashboard/cancel-appointment/cancel-appointment.html",
-                        controller: 'cancelAppointmentController'
-                    }
-                }
-            })
+            // .state('app.dashboard-cancel', {
+            //     url: "/cancel-appointment",
+			// 	cache: false,
+            //     params:{
+            //         isAnimated: true,
+            //         appointment: null
+            //     },
+            //     views: {
+            //         'menuContent': {
+            //             templateUrl: "templates/dashboard/cancel-appointment/cancel-appointment.html",
+            //             controller: 'cancelAppointmentController'
+            //         }
+            //     }
+            // })
             .state('app.dashboard-detail', {
                 url: "/detail-appointment",
 				cache: false,
@@ -107,50 +114,78 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "../templates/dashboard/detail-appointment/detail-appointment.html",
+                        templateUrl: "templates/dashboard/detail-appointment/detail-appointment.html",
                         controller: 'detailAppointmentController'
                     }
                 }
             })
+
+			// SCHEDULE APPOINTMENT
             .state('app.scheduleAppointment', {
-                url: "/scheduleAppointment",
+                url: "/schedule-appointment",
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/schedule-appointment/specialty.html",
+                        templateUrl: "templates/schedule-appointment/specialty/specialty.html",
                         controller: 'specialtyCtrl'
                     }
                 }
             })
-            .state('app.scheduleAppointment.days', {
-                url: "/days",
-                templateUrl: "templates/schedule-appointment/days.html",
-                controller: 'daysCtrl'
+            .state('app.scheduleAppointment::days', {
+                url: "/schedule-appointment/days",
+				views: {
+                    'menuContent': {
+                        templateUrl: "templates/schedule-appointment/days/days.html",
+                        controller: 'daysCtrl'
+                    }
+                }
             })
-            .state('app.scheduleAppointment.daysPeriods', {
-                url: "/daysPeriods",
-                templateUrl: "templates/schedule-appointment/days-periods.html",
-                controller: 'daysPeriodsCtrl'
+            .state('app.scheduleAppointment::daysPeriods', {
+                url: "/schedule-appointment/daysPeriods",
+				views: {
+                    'menuContent': {
+                        templateUrl: "templates/schedule-appointment/days-periods/days-periods.html",
+                        controller: 'daysPeriodsCtrl'
+                    }
+                }
             })
-            .state('app.scheduleAppointment.locations', {
-                url: "/locations",
-                templateUrl: "templates/schedule-appointment/locations.html",
-                controller: 'locationsCtrl'
+            .state('app.scheduleAppointment::locations', {
+                url: "/schedule-appointment/locations",
+				views: {
+                    'menuContent': {
+                        templateUrl: "templates/schedule-appointment/locations/locations.html",
+                        controller: 'locationsCtrl'
+                    }
+                }
             })
-            .state('app.scheduleAppointment.observations', {
-                url: "/observations",
-                templateUrl: "templates/schedule-appointment/observations.html",
-                controller: 'observationsCtrl'
+            .state('app.scheduleAppointment::observations', {
+                url: "/schedule-appointment/observations",
+				views: {
+                    'menuContent': {
+                        templateUrl: "templates/schedule-appointment/observations/observations.html",
+                        controller: 'observationsCtrl'
+                    }
+                }
             })
-            .state('app.scheduleAppointment.confirmation', {
-                url: "/confirmation",
-                templateUrl: "templates/schedule-appointment/confirmation.html",
-                controller: 'confirmationCtrl'
-            }).state('app.scheduleAppointment.happy-end', {
-                url: "/happy-end",
-                templateUrl: "templates/schedule-appointment/happy-end.html",
-                controller: 'happyEndCtrl'
+            .state('app.scheduleAppointment::confirmation', {
+                url: "/schedule-appointment/confirmation",
+				views: {
+                    'menuContent': {
+                        templateUrl: "templates/schedule-appointment/confirmation/confirmation.html",
+                        controller: 'confirmationCtrl'
+                    }
+                }
+            }).state('app.scheduleAppointment::happy-end', {
+                url: "/schedule-appointment/happy-end",
+				views: {
+                    'menuContent': {
+                        templateUrl: "templates/schedule-appointment/happy-end/happy-end.html",
+                        controller: 'happyEndCtrl'
+                    }
+                }
             })
+
+			// FALE CONOSCO
 			.state('app.talkWithUs', {
                 url: "/talkWithUs",
                 cache: true,
@@ -159,13 +194,14 @@ angular.module('starter')
                         templateUrl: "templates/talk-with-us/talk-with-us.html",
                         controller: 'talkWithUsCtrl'
                     }
-
                 }
             })
+
+			// PERFIL DO USUÁRIO
 			.state('app.userProfile', {
                 url: "/userProfile",
                 params:{
-                    isAnimated:true
+                    isAnimated: true
                 },
                 views: {
                     'menuContent': {
@@ -174,15 +210,6 @@ angular.module('starter')
                     }
                 }
             })
-			.state('app.tryApp', {
-                url: "/tryApp",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/try-app/html/try-app.html"
-                    }
-                }
-            });
 
         //Use $urlRouterProvider.otherwise(Url);
         $urlRouterProvider.otherwise(window.globalVariable.startPage.url);

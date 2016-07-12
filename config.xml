@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.com.rhases.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.com.rhases.app" version="0.0.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Rhases</name>
     <description>
 		    Um aplicativo para você cuidar da sua saúde.
@@ -94,7 +94,7 @@
         <variable name="SENDER_ID" value="835746108347" />
     </plugin>
     <plugin name="cordova-plugin-facebook4" spec="~1.7.1">
-        <variable name="APP_ID" value="1716198125324026" />
+        <variable name="APP_ID" value="1702791466664692" />
         <variable name="APP_NAME" value="Rhases" />
     </plugin>
     <plugin name="cordova-plugin-device" spec="~1.1.2" />

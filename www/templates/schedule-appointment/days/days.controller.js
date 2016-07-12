@@ -7,6 +7,6 @@ appControllers.controller('daysCtrl', function ($scope, $stateParams, $state, sc
         $scope.continue = function() {
             var selectedDays = weekdays.filter(function(element) { return element.checked });
             scheduleAppointmentRequestService.setWeekDays(selectedDays);
-            $state.go('app.scheduleAppointment.daysPeriods');
+            $state.go('app.scheduleAppointment::daysPeriods');
         }
 });

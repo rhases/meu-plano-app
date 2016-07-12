@@ -7,13 +7,23 @@
 
 <ion-view title="Suas consultas">
 	<ion-nav-title>
-      <i class="icon fa fa-stethoscope"></i> Suas consultas
+      &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Suas consultas
     </ion-nav-title>
-	<ion-nav-view></ion-nav-view>
+	<ion-nav-view>
+	    <!--footer fab bar-->
+	    <div class="footer-fab-bar">
+	        <a class="md-button md-accent md-fab fab-footer" ui-sref="app.scheduleAppointment" aria-label="Add">
+	            <i class="ion-plus-round"></i>
+	        </a>
+	    </div><!--end footer fab bar-->
+	</ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
 		<!-- COMPONENTE DO REFRESH -->
-		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="refresh()"></ion-refresher>
+		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()" spinner="ripple"></ion-refresher>
+		<div class="text-center padding-vertical" ng-if="loading">
+			<ion-spinner icon="ripple"></ion-spinner>
+		</div>
 
 		<!-- AVISO QUANDO NÃO SE TEM APPOINMENTS -->
 		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 "
@@ -30,7 +40,7 @@
 			<br />
 			<p>Clique no + abaixo, escolha a especialidade, o dia da semana e os horários disponíveis e nós encontramos o melhor médico para te atender.</p>
 		</div>
-		
+
 		<!-- CARDS APPOINTMENT REQUEST -->
         <div class="list card" ng-repeat="request in appointmentRequests | showOnlyIfStatusIs:'NEW' as newAppointmentRequests">
 			<div class="item item-icon-left">
@@ -122,11 +132,5 @@
 			</div>
         </div>
 
-	    <!--footer fab bar-->
-	    <div class="footer-fab-bar">
-	        <a class="md-button md-accent md-fab fab-footer" ui-sref="app.scheduleAppointment" aria-label="Add">
-	            <i class="ion-plus-round"></i>
-	        </a>
-	    </div><!--end footer fab bar-->
     </ion-content><!--end dashboard section-->
 </ion-view>

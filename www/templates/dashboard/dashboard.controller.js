@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('listAppointmentController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
+appControllers.controller('dashboardController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
     console.log($rootScope);
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -29,9 +29,8 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 	$rootScope.$on('rhases:appointment:refresh', function() { $scope.refresh().then(function() { console.log("ok"); }) });
 	$rootScope.$on('rhases:refresh', function() { $scope.refresh().then(function() { console.log("ok") }); });
 
-	$scope.refresh = function() {
-		console.log("Refreshing...");
-	    return appointmentRequestService.get({tryReloadFirst: true})
+	$scope.doRefresh = function() {
+		return appointmentRequestService.get({tryReloadFirst: true})
 	        .then(function(appointmentRequests) {
 				$scope.appointmentRequests = appointmentRequests;
 				return appointmentService.get({tryReloadFirst: true});
@@ -40,13 +39,18 @@ appControllers.controller('listAppointmentController', function ($http, $scope, 
 				$scope.appointments = appointments;
 			})
 	        .catch(function(err) { $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
-			.finally(function() {
-				// Stop the ion-refresher from spinning
-				$scope.$broadcast('scroll.refreshComplete');
+			.then(function() {
+				$scope.$broadcast('scroll.refreshComplete'); // Stop the ion-refresher from spinning
 			});
 	}
-	$scope.refresh();
 
+	$scope.refresh = function() {
+		console.log("Refreshing...");
+		$scope.loading = true;
+	    return $scope.doRefresh()
+			.then(function() { $scope.loading = false; });
+	}
+	$scope.refresh();
 
 	$scope.cancelRequest = function(appointmentRequest) {
 		return changeRequestStatus(appointmentRequest, APPOINTMENT_REQUEST_STATUS.CANCELED)

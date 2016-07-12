@@ -81,10 +81,13 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	// *********************************************************
 
 	function _facebookSignUp(facebookInfo) {
+		console.log(JSON.stringify(facebookInfo));
+
 		var authUser = {
 		    name: facebookInfo.name,
 		    email: facebookInfo.email,
-		    facebook: facebookInfo
+			picture : "https://graph.facebook.com/" + facebookInfo.id + "/picture?type=large",
+		    facebook: facebookInfo,
 		};
 
 		// Salva o authUser lá no rhases-auth.
