@@ -26,7 +26,7 @@
 		</div>
 
 		<!-- AVISO QUANDO NÃO SE TEM APPOINMENTS -->
-		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 "
+		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 && confirmed.length == 0"
 			class="text-center" style="opacity: 0.55; color: gray;">
 			<br />
 			<br />
@@ -98,7 +98,6 @@
 			</div>
         </div>
 
-		<!-- TODO Criar componente -->
 		<!-- CARDS DE APPOINTMENTS ACCEPTED -->
 		<div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'ACCEPTED' as acceptedAppointments">
 			<div class="item item-icon-left">
@@ -132,5 +131,32 @@
 			</div>
         </div>
 
+		<!-- CARDS DE APPOINTMENTS ACCEPTED -->
+		<div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'CONFIRMED' as confirmedAppointments">
+			<div class="item item-icon-left">
+				<i class="icon fa fa-calendar-check-o balanced"></i>
+				<h2 class="balanced"><strong>{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality) }} Agendado</strong><h2>
+			</div>
+			<div class="item item-body">
+				<h3>Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
+				<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }}</strong></h3>
+				<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
+				<h3>Quando</h3>
+				<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
+				<h3>Onde</h3>
+				<p>
+					<a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}">
+						<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.address }}
+					</a>
+				</p>
+			</div>
+			<div class="row text-center">
+				<div class="col-50">
+					<a class="item icon-left ion-close" ng-click="cancel(appointment)">
+						&nbsp; Desmarcar
+					</a>
+				</div>
+			</div>
+		</div>
     </ion-content><!--end dashboard section-->
 </ion-view>
