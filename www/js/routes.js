@@ -160,6 +160,7 @@ angular.module('starter')
             })
             .state('app.scheduleAppointment::observations', {
                 url: "/schedule-appointment/observations",
+                cache: false,
 				views: {
                     'menuContent': {
                         templateUrl: "templates/schedule-appointment/observations/observations.html",
