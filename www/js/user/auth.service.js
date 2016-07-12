@@ -34,6 +34,7 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 						user.profile = userProfile; // user profile
 						return inviteService.status(user.email)
 							.then(function(status) {
+								user.isInvited = (status === 'invited' || status === 'registered');
 								user.status = status;
 								return user;
 							})
