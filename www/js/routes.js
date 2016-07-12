@@ -93,7 +93,7 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "../templates/dashboard/cancel-appointment/cancel-appointment.html",
+                        templateUrl: "templates/dashboard/cancel-appointment/cancel-appointment.html",
                         controller: 'cancelAppointmentController'
                     }
                 }
@@ -107,7 +107,7 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "../templates/dashboard/detail-appointment/detail-appointment.html",
+                        templateUrl: "templates/dashboard/detail-appointment/detail-appointment.html",
                         controller: 'detailAppointmentController'
                     }
                 }
