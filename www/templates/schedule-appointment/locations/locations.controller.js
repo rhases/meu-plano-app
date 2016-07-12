@@ -9,7 +9,7 @@ appControllers.controller('locationsCtrl', function ($scope, $state, scheduleApp
         $scope.continue = function() {
             var selectedLocations = $scope.locations.filter(function(element) { return element.checked });
             scheduleAppointmentRequestService.setLocations(selectedLocations);
-            $state.go('app.scheduleAppointment.observations');
+            $state.go('app.scheduleAppointment::observations');
         }
 
         $scope.validateOptions = function() {

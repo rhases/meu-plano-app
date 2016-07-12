@@ -7,6 +7,6 @@ appControllers.controller('observationsCtrl', function ($scope, $state, schedule
   $scope.continue = function() {
     console.log('observations:' + $scope.model.comments);
     scheduleAppointmentRequestService.setObservations($scope.model.comments);
-    $state.go('app.scheduleAppointment.confirmation');
+    $state.go('app.scheduleAppointment::confirmation');
   }
 });

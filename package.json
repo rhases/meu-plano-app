@@ -31,7 +31,7 @@
     "cordova-plugin-statusbar",
     {
       "variables": {
-        "APP_ID": "1716198125324026",
+        "APP_ID": "1702791466664692",
         "APP_NAME": "Rhases - Test"
       },
       "locator": "cordova-plugin-facebook4",

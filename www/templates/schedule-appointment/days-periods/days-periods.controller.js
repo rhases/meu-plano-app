@@ -7,7 +7,7 @@ appControllers.controller('daysPeriodsCtrl', function ($scope, $state, scheduleA
         $scope.continue = function() {
             var selectedPeriods = periods.filter(function(element) { return element.checked });
             scheduleAppointmentRequestService.setPeriods(selectedPeriods);
-            $state.go('app.scheduleAppointment.locations');
+            $state.go('app.scheduleAppointment::locations');
         }
 
         $scope.validateOptions = function() {

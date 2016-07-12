@@ -5,7 +5,7 @@ appControllers.controller('specialtyCtrl', function ($scope, $mdBottomSheet, $md
 
         $scope.selectSpecialty = function(specialty) {
             scheduleAppointmentRequestService.setSpecialty(specialty);
-            $state.go('app.scheduleAppointment.days');
+            $state.go('app.scheduleAppointment::days');
         }
 
         $scope.backToDashboard = function() {

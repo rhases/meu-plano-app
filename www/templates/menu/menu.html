@@ -52,8 +52,8 @@
                         <span>Agendar consulta</span>
                     </div>
                 </div>
-				<!-- <div class="row menu-item" href="openMarket('https://play.google.com/store/apps/details?id=br.com.esec.icpm.android')"> -->
-				<div class="row menu-item" href="https://play.google.com/store/apps/details?id=br.com.esec.icpm.android">
+				<div class="row menu-item" ng-click="openMarket('https://play.google.com/store/apps/details?id=br.com.rhases.app')">
+				<!-- <div class="row menu-item" href="https://play.google.com/store/apps/details?id=br.com.esec.icpm.android"> -->
                     <div class="col-33">
                         <i class="fa fa-star"></i>
                     </div>
@@ -84,7 +84,7 @@
             <!--It will show animation when selecting row.-->
             <md-list ng-if="!isAndroid">
                 <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
-								<md-list-item class="menu-list-item" ng-click="navigateTo('app.dashboard')">
+				<md-list-item class="menu-list-item" ng-click="navigateTo('app.dashboard')">
                     <i class="fa fa-th-list"></i>
                     <span>Dashboard</span>
                 </md-list-item>
