@@ -9,7 +9,14 @@
 	<ion-nav-title>
       &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Suas consultas
     </ion-nav-title>
-	<ion-nav-view></ion-nav-view>
+	<ion-nav-view>
+	    <!--footer fab bar-->
+	    <div class="footer-fab-bar">
+	        <a class="md-button md-accent md-fab fab-footer" ui-sref="app.scheduleAppointment" aria-label="Add">
+	            <i class="ion-plus-round"></i>
+	        </a>
+	    </div><!--end footer fab bar-->
+	</ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
 		<!-- COMPONENTE DO REFRESH -->
@@ -125,11 +132,5 @@
 			</div>
         </div>
 
-	    <!--footer fab bar-->
-	    <div class="footer-fab-bar">
-	        <a class="md-button md-accent md-fab fab-footer" ui-sref="app.scheduleAppointment" aria-label="Add">
-	            <i class="ion-plus-round"></i>
-	        </a>
-	    </div><!--end footer fab bar-->
     </ion-content><!--end dashboard section-->
 </ion-view>
