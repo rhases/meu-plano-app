@@ -21,8 +21,8 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 	};
 
 	var rhasesLoginSuccess = function(user) {
-	    analyticsService.track.account('login', 'fb success', user);
-	    analyticsService.track.user(user)
+	  analyticsService.track.user(user)
+	  analyticsService.track.account('login', 'fb success', user);
 
 		console.log('User Signed in: ' + JSON.stringify(user));
 		$rootScope.$emit('login:successful', user._id);

@@ -26,7 +26,7 @@ appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, aut
 		console.log($scope.appUser)
 		authService.saveAppUser($scope.appUser)
 			.then(function(appUser) {
-				if (appUser.status == "not_invited") {
+				if (!appUser.isInvited) {
 					$state.go('app.notInvited');
 				} else {
 					$state.go('app.dashboard');
