@@ -45,7 +45,7 @@ angular.module('starter')
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/register/infos/complete-register.html",
+                        templateUrl: "templates/register/infos/infos.html",
                         controller: 'registerCtrl'
                     }
                 }

@@ -1,5 +1,5 @@
 // Controller of Register Page.
-appControllers.controller('notInvitedCtrl', function ($scope, $state, $mdToast, authService, $ionicLoading, $ionicHistory., $rootScope, inviteService, authService) {
+appControllers.controller('notInvitedCtrl', function ($scope, $state, $mdToast, authService, $ionicLoading, $ionicHistory, $rootScope, inviteService, authService) {
 
 	$ionicLoading.show();
 	authService.getAppUser()

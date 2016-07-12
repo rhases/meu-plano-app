@@ -1,6 +1,7 @@
 angular.module('starter',
 	[
 		'ionic',
+		// 'ionic-material',
 		'ngIOS9UIWebViewPatch',
 		'starter.controllers',
 		'starter.services',
@@ -8,7 +9,7 @@ angular.module('starter',
 		'ngMessages',
 		'ngCordova',
 		'ngLodash',
-		'ngMask'
+		'ngMask',
 	]
 )
 
