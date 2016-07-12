@@ -20,34 +20,34 @@
 			<div class="item item-icon-left">
 			    <i class="icon fa fa-stethoscope"></i>
 			    {{ appointment.specialty.label }}
-		  </div>
+			</div>
 
-		  <div class="item item-icon-left">
+			<div class="item item-icon-left">
 			    <i class="icon ion-calendar"></i>
 				<ion-list>
 					<ion-item ng-repeat="day in appointment.weekdays">
 						{{ day.label }}
 					</ion-item>
 				</ion-list>
-		  </div>
+			</div>
 
-		  <div class="item item-icon-left">
+			<div class="item item-icon-left">
 			    <i class="icon fa fa-clock-o"></i>
 				<ion-list>
 					<ion-item ng-repeat="period in appointment.periods">
 						{{ period.label }}
 					</ion-item>
 				</ion-list>
-		  </div>
+			</div>
 
-		  <div class="item item-icon-left">
+			<div class="item item-icon-left">
 			  <i class="icon fa fa-map-marker"></i>
 				<ion-list>
 					<ion-item ng-repeat="location in appointment.locations">
 						{{ location.label }}
 					</ion-item>
 				</ion-list>
-		  </div>
+			</div>
 
 			<div class="item item-icon-left" ng-if="appointment.observations">
 			  <i class="icon fa fa-comment-o"></i>
@@ -56,7 +56,7 @@
 						{{ appointment.observations }}
 					</ion-item>
 				</<ion-list>
-		  </div>
+			</div>
 
 		</div>
 

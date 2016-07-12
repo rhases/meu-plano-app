@@ -16,8 +16,8 @@ ionic plugin add cordova-plugin-splashscreen --save # This plugin is required to
 ionic plugin add cordova-plugin-email-composer --save # The plugin provides access to the standard interface that manages the editing and sending an email message.
 ionic plugin add cordova-plugin-whitelist --save # This plugin implements a whitelist policy for navigating the application webview on Cordova 4.0
 ionic plugin add phonegap-plugin-push --save --variable SENDER_ID="835746108347" # Register and receive push notifications
-#ionic plugin add phonegap-facebook-plugin --variable APP_ID="1716198125324026" --variable APP_NAME="Rhases - Test" # This is the official plugin for Facebook in Apache Cordova/PhoneGap!
-ionic plugin add cordova-plugin-facebook4 --save --variable APP_ID="1716198125324026" --variable APP_NAME="Rhases - Test" # This is the official plugin for Facebook in Apache Cordova/PhoneGap!
+#ionic plugin add phonegap-facebook-plugin --variable APP_ID="1702791466664692" --variable APP_NAME="Rhases - Test" # This is the official plugin for Facebook in Apache Cordova/PhoneGap!
+ionic plugin add cordova-plugin-facebook4 --save --variable APP_ID="1702791466664692" --variable APP_NAME="Rhases - Test" # This is the official plugin for Facebook in Apache Cordova/PhoneGap!
 ionic plugin add cordova-plugin-device --save # This plugin defines a global device object, which describes the device's hardware and software.
 ionic plugin add cordova-plugin-transport-security --save # IOS transport security
 ionic plugin add cordova-plugin-statusbar --save # IOS status bar

@@ -94,7 +94,7 @@
         <variable name="SENDER_ID" value="835746108347" />
     </plugin>
     <plugin name="cordova-plugin-facebook4" spec="~1.7.1">
-        <variable name="APP_ID" value="1716198125324026" />
+        <variable name="APP_ID" value="1702791466664692" />
         <variable name="APP_NAME" value="Rhases" />
     </plugin>
     <plugin name="cordova-plugin-device" spec="~1.1.2" />

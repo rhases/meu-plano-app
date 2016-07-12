@@ -11,7 +11,7 @@ appControllers.controller('confirmationCtrl', function ($scope, $mdToast, $ionic
         }
 
         var handleRequestSuccess = function() {
-            $state.go('app.scheduleAppointment.happy-end');
+            $state.go('app.scheduleAppointment::happy-end');
             $ionicLoading.hide();
         }
 

@@ -40,7 +40,11 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
 
 	$scope.logout = function() {
 		authService.logout();
-		$scope.navigateTo('app.login');
+		$ionicHistory.nextViewOptions({
+			disableAnimate: true,
+			disableBack: true
+		});
+		$scope.navigateTo('app.login', true);
 	}
 
     //closeSideNav is for close side navigation
