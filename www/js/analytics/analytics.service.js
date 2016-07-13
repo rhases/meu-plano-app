@@ -15,8 +15,8 @@ function(GA_TRACKING_ID) {
     appointment: function(action, label, value){
       analytics.trackEvent('appointments', action, label, value)
     },
-    user: function(userId){
-      analytics.analytics.setUserId(userId);
+    user: function(user){
+      analytics.analytics.setUserId(user._id);
     },
     logError: function(message){
       analytics.trackEvent('error handler',message)
