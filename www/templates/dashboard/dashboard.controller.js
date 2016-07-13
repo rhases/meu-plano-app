@@ -1,6 +1,8 @@
 // Controller of dashboard.
-appControllers.controller('dashboardController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
-    console.log($rootScope);
+appControllers.controller('dashboardController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams,
+	$ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService,
+	APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, ionicMaterialMotion, ionicMaterialInk) {
+
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
@@ -29,6 +31,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	$rootScope.$on('rhases:appointment:refresh', function() { $scope.refresh().then(function() { console.log("ok"); }) });
 	$rootScope.$on('rhases:refresh', function() { $scope.refresh().then(function() { console.log("ok") }); });
 
+
 	$scope.doRefresh = function() {
 		return appointmentRequestService.get({tryReloadFirst: true})
 	        .then(function(appointmentRequests) {
@@ -37,6 +40,13 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 			})
 			.then(function(appointments) {
 				$scope.appointments = appointments;
+
+			    $timeout(function() {
+			        ionicMaterialMotion.fadeSlideIn();
+					ionicMaterialInk.displayEffect();
+			    }, 100);
+
+			    // Activate ink for controller
 			})
 	        .catch(function(err) { $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
 			.then(function() {
@@ -69,7 +79,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	$scope.refuse = function(appointment) {
 		return $mdDialog.show({
 			controller: 'commentModalController',
-			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
+			templateUrl: 'templates/dashboard/comment-modal/comment-modal.html',
 		})
 		.then(
 			function(comment) {
@@ -83,7 +93,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	$scope.cancel = function(appointment) {
 		return $mdDialog.show({
 			controller: 'commentModalController',
-			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
+			templateUrl: 'templates/dashboard/comment-modal/comment-modal.html',
 		})
 		.then(
 			function(comment) {

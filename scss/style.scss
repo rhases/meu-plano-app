@@ -2825,3 +2825,61 @@ h2.big-text {
 i.fa-big-icon {
     font-size: 10em;
 }
+
+
+ion-item {
+
+}
+
+//menu content section
+#toggle-menu-left-content {
+  margin-top: 154px;
+
+  ion-list {
+    h2 {
+      background-color: transparent !important;
+      div.md-subheader-inner{
+        background-color: transparent !important;
+      }
+    }
+
+    ion-item {
+      display: table;
+      width: 100%;
+
+      i {
+        margin-right: 30px;
+        margin-left: 22px;
+        font-size: 19px;
+        color: $color_gray;
+        width: 20px;
+      }
+
+      span {
+        font-size: 15px;
+      }
+
+	  a {
+		  padding: 0px;
+	  }
+    }
+  }
+  .menu-list {
+    .menu-item {
+      padding: 14px;
+      .col-33 {
+        text-align: center;
+        font-size: 22px;
+        color: gray;
+      }
+      .col-66 {
+
+        font-size: 15px;
+        white-space: nowrap;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
+      }
+    }
+  }
+}//menu content section
+//end menu section

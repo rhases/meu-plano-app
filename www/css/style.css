@@ -1793,3 +1793,34 @@ h2.big-text {
 
 i.fa-big-icon {
   font-size: 10em; }
+
+#toggle-menu-left-content {
+  margin-top: 154px; }
+  #toggle-menu-left-content ion-list h2 {
+    background-color: transparent !important; }
+    #toggle-menu-left-content ion-list h2 div.md-subheader-inner {
+      background-color: transparent !important; }
+  #toggle-menu-left-content ion-list ion-item {
+    display: table;
+    width: 100%; }
+    #toggle-menu-left-content ion-list ion-item i {
+      margin-right: 30px;
+      margin-left: 22px;
+      font-size: 19px;
+      color: gray;
+      width: 20px; }
+    #toggle-menu-left-content ion-list ion-item span {
+      font-size: 15px; }
+    #toggle-menu-left-content ion-list ion-item a {
+      padding: 0px; }
+  #toggle-menu-left-content .menu-list .menu-item {
+    padding: 14px; }
+    #toggle-menu-left-content .menu-list .menu-item .col-33 {
+      text-align: center;
+      font-size: 22px;
+      color: gray; }
+    #toggle-menu-left-content .menu-list .menu-item .col-66 {
+      font-size: 15px;
+      white-space: nowrap;
+      overflow-x: hidden;
+      text-overflow: ellipsis; }

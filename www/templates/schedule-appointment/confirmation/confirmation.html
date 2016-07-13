@@ -7,12 +7,12 @@
 
 <ion-view title="Confirmar">
 	<ion-nav-title>
-    	&nbsp;<i class="icon ion-checkmark"></i>&nbsp;&nbsp;Confirmar
+    	&nbsp;&nbsp;<i class="icon ion-checkmark"></i>&nbsp;&nbsp;Confirmar
     </ion-nav-title>
 	<ion-nav-buttons side="left">
-        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
+        <button ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
             <i class="ion-android-arrow-back"></i>
-        </a>
+        </button>
     </ion-nav-buttons>
 	<ion-nav-view></ion-nav-view>
 	<ion-content>
@@ -65,7 +65,7 @@
 		</div>
 
 	    <form name="appointmentForm">
-			<a style="margin:10px;" ng-click="submit()" class="button button-block button-positive">CONFIRMAR</a>
+			<button style="margin:10px;" ng-click="submit()" class="button button-block button-positive">CONFIRMAR</a>
 	    </form>
 	</ion-content>
 </ion-view>

@@ -1,7 +1,7 @@
 angular.module('starter',
 	[
 		'ionic',
-		// 'ionic-material',
+		'ionic-material',
 		'ngIOS9UIWebViewPatch',
 		'starter.controllers',
 		'starter.services',
