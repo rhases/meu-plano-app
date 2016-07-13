@@ -170,6 +170,7 @@ angular.module('starter')
             })
             .state('app.scheduleAppointment::confirmation', {
                 url: "/schedule-appointment/confirmation",
+                cache: false,
 				views: {
                     'menuContent': {
                         templateUrl: "templates/schedule-appointment/confirmation/confirmation.html",
