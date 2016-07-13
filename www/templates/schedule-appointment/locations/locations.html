@@ -26,7 +26,9 @@
 		        </ion-checkbox>
 		  	</ion-list>
 
-			<a ng-click="continue()" class="button button-block button-positive">CONTINUAR</a>
+			<a style="margin: 10px;" ng-disabled="!validateOptions()" ng-click="continue()" class="button button-block button-positive">
+				CONTINUAR
+			</a>
 	    </form>
 	</ion-content>
 </ion-view>

@@ -18,8 +18,12 @@
 	<ion-content>
 		<div class="list card">
 			<div class="item item-icon-left">
-			    <i class="icon fa fa-stethoscope"></i>
-			    {{ appointment.specialty.label }}
+				<i class="icon fa fa-stethoscope"></i>
+				<ion-list>
+					<ion-item>
+					    {{ appointment.specialty.label }}
+					</ion-item>
+				</ion-list>
 			</div>
 
 			<div class="item item-icon-left">
@@ -61,7 +65,7 @@
 		</div>
 
 	    <form name="appointmentForm">
-			<a ng-click="submit()" class="button button-block button-positive">CONFIRMAR</a>
+			<a style="margin:10px;" ng-click="submit()" class="button button-block button-positive">CONFIRMAR</a>
 	    </form>
 	</ion-content>
 </ion-view>

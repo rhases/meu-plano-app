@@ -24,7 +24,9 @@
 	        	{{ period.label }}
 	        </ion-checkbox>
 
-			<a ng-click="continue()" class="button button-block button-positive">CONTINUAR</a>
+			<a ng-disabled="!validateOptions()" style="margin: 10px;" ng-click="continue()" class="button button-block button-positive">
+				CONTINUAR
+			</a>
 	    </form>
 	</ion-content>
 </ion-view>
