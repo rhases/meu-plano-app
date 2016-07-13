@@ -84,6 +84,7 @@ angular.module('starter')
 					else {
 						$state.go('app.dashboard');
 						console.log("The user '" + appUser.name + "' successful logged!");
+            analyticsService.track.user(appUser);
 					}
 				})
 				.catch(function(err) {
