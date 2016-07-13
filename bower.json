@@ -21,7 +21,8 @@
     "ng-lodash": "^0.5.0",
     "moment": "^2.14.1",
     "ngMask": "angular-mask#^3.1.1",
-    "moment-timezone": "^0.5.4"
+    "moment-timezone": "^0.5.4",
+    "ionic-material": "^0.4.2"
   },
   "resolutions": {
     "angular": "^1.5.7",

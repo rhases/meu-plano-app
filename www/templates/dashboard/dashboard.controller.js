@@ -161,7 +161,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 				console.log('Appointment status change from ' + oldStatus + ' to ' + status + '.');
 			})
 			.catch(function(err) { appointment.status = oldStatus; $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
-			.then(function() { $ionicLoading.hide(); })
+			.then(function() { $ionicLoading.hide(); ionicMaterialMotion.fadeSlideIn();´})
 	}
 
 	function changeRequestStatus(appointmentRequest, status, comment) {
@@ -176,7 +176,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 				console.log('Appointment request status change from ' + oldStatus + ' to ' + status + '.');
 			})
 			.catch(function(err) { appointmentRequest.status = oldStatus; $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
-			.then(function() { $ionicLoading.hide(); })
+			.then(function() { $ionicLoading.hide(); ionicMaterialMotion.fadeSlideIn(); })
 	}
 
 	function findAppointment(appointmentId) {

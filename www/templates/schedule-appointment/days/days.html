@@ -10,19 +10,24 @@
     	&nbsp;&nbsp;<i class="icon ion-calendar"></i>&nbsp;&nbsp;Quais dias?
     </ion-nav-title>
 	<ion-nav-buttons side="left">
-        <button ng-click="back()" class="button back-button buttons button-clear header-item nav-back-btn"></button>
+        <button ng-click="back()" class="button back-button buttons button-clear header-item nav-back-btn">
+        	<i class="ion-android-arrow-back"></i>
+        </button>
     </ion-nav-buttons>
 	<ion-content>
 	    <form name="appointmentForm">
 
-			<ion-checkbox ng-repeat="item in weekdays"
-            	ng-model="item.checked"
-            	ng-checked="item.checked"
-			>
-	        	{{ item.label }}
-	        </ion-checkbox>
+			<ion-list>
+				<ion-checkbox ng-repeat="item in weekdays"
+	            	ng-model="item.checked"
+	            	ng-checked="item.checked" >
+		        	{{ item.label }}
+		        </ion-checkbox>
+			</ion-list>
 
-			<button style="margin: 10px;" ng-click="continue()" ng-disabled="!validateOptions()" class="button button-block button-positive">CONTINUAR</button>
+			<div class="text-center padding">
+				<button ng-click="continue()" ng-disabled="!validateOptions()" class="button button-block button-positive">CONTINUAR</button>
+			</div>
 	    </form>
 	</ion-content>
 </ion-view>

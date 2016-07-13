@@ -57,9 +57,9 @@
 						<input ng-model="appUser.profile.healthPlan.number" name="healthPlanNumber" required placeholder="Número da carteirinha">
 					</md-input-container>
 				</md-content>
-				<a class="button button-block button-positive button-balanced" ng-disabled="!(registerUserProfile.state.$valid && registerUserProfile.city.$valid && registerUserProfile.healthPlanName.$valid && registerUserProfile.healthPlanNumber.$valid)" ng-click="save()">
+				<button class="button button-block button-positive button-balanced" ng-disabled="!(registerUserProfile.state.$valid && registerUserProfile.city.$valid && registerUserProfile.healthPlanName.$valid && registerUserProfile.healthPlanNumber.$valid)" ng-click="save()">
 					Continuar
-				</a>
+				</button>
 			</section>
 		</form>
 	</ion-content>

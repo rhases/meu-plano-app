@@ -19,10 +19,6 @@
 		<button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive spin" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add">
 			<i class="icon ion-plus-round"></i>
 		</button>
-		<script>
-			console.log("....")
-			console.log(jQuery("#new-appointment"))
-		</script>
 		<!-- </div> -->
 	</ion-nav-view>
 	<!--dashboard section-->
@@ -34,7 +30,7 @@
 		</div>
 
 		<!-- AVISO QUANDO NÃO SE TEM APPOINMENTS -->
-		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 && confirmed.length == 0"
+		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 && confirmedAppointments.length == 0"
 			class="text-center" style="opacity: 0.55; color: gray;">
 			<br />
 			<br />

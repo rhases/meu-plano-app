@@ -17,13 +17,17 @@
 	<ion-content>
 	    <form name="appointmentForm">
 
-			<ion-checkbox ng-repeat="period in periods"
-                  ng-model="period.checked"
-                  ng-checked="period.checked">
-	        	{{ period.label }}
-	        </ion-checkbox>
+			<ion-list>
+				<ion-checkbox ng-repeat="period in periods"
+	                  ng-model="period.checked"
+	                  ng-checked="period.checked">
+		        	{{ period.label }}
+		        </ion-checkbox>
+			</ion-list>
 
-			<button ng-disabled="!validateOptions()" style="margin: 10px;" ng-click="continue()" class="button button-block button-positive">CONTINUAR</a>
+			<div class="text-center padding">
+				<button ng-disabled="!validateOptions()" ng-click="continue()" class="button button-block button-positive">CONTINUAR</a>
+			</div>
 	    </form>
 	</ion-content>
 </ion-view>
