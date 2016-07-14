@@ -69,7 +69,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	$scope.refuse = function(appointment) {
 		return $mdDialog.show({
 			controller: 'commentModalController',
-			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
+			templateUrl: 'templates/dashboard/comment-modal/comment-modal.html',
 		})
 		.then(
 			function(comment) {
@@ -83,7 +83,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	$scope.cancel = function(appointment) {
 		return $mdDialog.show({
 			controller: 'commentModalController',
-			templateUrl: 'templates/dashboard/list-appointment/comment-modal/comment-modal.html',
+			templateUrl: 'templates/dashboard/comment-modal/comment-modal.html',
 		})
 		.then(
 			function(comment) {
