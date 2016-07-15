@@ -1,6 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('dashboardController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS) {
-    console.log($rootScope);
+appControllers.controller('dashboardController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, $ionicPopup) {
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
@@ -50,11 +49,20 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	    return $scope.doRefresh()
 			.then(function() { $scope.loading = false; });
 	}
+
 	$scope.refresh();
 
 	$scope.cancelRequest = function(appointmentRequest) {
-		return changeRequestStatus(appointmentRequest, APPOINTMENT_REQUEST_STATUS.CANCELED)
-			.then(function() { $mdToast.showSimple('Seu pedido de consulta foi cancelado!') });
+    var body = "Cancelar " + $rootScope.TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointmentRequest.speciality) + " ?";
+        showConfirm("Cancelar solicitação", body)
+            .then(function(res) {
+                if (res) {
+                    changeRequestStatus(appointmentRequest, APPOINTMENT_REQUEST_STATUS.CANCELED)
+                        .then(function() {
+                            $mdToast.showSimple('Seu pedido de consulta foi cancelado!')
+                        });
+                }
+            });
 	}
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
@@ -138,6 +146,12 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
         }, ($scope.isAnimated  ? 300 : 0));
     }; // End of navigateTo.
 
+    function showConfirm(title, body) {
+        return confirmPopup = $ionicPopup.confirm({
+            title: title,
+            template: body
+        });
+     }
 
 	function changeStatus(appointment, status, comment) {
 		$ionicLoading.show();
