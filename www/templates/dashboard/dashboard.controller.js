@@ -146,6 +146,15 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
         }, ($scope.isAnimated  ? 300 : 0));
     }; // End of navigateTo.
 
+    $scope.makeAddressClinic = function(clinic) {
+        if (!clinic)
+            return;
+
+        console.log(clinic.name);
+        console.log(clinic.unit.address);
+        return clinic.name + ", " + clinic.unit.address;
+    }
+
     function showConfirm(title, body) {
         return confirmPopup = $ionicPopup.confirm({
             title: title,
