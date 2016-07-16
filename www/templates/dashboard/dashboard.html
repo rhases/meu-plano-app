@@ -10,28 +10,24 @@
       &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Suas consultas
     </ion-nav-title>
 	<ion-nav-view>
-	    <!-- <div class="footer-fab-bar">
-	        <a class="md-button md-accent md-fab fab-footer" ui-sref="app.scheduleAppointment" aria-label="Add">
-	            <i class="ion-plus-round"></i>
-	        </a>
-	    </div> -->
-		<!-- <div class="footer-fab-bar"> -->
-		<button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive spin" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add">
+		<!-- <button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive spin" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add"> -->
+		<button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive drop" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add">
 			<i class="icon ion-plus-round"></i>
 		</button>
-		<!-- </div> -->
+		<!-- button button-fab button-fab-top-right expanded button-energized-900 drop -->
 	</ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
 		<!-- COMPONENTE DO REFRESH -->
 		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()" spinner="ripple"></ion-refresher>
 		<div class="text-center padding-vertical" ng-if="loading">
+			<br />
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
 
 		<!-- AVISO QUANDO NÃO SE TEM APPOINMENTS -->
 		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 && confirmedAppointments.length == 0"
-			class="text-center" style="opacity: 0.55; color: gray;">
+			class="text-center padding" style="opacity: 0.55; color: gray;">
 			<br />
 			<br />
 			<br />
@@ -44,40 +40,6 @@
 			<br />
 			<p>Clique no + abaixo, escolha a especialidade, o dia da semana e os horários disponíveis e nós encontramos o melhor médico para te atender.</p>
 		</div>
-
-
-		<!-- <div class="animate-fade-slide-in">
-	        <div class="item card-item">
-	            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
-	                <div class="item item-avatar item-text-wrap">
-	                    <span class="avatar" style="background-image: url('img/jon-snow.jpg');"></span>
-	                    <strong>Jon Snow</strong> knows nothing.
-	                    <div class="card-footer text-right">
-	                        <i class="icon ion-chatbubbles positive"></i> 6
-	                        <i class="icon ion-heart assertive"></i> 23
-	                        <div class="pull-left">
-	                            <i class="icon ion-clock"></i> just now
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	        <div class="item card-item">
-	            <div ui-sref="app.gallery" class="card stable-bg ink ink-dark">
-	                <div class="item item-avatar item-text-wrap">
-	                    <span class="avatar" style="background-image: url('img/tyrion.jpg');"></span>
-	                    <strong>Tyrion Lannister</strong> says "Perhaps that is the secret. It is not what we do, so much as why we do it."
-	                    <div class="card-footer text-right">
-	                        <i class="icon ion-chatbubble positive"></i> 2
-	                        <i class="icon ion-heart assertive"></i> 4
-	                        <div class="pull-left">
-	                            <i class="icon ion-clock"></i> 12 mins ago
-	                        </div>
-	                    </div>
-	                </div>
-	            </div>
-	        </div>
-	    </div> -->
 
 		<!-- CARDS APPOINTMENT REQUEST -->
 		<div class="animate-fade-slide-in">

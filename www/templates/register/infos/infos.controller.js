@@ -1,5 +1,6 @@
 // Controller of Register Page.
-appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, authService, $ionicLoading, $rootScope) {
+appControllers.controller('registerCtrl', function ($scope, $state, authService, toasts,
+	$ionicLoading, $rootScope) {
 
 	moment().locale('pt-br');
 	moment.tz.setDefault("America/Sao_Paulo");
@@ -20,7 +21,7 @@ appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, au
 		})
 		.catch(function() {
 			$scope.appUser = {};
-			$mdToast.showSimple('Algum erro aconteceu! :(');
+			toasts.showSimple('Algum erro aconteceu! :(');
 		})
 		.then(function() {
 			$ionicLoading.hide();
@@ -36,7 +37,7 @@ appControllers.controller('registerCtrl', function ($scope, $state, $mdToast, au
 				$state.go('app.profile');
 			})
 			.catch(function() {
-				$mdToast.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');
+				toasts.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');
 			})
 			.then(function() {
 				$ionicLoading.hide();

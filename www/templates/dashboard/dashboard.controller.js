@@ -1,7 +1,8 @@
 // Controller of dashboard.
 appControllers.controller('dashboardController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams,
-	$ionicHistory, lodash, $mdDialog, $mdToast, $ionicLoading, appointmentService, appointmentRequestService,
-	APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, ionicMaterialMotion, ionicMaterialInk) {
+	$q, lodash, appointmentService, appointmentRequestService, ionicMaterialMotion, ionicMaterialInk,
+	APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, transformUtils, toasts,
+	$ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -16,7 +17,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 			.then(function(appointment) {
 				return $scope.accept(appointment);
 			})
-			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Feche o aplicativo e abra novamente.') })
+			.catch(function() { toasts.showSimple('Algo ruim aconteceu! Feche o aplicativo e abra novamente.') })
 	});
 
 	$rootScope.$on('rhases:appointment:refuse', function(event, appointmentId) {
@@ -25,7 +26,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 			.then(function(appointment) {
 				return $scope.refuse(appointment);
 			})
-			.catch(function() { $mdToast.showSimple('Algo ruim aconteceu! Feche o aplicativo e abra novamente.') })
+			.catch(function() { toasts.showSimple('Algo ruim aconteceu! Feche o aplicativo e abra novamente.') })
 	});
 
 	$rootScope.$on('rhases:appointment:refresh', function() { $scope.refresh().then(function() { console.log("ok"); }) });
@@ -40,15 +41,9 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 			})
 			.then(function(appointments) {
 				$scope.appointments = appointments;
-
-			    $timeout(function() {
-			        ionicMaterialMotion.fadeSlideIn();
-					ionicMaterialInk.displayEffect();
-			    }, 100);
-
-			    // Activate ink for controller
+				animateList();
 			})
-	        .catch(function(err) { $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
+	        .catch(function(err) { toasts.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
 			.then(function() {
 				$scope.$broadcast('scroll.refreshComplete'); // Stop the ion-refresher from spinning
 			});
@@ -63,49 +58,49 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	$scope.refresh();
 
 	$scope.cancelRequest = function(appointmentRequest) {
-		return changeRequestStatus(appointmentRequest, APPOINTMENT_REQUEST_STATUS.CANCELED)
-			.then(function() { $mdToast.showSimple('Seu pedido de consulta foi cancelado!') });
+		return $ionicPopup.confirm({
+				title: 'Cancelamento de marcação',
+				template: 'Tem certeza que deseja cancelar a marcação do seu '  + transformUtils.getMedicalSpecialtyLabelByCod(appointmentRequest.speciality) + "?"
+			})
+			.then(function(res) {
+				if(res) {
+					return changeRequestStatus(appointmentRequest, APPOINTMENT_REQUEST_STATUS.CANCELED)
+						.then(function() { toasts.showSimple('Seu pedido de consulta foi cancelado!') });
+				}
+			});
 	}
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
 	// put the appointment in status ACCEPTED
 	$scope.accept = function(appointment) {
 		return changeStatus(appointment, APPOINTMENT_STATUS.ACCEPTED)
-			.then(function() { $mdToast.showSimple('Aguardamos você na sua consulta!') });
+			.then(function() { toasts.showSimple('Aguardamos você na sua consulta!') });
 	}
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
 	// put the appointment in status REFUSED
 	$scope.refuse = function(appointment) {
-		return $mdDialog.show({
-			controller: 'commentModalController',
-			templateUrl: 'templates/dashboard/comment-modal/comment-modal.html',
-		})
-		.then(
-			function(comment) {
-				changeStatus(appointment, APPOINTMENT_STATUS.REFUSED, comment)
-					.then(function() { $mdToast.showSimple('Consulta recusada!') });
-			});
+		return showModalComment("Recusar " + transformUtils.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality))
+			.then(function(comment) {
+				return changeStatus(appointment, APPOINTMENT_STATUS.REFUSED, comment)
+					.then(function() { toasts.showSimple('Consulta recusada!') });
+			})
 	}
 
 	// when the user accept the appointment at any time he can cancel it
 	// put the appointment in status CANCELED
 	$scope.cancel = function(appointment) {
-		return $mdDialog.show({
-			controller: 'commentModalController',
-			templateUrl: 'templates/dashboard/comment-modal/comment-modal.html',
-		})
-		.then(
-			function(comment) {
-				changeStatus(appointment, APPOINTMENT_STATUS.CANCELED, comment)
-					.then(function() { $mdToast.showSimple('Consulta cancelada!') });
-			});
+		return showModalComment("Desmarcar " + transformUtils.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality))
+			.then(function(comment) {
+				return changeStatus(appointment, APPOINTMENT_STATUS.CANCELED, comment)
+					.then(function() { toasts.showSimple('Consulta cancelada!') });
+			})
 	}
 
 	// One or two days before the appointment the user can really confirm it
 	$scope.confirm = function(appointment) {
 		return changeStatus(appointment, APPOINTMENT_STATUS.CONFIRMED)
-			.then(function() { $mdToast.showSimple('Consulta confirmada!') });
+			.then(function() { toasts.showSimple('Consulta confirmada!') });
 	}
 
 	// Only can confirm 48h before the appointment
@@ -123,7 +118,7 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 
     $scope.moreDetails = function(request) {
         if (!request) {
-            $mdToast.showSimple("Algo de errado ocorreu, por favor tente novamente");
+            toasts.showSimple("Algo de errado ocorreu, por favor tente novamente");
             return;
         }
 
@@ -159,9 +154,16 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 		return appointmentService.update(appointment)
 			.then(function() {
 				console.log('Appointment status change from ' + oldStatus + ' to ' + status + '.');
+				$ionicLoading.hide();
+				animateList();
 			})
-			.catch(function(err) { appointment.status = oldStatus; $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
-			.then(function() { $ionicLoading.hide(); ionicMaterialMotion.fadeSlideIn();´})
+			.catch(function(err) {
+				appointment.status = oldStatus;
+				toasts.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.');
+				$ionicLoading.hide();
+				animateList();
+				throw err;
+			})
 	}
 
 	function changeRequestStatus(appointmentRequest, status, comment) {
@@ -174,9 +176,17 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 		return appointmentRequestService.update(appointmentRequest)
 			.then(function() {
 				console.log('Appointment request status change from ' + oldStatus + ' to ' + status + '.');
+				$ionicLoading.hide();
+				animateList();
 			})
-			.catch(function(err) { appointmentRequest.status = oldStatus; $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
-			.then(function() { $ionicLoading.hide(); ionicMaterialMotion.fadeSlideIn(); })
+			.catch(function(err) {
+				appointmentRequest.status = oldStatus; toasts
+				.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.')
+				$ionicLoading.hide();
+				animateList();
+				throw err;
+
+			})
 	}
 
 	function findAppointment(appointmentId) {
@@ -185,6 +195,40 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 			if (i >= 0)
 				return $scope.appointments[i];
 		}
+	}
+
+	function showModalComment(title) {
+		return $q(function(resolve, reject) {
+			$ionicModal.fromTemplateUrl('templates/dashboard/comment-modal/comment-modal.html', {
+					scope: $scope,
+					animation: 'slide-in-up'
+				})
+				.then(function(modal) {
+					var commentModal = {
+						title: title,
+						ok: function() {
+							modal.remove();
+							resolve($scope.commentModal);
+							delete $scope.commentModal;
+						},
+						cancel: function() {
+							modal.remove();
+							reject();
+							delete $scope.commentModal;
+						}
+					}
+
+					$scope.commentModal = commentModal;
+					modal.show();
+				});
+		})
+	}
+
+	function animateList() {
+	    $timeout(function() {
+			ionicMaterialMotion.fadeSlideIn();
+			ionicMaterialInk.displayEffect();
+		}, 100);
 	}
 
 }); // End of dashboard controller.

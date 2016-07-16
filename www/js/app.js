@@ -33,12 +33,11 @@ window.globalVariable = {
 };// End Global variable
 
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, authService, analyticsService, transformUtils) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $ionicLoading, $http, authService, analyticsService, transformUtils) {
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
         function initialRootScope() {
-            $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
         };
@@ -107,7 +106,7 @@ angular.module('starter')
             initialRootScope();
 
 			// checkInternet()
-			// 	.catch( $mdToast.show("Sem conexão com a internet.") );
+			// 	.catch( toasts.show("Sem conexão com a internet.") );
 
 			if (!authService.isLoggedIn()) {
 				$state.go('app.login');
@@ -127,7 +126,7 @@ angular.module('starter')
 
     })
 
-    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider, $mdColorPalette, $mdIconProvider) {
+    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider) {
 
         // Use for change ionic spinner to android pattern.
         $ionicConfigProvider.spinner.icon("android");

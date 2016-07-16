@@ -1,19 +1,9 @@
 // Controller of menu toggle.
 // Learn more about Sidenav directive of angular material
 // https://material.angularjs.org/latest/#/demo/material.components.sidenav
-appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSidenav, $log, $ionicHistory, $state, $ionicPlatform, $mdDialog, $mdBottomSheet, $mdMenu, $mdSelect, analyticsService, authService) {
+appControllers.controller('menuCtrl', function ($scope, $timeout, $log, $ionicHistory, $state, $ionicPlatform, analyticsService, authService) {
 
-    $scope.toggleLeft = buildToggler('left');
-
-    // buildToggler is for create menu toggle.
-    // Parameter :
-    // navID = id of navigation bar.
-    function buildToggler(navID) {
-        var debounceFn = $mdUtil.debounce(function () {
-            $mdSidenav(navID).toggle();
-        }, 0);
-        return debounceFn;
-    };// End buildToggler.
+    // $scope.toggleLeft = buildToggler('left');
 
     // navigateTo is for navigate to other page
     // by using targetPage to be the destination state.
@@ -21,7 +11,7 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
     // stateNames = target state to go
     $scope.navigateTo = function (stateName, cleanHistory) {
         $timeout(function () {
-            $mdSidenav('left').close();
+            // $mdSidenav('left').close();
             if ($ionicHistory.currentStateName() != stateName) {
 				if (cleanHistory == true) {
 	                $ionicHistory.nextViewOptions({
@@ -46,14 +36,6 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
 		});
 		$scope.navigateTo('app.login', true);
 	}
-
-    //closeSideNav is for close side navigation
-    //It will use with event on-swipe-left="closeSideNav()" on-drag-left="closeSideNav()"
-    //When user swipe or drag md-sidenav to left side
-    $scope.closeSideNav = function(){
-        $mdSidenav('left').close();
-    };
-    //End closeSideNav
 
     //  $ionicPlatform.registerBackButtonAction(callback, priority, [actionId])
     //
@@ -82,11 +64,7 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $mdUtil, $mdSi
 
     $ionicPlatform.registerBackButtonAction(function(){
 
-        if($mdSidenav("left").isOpen()){
-            //If side navigation is open it will close and then return
-            $mdSidenav('left').close();
-        }
-        else if(jQuery('md-bottom-sheet').length > 0 ) {
+        if(jQuery('md-bottom-sheet').length > 0 ) {
             //If bottom sheet is open it will close and then return
             $mdBottomSheet.cancel();
         }

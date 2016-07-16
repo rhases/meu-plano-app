@@ -1,4 +1,5 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService, analyticsService, $rootScope) {
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading,
+	authService, analyticsService, $rootScope, toasts) {
 	// This is the success callback from the login method
 	var fbLoginSuccess = function(response) {
 		if (!response.authResponse) {
@@ -39,7 +40,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 		waitResponse = false;
 
 		// User Cancelled (4201)
-		$mdToast.showSimple('Não foi possível acessar o seu perfil.\n Feche o app do Facebook e tente novamente!');
+		toasts.showSimple('Não foi possível acessar o seu perfil.\n Feche o app do Facebook e tente novamente!');
 	};
 
 	// This method is to get the user profile info from the facebook api

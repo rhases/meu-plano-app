@@ -9,22 +9,26 @@
     </ion-nav-buttons>
 	<ion-content>
 		<style>
-			#observation {
+			/*#observation {
 				min-height: 100px;
-			}
+			}*/
 		</style>
-	    <form name="appointmentForm">
-			<md-content class="md-no-momentum">
-				<md-input-container class="md-block">
-					<label>Observações</label>
+		<div class="text-center padding">
+		    <form name="appointmentForm">
+				<md-content class="md-no-momentum">
+					<md-input-container class="md-block">
+						<label>Observações</label>
+						<textarea id="observation" name="observationsField" ng-model="model.comments" rows="6" md-maxlength="256" md-autofocus placeholder="..."></textarea>
+						<div class="hint">Alguma coisa diferente sobre esse agendamento que gostaria de nos comunicar?</div>
+					</md-input-container>
+				</md-content>
+				<!-- <label class="item item-input item-floating-label">
+					<span class="input-label">Observações</span>
 					<textarea id="observation" name="observationsField" ng-model="model.comments" rows="6" md-maxlength="256" md-autofocus placeholder="..."></textarea>
-					<div class="hint">Alguma coisa diferente sobre esse agendamento que gostaria de nos comunicar?</div>
-				</md-input-container>
-			</md-content>
+				</label> -->
 
-			<div class="text-center padding">
 				<button ng-click="continue()" class="button button-block button-positive">CONTINUAR</a>
-			</div>
-	    </form>
+		    </form>
+		</div>
 	</ion-content>
 </ion-view>

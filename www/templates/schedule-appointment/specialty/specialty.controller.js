@@ -1,15 +1,20 @@
-appControllers.controller('specialtyCtrl', function ($scope, $mdBottomSheet, $mdToast, $mdDialog,
-    $state, scheduleAppointmentRequestService) {
+appControllers.controller('specialtyCtrl', function ($scope, $state,
+	scheduleAppointmentRequestService, ionicMaterialMotion, ionicMaterialInk, $timeout) {
 
-        $scope.specialties = medicalInfos.specializations;
+    $scope.specialties = medicalInfos.specializations;
 
-        $scope.selectSpecialty = function(specialty) {
-            scheduleAppointmentRequestService.setSpecialty(specialty);
-            $state.go('app.scheduleAppointment::days');
-        }
+	$timeout(function() {
+		ionicMaterialMotion.fadeSlideIn();
+		ionicMaterialInk.displayEffect();
+	}, 100);
 
-        $scope.backToDashboard = function() {
-            scheduleAppointmentRequestService.forceCleanRequest();
-            $state.go("app.dashboard");
-        }
+    $scope.selectSpecialty = function(specialty) {
+        scheduleAppointmentRequestService.setSpecialty(specialty);
+        $state.go('app.scheduleAppointment::days');
+    }
+
+    $scope.backToDashboard = function() {
+        scheduleAppointmentRequestService.forceCleanRequest();
+        $state.go("app.dashboard");
+    }
 });

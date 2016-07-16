@@ -18,8 +18,8 @@
 	<ion-content>
 	    <form name="appointmentForm">
 
-			<ion-list>
-				<ion-checkbox ng-repeat="location in locations"
+			<ion-list class="animate-fade-slide-in">
+				<ion-checkbox class="ink" ng-repeat="location in locations"
 	                  ng-model="location.checked"
 	                  ng-checked="location.checked">
 		        	{{ location.label }}

@@ -19,9 +19,11 @@
 
     <!-- CSS reference section -->
     <link rel="stylesheet" href="css/ionic.app.css">
-	<link rel="stylesheet prefetch" href="lib/angular-material/angular-material.css">
+	<!-- <link rel="stylesheet prefetch" href="lib/angular-material/angular-material.css"> -->
     <link rel="stylesheet" href="lib/ionic-material/dist/ionic.material.min.css">
     <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.css">
+	<link rel="stylesheet" href="lib/snackbarjs/dist/snackbar.min.css">
+	<link rel="stylesheet" href="lib/snackbarjs/themes-css/material.css">
 	<link rel="stylesheet" href="css/style.css">
     <!-- end CSS reference section -->
 
@@ -30,11 +32,16 @@
 	<script src="lib/ionic-material/dist/ionic.material.min.js"></script>
     <!-- end Ionic javascript lib -->
 
+	<!-- jQuery section-->
+	<script src="lib/jquery/dist/jquery.js"></script>
+	<!-- end jQuery section-->
+
     <!-- Angular javascript lib -->
 	<script src='lib/ngMask/dist/ngMask.min.js'></script>
-    <script src="lib/angular-messages/angular-messages.js"></script>
     <script src="lib/angular-aria/angular-aria.js"></script>
-	<script src="lib/angular-material/angular-material.js"></script>
+	<script src="lib/angular-messages/angular-messages.js"></script>
+	<!-- <script src="lib/angular-material/angular-material.js"></script> -->
+	<script src="lib/snackbarjs/dist/snackbar.min.js"></script>
     <!-- end Angular javascript lib -->
 
     <!-- Cordova script (this will be a 404 during development) -->
@@ -50,7 +57,6 @@
     <script src="lib/moment/min/moment.min.js"></script>
     <script src="lib/moment/locale/pt-br.js"></script>
 	<script src="lib/moment-timezone/moment-timezone.js"></script>
-
     <!-- end Utils section -->
 
     <!--ionic framework ngIOS9UIWebViewPatch-->
@@ -62,8 +68,9 @@
 	<script src="js/module.js"></script>
     <script src="js/app.constants.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/md-config.js"></script>
+    <!-- <script src="js/md-config.js"></script> -->
 	<script src="js/routes.js"></script>
+	<script src="js/toasts.service.js"></script>
     <!-- end app.js section-->
 
     <!-- Controllers section-->
@@ -116,10 +123,6 @@
 
 	<script src="js/utils/transform-utils.service.js"></script>
     <!-- end Controllers section-->
-
-    <!-- jQuery section-->
-    <script src="lib/jquery/dist/jquery.js"></script>
-    <!-- end jQuery section-->
 
 </head><!-- end head section-->
 

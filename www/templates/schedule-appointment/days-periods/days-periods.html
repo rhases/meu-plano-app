@@ -17,10 +17,10 @@
 	<ion-content>
 	    <form name="appointmentForm">
 
-			<ion-list>
-				<ion-checkbox ng-repeat="period in periods"
-	                  ng-model="period.checked"
-	                  ng-checked="period.checked">
+			<ion-list class="animate-fade-slide-in">
+				<ion-checkbox class="ink" ng-repeat="period in periods"
+	                ng-model="period.checked"
+	                ng-checked="period.checked">
 		        	{{ period.label }}
 		        </ion-checkbox>
 			</ion-list>

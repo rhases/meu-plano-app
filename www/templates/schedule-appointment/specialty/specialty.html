@@ -17,8 +17,8 @@
 	<ion-content>
 	    <form name="appointmentForm">
 
-			<ion-list>
-				<ion-item ng-repeat="specialty in specialties" ng-click="selectSpecialty(specialty)">
+			<ion-list class="animate-fade-slide-in">
+				<ion-item class="ink" ng-repeat="specialty in specialties" ng-click="selectSpecialty(specialty)">
 					{{ specialty.label }}
 				</ion-item>
 			</ion-list>
