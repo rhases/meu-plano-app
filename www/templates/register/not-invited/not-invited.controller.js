@@ -9,7 +9,7 @@ appControllers.controller('notInvitedCtrl', function ($scope, $state, toasts,
 		})
 		.catch(function(err) {
 			toasts.showSimple('Algum erro aconteceu! :(');
-			$state.go('app.profile'); //back so user can submit again
+			$state.go('app.register::profile'); //back so user can submit again
 		})
 		.then(function() {
 			$ionicLoading.hide();

@@ -2,30 +2,21 @@
 	<ion-nav-title>
 		&nbsp;&nbsp;<i class="icon fa fa-comment-o"></i>&nbsp;&nbsp;Alguma observação?
 	</ion-nav-title>
-	<ion-nav-buttons side="left">
+	<!-- <ion-nav-buttons side="left">
         <button ng-click="$ionicGoBack()" class="button back-button buttons button-clear header-item nav-back-btn">
             <i class="ion-android-arrow-back"></i>
         </button>
-    </ion-nav-buttons>
+    </ion-nav-buttons> -->
 	<ion-content>
-		<style>
-			/*#observation {
-				min-height: 100px;
-			}*/
-		</style>
 		<div class="text-center padding">
 		    <form name="appointmentForm">
-				<md-content class="md-no-momentum">
-					<md-input-container class="md-block">
-						<label>Observações</label>
-						<textarea id="observation" name="observationsField" ng-model="model.comments" rows="6" md-maxlength="256" md-autofocus placeholder="..."></textarea>
-						<div class="hint">Alguma coisa diferente sobre esse agendamento que gostaria de nos comunicar?</div>
-					</md-input-container>
-				</md-content>
-				<!-- <label class="item item-input item-floating-label">
-					<span class="input-label">Observações</span>
-					<textarea id="observation" name="observationsField" ng-model="model.comments" rows="6" md-maxlength="256" md-autofocus placeholder="..."></textarea>
-				</label> -->
+				<ion-list>
+					<label class="item item-input item-floating-label">
+						<span class="input-label">Observação</span>
+						<textarea id="observation" name="observationsField" ng-model="model.comments" rows="6" placeholder="Observação: Caso exita algo a mais que necessite use este espaço para indicar."></textarea>
+						<div class="hint" style="opacity: 0.4;">Alguma coisa diferente sobre esse agendamento?</div>
+					</label>
+				</ion-list>
 
 				<button ng-click="continue()" class="button button-block button-positive">CONTINUAR</a>
 		    </form>

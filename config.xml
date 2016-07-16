@@ -10,12 +10,21 @@
     <content src="index.html" />
     <allow-navigation href="tel:*" />
     <allow-navigation href="maps:*" />
+    <allow-navigation href="geo:*" />
+    <allow-navigation href="market:*" />
+    <allow-navigation href="mailto:*" />
     <allow-navigation href="https://graph.facebook.com/*" />
+	<access origin="tel:*" launch-external="yes"/>
+	<access origin="maps:*" launch-external="yes"/>
+	<access origin="geo:*" launch-external="yes"/>
+	<access origin="mailto:*" launch-external="yes"/>
+	<access origin="market:*" launch-external="yes"/>
     <access origin="*" />
+	<allow-intent href="tel:*" />
     <allow-intent href="maps:*" />
     <allow-intent href="geo:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="tel:*" />
+	<allow-intent href="mailto:*" />
+	<allow-intent href="market:*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <preference name="BackgroundColor" value="#006838" />

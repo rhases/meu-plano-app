@@ -61,13 +61,18 @@ angular.module('starter')
 
 					$rootScope.appUser = appUser;
 
+					$ionicHistory.nextViewOptions({
+	                    disableAnimate: true,
+	                    disableBack: true
+	                });
+
 					// Need to complete the registration
 					if (!appUser.name
 						|| !appUser.email
 						|| !appUser.phone
 						|| !appUser.birthdate
 						|| !appUser.gender) {
-						$state.go('app.register');
+						$state.go('app.register::infos');
 					}
 
 					// Need to complete the profile
@@ -77,19 +82,19 @@ angular.module('starter')
 						|| !appUser.profile.healthPlan
 						|| !appUser.profile.healthPlan.name
 						|| !appUser.profile.healthPlan.number) {
-						$state.go('app.profile');
+						$state.go('app.register::profile');
 					}
 
 					// Check invite status status
 					else if (!appUser.isInvited) {
-						$state.go('app.notInvited');
+						$state.go('app.register::notInvited');
 					}
 
 					// Go to dashboard
 					else {
 						$state.go('app.dashboard');
 						console.log("The user '" + appUser.name + "' successful logged!");
-            analyticsService.track.user(appUser);
+            			analyticsService.track.user(appUser);
 					}
 				})
 				.catch(function(err) {

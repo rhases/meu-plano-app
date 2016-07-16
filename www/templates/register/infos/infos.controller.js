@@ -34,7 +34,7 @@ appControllers.controller('registerCtrl', function ($scope, $state, authService,
 
 		authService.saveAppUser($scope.appUser)
 			.then(function() {
-				$state.go('app.profile');
+				$state.go('app.register::profile');
 			})
 			.catch(function() {
 				toasts.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');

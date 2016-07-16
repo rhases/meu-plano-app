@@ -2,8 +2,8 @@
     <ion-side-menu-content>
         <!-- <ion-nav-bar class="bar-assertive-900" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-left': hasHeaderFableft}" align-title="left"> -->
 		<ion-nav-bar class="bar-balanced  material-background-nav-bar">
-            <!-- <ion-nav-back-button class="no-text">
-            </ion-nav-back-button> -->
+            <ion-nav-back-button class="no-text">
+            </ion-nav-back-button>
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
             </ion-nav-buttons>
@@ -26,22 +26,22 @@
 			</p> -->
         </ion-header-bar>
         <ion-content class="has-expanded-header">
-            <ion-list>
+            <ion-list class="menu-list">
                 <ion-item nav-clear menu-close>
                     <div ui-sref="app.dashboard">
 	                    <i class="fa fa-home"></i>
 	                    <span>&nbsp;&nbsp; Início</span>
 	                </div>
                 </ion-item>
-                <ion-item nav-clear menu-close>
-                    <div ui-sref="app.scheduleAppointment">
+                <ion-item menu-close ui-sref="app.scheduleAppointment">
+                    <div >
 	                    <i class="fa fa-user-md"></i>
 	                    <span>&nbsp;&nbsp; Agendar consulta</span>
 	                </div>
                 </ion-item>
                 <ion-item nav-clear menu-close>
                     <div>
-						<a href="https://play.google.com/store/apps/details?id=br.com.rhases.app">
+						<a href="market://details?id=br.com.rhases.app">
 		                    <i class="fa fa-star"></i>
 		                    <span>&nbsp;&nbsp; Avalie-nos na Store</span>
 						</a>

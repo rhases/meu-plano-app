@@ -11,3 +11,23 @@ h2.big-text {
 i.fa-big-icon {
     font-size: 10em;
 }
+
+.menu-list {
+	.item {
+		font-size: 1.25em;
+
+		a {
+			color: #444;
+			text-decoration: none;
+		}
+	}
+}
+
+
+.appointment-details-list {
+	.item {
+		.icon {
+			font-size: 22px;
+		}
+	}
+}
