@@ -1,135 +1,70 @@
-<!--View Information-->
-<!--View name : Menu-->
-<!--Controller name : menuCtrl-->
-<!--Controller path : www/templates/menu/js/controllers.js-->
-<!--State name : app-->
-<!--URL : #app-->
-
-<ion-side-menus enable-menu-with-back-views="true">
+<ion-side-menus enable-menu-with-back-views="false">
     <ion-side-menu-content>
-        <ion-nav-bar class="bar-balanced  material-background-nav-bar">
+        <!-- <ion-nav-bar class="bar-assertive-900" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-left': hasHeaderFableft}" align-title="left"> -->
+		<ion-nav-bar class="bar-balanced  material-background-nav-bar">
+            <ion-nav-back-button class="no-text">
+            </ion-nav-back-button>
             <ion-nav-buttons side="left">
-                <a class="button button-icon button-clear ion-navicon" menu-toggle="left" ng-click="toggleLeft()"></a>
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
             </ion-nav-buttons>
         </ion-nav-bar>
-        <ion-nav-view name="menuContent"></ion-nav-view>
+        <!-- <ion-nav-view name="fabContent"></ion-nav-view> -->
+        <ion-nav-view name="menuContent" ng-class="{expanded: isExpanded}" ></ion-nav-view>
     </ion-side-menu-content>
-    <md-sidenav md-component-id="left" on-swipe-left="closeSideNav()" on-drag-left="closeSideNav()">
-        <!--menu section-->
-        <div class="material-background" id="toggle-menu-left-header">
-            <!--menu header section-->
-			<div class="menu-left-header">
-				<!-- <a ng-click="navigateTo('app.userProfile')"> -->
-                <a href="#">
-                    <img class="user-img" src="{{ appUser.picture }}">
-				</a>
+    <ion-side-menu side="left">
+        <ion-header-bar class="balanced-bg expanded" style="background-size: cover;">
+            <!-- <span class="avatar" style="background: url('img/crown.jpg'); background-size: cover;"></span> -->
+            <!-- <h2>Thronester</h2> -->
 
-				<p>
-					<span class="title">{{ appUser.name }}</span>
-				</p>
-			</div>
-			<!--end menu header section-->
-        </div> <!--menu content section-->
-        <ion-content id="toggle-menu-left-content">
-
-            <!--If device is android application will present below code.-->
-            <!--It will disable animation to better performance on android.-->
-            <!--list section-->
-            <div ng-if="isAndroid" class="menu-list">
-                <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
-				<div class="row menu-item" ng-click="navigateTo('app.dashboard', true)">
-                    <div class="col-33">
-                        <i class="fa fa-home"></i>
-                    </div>
-                    <div class="col-66">
-                        <span>Minhas Consultas</span>
-                    </div>
-                </div>
-                <div class="row menu-item" ng-click="navigateTo('app.scheduleAppointment')">
-                    <div class="col-33">
-                        <i class="fa fa-user-md"></i>
-                    </div>
-                    <div class="col-66">
-                        <span>Agendar consulta</span>
-                    </div>
-                </div>
-				<div class="row menu-item" ng-click="openMarket('https://play.google.com/store/apps/details?id=br.com.rhases.app')">
-				<!-- <div class="row menu-item" href="https://play.google.com/store/apps/details?id=br.com.esec.icpm.android"> -->
-                    <div class="col-33">
-                        <i class="fa fa-star"></i>
-                    </div>
-                    <div class="col-66">
-                        <span>Avalie-nos na Store</span>
-                    </div>
-                </div>
-                <div class="row menu-item" ng-click="navigateTo('app.talkWithUs', true)">
-                    <div class="col-33">
-                        <i class="fa fa-envelope"></i>
-                    </div>
-                    <div class="col-66">
-                        <span>Fale com a gente</span>
-                    </div>
-                </div>
-				<div class="row menu-item" ng-click="logout()">
-                    <div class="col-33">
-                        <i class="fa fa-sign-out"></i>
-                    </div>
-                    <div class="col-66">
-                        <span>Sair</span>
-                    </div>
-                </div>
-            </div>
-
-
-            <!--If device is not Android application will present below code.-->
-            <!--It will show animation when selecting row.-->
-            <md-list ng-if="!isAndroid">
-                <!-- <md-subheader class="md-warn">Application Storage</md-subheader> -->
-				<md-list-item class="menu-list-item" ng-click="navigateTo('app.dashboard')">
-                    <i class="fa fa-th-list"></i>
-                    <span>Dashboard</span>
-                </md-list-item>
-				<md-list-item class="menu-list-item" ng-click="navigateTo('app.login')">
-                    <i class="fa fa-th-list"></i>
-                    <span>Login</span>
-                </md-list-item>
-				<md-list-item class="menu-list-item" ng-click="navigateTo('app.register')">
-                    <i class="fa fa-th-list"></i>
-                    <span>Register</span>
-                </md-list-item>
-                <md-list-item class="menu-list-item" ng-click="navigateTo('app.scheduleAppointment')">
-                    <i class="fa fa-user-md"></i>
-                    <span>Agendar Consulta</span>
-                </md-list-item>
-                <md-list-item class="menu-list-item" ng-click="navigateTo('app.a')">
-                    <i class="fa fa-question"></i>
-                    <span>Qual consulta fazer</span>
-                </md-list-item>
-				<md-list-item class="menu-list-item" ng-click="openMarket('https://play.google.com/store/apps/details?id=br.com.esec.icpm.android')">
-                    <i class="fa fa-star"></i>
-                    <span>Classifique a rhases</span>
-                </md-list-item>
-				<md-list-item class="menu-list-item" ng-click="navigateTo('app.news')">
-                    <i class="fa fa-newspaper-o"></i>
-                    <span>Novidades</span>
-                </md-list-item>
-				<md-list-item class="menu-list-item" ng-click="navigateTo('app.setting')">
-                    <i class="fa fa-cog"></i>
-                    <span>Configurações</span>
-                </md-list-item>
-				<md-list-item class="menu-list-item" ng-click="navigateTo('app.talkWithUs')">
-                    <i class="fa fa-envelope"></i>
-                    <span>Fale com a gente</span>
-                </md-list-item>
-				<md-list-item class="menu-list-item" ng-click="logout()">
-                    <i class="fa fa-sign-out"></i>
-                    <span>Sair</span>
-                </md-list-item>
-            </md-list>
-            <!--end list section-->
+			<!-- <span class="avatar" style="background: url({{ appUser.picture }}); background-size: cover;"></span> -->
+			<img class="avatar user-img" src="{{ appUser.picture }}">
+			<h2 class="title">{{ appUser.name }}</h2>
+            <!-- <a href="#">
+			</a> -->
+			<!-- <p>
+				<span class="title">{{ appUser.name }}</span>
+			</p> -->
+        </ion-header-bar>
+        <ion-content class="has-expanded-header">
+            <ion-list class="menu-list">
+                <ion-item nav-clear menu-close>
+                    <div ui-sref="app.dashboard">
+	                    <i class="fa fa-home"></i>
+	                    <span>&nbsp;&nbsp; Início</span>
+	                </div>
+                </ion-item>
+                <ion-item menu-close ui-sref="app.scheduleAppointment">
+                    <div >
+	                    <i class="fa fa-user-md"></i>
+	                    <span>&nbsp;&nbsp; Agendar consulta</span>
+	                </div>
+                </ion-item>
+                <ion-item nav-clear menu-close>
+                    <div>
+						<a href="market://details?id=br.com.rhases.app">
+		                    <i class="fa fa-star"></i>
+		                    <span>&nbsp;&nbsp; Avalie-nos na Store</span>
+						</a>
+	                </div>
+                </ion-item>
+				<ion-item nav-clear menu-close>
+					<div ui-sref="app.talkWithUs">
+						<i class="fa fa-envelope"></i>
+						<span>&nbsp;&nbsp; Fale com a gente</span>
+					</div>
+				</ion-item>
+                <ion-item nav-clear menu-close>
+					<div ng-click="logout()">
+	                    <i class="fa fa-sign-out"></i>
+	                    <span>&nbsp;&nbsp; Sair</span>
+	                </div>
+                </ion-item>
+            </ion-list>
 
 			<br/>
 			<br/>
+			<br/>
+
 			<div class="row menu-item">
 				<p>
 					Feito com amor em Brasília, DF, Brasil.
@@ -145,8 +80,6 @@
 					</small>
 				</p>
 			</div>
-        </ion-content><!--end menu content section-->
-        <!--end menu section-->
-
-    </md-sidenav>
+        </ion-content>
+    </ion-side-menu>
 </ion-side-menus>

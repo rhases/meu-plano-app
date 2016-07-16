@@ -33,12 +33,11 @@ window.globalVariable = {
 };// End Global variable
 
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, authService, analyticsService, transformUtils) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $ionicLoading, $http, authService, analyticsService, transformUtils) {
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
         function initialRootScope() {
-            $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
         };
@@ -62,13 +61,18 @@ angular.module('starter')
 
 					$rootScope.appUser = appUser;
 
+					$ionicHistory.nextViewOptions({
+	                    disableAnimate: true,
+	                    disableBack: true
+	                });
+
 					// Need to complete the registration
 					if (!appUser.name
 						|| !appUser.email
 						|| !appUser.phone
 						|| !appUser.birthdate
 						|| !appUser.gender) {
-						$state.go('app.register');
+						$state.go('app.register::infos');
 					}
 
 					// Need to complete the profile
@@ -78,19 +82,19 @@ angular.module('starter')
 						|| !appUser.profile.healthPlan
 						|| !appUser.profile.healthPlan.name
 						|| !appUser.profile.healthPlan.number) {
-						$state.go('app.profile');
+						$state.go('app.register::profile');
 					}
 
 					// Check invite status status
 					else if (!appUser.isInvited) {
-						$state.go('app.notInvited');
+						$state.go('app.register::notInvited');
 					}
 
 					// Go to dashboard
 					else {
 						$state.go('app.dashboard');
 						console.log("The user '" + appUser.name + "' successful logged!");
-            analyticsService.track.user(appUser);
+            			analyticsService.track.user(appUser);
 					}
 				})
 				.catch(function(err) {
@@ -116,7 +120,7 @@ angular.module('starter')
             initialRootScope();
 
 			// checkInternet()
-			// 	.catch( $mdToast.show("Sem conexão com a internet.") );
+			// 	.catch( toasts.show("Sem conexão com a internet.") );
 
 			if (!authService.isLoggedIn()) {
 				$state.go('app.login');
@@ -136,7 +140,7 @@ angular.module('starter')
 
     })
 
-    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider, $mdColorPalette, $mdIconProvider) {
+    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider) {
 
         // Use for change ionic spinner to android pattern.
         $ionicConfigProvider.spinner.icon("android");

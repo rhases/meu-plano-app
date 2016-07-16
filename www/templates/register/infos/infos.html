@@ -1,35 +1,41 @@
 <ion-view title="Complete o seu registro">
-    <ion-nav-buttons side="left">
-        <a ng-click="$ionicGoBack()" class="button back-button buttons  button-clear header-item nav-back-btn">
-            <i class="ion-android-arrow-back"></i>
-        </a>
-    </ion-nav-buttons>
+    <!-- <ion-nav-buttons side="left">
+        <button ng-click="back()" class="button back-button buttons button-clear header-item nav-back-btn">
+        	<i class="ion-android-arrow-back"></i>
+        </button>
+    </ion-nav-buttons> -->
 
 	<ion-content id="register-content" padding="true" scrollbar-x="false">
     	<form name="registerUser">
-  			<md-content class="md-no-momentum">
-				<md-input-container class="md-block">
-					<md-icon md-font-icon="ion-android-person" class="fa-2x"></md-icon>
-					<input ng-model="appUser.name" name="name" required placeholder="Nome completo">
-				</md-input-container>
-				<md-input-container class="md-block">
-					<md-icon md-font-icon="ion-android-phone-portrait" class="fa-2x"></md-icon>
+			<ion-list>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Nome</span>
+					<input ng-model="appUser.name" name="name" required placeholder="Nome" type="text">
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Telefone</span>
 					<input ng-model="appUser.phone" name="phone" required placeholder="Telefone" type="tel" mask="(99) 9?9999-9999">
-				</md-input-container>
-				<md-input-container class="md-block">
-					<md-icon md-font-icon="ion-android-calendar" class="fa-2x"></md-icon>
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Data de Nascimento</span>
 					<input ng-model="birthdate" name="birthdate" required placeholder="Data de Nascimento" type="tel" mask="39/19/9999" >
-				</md-input-container>
-				<md-radio-group ng-model="appUser.gender" required name="gender">
-					<md-radio-button value="male">Homem</md-radio-button>
-					<md-radio-button value="female">Mulher</md-radio-button>
-				</md-radio-group>
-			</md-content>
+				</label>
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Sexo
+					</div>
+					<select ng-model="appUser.gender" required name="gender">
+						<option value="male">Homem</option>
+						<option value="female">Mulher</option>
+					</select>
+				</label>
+			</ion-list>
 
-			<a class="button button-block button-positive button-balanced" ng-disabled="!(registerUser.name.$valid && registerUser.phone.$valid && registerUser.birthdate.$valid && registerUser.gender.$valid)" ng-click="save()">
+			<br />
+
+			<button class="button button-block button-positive button-balanced" ng-disabled="!(registerUser.name.$valid && registerUser.phone.$valid && registerUser.birthdate.$valid && registerUser.gender.$valid)" ng-click="save()">
 				Continuar
-			</a>
-
+			</button>
     	</form>
 	</ion-content>
 </ion-view>
