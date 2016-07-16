@@ -42,6 +42,12 @@ angular.module('starter')
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
         };
 
+        function configSplashScreen() {
+            setTimeout(function() {
+                navigator.splashscreen.hide();
+            }, 100);
+        };
+
 		function checkLogin() {
 			return authService.getAppUser({tryReloadFirst: true})
 				.then(function(appUser) {
@@ -83,6 +89,7 @@ angular.module('starter')
 					else {
 						$state.go('app.dashboard');
 						console.log("The user '" + appUser.name + "' successful logged!");
+            analyticsService.track.user(appUser);
 					}
 				})
 				.catch(function(err) {
@@ -94,6 +101,8 @@ angular.module('starter')
 		}
 
         $ionicPlatform.ready(function () {
+            configSplashScreen();
+
             ionic.Platform.isFullScreen = true;
             if (window.cordova && window.cordova.plugins.Keyboard) {
                 cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);

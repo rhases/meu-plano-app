@@ -55,19 +55,20 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	    return $scope.doRefresh()
 			.then(function() { $scope.loading = false; });
 	}
+
 	$scope.refresh();
 
 	$scope.cancelRequest = function(appointmentRequest) {
-		return $ionicPopup.confirm({
-				title: 'Cancelamento de marcação',
-				template: 'Tem certeza que deseja cancelar a marcação do seu '  + transformUtils.getMedicalSpecialtyLabelByCod(appointmentRequest.speciality) + "?"
-			})
-			.then(function(res) {
-				if(res) {
-					return changeRequestStatus(appointmentRequest, APPOINTMENT_REQUEST_STATUS.CANCELED)
-						.then(function() { toasts.showSimple('Seu pedido de consulta foi cancelado!') });
-				}
-			});
+    var body = "Cancelar " + $rootScope.TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointmentRequest.speciality) + " ?";
+        showConfirm("Cancelar solicitação", body)
+            .then(function(res) {
+                if (res) {
+                    changeRequestStatus(appointmentRequest, APPOINTMENT_REQUEST_STATUS.CANCELED)
+                        .then(function() {
+                            toasts.showSimple('Seu pedido de consulta foi cancelado!')
+                        });
+                }
+            });
 	}
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
@@ -143,6 +144,21 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
         }, ($scope.isAnimated  ? 300 : 0));
     }; // End of navigateTo.
 
+    $scope.makeAddressClinic = function(clinic) {
+        if (!clinic)
+            return;
+
+        console.log(clinic.name);
+        console.log(clinic.unit.address);
+        return clinic.name + ", " + clinic.unit.address;
+    }
+
+    function showConfirm(title, body) {
+        return confirmPopup = $ionicPopup.confirm({
+            title: title,
+            template: body
+        });
+     }
 
 	function changeStatus(appointment, status, comment) {
 		$ionicLoading.show();
