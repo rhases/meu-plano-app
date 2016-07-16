@@ -21,7 +21,8 @@
     "ngMask": "angular-mask#^3.1.1",
     "moment-timezone": "^0.5.4",
     "ionic-material": "^0.4.2",
-    "snackbarjs": "^1.1.0"
+    "snackbarjs": "^1.1.0",
+    "angular-messages": "^1.5.7"
   },
   "resolutions": {
     "angular": "^1.5.7",

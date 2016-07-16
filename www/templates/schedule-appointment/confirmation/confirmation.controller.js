@@ -1,5 +1,5 @@
 appControllers.controller('confirmationCtrl', function ($scope, $ionicLoading,
-	$state, analyticsService, scheduleAppointmentRequestService, toasts
+	$state, analyticsService, scheduleAppointmentRequestService, toasts,
 	ionicMaterialMotion, ionicMaterialInk, $timeout) {
 
         $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
