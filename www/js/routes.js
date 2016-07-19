@@ -37,8 +37,8 @@ angular.module('starter')
             })
 
 			// REGISTER
-			.state('app.register', {
-                url: "/complete-register",
+			.state('app.register::infos', {
+                url: "/register/infos",
 				cache: false,
                 params:{
                     isAnimated: false
@@ -50,8 +50,8 @@ angular.module('starter')
                     }
                 }
             })
-			.state('app.profile', {
-                url: "/profile",
+			.state('app.register::profile', {
+                url: "/register/profile",
 				cache: false,
                 params:{
                     isAnimated: false
@@ -63,8 +63,8 @@ angular.module('starter')
                     }
                 }
             })
-			.state('app.notInvited', {
-                url: "/not-invited",
+			.state('app.register::notInvited', {
+                url: "/register/not-invited",
 				cache: false,
                 params:{
                     isAnimated: false

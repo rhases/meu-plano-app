@@ -11,7 +11,7 @@ appControllers.controller("cancelAppointmentController", function ($scope, $time
 
 		var oldStatus = appointment.status;
 		appointment.status = status;
-		appointment.comment = comment
+		appointment.comment = comment;
 
 		return appointmentService.update(appointment)
 			.then(function() {

@@ -1,5 +1,6 @@
 // Controller of Register Page.
-appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, authService, $ionicLoading, $rootScope) {
+appControllers.controller('profileCtrl', function ($scope, $state, authService, toasts,
+	$ionicLoading, $rootScope) {
 
 	$scope.appUser = {};
 	$ionicLoading.show();
@@ -14,7 +15,7 @@ appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, aut
 		})
 		.catch(function() {
 			$scope.appUser = {};
-			$mdToast.showSimple('Algum erro aconteceu! :(');
+			toasts.showSimple('Algum erro aconteceu! :(');
 		})
 		.then(function() {
 			$ionicLoading.hide();
@@ -27,13 +28,13 @@ appControllers.controller('profileCtrl', function ($scope, $state, $mdToast, aut
 		authService.saveAppUser($scope.appUser)
 			.then(function(appUser) {
 				if (!appUser.isInvited) {
-					$state.go('app.notInvited');
+					$state.go('app.register::notInvited');
 				} else {
 					$state.go('app.dashboard');
 				}
 			})
 			.catch(function() {
-				$mdToast.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');
+				toasts.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');
 			})
 			.then(function() {
 				$ionicLoading.hide();

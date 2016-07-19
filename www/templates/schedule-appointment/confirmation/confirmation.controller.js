@@ -1,13 +1,14 @@
-appControllers.controller('confirmationCtrl', function ($scope, $mdToast, $ionicLoading, $state, analyticsService, scheduleAppointmentRequestService) {
+appControllers.controller('confirmationCtrl', function ($scope, $ionicLoading,
+	$state, analyticsService, scheduleAppointmentRequestService, toasts,
+	ionicMaterialMotion, ionicMaterialInk, $timeout) {
 
         $scope.appointment = scheduleAppointmentRequestService.getAppointmentRequest();
 
         $scope.submit = function() {
-          $ionicLoading.show({
-            template: 'Solicitando agendamento...'
-          });
-            scheduleAppointmentRequestService.submit(handleRequestSuccess, handleRequestError);
-
+			$ionicLoading.show({
+				template: 'Solicitando agendamento...'
+			});
+			scheduleAppointmentRequestService.submit(handleRequestSuccess, handleRequestError);
         }
 
         var handleRequestSuccess = function() {
@@ -16,11 +17,11 @@ appControllers.controller('confirmationCtrl', function ($scope, $mdToast, $ionic
         }
 
         var handleRequestError = function(error) {
-          analyticsService.track.logError('appointment-request-error: requesting:' + JSON.stringify(error) );
-          analyticsService.track.appointment('requesting', 'error', error)
+			analyticsService.track.logError('appointment-request-error: requesting:' + JSON.stringify(error) );
+			analyticsService.track.appointment('requesting', 'error', error)
 
-          $ionicLoading.hide();
+			$ionicLoading.hide();
 
-          $mdToast.showSimple('Desculpe. Está ocorrendo um erro ao enviar solicitação. Por favor, tente novamente em alguns segundos');
+			toasts.showSimple('Desculpe. Está ocorrendo um erro ao enviar solicitação. Por favor, tente novamente em alguns segundos');
         };
 });

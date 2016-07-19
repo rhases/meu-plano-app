@@ -10,24 +10,24 @@
       &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Minhas consultas
     </ion-nav-title>
 	<ion-nav-view>
-	    <!--footer fab bar-->
-	    <div class="footer-fab-bar">
-	        <a class="md-button md-accent md-fab fab-footer" ui-sref="app.scheduleAppointment" aria-label="Add">
-	            <i class="ion-plus-round"></i>
-	        </a>
-	    </div><!--end footer fab bar-->
+		<!-- <button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive spin" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add"> -->
+		<button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive drop" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add">
+			<i class="icon ion-plus-round"></i>
+		</button>
+		<!-- button button-fab button-fab-top-right expanded button-energized-900 drop -->
 	</ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
 		<!-- COMPONENTE DO REFRESH -->
 		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()" spinner="ripple"></ion-refresher>
 		<div class="text-center padding-vertical" ng-if="loading">
+			<br />
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
 
 		<!-- AVISO QUANDO NÃO SE TEM APPOINMENTS -->
 		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 && confirmedAppointments.length == 0"
-			class="text-center" style="opacity: 0.55; color: gray;">
+			class="text-center padding" style="opacity: 0.55; color: gray;">
 			<br />
 			<br />
 			<br />
@@ -42,62 +42,63 @@
 		</div>
 
 		<!-- CARDS APPOINTMENT REQUEST -->
-        <div class="list card" ng-repeat="request in appointmentRequests | showOnlyIfStatusIs:'NEW' as newAppointmentRequests">
-			<div class="item item-icon-left">
-				<i class="icon fa fa-clock-o positive"></i>
-				<h2 class="positive"><strong>{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(request.speciality) }} Solicitado</strong><h2>
-			</div>
-			<div class="item item-body">
-				<h3>Sua consulta será agendada em até 1 dia útil.</h3>
-				<p><i class="icon fa fa-calendar"></i> Pedido feito em <strong>{{ formatDate(request.createdAt) }}</strong>.</p>
-			</div>
-			<div class="row text-center">
-				<div class="col-50">
-					<a class="item icon-left ion-close" ng-click="cancelRequest(request)">
-						&nbsp; Cancelar
-					</a>
-				</div>
-				<div class="col-50">
-					<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
-						&nbsp; Detalhes
-					</a>
-				</div>
-			</div>
-        </div>
+		<div class="animate-fade-slide-in">
+			<div class="item card-item" style="padding: 5px;">
+		        <div class="list card" ng-repeat="request in appointmentRequests | showOnlyIfStatusIs:'NEW' as newAppointmentRequests">
+					<div class="item item-icon-left ink">
+						<i class="icon fa fa-clock-o positive"></i>
+						<h2 class="positive"><strong>{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(request.speciality) }} Solicitado</strong><h2>
+					</div>
+					<div class="item item-body">
+						<h3>Sua consulta será agendada em até 1 dia útil.</h3>
+						<p><i class="icon fa fa-calendar"></i> Pedido feito em <strong>{{ formatDate(request.createdAt) }}</strong>.</p>
+					</div>
+					<div class="row text-center">
+						<div class="col-50">
+							<a class="item icon-left ion-close" ng-click="cancelRequest(request)">
+								&nbsp; Cancelar
+							</a>
+						</div>
+						<div class="col-50">
+							<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
+								&nbsp; Detalhes
+							</a>
+						</div>
+					</div>
+		        </div>
 
-		<!-- TODO Criar componente -->
-        <!-- CARDS DE APPOINTMENT SCHEDULED -->
-        <div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'SCHEDULED' as scheduledAppointments">
-			<div class="item item-icon-left">
-				<i class="icon fa fa-question energized"></i>
-				<h2 class="energized"><strong>Confirmação de {{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality) }}</strong><h2>
-			</div>
-			<div class="item item-body">
-				<h3>Já agendamos sua consulta! Agora só falta confirmar.</h3>
-				<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }}</strong></h3>
-				<h3><strong><i class="icon fa fa-phone"></i> {{ appointment.clinic.phone }}</strong></h3>
-				<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
-				<h3>Quando</h3>
-				<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
-				<h3>Onde</h3>
-				<p>
-					<a href="geo:0,0?q={{ makeAddressClinic(appointment.clinic) }}" />
-					<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.unit.address }} </a>
-				</p>
-			</div>
-			<div class="row text-center">
-				<div class="col-50">
-					<a class="item icon-left ion-close" ng-click="refuse(appointment)">
-						&nbsp; Recusar
-					</a>
-				</div>
-				<div class="col-50">
-					<a class="item icon-left ion-checkmark" ng-click="accept(appointment)">
-						&nbsp; Aceitar
-					</a>
-				</div>
-			</div>
-        </div>
+				<!-- TODO Criar componente -->
+		        <!-- CARDS DE APPOINTMENT SCHEDULED -->
+		        <div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'SCHEDULED' as scheduledAppointments">
+					<div class="item item-icon-left ink">
+						<i class="icon fa fa-question energized"></i>
+						<h2 class="energized"><strong>Confirmação de {{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality) }}</strong><h2>
+					</div>
+					<div class="item item-body">
+						<h3>Já agendamos sua consulta! Agora só falta confirmar.</h3>
+						<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }}</strong></h3>
+						<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
+						<h3>Quando</h3>
+						<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
+						<h3>Onde</h3>
+						<p>
+							<a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" />
+							<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.address }} </a>
+						</p>
+					</div>
+					<div class="row text-center">
+						<div class="col-50">
+							<a class="item icon-left ion-close" ng-click="refuse(appointment)">
+								&nbsp; Recusar
+							</a>
+						</div>
+						<div class="col-50">
+							<a class="item icon-left ion-checkmark" ng-click="accept(appointment)">
+								&nbsp; Aceitar
+							</a>
+						</div>
+					</div>
+		        </div>
 
 		<!-- CARDS DE APPOINTMENTS ACCEPTED -->
 		<div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'ACCEPTED' as acceptedAppointments">
