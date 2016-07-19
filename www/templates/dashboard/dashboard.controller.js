@@ -81,11 +81,14 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
 	// put the appointment in status REFUSED
 	$scope.refuse = function(appointment) {
-		return showModalComment("Recusar " + transformUtils.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality))
-			.then(function(comment) {
-				return changeStatus(appointment, APPOINTMENT_STATUS.REFUSED, comment)
-					.then(function() { toasts.showSimple('Consulta recusada!') });
-			})
+		$state.go("app.dashboard-cancel", {
+				"appointment": appointment
+			});
+		// return showModalComment("Recusar " + transformUtils.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality))
+		// 	.then(function(comment) {
+		// 		return changeStatus(appointment, APPOINTMENT_STATUS.REFUSED, comment)
+		// 			.then(function() { toasts.showSimple('Consulta recusada!') });
+		// 	})
 	}
 
 	// when the user accept the appointment at any time he can cancel it

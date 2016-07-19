@@ -82,8 +82,9 @@
 						<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
 						<h3>Onde</h3>
 						<p>
-							<a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}" />
-							<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.address }} </a>
+							<a href="geo:0,0?q={{ makeAddressClinic(appointment.clinic) " />
+								<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.unit.address }} 
+							</a>
 						</p>
 					</div>
 					<div class="row text-center">
@@ -149,7 +150,7 @@
 				<h3>Onde</h3>
 				<p>
 					<a href="geo:0,0?q={{ makeAddressClinic(appointment.clinic) }}">
-						<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.address }}
+						<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.unit.address }}
 					</a>
 				</p>
 			</div>

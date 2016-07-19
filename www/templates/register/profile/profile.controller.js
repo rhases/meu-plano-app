@@ -33,7 +33,7 @@ appControllers.controller('profileCtrl', function ($scope, $state, authService, 
 					$state.go('app.dashboard');
 				}
 			})
-			.catch(function() {
+			.catch(function(ignore) {
 				toasts.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');
 			})
 			.then(function() {

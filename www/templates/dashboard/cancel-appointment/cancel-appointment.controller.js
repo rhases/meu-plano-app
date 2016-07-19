@@ -17,8 +17,13 @@ appControllers.controller("cancelAppointmentController", function ($scope, $time
 			.then(function() {
 				console.log('Appointment status change from ' + oldStatus + ' to ' + status + '.');
 			})
-			.catch(function(err) { appointment.status = oldStatus; $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
-			.then(function() { $ionicLoading.hide(); })
+			.catch(function(err) {
+                appointment.status = oldStatus;
+                $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.')
+            })
+			.then(function() {
+                $ionicLoading.hide();
+            });
 	}
 
 });
