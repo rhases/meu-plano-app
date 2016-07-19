@@ -75,15 +75,18 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
 	// put the appointment in status REFUSED
 	$scope.refuse = function(appointment) {
-		return $mdDialog.show({
-			controller: 'commentModalController',
-			templateUrl: 'templates/dashboard/comment-modal/comment-modal.html',
-		})
-		.then(
-			function(comment) {
-				changeStatus(appointment, APPOINTMENT_STATUS.REFUSED, comment)
-					.then(function() { $mdToast.showSimple('Consulta recusada!') });
-			});
+        $state.go("app.dashboard-cancel", {
+            "appointment": appointment
+        });
+		// return $mdDialog.show({
+		// 	controller: 'commentModalController',
+		// 	templateUrl: 'templates/dashboard/comment-modal/comment-modal.html',
+		// })
+		// .then(
+		// 	function(comment) {
+		// 		changeStatus(appointment, APPOINTMENT_STATUS.REFUSED, comment)
+		// 			.then(function() { $mdToast.showSimple('Consulta recusada!') });
+		// 	});
 	}
 
 	// when the user accept the appointment at any time he can cancel it
@@ -162,20 +165,6 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
         });
      }
 
-	function changeStatus(appointment, status, comment) {
-		$ionicLoading.show();
-
-		var oldStatus = appointment.status;
-		appointment.status = status;
-		appointment.comment = comment
-
-		return appointmentService.update(appointment)
-			.then(function() {
-				console.log('Appointment status change from ' + oldStatus + ' to ' + status + '.');
-			})
-			.catch(function(err) { appointment.status = oldStatus; $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.') })
-			.then(function() { $ionicLoading.hide(); })
-	}
 
 	function changeRequestStatus(appointmentRequest, status, comment) {
 		$ionicLoading.show();

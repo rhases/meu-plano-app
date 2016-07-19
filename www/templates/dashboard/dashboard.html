@@ -121,7 +121,7 @@
 			</div>
 			<div class="row text-center">
 				<div class="col-50">
-					<a class="item icon-left ion-close" ng-click="cancel(appointment)">
+						<a class="item icon-left ion-close" ng-click="cancel(appointment)">
 						&nbsp; Desmarcar
 					</a>
 				</div>
@@ -147,7 +147,7 @@
 				<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
 				<h3>Onde</h3>
 				<p>
-					<a href="maps:{{ appointment.clinic.name }} {{ appointment.clinic.address }}">
+					<a href="geo:0,0?q={{ makeAddressClinic(appointment.clinic) }}">
 						<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.address }}
 					</a>
 				</p>
