@@ -91,20 +91,20 @@ angular.module('starter')
                     }
                 }
             })
-            // .state('app.dashboard-cancel', {
-            //     url: "/cancel-appointment",
-			// 	cache: false,
-            //     params:{
-            //         isAnimated: true,
-            //         appointment: null
-            //     },
-            //     views: {
-            //         'menuContent': {
-            //             templateUrl: "templates/dashboard/cancel-appointment/cancel-appointment.html",
-            //             controller: 'cancelAppointmentController'
-            //         }
-            //     }
-            // })
+            .state('app.dashboard-cancel', {
+                url: "/cancel-appointment",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                    appointment: null
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/dashboard/cancel-appointment/cancel-appointment.html",
+                        controller: 'cancelAppointmentController'
+                    }
+                }
+            })
             .state('app.dashboard-detail', {
                 url: "/detail-appointment",
 				cache: false,
