@@ -34,7 +34,7 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $log, $ionicHi
 			disableAnimate: true,
 			disableBack: true
 		});
-    $rootScope.slideSideMenu = false;
+    	$rootScope.slideSideMenu = false;
 		$scope.navigateTo('app.login', true);
 	}
 
