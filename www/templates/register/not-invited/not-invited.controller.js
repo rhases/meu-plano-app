@@ -22,10 +22,6 @@ appControllers.controller('notInvitedCtrl', function ($scope, $state, toasts,
 
 	$scope.logout = function() {
 		authService.logout();
-		$ionicHistory.nextViewOptions({
-			disableAnimate: true,
-			disableBack: true
-		});
 		$state.go('app.login');
 	}
 

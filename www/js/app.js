@@ -51,6 +51,11 @@ angular.module('starter')
 		function checkLogin() {
 			return authService.getAppUser({tryReloadFirst: true})
 				.then(function(appUser) {
+					$ionicHistory.nextViewOptions({
+						historyRoot: true,
+						expire: 300
+					});
+
 					// If can not load app user
 					if(!appUser) {
 						authService.logout();
@@ -60,11 +65,6 @@ angular.module('starter')
 					}
 
 					$rootScope.appUser = appUser;
-
-					$ionicHistory.nextViewOptions({
-	                    disableAnimate: true,
-	                    disableBack: true
-	                });
 
 					// Need to complete the registration
 					if (!appUser.name

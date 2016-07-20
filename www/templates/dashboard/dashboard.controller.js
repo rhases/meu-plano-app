@@ -116,22 +116,6 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
         });
     }
 
-    // navigateTo is for navigate to other page
-    // by using targetPage to be the destination state.
-    // Parameter :
-    // stateNames = target state to go.
-    $scope.navigateTo = function(stateName) {
-        $timeout(function () {
-            if ($ionicHistory.currentStateName() != stateName) {
-                $ionicHistory.nextViewOptions({
-                    disableAnimate: false,
-                    disableBack: true
-                });
-                $state.go(stateName);
-            }
-        }, ($scope.isAnimated  ? 300 : 0));
-    }; // End of navigateTo.
-
     $scope.makeAddressClinic = function(clinic) {
         if (!clinic)
             return;
