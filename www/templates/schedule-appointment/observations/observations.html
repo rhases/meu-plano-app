@@ -7,19 +7,19 @@
             <i class="ion-android-arrow-back"></i>
         </button>
     </ion-nav-buttons> -->
-	<ion-content>
-		<div class="text-center padding">
-		    <form name="appointmentForm">
-				<ion-list>
-					<label class="item item-input item-floating-label">
-						<span class="input-label">Observação</span>
-						<textarea id="observation" name="observationsField" ng-model="model.comments" rows="6" placeholder="Observação: Caso necessite de algo a mais, escreva nesse espaço."></textarea>
-						<div class="hint" style="opacity: 0.4;">Alguma coisa diferente sobre esse agendamento?</div>
-					</label>
-				</ion-list>
-
-				<button ng-click="continue()" class="button button-block button-positive">CONTINUAR</a>
-		    </form>
+	<ion-scroll>
+		<br><br><br>
+		<div class="list">
+			<label class="item item-input item-floating-label">
+				<span class="input-label">Observação</span>
+				<textarea  ng-model="model.comments" rows="6" placeholder="Observação: Caso necessite de algo a mais, escreva nesse espaço."></textarea>
+				<div class="hint" style="opacity: 0.4;">Alguma coisa diferente sobre esse agendamento?</div>
+			</label>
 		</div>
-	</ion-content>
+		<div class="padding">
+			<button ng-click="continue()" class="button button-block button-positive">
+			   CONTINUAR
+			</button>
+		</div>
+	</ion-scroll>
 </ion-view>
