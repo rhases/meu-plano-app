@@ -62,75 +62,49 @@ appControllers.controller('menuCtrl', function ($scope, $timeout, $log, $ionicHi
     //
     //  Learn more at : http://ionicframework.com/docs/api/service/$ionicPlatform/#registerBackButtonAction
 
-    $ionicPlatform.registerBackButtonAction(function(){
-
-        if(jQuery('md-bottom-sheet').length > 0 ) {
-            //If bottom sheet is open it will close and then return
-            $mdBottomSheet.cancel();
-        }
-        else if(jQuery('[id^=dialog]').length > 0 ){
-            //If popup dialog is open it will close and then return
-            $mdDialog.cancel();
-        }
-        else if(jQuery('md-menu-content').length > 0 ){
-            //If md-menu is open it will close and then return
-            $mdMenu.hide();
-        }
-        else if(jQuery('md-select-menu').length > 0 ){
-            //If md-select is open it will close and then return
-            $mdSelect.hide();
-        }
-
-        else{
-
-            // If control :
-            // side navigation,
-            // bottom sheet,
-            // popup dialog,
-            // md-menu,
-            // md-select
-            // is not opening, It will show $mdDialog to ask for
-            // Confirmation to close the application or go to the view of lasted state.
-
-            // Check for the current state that not have previous state.
-            // It will show $mdDialog to ask for Confirmation to close the application.
-
-            if($ionicHistory.backView() == null){
-
-                //Check is popup dialog is not open.
-                if(jQuery('[id^=dialog]').length == 0 ) {
-
-                    // mdDialog for show $mdDialog to ask for
-                    // Confirmation to close the application.
-
-                    $mdDialog.show({
-                        controller: 'DialogController',
-                        templateUrl: 'confirm-dialog.html',
-                        targetEvent: null,
-                        locals: {
-                            displayOption: {
-                                title: "Confirmation",
-                                content: "Do you want to close the application?",
-                                ok: "Confirm",
-                                cancel: "Cancel"
-                            }
-                        }
-                    }).then(function () {
-                        //If user tap Confirm at the popup dialog.
-                        //Application will close.
-                        ionic.Platform.exitApp();
-                    }, function () {
-                        // For cancel button actions.
-                    }); //End mdDialog
-                }
-            }
-            else{
-                //Go to the view of lasted state.
-                $ionicHistory.goBack();
-            }
-        }
-
-    },100);
+    // $ionicPlatform.registerBackButtonAction(function(){
+	//
+    //     // It will show $mdDialog to ask for
+    //     // Confirmation to close the application or go to the view of lasted state.
+	//
+    //     // Check for the current state that not have previous state.
+    //     // It will show $mdDialog to ask for Confirmation to close the application.
+	//
+    //     if($ionicHistory.backView() == null) {
+	//
+    //         //Check is popup dialog is not open.
+    //         if(jQuery('[id^=dialog]').length == 0 ) {
+	//
+    //             // mdDialog for show $mdDialog to ask for
+    //             // Confirmation to close the application.
+	//
+    //             $mdDialog.show({
+    //                 controller: 'DialogController',
+    //                 templateUrl: 'confirm-dialog.html',
+    //                 targetEvent: null,
+    //                 locals: {
+    //                     displayOption: {
+    //                         title: "Confirmation",
+    //                         content: "Do you want to close the application?",
+    //                         ok: "Confirm",
+    //                         cancel: "Cancel"
+    //                     }
+    //                 }
+    //             }).then(function () {
+    //                 //If user tap Confirm at the popup dialog.
+    //                 //Application will close.
+    //                 ionic.Platform.exitApp();
+    //             }, function () {
+    //                 // For cancel button actions.
+    //             }); //End mdDialog
+    //         }
+    //     }
+    //     else{
+    //         //Go to the view of lasted state.
+    //         $ionicHistory.goBack();
+    //     }
+	//
+    // }, 100);
     //End of $ionicPlatform.registerBackButtonAction
 
 }); // End of menu toggle controller.
