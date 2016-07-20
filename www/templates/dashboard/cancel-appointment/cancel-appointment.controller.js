@@ -1,9 +1,21 @@
-appControllers.controller("cancelAppointmentController", function ($scope, $timeout, $state, $stateParams, $ionicHistory, lodash, appointmentService, transformUtils) {
+appControllers.controller("cancelAppointmentController", function ($scope, $state, $stateParams, lodash, appointmentService, transformUtils, $ionicLoading, toasts, APPOINTMENT_STATUS) {
 
     $scope.appointment = lodash.isNil($stateParams.appointment) ? undefined : $stateParams.appointment;
 
     $scope.formatTitle = function() {
         return "Cancelamento " + transformUtils.getMedicalSpecialtyLabelByCod($scope.appointment.doctor.speciality);
+    }
+
+    $scope.cancel = function() {
+        var nextState = $scope.appointment.status === APPOINTMENT_STATUS.SCHEDULED ? APPOINTMENT_STATUS.REFUSED : APPOINTMENT_STATUS.CANCELED;
+
+        changeStatus($scope.appointment, nextState, $scope.comment)
+            .then(function() {
+                toasts.showSimple("Cancelado com sucesso.");
+                setTimeout(function () {
+                    $state.go("app.dashboard");
+                }, 1000);
+            });
     }
 
     function changeStatus(appointment, status, comment) {
@@ -19,7 +31,7 @@ appControllers.controller("cancelAppointmentController", function ($scope, $time
 			})
 			.catch(function(err) {
                 appointment.status = oldStatus;
-                $mdToast.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.')
+                toasts.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.')
             })
 			.then(function() {
                 $ionicLoading.hide();
