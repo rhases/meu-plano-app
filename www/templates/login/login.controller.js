@@ -1,5 +1,6 @@
 appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading,
 	authService, analyticsService, $rootScope, toasts) {
+	//disable
 	// This is the success callback from the login method
 	var fbLoginSuccess = function(response) {
 		if (!response.authResponse) {
@@ -27,6 +28,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 		console.log('User Signed in: ' + JSON.stringify(user));
 		$rootScope.$emit('login:successful', user._id);
 		$ionicLoading.hide();
+		$rootScope.slideSideMenu = true;
 		waitResponse = false;
 	};
 
