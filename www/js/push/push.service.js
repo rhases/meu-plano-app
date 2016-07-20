@@ -1,12 +1,8 @@
-angular.module('starter').service('pushService', function($rootScope, $cordovaPushV5, $http, authService, $state) {
+angular.module('starter').service('pushService', function($rootScope, $cordovaPushV5, $http, authService, $state, AUTH_SERVER_URI, GCM_SENDER_ID) {
 
 	function _updateUser(userId, updateData) {
-		return $http.put(window.globalVariable.backend.authServerUri + "api/users/" + userId, updateData)
+		return $http.put(AUTH_SERVER_URI + "api/users/" + userId, updateData)
 	}
-
-	// function _updateAppointment(appointmentId, updateData) {
-	// 	return $http.put(window.globalVariable.backend.schedulerServerUri + "/api/appointments/" + appointmentId, updateData)
-	// }
 
 	function _register() {
 		console.log("The platform recognized is '" + ionic.Platform.platform() + "'.");
@@ -19,7 +15,7 @@ angular.module('starter').service('pushService', function($rootScope, $cordovaPu
 		$cordovaPushV5.initialize(  // important to initialize with the multidevice structure !!
 			{
 				android: {
-					senderID: window.globalVariable.push.gcmSenderId,
+					senderID: GCM_SENDER_ID,
 					icon: "icon",
 					iconColor: "#006838"
 				},
