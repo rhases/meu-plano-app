@@ -1,5 +1,5 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading,
-	authService, analyticsService, $rootScope, toasts) {
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, authService, analyticsService, $rootScope, toasts) {
+
 	//disable
 	// This is the success callback from the login method
 	var fbLoginSuccess = function(response) {
