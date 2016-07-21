@@ -13,14 +13,17 @@
         </div>
 
         <div class="content" style="text-align: center;">
-            <h1>Rhases</h1>
+            <h2>Rhases</h2>
 
-            <h2>Nós acreditamos que o melhor do ser humano está em cuidar um do outro.</h2>
+            <h3>Nós acreditamos que o melhor do ser humano está em cuidar um do outro.</h3>
         </div>
 
         <div class="list">
+
             <div class="item item-icon-right">
-                <h3>Fale com a gente</h3>
+                <h3>
+                    <a ng-click="callTo(contactInfo.telephone)">{{contactInfo.telephone}}</a>
+                </h3>
                 <a ng-click="callTo(contactInfo.telephone)"
                    aria-label="Add">
                     <i class="icon ion-android-call"></i>
@@ -28,24 +31,16 @@
             </div>
 
             <div class="item item-icon-right">
-                <h3>{{contactInfo.email}}</h3>
+                <h3>
+                    <a ng-click="sendEmail(contactInfo.email)">{{contactInfo.email}}</a>
+                </h3>
                 <i class="icon ion-android-mail" ng-click="sendEmail(contactInfo.email)"></i>
-            </div>
-
-            <div class="item item-icon-right">
-                <h3>{{contactInfo.telephone}}</h3>
-                <i class="icon ion-android-textsms" ng-click="sendSms(contactInfo.telephone)"></i>
-            </div>
-
-            <div class="item item-icon-right">
-                <h3>Brasília, Brasil</h3>
-                <i class="icon ion-location"></i>
             </div>
 
         </div>
 
         <div class="content" style="text-align: center;">
-            <h3>Por favor, entre em contato conosco sempre que achar necessário. Estamos a disposição para atendê-lo.</h3>
+            <h4>Por favor, entre em contato conosco sempre que achar necessário. Estamos a disposição para atendê-lo.</h4>
         </div>
 
     </ion-content>
