@@ -20,3 +20,7 @@ i.fa-big-icon {
 
 .button.button-positive.facebook-background {
   background-color: #3c5c99; }
+
+.popup-buttons button {
+  padding-left: 1rem;
+  padding-right: 1rem; }

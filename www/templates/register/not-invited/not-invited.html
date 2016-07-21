@@ -1,4 +1,6 @@
 <ion-view title="Aguarde seu convite">
+	<ion-nav-buttons></ion-nav-buttons> <!-- Needed to not show menu or back button -->
+
 	<!--login content section-->
 	<ion-content padding="true" scrollbar-x="false">
 		<div class="text-center padding-vertical">
@@ -37,7 +39,7 @@
 				<br />
 				<span>ou</span>
 				<br />
-				<md-button ng-click="logout()" style="font-size: 12px;"><small>Entrar com outro usuário</small></md-button>
+				<md-button nav-clear ng-click="logout()" style="font-size: 12px;"><small>Entrar com outro usuário</small></md-button>
 			</div>
 
 		</div>

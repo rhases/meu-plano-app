@@ -75,12 +75,10 @@
     <!-- end app.js section-->
 
     <!-- Controllers section-->
-	<script src="js/shared/dialog.controller.js"></script>
-	<script src="js/shared/epoch-to-date.filter.js"></script>
 	<script src="js/shared/local-storage.service.js"></script>
+	<script src="js/shared/nav-clear.directive.js"></script>
 	<script src="js/shared/numbers-only.directive.js"></script>
 	<script src="js/shared/number-suffix.filter.js"></script>
-	<script src="js/shared/toast.controller.js"></script>
     <script src="templates/menu/menu.controller.js"></script>
 
     <script src="templates/dashboard/dashboard.controller.js"></script>
@@ -130,11 +128,6 @@
 <!--body section-->
 <body ng-app="starter" class="hide-native-scroll-y">
 
-	<!--Custom Style section-->
-	<style type="text/css">
-	    {{customStyle}}
-	</style><!-- end Custom Style section-->
-
 	<!-- Ionic navigation bar section-->
 	<ion-nav-view></ion-nav-view>
 	<!-- end Ionic navigation bar section-->
@@ -144,35 +137,6 @@
 
 <!-- Angular custom template section-->
 
-<!--Share template confirm-dialog section-->
-<script type="text/ng-template" id="confirm-dialog.html">
-    <md-dialog aria-label="confirm-dialog">
-        <form>
-            <md-dialog-content>
-                <div>
-                    <h2 class="md-title">{{displayOption.title}}</h2>
-
-                    <p>{{displayOption.content}}</p>
-                </div>
-            </md-dialog-content>
-            <div class="md-actions" layout="row">
-                <a class="md-primary-color dialog-action-btn" ng-click="cancel()">
-                    {{displayOption.cancel}}
-                </a>
-                <a class="md-primary-color dialog-action-btn" ng-click="ok()">
-                    {{displayOption.ok}}
-                </a>
-            </div>
-        </form>
-    </md-dialog>
-</script> <!-- end share template confirm-dialog section-->
-
-<!-- Share template toast section-->
-<script type="text/ng-template" id="toast.html">
-    <md-toast class="toast-form">
-        <span flex>{{displayOption.title}}</span>
-    </md-toast>
-</script><!-- end share template toast section-->
 
 <!-- end Angular custom template section-->
 

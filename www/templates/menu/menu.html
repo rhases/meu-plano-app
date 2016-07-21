@@ -27,19 +27,13 @@
         </ion-header-bar>
         <ion-content class="has-expanded-header">
             <ion-list class="menu-list">
-                <ion-item nav-clear menu-close>
+                <ion-item menu-close>
                     <div ui-sref="app.dashboard">
 	                    <i class="fa fa-home"></i>
-	                    <span>&nbsp;&nbsp; Início</span>
+	                    <span>&nbsp;&nbsp; Minhas Consultas</span>
 	                </div>
                 </ion-item>
-                <ion-item menu-close ui-sref="app.scheduleAppointment">
-                    <div >
-	                    <i class="fa fa-user-md"></i>
-	                    <span>&nbsp;&nbsp; Agendar consulta</span>
-	                </div>
-                </ion-item>
-                <ion-item nav-clear menu-close>
+                <ion-item menu-close>
                     <div>
 						<a href="market://details?id=br.com.rhases.app">
 		                    <i class="fa fa-star"></i>
@@ -47,13 +41,13 @@
 						</a>
 	                </div>
                 </ion-item>
-				<ion-item nav-clear menu-close>
+				<ion-item menu-close>
 					<div ui-sref="app.talkWithUs">
 						<i class="fa fa-envelope"></i>
 						<span>&nbsp;&nbsp; Fale com a gente</span>
 					</div>
 				</ion-item>
-                <ion-item nav-clear menu-close>
+                <ion-item menu-close nav-clear>
 					<div ng-click="logout()">
 	                    <i class="fa fa-sign-out"></i>
 	                    <span>&nbsp;&nbsp; Sair</span>

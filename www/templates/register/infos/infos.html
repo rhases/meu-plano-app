@@ -1,9 +1,5 @@
 <ion-view title="Complete o seu registro">
-    <!-- <ion-nav-buttons side="left">
-        <button ng-click="back()" class="button back-button buttons button-clear header-item nav-back-btn">
-        	<i class="ion-android-arrow-back"></i>
-        </button>
-    </ion-nav-buttons> -->
+	<ion-nav-buttons></ion-nav-buttons> <!-- Needed to not show menu or back button -->
 
 	<ion-content id="register-content" padding="true" scrollbar-x="false">
     	<form name="registerUser">
@@ -33,7 +29,7 @@
 
 			<br />
 
-			<button class="button button-block button-positive button-balanced" ng-disabled="!(registerUser.name.$valid && registerUser.phone.$valid && registerUser.birthdate.$valid && registerUser.gender.$valid)" ng-click="save()">
+			<button class="button button-block button-positive button-balanced" nav-clear ng-disabled="!(registerUser.name.$valid && registerUser.phone.$valid && registerUser.birthdate.$valid && registerUser.gender.$valid)" ng-click="save()">
 				Continuar
 			</button>
     	</form>

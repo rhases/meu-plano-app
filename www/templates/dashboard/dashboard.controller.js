@@ -80,25 +80,10 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
 
 	// when you receive the appointment (status: SCHEDULED) you need to accept or reject it
 	// put the appointment in status REFUSED
-	$scope.refuse = function(appointment) {
+	$scope.goToCancel = function(appointment) {
 		$state.go("app.dashboard-cancel", {
 				"appointment": appointment
 			});
-		// return showModalComment("Recusar " + transformUtils.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality))
-		// 	.then(function(comment) {
-		// 		return changeStatus(appointment, APPOINTMENT_STATUS.REFUSED, comment)
-		// 			.then(function() { toasts.showSimple('Consulta recusada!') });
-		// 	})
-	}
-
-	// when the user accept the appointment at any time he can cancel it
-	// put the appointment in status CANCELED
-	$scope.cancel = function(appointment) {
-		return showModalComment("Desmarcar " + transformUtils.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality))
-			.then(function(comment) {
-				return changeStatus(appointment, APPOINTMENT_STATUS.CANCELED, comment)
-					.then(function() { toasts.showSimple('Consulta cancelada!') });
-			})
 	}
 
 	// One or two days before the appointment the user can really confirm it
@@ -131,22 +116,6 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
         });
     }
 
-    // navigateTo is for navigate to other page
-    // by using targetPage to be the destination state.
-    // Parameter :
-    // stateNames = target state to go.
-    $scope.navigateTo = function(stateName) {
-        $timeout(function () {
-            if ($ionicHistory.currentStateName() != stateName) {
-                $ionicHistory.nextViewOptions({
-                    disableAnimate: false,
-                    disableBack: true
-                });
-                $state.go(stateName);
-            }
-        }, ($scope.isAnimated  ? 300 : 0));
-    }; // End of navigateTo.
-
     $scope.makeAddressClinic = function(clinic) {
         if (!clinic)
             return;
@@ -159,7 +128,17 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
     function showConfirm(title, body) {
         return confirmPopup = $ionicPopup.confirm({
             title: title,
-            template: body
+            template: body,
+			buttons: [
+				{ text: "NÃO" },
+				{
+					text: "SIM",
+					type: "button-positive",
+					onTap: function(e) {
+						return true;
+					}
+				}
+			]
         });
      }
 
