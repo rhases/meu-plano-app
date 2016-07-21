@@ -5,69 +5,43 @@
 <!--State name : app.aboutUs-->
 <!--URL : #app/aboutUs-->
 
-<ion-view view-title="Sobre nós">
-    <!--toolbar section-->
-    <md-toolbar class="md-tall md-primary toolbar-with-image">
-        <div>
-            <h1>Rhases</h1>
+<ion-view view-title="Fale com a gente">
+    <ion-content>
 
-            <h2>Nós acreditamos que o melhor do ser humano está em cuidar um do outro.</h2>
-        </div>
-    </md-toolbar>
-    <!--end toolbar section-->
+        <div class="hero" style="background-image: url('http://www.mederi.com.br/imagens/Brasilia.jpg');">
 
-    <!--button section-->
-    <a class="md-button md-accent md-fab fab-toolbar-medium"
-       ng-click="callTo(contractInfo.telephone)"
-       aria-label="Add">
-        <i class="ion-android-call"></i>
-    </a><!--end button section-->
-
-    <!--contract us section-->
-    <ion-content id="contract-us-content">
-        <!--header section-->
-        <div class="row header">
-            <div class="col">
-                Fale com a gente:
-            </div>
-
-        </div> <!--end header section-->
-
-        <!--content section-->
-        <div class="row content">
-            <div class="col-75">
-                {{contractInfo.email}}
-            </div>
-            <div class="col-25">
-                <i class="ion-android-mail" ng-click="sentEmail(contractInfo.email)"></i>
-            </div>
         </div>
 
-        <div class="row content">
-            <div class="col-75">
-                {{contractInfo.telephone}}
-            </div>
-            <div class="col-25">
-                <i class="ion-android-textsms" ng-click="sentSms(contractInfo.telephone)"></i>
-            </div>
+        <div class="content" style="text-align: center;">
+            <h2>Rhases</h2>
+
+            <h3>Nós acreditamos que o melhor do ser humano está em cuidar um do outro.</h3>
         </div>
 
-        <div class="row header">
-            <div class="col">
-                Endereço:
+        <div class="list">
+
+            <div class="item item-icon-right">
+                <h3>
+                    <a ng-click="callTo(contactInfo.telephone)">{{contactInfo.telephone}}</a>
+                </h3>
+                <a ng-click="callTo(contactInfo.telephone)"
+                   aria-label="Add">
+                    <i class="icon ion-android-call"></i>
+                </a>
             </div>
-        </div>
-        <div class="row content">
-            <div class="col-90">
-                Brasília, Brasil
+
+            <div class="item item-icon-right">
+                <h3>
+                    <a ng-click="sendEmail(contactInfo.email)">{{contactInfo.email}}</a>
+                </h3>
+                <i class="icon ion-android-mail" ng-click="sendEmail(contactInfo.email)"></i>
             </div>
 
         </div>
-        <div class="row content">
-            <div class="col-90">
-                Por favor, entre em contato conosco sempre que achar necessário. Estamos a disposição para atendê-lo.
-            </div>
+
+        <div class="content" style="text-align: center;">
+            <h4>Por favor, entre em contato conosco sempre que achar necessário. Estamos a disposição para atendê-lo.</h4>
         </div>
-        <!--end content section-->
-    </ion-content><!--end contract us section-->
+
+    </ion-content>
 </ion-view>
