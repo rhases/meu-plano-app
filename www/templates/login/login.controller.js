@@ -74,7 +74,10 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 			template: 'Login de teste...'
 		});
 
-		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho", _id:"1"};
+		profileInfo = {email:"jaime_cetutyn_da_costa@tfbnw.net",
+		name:"Jaime Gil da Costa",
+		id: "122665894837521",
+		_id:"1"};
 		// profileInfo = {email:"talesap@gmail.com", name:"Tales Porto", _id:"1"};
 		authService.facebookSignUp(profileInfo)
 			.then(function(user) {
