@@ -114,7 +114,8 @@
 					<h2 class="balanced"><strong>{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality) }} Agendado</strong><h2>
 				</div>
 				<div class="item item-body">
-					<h3>Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
+					<h3 ng-if="!outdatedDate(appointment.when)">Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
+					<h3 ng-if="outdatedDate(appointment.when)">Sua consulta era <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
 					<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }}</strong></h3>
 					<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
 					<h3>Quando</h3>
@@ -152,7 +153,8 @@
 					<h2 class="balanced"><strong>{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality) }} Agendado</strong><h2>
 				</div>
 				<div class="item item-body">
-					<h3>Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
+					<h3 ng-if="!outdatedDate(appointment.when)">Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
+					<h3 ng-if="outdatedDate(appointment.when)">Sua consulta era <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
 					<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }}</strong></h3>
 					<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
 					<h3>Quando</h3>
