@@ -7,41 +7,37 @@
 
 <ion-view view-title="Fale com a gente">
     <ion-content>
-
-        <div class="hero" style="background-image: url('http://www.mederi.com.br/imagens/Brasilia.jpg');">
-
-        </div>
-
-        <div class="content" style="text-align: center;">
-            <h2>Rhases</h2>
-
-            <h3>Nós acreditamos que o melhor do ser humano está em cuidar um do outro.</h3>
-        </div>
-
-        <div class="list">
-
-            <div class="item item-icon-right">
-                <h3>
-                    <a ng-click="callTo(contactInfo.telephone)">{{contactInfo.telephone}}</a>
-                </h3>
-                <a ng-click="callTo(contactInfo.telephone)"
-                   aria-label="Add">
-                    <i class="icon ion-android-call"></i>
-                </a>
-            </div>
-
-            <div class="item item-icon-right">
-                <h3>
-                    <a ng-click="sendEmail(contactInfo.email)">{{contactInfo.email}}</a>
-                </h3>
-                <i class="icon ion-android-mail" ng-click="sendEmail(contactInfo.email)"></i>
-            </div>
+      <div class="responsive-lg">
+        <div class="hero" style="background-image: url('img/brasilia.jpg');">
 
         </div>
 
-        <div class="content" style="text-align: center;">
-            <h4>Por favor, entre em contato conosco sempre que achar necessário. Estamos a disposição para atendê-lo.</h4>
-        </div>
+        <div class="content im-wrapper responsive-lg" style="text-align: center;">
+          <div class="row  responsive-lg">
+            <h4>Rhases</h4>
 
+            <blockquote>Nós acreditamos que o melhor do ser humano está em cuidar um do outro.</blockquote>
+          </div>
+
+          <div class="list">
+            <a class="item item-button-right" ng-click="callTo(contactInfo.telephone)"
+               aria-label="Add">
+               <span>{{contactInfo.telephone}} </span>
+               <button class="button button-balanced ink">
+                 <i class="icon ion-android-call"></i>
+              </button>
+            </a>
+            <a href="mailto:{{contactInfo.email}}" class="item item-button-right" ng-click="sendEmail(contactInfo.email)"
+               aria-label="Add">
+               <span>{{contactInfo.email}} </span>
+               <button class="button button-balanced ink">
+                 <i class="icon ion-android-mail"></i>
+              </button>
+            </a>
+          </div>
+          <br/>
+          <p>Entre em contato conosco! <br/> Estamos a disposição para atendê-lo.</p>
+
+      </div>
     </ion-content>
 </ion-view>
