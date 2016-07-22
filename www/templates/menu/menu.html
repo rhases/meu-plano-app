@@ -1,7 +1,7 @@
 <ion-side-menus enable-menu-with-back-views="false">
     <ion-side-menu-content drag-content="slideSideMenu">
         <!-- <ion-nav-bar class="bar-assertive-900" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-left': hasHeaderFableft}" align-title="left"> -->
-		<ion-nav-bar class="bar-balanced  material-background-nav-bar">
+		<ion-nav-bar class="bar-balanced" >
             <ion-nav-back-button class="no-text">
             </ion-nav-back-button>
             <ion-nav-buttons side="left">
@@ -18,54 +18,59 @@
           <h2 class="title">{{ appUser.name }}</h2>
         </ion-header-bar>
         <ion-content class="has-expanded-header">
+          <div class="scroll">
             <ion-list class="menu-list">
-                <ion-item menu-close>
-                    <div ui-sref="app.dashboard">
-	                    <i class="fa fa-home"></i>
-	                    <span>&nbsp;&nbsp; Minhas Consultas</span>
-	                </div>
+              <div class="list">
+                <ion-item menu-close class="item item-complex">
+                  <div ui-sref="app.dashboard">
+                    <a class="item-content">
+                      <i class="fa fa-home"></i>
+                      <span>&nbsp;&nbsp; Minhas Consultas</span>
+                    </a>
+                  </div>
                 </ion-item>
                 <ion-item menu-close>
-                    <div>
-						<a href="market://details?id=br.com.rhases.app">
-		                    <i class="fa fa-star"></i>
-		                    <span>&nbsp;&nbsp; Avalie-nos na Store</span>
-						</a>
-	                </div>
+                  <div>
+          					<a class="item-content" href="market://details?id=br.com.rhases.app">
+                      <i class="fa fa-star"></i>
+                      <span>&nbsp;&nbsp; Avalie-nos na Store</span>
+          					</a>
+                  </div>
                 </ion-item>
-				<ion-item menu-close>
-					<div ui-sref="app.talkWithUs">
-						<i class="fa fa-envelope"></i>
-						<span>&nbsp;&nbsp; Fale com a gente</span>
-					</div>
-				</ion-item>
+                <ion-item menu-close>
+                	<a class="item-content" ui-sref="app.talkWithUs">
+                		<i class="fa fa-envelope"></i>
+                		<span>&nbsp;&nbsp; Fale com a gente</span>
+                	</a>
+                </ion-item>
                 <ion-item menu-close nav-clear>
-					<div ng-click="logout()">
-	                    <i class="fa fa-sign-out"></i>
-	                    <span>&nbsp;&nbsp; Sair</span>
-	                </div>
+                  <a class="item-content" ng-click="logout()">
+                    <i class="fa fa-sign-out"></i>
+                    <span>&nbsp;&nbsp; Sair</span>
+                  </a>
                 </ion-item>
+              </div>
             </ion-list>
-
-			<br/>
-			<br/>
-			<br/>
-
-			<div class="row menu-item">
-				<p>
-					Feito com amor em Brasília, DF, Brasil.
-					<br>
-					<small>
-						Todos os direitos reservados
-						<br>
-						© Rhases Soluções em Tecnologia LTDA
-						<br>
-						<small>CNPJ 23.821.354/0001-00</small>
-						<br>
-						v1.0
-					</small>
-				</p>
-			</div>
+      			<br/>
+      			<br/>
+      			<br/>
+            <span > </span>
+      			<div style="border-style:none" class="item row menu-item">
+      				<p>
+      					Feito com amor em Brasília, DF, Brasil.
+      					<br>
+      					<small>
+      						Todos os direitos reservados
+      						<br>
+      						© Rhases Soluções em Tecnologia LTDA
+      						<br>
+      						<small>CNPJ 23.821.354/0001-00</small>
+      						<br>
+      						{{appVersion}}
+      					</small>
+      				</p>
+      			</div>
+          </div>
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>

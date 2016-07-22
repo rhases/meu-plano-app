@@ -1,3 +1,10 @@
+p {
+  color: #555; }
+
+.bar.bar-balanced {
+  background-color: #4CAF50;
+  color: #fff; }
+
 p.big-text {
   font-size: 16px;
   line-height: 150%;
@@ -8,12 +15,6 @@ h2.big-text {
 
 i.fa-big-icon {
   font-size: 10em; }
-
-.menu-list .item {
-  font-size: 1.25em; }
-  .menu-list .item a {
-    color: #444;
-    text-decoration: none; }
 
 .appointment-details-list .item .icon {
   font-size: 22px; }
