@@ -6,6 +6,11 @@ angular.module('starter')
         function initialRootScope() {
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
+            if(typeof cordova !== 'undefined'){
+              cordova.getAppVersion((version) => {
+                $rootScope.appVersion = version;
+              });
+            }
         };
 
         function configSplashScreen() {

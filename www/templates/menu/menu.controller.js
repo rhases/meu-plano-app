@@ -1,7 +1,4 @@
 appControllers.controller('menuCtrl', function ($scope, $state, $rootScope, $ionicHistory, $ionicPlatform, analyticsService, authService) {
-
-	$scope.appVersion = "?v";
-
 	$scope.logout = function() {
 		authService.logout();
 
@@ -14,13 +11,4 @@ appControllers.controller('menuCtrl', function ($scope, $state, $rootScope, $ion
 
 		$state.go('app.login');
 	}
-
-	$ionicPlatform.ready(function() {
-		if(typeof cordova !== 'undefined'){
-			cordova.getAppVersion((version) => {
-		  	$scope.appVersion = version;
-		  });
-		}
-	});
-
 });
