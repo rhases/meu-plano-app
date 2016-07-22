@@ -10,7 +10,11 @@ angular.module('starter')
 
         function configSplashScreen() {
             setTimeout(function() {
-                navigator.splashscreen.hide();
+                try {
+                    navigator.splashscreen.hide();
+                } catch(e) {
+                    console.log("Could not execute 'navigator.splashscreen.hide()'");
+                }
             }, 100);
         };
 

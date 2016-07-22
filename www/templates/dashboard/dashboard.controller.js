@@ -125,6 +125,13 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
         return clinic.name + ", " + clinic.unit.address;
     }
 
+	$scope.outdatedDate = function(dateP) {
+		var nowTime = Date.now();
+		var date = new Date(String(dateP));
+
+		return now > date.getTime();
+	}
+
     function showConfirm(title, body) {
         return confirmPopup = $ionicPopup.confirm({
             title: title,

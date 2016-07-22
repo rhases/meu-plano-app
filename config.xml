@@ -31,12 +31,16 @@
     <preference name="webviewbounce" value="false" />
     <preference name="UIWebViewBounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
+
+    <!-- SPLASH SCREEN -->
     <preference name="SplashScreenBackgroundColor" value="#006838" />
     <preference name="AutoHideSplashScreen" value="false" />
     <preference name="ShowSplashScreenSpinner" value="true" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="FadeSplashScreen" value="false"/>
+
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="SplashScreen" value="screen" />
     <preference name="xwalkVersion" value="18+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
