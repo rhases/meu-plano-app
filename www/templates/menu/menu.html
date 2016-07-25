@@ -17,33 +17,34 @@
           </span>
           <h2 class="title">{{ appUser.name }}</h2>
         </ion-header-bar>
-        <ion-content class="has-expanded-header">
+        <ion-content class="has-expanded-header stable-bg">
           <div class="scroll">
+			<br />
             <ion-list class="menu-list">
               <div class="list">
-                <ion-item menu-close class="item item-complex">
+                <ion-item menu-close class="item item-complex ink">
                   <div ui-sref="app.dashboard">
                     <a class="item-content">
-                      <i class="fa fa-home"></i>
+                      <i class="fa fa-stethoscope"></i>
                       <span>&nbsp;&nbsp; Minhas Consultas</span>
                     </a>
                   </div>
                 </ion-item>
-                <ion-item menu-close>
+                <ion-item menu-close class="ink">
                   <div>
-          					<a class="item-content" href="market://details?id=br.com.rhases.app">
+        			<a class="item-content" href="market://details?id=br.com.rhases.app">
                       <i class="fa fa-star"></i>
                       <span>&nbsp;&nbsp; Avalie-nos na Store</span>
-          					</a>
+        			</a>
                   </div>
                 </ion-item>
-                <ion-item menu-close>
+                <ion-item menu-close class="ink">
                 	<a class="item-content" ui-sref="app.talkWithUs">
                 		<i class="fa fa-envelope"></i>
                 		<span>&nbsp;&nbsp; Fale com a gente</span>
                 	</a>
                 </ion-item>
-                <ion-item menu-close nav-clear>
+                <ion-item menu-close nav-clear class="ink">
                   <a class="item-content" ng-click="logout()">
                     <i class="fa fa-sign-out"></i>
                     <span>&nbsp;&nbsp; Sair</span>
@@ -55,7 +56,7 @@
       			<br/>
       			<br/>
             <span > </span>
-      			<div style="border-style:none" class="item row menu-item">
+      			<div style="border-style:none" class="item row menu-item text-right">
       				<p>
       					Feito com amor em Brasília, DF, Brasil.
       					<br>

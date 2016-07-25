@@ -10,7 +10,9 @@ angular.module('starter')
               cordova.getAppVersion((version) => {
                 $rootScope.appVersion = version;
               });
-            }
+		  } else {
+			  $rootScope.appVersion = 'x.y.z';
+		  }
         };
 
         function configSplashScreen() {
