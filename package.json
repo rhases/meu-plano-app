@@ -38,7 +38,8 @@
       "id": "cordova-plugin-facebook4"
     },
     "cordova-plugin-google-analytics",
-    "ionic-plugin-keyboard"
+    "ionic-plugin-keyboard",
+    "cordova-plugin-app-version"
   ],
   "cordovaPlatforms": [
     "ios",

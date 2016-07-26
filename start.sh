@@ -23,6 +23,7 @@ ionic plugin add cordova-plugin-transport-security --save # IOS transport securi
 ionic plugin add cordova-plugin-statusbar --save # IOS status bar
 ionic plugin add cordova-plugin-google-analytics --save # Google Analytics
 ionic plugin add ionic-plugin-keyboard --save # Contrala a subida do teclado
+ionic plugin add cordova-plugin-app-version --save # obtem a versão do app para ser exibido na tela
 
 echo "Instalando browser CROSSWALK..."​
 ionic browser add crosswalk # https://crosswalk-project.org/

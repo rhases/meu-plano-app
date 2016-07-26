@@ -8,16 +8,21 @@
 <ion-view view-title="{{ formatTitle() }}">
 
     <!--right button on navigation bar-->
-    <ion-nav-buttons side="right">
-        <md-button class="md-icon-button ion-nav-button-right" ng-click="goToSetting()"
-                   aria-label="Setting">
-            <i class="ion-android-more-vertical"></i>
-        </md-button>
-    </ion-nav-buttons> <!--end right button on navigation bar-->
+    <ion-nav-buttons side="right"></ion-nav-buttons>
+    <!--end right button on navigation bar-->
 
-	<!--dashboard section-->
-	<ion-content id="dashboard-content">
-        {{ appointment }}
-    </ion-content><!--end dashboard section-->
-
+	<ion-scroll>
+        <br><br><br>
+        <div class="list">
+            <label class="item item-input item-floating-label">
+                <span class="input-label">Nos diga quais os motivos para o cancelamento</span>
+                <textarea rows="5" ng-model="comment" placeholder="Nos diga quais os motivos para o cancelamento"></textarea>
+            </label>
+        </div>
+        <div class="padding">
+            <button ng-click="cancel()" ng-disabled="comment.length <= 0 || !comment" class="button button-block button-positive">
+               CANCELAR
+            </button>
+        </div>
+    </ion-scroll>
 </ion-view>

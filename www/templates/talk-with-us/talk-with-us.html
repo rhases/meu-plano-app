@@ -5,69 +5,39 @@
 <!--State name : app.aboutUs-->
 <!--URL : #app/aboutUs-->
 
-<ion-view view-title="Sobre nós">
-    <!--toolbar section-->
-    <md-toolbar class="md-tall md-primary toolbar-with-image">
-        <div>
-            <h1>Rhases</h1>
-
-            <h2>Nós acreditamos que o melhor do ser humano está em cuidar um do outro.</h2>
-        </div>
-    </md-toolbar>
-    <!--end toolbar section-->
-
-    <!--button section-->
-    <a class="md-button md-accent md-fab fab-toolbar-medium"
-       ng-click="callTo(contractInfo.telephone)"
-       aria-label="Add">
-        <i class="ion-android-call"></i>
-    </a><!--end button section-->
-
-    <!--contract us section-->
-    <ion-content id="contract-us-content">
-        <!--header section-->
-        <div class="row header">
-            <div class="col">
-                Fale com a gente:
-            </div>
-
-        </div> <!--end header section-->
-
-        <!--content section-->
-        <div class="row content">
-            <div class="col-75">
-                {{contractInfo.email}}
-            </div>
-            <div class="col-25">
-                <i class="ion-android-mail" ng-click="sentEmail(contractInfo.email)"></i>
-            </div>
-        </div>
-
-        <div class="row content">
-            <div class="col-75">
-                {{contractInfo.telephone}}
-            </div>
-            <div class="col-25">
-                <i class="ion-android-textsms" ng-click="sentSms(contractInfo.telephone)"></i>
-            </div>
-        </div>
-
-        <div class="row header">
-            <div class="col">
-                Endereço:
-            </div>
-        </div>
-        <div class="row content">
-            <div class="col-90">
-                Brasília, Brasil
-            </div>
+<ion-view view-title="Fale com a gente">
+    <ion-content>
+      <div class="responsive-lg">
+        <div class="hero" style="background-image: url('img/brasilia.jpg');">
 
         </div>
-        <div class="row content">
-            <div class="col-90">
-                Por favor, entre em contato conosco sempre que achar necessário. Estamos a disposição para atendê-lo.
-            </div>
-        </div>
-        <!--end content section-->
-    </ion-content><!--end contract us section-->
+
+        <div class="content im-wrapper responsive-lg" style="text-align: center;">
+          <div class="row  responsive-lg">
+            <h4>Rhases</h4>
+
+            <blockquote>Nós acreditamos que o melhor do ser humano está em cuidar um do outro.</blockquote>
+          </div>
+
+          <div class="list">
+            <a class="item item-button-right" ng-click="callTo(contactInfo.telephone)"
+               aria-label="Add">
+               <span>{{contactInfo.telephone}} </span>
+               <button class="button button-balanced ink">
+                 <i class="icon ion-android-call"></i>
+              </button>
+            </a>
+            <a href="mailto:{{contactInfo.email}}" class="item item-button-right" ng-click="sendEmail(contactInfo.email)"
+               aria-label="Add">
+               <span>{{contactInfo.email}} </span>
+               <button class="button button-balanced ink">
+                 <i class="icon ion-android-mail"></i>
+              </button>
+            </a>
+          </div>
+          <br/>
+          <p>Entre em contato conosco! <br/> Estamos a disposição para atendê-lo.</p>
+
+      </div>
+    </ion-content>
 </ion-view>

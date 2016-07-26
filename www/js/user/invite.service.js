@@ -1,4 +1,4 @@
-angular.module('starter').service('inviteService', function($rootScope, $q, $http, localStorage) {
+angular.module('starter').service('inviteService', function($rootScope, $q, $http, localStorage, SCHEDULER_SERVER_URI) {
 
 	var INVITE_STATUS_KEY = "INVITE_STATUS";
 
@@ -6,7 +6,7 @@ angular.module('starter').service('inviteService', function($rootScope, $q, $htt
 		if (localStorage.get(INVITE_STATUS_KEY) == "registered")
 			return $q(function(resolve) { resolve(localStorage.get(INVITE_STATUS_KEY)); });
 
-		return $http.get(window.globalVariable.backend.schedulerServerUri + "api/invites/status/" + email)
+		return $http.get(SCHEDULER_SERVER_URI + "api/invites/status/" + email)
 			.then(function(res) {
 				localStorage.set(INVITE_STATUS_KEY, res.data.status);
 				return res.data.status;
@@ -21,7 +21,7 @@ angular.module('starter').service('inviteService', function($rootScope, $q, $htt
 			healthIssurance: (appUser && appUser.profile && appUser.profile.healthPlan ? appUser.profile.healthPlan.name : ''),
 		}
 
-		return $http.post(window.globalVariable.backend.schedulerServerUri + "api/invites/request", inviteRequest)
+		return $http.post(SCHEDULER_SERVER_URI + "api/invites/request", inviteRequest)
 			.then(function(res) {
 				return res.data;
 			});

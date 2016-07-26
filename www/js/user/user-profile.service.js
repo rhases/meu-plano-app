@@ -1,12 +1,12 @@
 // User on rhases-auth
-angular.module('starter').service('userProfileService', function($rootScope, $q, $http, localStorage, lodash) {
+angular.module('starter').service('userProfileService', function($rootScope, $q, $http, localStorage, lodash, SCHEDULER_SERVER_URI) {
 
 	var USER_PROFILE_KEY = "USER_PROFILE";
 
 	// Load from server (save locally too)
 	function _load(id) {
 		console.log("Loading user profile from server...")
-		return $http.get(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/" + id)
+		return $http.get(SCHEDULER_SERVER_URI + "api/user-profiles/" + id)
 			.then(function(res) {
 				var userProfile = res.data;
 				console.log("User profile loaded.");
@@ -25,9 +25,9 @@ angular.module('starter').service('userProfileService', function($rootScope, $q,
 		delete userProfile.__v;
 
 		// envia para o scheduler-ws.
-		return $http.put(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/" + userProfile._id, userProfile)
+		return $http.put(SCHEDULER_SERVER_URI + "api/user-profiles/" + userProfile._id, userProfile)
 			.catch(function(error) {
-				return $http.post(window.globalVariable.backend.schedulerServerUri + "api/user-profiles/", userProfile);
+				return $http.post(SCHEDULER_SERVER_URI + "api/user-profiles/", userProfile);
 			})
 			.then(function(res) {
 				userProfile = res.data; // The server return a user profile

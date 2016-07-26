@@ -37,8 +37,8 @@ angular.module('starter')
             })
 
 			// REGISTER
-			.state('app.register', {
-                url: "/complete-register",
+			.state('app.register::infos', {
+                url: "/register/infos",
 				cache: false,
                 params:{
                     isAnimated: false
@@ -50,8 +50,8 @@ angular.module('starter')
                     }
                 }
             })
-			.state('app.profile', {
-                url: "/profile",
+			.state('app.register::profile', {
+                url: "/register/profile",
 				cache: false,
                 params:{
                     isAnimated: false
@@ -63,8 +63,8 @@ angular.module('starter')
                     }
                 }
             })
-			.state('app.notInvited', {
-                url: "/not-invited",
+			.state('app.register::notInvited', {
+                url: "/register/not-invited",
 				cache: false,
                 params:{
                     isAnimated: false
@@ -91,20 +91,20 @@ angular.module('starter')
                     }
                 }
             })
-            // .state('app.dashboard-cancel', {
-            //     url: "/cancel-appointment",
-			// 	cache: false,
-            //     params:{
-            //         isAnimated: true,
-            //         appointment: null
-            //     },
-            //     views: {
-            //         'menuContent': {
-            //             templateUrl: "templates/dashboard/cancel-appointment/cancel-appointment.html",
-            //             controller: 'cancelAppointmentController'
-            //         }
-            //     }
-            // })
+            .state('app.dashboard-cancel', {
+                url: "/cancel-appointment",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                    appointment: null
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/dashboard/cancel-appointment/cancel-appointment.html",
+                        controller: 'cancelAppointmentController'
+                    }
+                }
+            })
             .state('app.dashboard-detail', {
                 url: "/detail-appointment",
 				cache: false,
@@ -214,6 +214,6 @@ angular.module('starter')
             })
 
         //Use $urlRouterProvider.otherwise(Url);
-        $urlRouterProvider.otherwise(window.globalVariable.startPage.url);
+        $urlRouterProvider.otherwise(localStorage['AUTH_TOKEN'] ? '/app/dashboard' : '/app/login');
 
     });

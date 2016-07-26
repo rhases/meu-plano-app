@@ -1,4 +1,6 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, $mdToast, authService, analyticsService, $rootScope) {
+appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, authService, analyticsService, $rootScope, toasts) {
+
+	//disable
 	// This is the success callback from the login method
 	var fbLoginSuccess = function(response) {
 		if (!response.authResponse) {
@@ -26,6 +28,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 		console.log('User Signed in: ' + JSON.stringify(user));
 		$rootScope.$emit('login:successful', user._id);
 		$ionicLoading.hide();
+		$rootScope.slideSideMenu = true;
 		waitResponse = false;
 	};
 
@@ -38,7 +41,7 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 		waitResponse = false;
 
 		// User Cancelled (4201)
-		$mdToast.showSimple('Não foi possível acessar o seu perfil.\n Feche o app do Facebook e tente novamente!');
+		toasts.showSimple('Não foi possível acessar o seu perfil.\n Feche o app do Facebook e tente novamente!');
 	};
 
 	// This method is to get the user profile info from the facebook api
@@ -71,7 +74,10 @@ appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoadin
 			template: 'Login de teste...'
 		});
 
-		profileInfo = {email:"mvsgodinho@gmail.com",name:"Marcos Vinícius Silva Godinho", _id:"1"};
+		profileInfo = {email:"jaime_cetutyn_da_costa@tfbnw.net",
+		name:"Jaime Gil da Costa",
+		id: "122665894837521",
+		_id:"1"};
 		// profileInfo = {email:"talesap@gmail.com", name:"Tales Porto", _id:"1"};
 		authService.facebookSignUp(profileInfo)
 			.then(function(user) {

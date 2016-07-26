@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.com.rhases.app" version="0.0.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.com.rhases.app" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Rhases</name>
     <description>
 		    Um aplicativo para você cuidar da sua saúde.
@@ -10,12 +10,21 @@
     <content src="index.html" />
     <allow-navigation href="tel:*" />
     <allow-navigation href="maps:*" />
+    <allow-navigation href="geo:*" />
+    <allow-navigation href="market:*" />
+    <allow-navigation href="mailto:*" />
     <allow-navigation href="https://graph.facebook.com/*" />
+    <access launch-external="yes" origin="tel:*" />
+    <access launch-external="yes" origin="maps:*" />
+    <access launch-external="yes" origin="geo:*" />
+    <access launch-external="yes" origin="mailto:*" />
+    <access launch-external="yes" origin="market:*" />
     <access origin="*" />
+    <allow-intent href="tel:*" />
     <allow-intent href="maps:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="mailto:*" />
-    <allow-intent href="tel:*" />
+    <allow-intent href="market:*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
     <preference name="BackgroundColor" value="#006838" />
@@ -24,10 +33,11 @@
     <preference name="DisallowOverscroll" value="true" />
     <preference name="SplashScreenBackgroundColor" value="#006838" />
     <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="ShowSplashScreenSpinner" value="false" />
+    <preference name="ShowSplashScreenSpinner" value="true" />
+    <preference name="SplashScreen" value="screen" />
+    <preference name="FadeSplashScreen" value="false" />
     <preference name="android-minSdkVersion" value="16" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="SplashScreen" value="screen" />
     <preference name="xwalkVersion" value="18+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
@@ -103,4 +113,5 @@
     <plugin name="cordova-plugin-statusbar" spec="~2.1.3" />
     <plugin name="cordova-plugin-google-analytics" spec="~0.8.1" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
+    <plugin name="cordova-plugin-app-version" spec="~0.1.8" />
 </widget>

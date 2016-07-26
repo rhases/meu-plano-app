@@ -1,34 +1,23 @@
-<!-- <md-dialog aria-label="Comente isto">
-	<md-dialog-content>
+<ion-modal-view>
+	<ion-header-bar class="balanced-bg">
+		<h1 class="title">{{ commentModal.title }}</h1>
+	</ion-header-bar>
+	<ion-content>
+		<form name="form" class="text-center">
+			<br />
+			<br />
+			<textarea id="comment" ng-model="commentModal.comment" name="comment" required placeholder="Motivo" rows="8" cols="65" style="width:100%"></textarea>
+			<div class="hint">Diga nos o porque da desistência para que possamos te ajudar.</div>
 
-	</md-dialog-content>
-	<md-dialog-actions>
+			<br />
+			<br />
 
-</md-dialog> -->
-
-<md-dialog aria-label="List dialog">
-	<style>
-		#comment {
-			min-height: 100px;
-		}
-	</style>
-	<md-dialog-content>
-		<form name="form">
-			<div class="md-dialog-content">
-				<md-input-container class="md-block">
-					<!-- <input ng-model="comment" name="comment" required placeholder="Motivo" rows="4" md-maxlength="256" md-autofocus style="min-height: 100px;" /> -->
-					<textarea id="comment" ng-model="comment" name="comment" required placeholder="Motivo" rows="4" md-maxlength="256" md-autofocus style="min-height: 100px;" ></textarea>
-					<div class="hint">Diga nos o porque da desistência para que possamos te ajudar.</div>
-				</md-input-container>
-			</div>
+			<button class="button" ng-click="commentModal.cancel()">
+				Cancel
+			</button>
+			<button class="button button-balanced" ng-disabled="!form.comment.$valid" ng-click="commentModal.ok()">
+				Ok
+			</button>
 		</form>
-	</md-dialog-content>
-	<md-dialog-actions>
-		<md-button ng-click="cancel()">
-			Cancel
-		</md-button>
-		<md-button class="md-primary" ng-disabled="!form.comment.$valid" ng-click="ok()">
-			Ok
-		</md-button>
-	</md-dialog-actions>
-	</md-dialog>
+	</ion-content>
+</ion-modal-view>

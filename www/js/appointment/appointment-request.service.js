@@ -1,11 +1,11 @@
 angular.module("starter")
-    .factory("appointmentRequestService", function($http, $cacheFactory, $q, authService, lodash, SCHEDULER_HOST, localStorage) {
+    .factory("appointmentRequestService", function($http, $cacheFactory, $q, authService, lodash, SCHEDULER_SERVER_URI, localStorage) {
         var APPOINTMENT_REQUEST_KEY = "APPOINTMENT_REQUESTS";
 
 		// Load from server (save locally info too)
 		function _load() {
 			console.log("Loading appointments requests...")
-			return $http.get(SCHEDULER_HOST + "api/appointment-requests")
+			return $http.get(SCHEDULER_SERVER_URI + "api/appointment-requests")
 				.then(function(res) {
 					var appointmentRequests = res.data;
 					console.log("Appointment requests loaded.");
@@ -19,7 +19,7 @@ angular.module("starter")
 		}
 
         function _update(appointmentRequest) {
-            return $http.put(SCHEDULER_HOST + "api/appointment-requests/" + appointmentRequest._id, appointmentRequest)
+            return $http.put(SCHEDULER_SERVER_URI + "api/appointment-requests/" + appointmentRequest._id, appointmentRequest)
 				.then(function(res) {
 					if(res.status >= 300)
 						throw new Error('Something bad happedned. Status: ' + res.status);

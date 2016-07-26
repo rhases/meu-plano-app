@@ -1,12 +1,12 @@
 // User on rhases-auth
-angular.module('starter').service('userService', function($rootScope, $q, $http, localStorage, lodash) {
+angular.module('starter').service('userService', function($rootScope, $q, $http, localStorage, lodash, AUTH_SERVER_URI) {
 
 	var USER_KEY = "USER";
 
 	// Load from server (save locally info too)
 	function _load() {
 		console.log("Loading complete user from server...")
-		return $http.get(window.globalVariable.backend.authServerUri + "api/users/me")
+		return $http.get(AUTH_SERVER_URI + "api/users/me")
 			.then(function(res) {
 				var user = res.data;
 				console.log("User loaded.");
@@ -26,9 +26,9 @@ angular.module('starter').service('userService', function($rootScope, $q, $http,
 		delete user.__v;
 
 		// envia para o scheduler-ws.
-		return $http.put(window.globalVariable.backend.authServerUri + "api/users/" + user._id, user)
+		return $http.put(AUTH_SERVER_URI + "api/users/" + user._id, user)
 			.catch(function(error) {
-				return $http.post(window.globalVariable.backend.authServerUri + "api/users/", user);
+				return $http.post(AUTH_SERVER_URI + "api/users/", user);
 			})
 			.then(function(res) {
 				console.log('User saved on RHASES AUTH server.');

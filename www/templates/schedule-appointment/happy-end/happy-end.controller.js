@@ -1,10 +1,9 @@
-appControllers.controller('happyEndCtrl', function ($scope, $state, $ionicHistory) {
+appControllers.controller('happyEndCtrl', function ($scope, $state, $ionicHistory,
+	ionicMaterialMotion, ionicMaterialInk, $timeout) {
 
-        $scope.ok = function() {
-            $ionicHistory.nextViewOptions({
-                disableAnimate: true,
-                disableBack: true
-            });
-            $state.go('app.dashboard');
-        }
+	$timeout(function() {
+		ionicMaterialMotion.fadeSlideIn();
+		ionicMaterialInk.displayEffect();
+	}, 100);
+
 });

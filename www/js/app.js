@@ -1,57 +1,38 @@
-//
-//Welcome to app.js
-//This is main application config of project. You can change a setting of :
-//  - Global Variable
-//  - Theme setting
-//  - Icon setting
-//  - Register View
-//  - Spinner setting
-//  - Custom style
-//
-//Global variable use for setting color, start page, message, oAuth key.
-var db = null; //Use for SQLite database.
-window.globalVariable = {
-    startPage: {
-        url: "/app/login", //Url of start page.
-        state: "app.login" //State name of start page.
-    },
-    message: {
-        errorMessage: "Technical error please try again later." //Default error message.
-    },
-    oAuth: {
-      facebook: "1702791466664692",//Use for Facebook API appID.
-      googlePlus: "your_api_key",//Use for Google API clientID.
-    },
-	push: {
-		gcmSenderId: "835746108347"
-	},
-	backend: {
-		authServerUri: "http://auth.api.rhases.com.br/",
-		schedulerServerUri: "http://scheduler.api.rhases.com.br/",
-	}
-
-};// End Global variable
-
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $mdDialog, $mdBottomSheet, $ionicLoading, $http, authService, analyticsService, transformUtils) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $ionicLoading, $http, authService, analyticsService, transformUtils) {
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
         function initialRootScope() {
-            $rootScope.appPrimaryColor = appPrimaryColor;// Add value of appPrimaryColor to rootScope for use it to base color.
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
+            if(typeof cordova !== 'undefined'){
+              cordova.getAppVersion((version) => {
+                $rootScope.appVersion = version;
+              });
+		  } else {
+			  $rootScope.appVersion = 'x.y.z';
+		  }
         };
 
         function configSplashScreen() {
             setTimeout(function() {
-                navigator.splashscreen.hide();
+                try {
+                    navigator.splashscreen.hide();
+                } catch(e) {
+                    console.log("Could not execute 'navigator.splashscreen.hide()'");
+                }
             }, 100);
         };
 
 		function checkLogin() {
 			return authService.getAppUser({tryReloadFirst: true})
 				.then(function(appUser) {
+					$ionicHistory.nextViewOptions({
+						historyRoot: true,
+						expire: 300
+					});
+
 					// If can not load app user
 					if(!appUser) {
 						authService.logout();
@@ -68,7 +49,7 @@ angular.module('starter')
 						|| !appUser.phone
 						|| !appUser.birthdate
 						|| !appUser.gender) {
-						$state.go('app.register');
+						$state.go('app.register::infos');
 					}
 
 					// Need to complete the profile
@@ -78,19 +59,19 @@ angular.module('starter')
 						|| !appUser.profile.healthPlan
 						|| !appUser.profile.healthPlan.name
 						|| !appUser.profile.healthPlan.number) {
-						$state.go('app.profile');
+						$state.go('app.register::profile');
 					}
 
 					// Check invite status status
 					else if (!appUser.isInvited) {
-						$state.go('app.notInvited');
+						$state.go('app.register::notInvited');
 					}
 
 					// Go to dashboard
 					else {
 						$state.go('app.dashboard');
 						console.log("The user '" + appUser.name + "' successful logged!");
-            analyticsService.track.user(appUser);
+            			analyticsService.track.user(appUser);
 					}
 				})
 				.catch(function(err) {
@@ -115,8 +96,11 @@ angular.module('starter')
 
             initialRootScope();
 
-			// checkInternet()
-			// 	.catch( $mdToast.show("Sem conexão com a internet.") );
+			// Existe um variavel q diz se está com internet ou não!!!
+			// TODO: checkInternet()
+			// 	.catch( toasts.show("Sem conexão com a internet.") );
+
+			// TODO: Testar se o token do usuário esta válido
 
 			if (!authService.isLoggedIn()) {
 				$state.go('app.login');
@@ -136,7 +120,7 @@ angular.module('starter')
 
     })
 
-    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider, $mdThemingProvider, $mdIconProvider, $mdColorPalette, $mdIconProvider) {
+    .config(function ($ionicConfigProvider, $stateProvider, $urlRouterProvider) {
 
         // Use for change ionic spinner to android pattern.
         $ionicConfigProvider.spinner.icon("android");

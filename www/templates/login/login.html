@@ -5,10 +5,8 @@
 <!--State name : app.facebookLogin-->
 <!--URL : #app/facebookLogin-->
 
-<ion-view title="Bem vindo à Rhases">
-	<!--left button on navigation bar-->
-	<ion-nav-buttons side="left">
-	</ion-nav-buttons> <!--end left button on navigation bar-->
+<ion-view title="Bem vindo à Rhases" >
+	<ion-nav-buttons></ion-nav-buttons> <!-- Needed to not show menu -->
 	<!--login content section-->
     <ion-content scroll-x="false" padding="true">
         <form class="text-center">
@@ -28,7 +26,7 @@
 			<br />
 
             <div class="padding-top">
-                <a class="button button-block button-positive facebook-background" ng-click="facebookSignIn()">
+                <a class="button button-block button-positive facebook-background" nav-clear ng-click="facebookSignIn()">
 					<i class="fa fa-facebook fa-lg"></i>
 					&nbsp;
                     Continuar com o Facebook
@@ -36,7 +34,7 @@
             </div>
 
 			<!-- <div class="padding-top">
-                <a class="button button-block button-positive " ng-click="testLogin()">
+                <a class="button button-block button-positive" nav-clear ng-click="testLogin()">
                     Login de Teste
                 </a>
             </div> -->
