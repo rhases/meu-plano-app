@@ -9,9 +9,6 @@
 	<ion-nav-title>
 	  &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Hospitais com emergência
 	</ion-nav-title>
-	<ion-nav-view>
-		<tabs-menu state="emergency"></tabs-menu>
-	</ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
 		<!-- COMPONENTE DO REFRESH -->
@@ -21,9 +18,12 @@
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
 
-		map
+		<div class="list card">
+			<div class="item item-body" style="padding: 0px !important;">
+				<div id="map" style="width: 100%; height: 350px;" data-tap-disabled="true"></div>
+			</div>
+		</div>
 
-		<!-- CARDS APPOINTMENT REQUEST -->
 		<div class="animate-fade-slide-in">
 
 			<div class="list card" ng-repeat="hospital in emergencyHospitals">
@@ -32,8 +32,10 @@
 					<img ng-src="{{ hospital.image ? hospital.image : 'img/icons/hospital.ico' }}">
 					<h2>{{ hospital.name }}</h2>
 					<p ng-repeat="phone in hospital.address.phones">
-    					<i class="fa fa-phone"></i>&nbsp;
-						{{ phone }}
+						<a ng-href="tel:{{ phone }}" style="text-decoration: none;">
+	    					<i class="fa fa-phone"></i>&nbsp;
+							{{ phone }}
+						</a>
 					</p>
 
 					<p>

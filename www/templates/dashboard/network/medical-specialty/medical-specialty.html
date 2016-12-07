@@ -1,0 +1,55 @@
+<ion-view title="{{ medicalSpecialty.name }}">
+	<ion-nav-title>
+		{{ medicalSpecialty.name }}
+    </ion-nav-title>
+	<!--dashboard section-->
+	<ion-content id="medical-specialty-content" class="padding">
+		<!-- COMPONENTE DO REFRESH -->
+		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()" spinner="ripple"></ion-refresher>
+		<div class="text-center padding-vertical" ng-if="loading">
+			<br />
+			<ion-spinner icon="ripple"></ion-spinner>
+		</div>
+
+		<div style="text-align: center;">
+			<h4> {{ medicalSpecialty.name }} </h4>
+		</div>
+
+		<br>
+
+		Rede:
+
+		<div class="animate-fade-slide-in">
+
+			<div class="list card" ng-repeat="healthProvider in healthProviders">
+
+				<div class="item item-avatar" style="white-space: normal !important">
+					<img ng-src="{{ healthProvider.image ? healthProvider.image : 'img/icons/hospital.ico' }}">
+					<h2>{{ healthProvider.name }}</h2>
+					<p ng-repeat="phone in healthProvider.address.phones">
+    					<i class="fa fa-phone"></i>&nbsp;
+						{{ phone }}
+					</p>
+
+					<p>
+						<i class="fa fa-map-marker"></i>&nbsp;
+						{{ healthProvider.address.area }}&nbsp;-&nbsp;
+						{{ healthProvider.address.address}}&nbsp;-&nbsp;
+						{{ healthProvider.address.zip }}
+					</p>
+				</div>
+
+			</div>
+
+		</div>
+
+		<br>
+		<br>
+
+		<hr>
+
+		<button class="button button-block button-positive" ng-click="requestNetwork()">
+			Solicitar Rede
+		</button>
+    </ion-content>
+</ion-view>

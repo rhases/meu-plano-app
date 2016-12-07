@@ -1,16 +1,19 @@
-<div class="tabs-striped tabs-color-balanced">
-    <div class="tabs tabs-icon-top">
-        <a class="tab-item" ui-sref="app.dashboard::infos" ng-class="{ 'active' : state == 'my-plan'} ">
-            <i class="icon fa fa-address-card"></i>
-            Meu Plano
-        </a>
-        <a class="tab-item" ui-sref="app.dashboard::network" ng-class="{ 'active' : state == 'network'} ">
-            <i class="icon fa fa-hospital-o"></i>
-            Rede
-        </a>
-        <a class="tab-item" ui-sref="app.dashboard::emergencyHospitals" ng-class="{ 'active' : state == 'emergency'} ">
-            <i class="icon fa fa-ambulance"></i>
-            Emergência
-        </a>
-    </div>
-</div>
+<ion-tabs class="tabs-icon-top tabs-color-active-positive">
+
+  <!-- Dashboard Tab -->
+  <ion-tab title="Meu Plano" icon-off="fa fa-address-card" icon-on="fa fa-address-card" ui-sref="app.tabs.infos">
+    <ion-nav-view name="tab-infos"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Chats Tab -->
+  <ion-tab title="Rede" icon-off="fa fa-hospital-o" icon-on="fa fa-hospital-o" ui-sref="app.tabs.network">
+    <ion-nav-view name="tab-network"></ion-nav-view>
+  </ion-tab>
+
+  <!-- Account Tab -->
+  <ion-tab title="Emergência" icon-off="fa fa-ambulance" icon-on="fa fa-ambulance" ui-sref="app.tabs.emergency-hospitals">
+    <ion-nav-view name="tab-emergency"></ion-nav-view>
+  </ion-tab>
+
+
+</ion-tabs>

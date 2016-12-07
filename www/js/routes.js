@@ -21,46 +21,92 @@ angular.module('starter')
                 controller: 'menuCtrl'
             })
 
-			// DASHBOARD 
-            .state('app.dashboard::emergencyHospitals', {
-                url: "/emergency-hospitals",
+			.state('app.tabs', {
+				url: "/tabs",
 				cache: false,
-                params:{
-                    isAnimated: true,
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/dashboard/emergency/emergency.html",
-                        controller: 'emergencyHospitalsController'
-                    }
-                }
-            })
-			.state('app.dashboard::network', {
-                url: "/network",
-				cache: false,
-                params:{
-                    isAnimated: true,
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/dashboard/network/network.html",
-                        controller: 'networkController'
-                    }
-                }
-            })
-            .state('app.dashboard::infos', {
+				params:{
+					isAnimated: false,
+				},
+				views: {
+					'menuContent': {
+						templateUrl: "templates/dashboard/components/tabs-menu/tabs-menu.html",
+					}
+				}
+			})
+
+			// Infos
+            .state('app.tabs.infos', {
                 url: "/infos",
                 cache: false,
+				params:{
+					isAnimated: false,
+				},
                 views: {
-                    'menuContent': {
+                    'tab-infos': {
                         templateUrl: "templates/dashboard/infos/infos.html",
                         controller: 'infosCtrl'
                     }
                 }
             })
 
+			// Network
+			.state('app.tabs.network', {
+                url: "/network",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+                    'tab-network': {
+                        templateUrl: "templates/dashboard/network/network.html",
+                        controller: 'networkController'
+                    }
+                }
+            })
+			.state('app.tabs.network-medical-specialty', {
+                url: "/network/medical-specialty",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+                    'tab-network': {
+                        templateUrl: "templates/dashboard/network/medical-specialty/medical-specialty.html",
+                        controller: 'medicalSpecialtyController'
+                    }
+                }
+            })
+			.state('app.tabs.network-procedure', {
+				url: "/network/procedure",
+				cache: false,
+				params:{
+					isAnimated: true,
+				},
+				views: {
+					'tab-network': {
+						templateUrl: "templates/dashboard/network/procedure/procedure.html",
+						controller: 'procedureController'
+					}
+				}
+			})
+
+			// Emergency
+            .state('app.tabs.emergency-hospitals', {
+                url: "/emergency-hospitals",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+                    'tab-emergency': {
+                        templateUrl: "templates/dashboard/emergency/emergency.html",
+                        controller: 'emergencyHospitalsController'
+                    }
+                }
+            })
+
         //Use $urlRouterProvider.otherwise(Url);
         // $urlRouterProvider.otherwise(localStorage['AUTH_TOKEN'] ? '/app/dashboard' : '/app/login');
-        $urlRouterProvider.otherwise('/app/emergency-hospitals');
+        $urlRouterProvider.otherwise('/app/tabs');
 
     });
