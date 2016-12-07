@@ -1,0 +1,29 @@
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view title="Hospitais com emergência">
+	<ion-nav-title>
+      &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Hospitais com emergência
+    </ion-nav-title>
+	<ion-nav-view>
+		<tabs-menu state="emergency"></tabs-menu>
+	</ion-nav-view>
+	<!--dashboard section-->
+	<ion-content id="dashboard-content">
+		<!-- COMPONENTE DO REFRESH -->
+		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()" spinner="ripple"></ion-refresher>
+		<div class="text-center padding-vertical" ng-if="loading">
+			<br />
+			<ion-spinner icon="ripple"></ion-spinner>
+		</div>
+
+		<!-- CARDS APPOINTMENT REQUEST -->
+		<div class="animate-fade-slide-in">
+
+		</div>
+    </ion-content>
+</ion-view>

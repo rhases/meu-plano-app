@@ -102,17 +102,16 @@ angular.module('starter')
                     }
                 }
             })
-            .state('app.dashboard-cancel', {
-                url: "/cancel-appointment",
+            .state('app.dashboard:emergencyHospitals', {
+                url: "/emergency-hospitals",
 				cache: false,
                 params:{
                     isAnimated: true,
-                    appointment: null
                 },
                 views: {
                     'menuContent': {
-                        templateUrl: "templates/dashboard/cancel-appointment/cancel-appointment.html",
-                        controller: 'cancelAppointmentController'
+                        templateUrl: "templates/dashboard/emergency/emergency.html",
+                        controller: 'emergencyHospitalsController'
                     }
                 }
             })
