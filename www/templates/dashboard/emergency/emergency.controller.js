@@ -1,13 +1,39 @@
 // Controller of dashboard.
-appControllers.controller('emergencyHospitalsController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams,
-	$q, lodash, appointmentService, appointmentRequestService, ionicMaterialMotion, ionicMaterialInk,
-	APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, transformUtils, toasts,
-	$ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
+appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, ionicMaterialMotion, ionicMaterialInk, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading, Hospitals) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
-	$scope.emergencyHospitals = [];
+	$scope.emergencyHospitals = [{
+        "_id": 3019608,
+        "name": "HOSPITAL SANTA HELENA",
+        "image": "",
+        "address":  {
+    	    "label": "sede",
+    	    "name": "",
+    	    "state": "df",
+    	    "city": "brasilia",
+    	    "area": "Asa Norte",
+    	    "address": "SHLN 516 CONJUNTO D",
+    	    "zip":  "70770560",
+    	    "phones": ["3215-0150"],
+    	},
+        "operators": [ 5711 ],
+        "healthPlans": [{
+    		"plan": 471802140,
+            "services": [ "pronto-socorro" ],
+            "medicalSpecialties": [],
+            "procedures": [],
+        }]
+    }];
+
+	// getHospitals()
+	// 	.then(function(emergencyHospitals) {
+	// 		$scope.emergencyHospitals = emergencyHospitals;
+	// 	})
+	// 	.cathc(function(error) {
+	// 		console.log(error);
+	// 	});
 
 	$scope.doRefresh = function() {
 		return appointmentRequestService.get({tryReloadFirst: true})
@@ -91,4 +117,8 @@ appControllers.controller('emergencyHospitalsController', function ($http, $scop
 		}, 100);
 	}
 
-}); // End of dashboard controller.
+	function getHospitals() {
+		return Hospitals.getEmergencyHospitals($scope.userProfile);
+	}
+
+});

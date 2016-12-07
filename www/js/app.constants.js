@@ -1,6 +1,6 @@
 angular.module("starter")
-	.constant("SCHEDULER_SERVER_URI", "http://scheduler.api.rhases.com.br/")
-	// .constant("SCHEDULER_SERVER_URI", "http://localhost:9002/")
+	.constant("ANS_WS_URI", "http://scheduler.api.rhases.com.br/")
+	// .constant("ANS_WS_URI", "http://localhost:9002/")
     .constant("AUTH_SERVER_URI", "http://auth.api.rhases.com.br/")
 
 	.constant("GCM_SENDER_ID", "835746108347")

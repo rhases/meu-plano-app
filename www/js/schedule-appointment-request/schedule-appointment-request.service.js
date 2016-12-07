@@ -1,4 +1,4 @@
-appServices.factory('scheduleAppointmentRequestService', function ($http, $rootScope, SCHEDULER_SERVER_URI, $q) {
+appServices.factory('scheduleAppointmentRequestService', function ($http, $rootScope, ANS_WS_URI, $q) {
 
     var service = { };
 
@@ -49,7 +49,7 @@ appServices.factory('scheduleAppointmentRequestService', function ($http, $rootS
     function send(request) {
         var deferred = $q.defer();
 
-        $http.post(SCHEDULER_SERVER_URI + "api/appointment-requests", request)
+        $http.post(ANS_WS_URI + "api/appointment-requests", request)
           .success(function(result) {
               deferred.resolve();
           })
