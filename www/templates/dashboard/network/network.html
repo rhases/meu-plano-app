@@ -6,7 +6,7 @@
 		<tabs-menu state="network"></tabs-menu>
 	</ion-nav-view>
 	<!--dashboard section-->
-	<ion-content id="dashboard-content">
+	<ion-content id="network-content">
 		<!-- COMPONENTE DO REFRESH -->
 		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()" spinner="ripple"></ion-refresher>
 		<div class="text-center padding-vertical" ng-if="loading">
@@ -14,10 +14,10 @@
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
 
-		<div class="list">
+		<div class="list" style="margin-bottom: 0px;">
 			<label class="item item-input">
 				<i class="icon ion-search placeholder-icon"></i>
-				<input type="text" placeholder="Search">
+				<input type="text" placeholder="Search" ng-model="searchText">
 			</label>
 		</div>
 
@@ -25,15 +25,15 @@
 		<!-- <div class="animate-fade-slide-in"> -->
 		<div>
 
-			<div class="list" style="white-space: normal">
+			<div class="list">
 
 				<div class="item item-divider"> Consultas </div>
-				<a class="item" href="#" ng-repeat="medicalSpecialty in medicalSpecialties">
+				<a class="item" ui-sref="app.dashboard::network::medical-specialty" ng-repeat="medicalSpecialty in medicalSpecialties | filter:searchText">
 					{{ medicalSpecialty.name }}
 				</a>
 
 				<div class="item item-divider"> Procedimentos </div>
-				<a class="item" href="#" ng-repeat="procedure in procedures">
+				<a class="item" ui-sref="app.dashboard::network::procedure" ng-repeat="procedure in procedures | filter:searchText" style="white-space: normal">
 					{{ procedure.mainDescription }}
 				</a>
 

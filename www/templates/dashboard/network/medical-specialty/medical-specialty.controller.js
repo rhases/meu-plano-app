@@ -1,15 +1,10 @@
 // Controller of dashboard.
-appControllers.controller('procedureController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, ionicMaterialMotion, ionicMaterialInk, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
+appControllers.controller('medicalSpecialtyController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, ionicMaterialMotion, ionicMaterialInk, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
 
-	$scope.procedure =
+	$scope.medicalSpecialty =
 		{
-			"_id": 4902,
-			"mainDescription": "IMPLANTE DE PRÓTESE SEMI-RÍGIDA (EXCLUI PRÓTESES INFLÁVEIS)",
-			"coverageTypes": [ {} ],
-			"descriptions": [
-				"implante (colocação cirúrgica) de prótese semi-rígida (exclui próteses infláveis)",
-				"31206140 - Implante de prótese semi-rígida (exclui próteses infláveis)"
-			],
+			"_id": 123,
+			"name": "Cardiologista"
 		}
 
 	$q.when()
@@ -91,5 +86,6 @@ appControllers.controller('procedureController', function ($http, $scope, $rootS
 				});
 		})
 	}
-	
+
+
 }); // End of dashboard controller.

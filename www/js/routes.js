@@ -21,7 +21,7 @@ angular.module('starter')
                 controller: 'menuCtrl'
             })
 
-			// DASHBOARD 
+			// DASHBOARD
             .state('app.dashboard::emergencyHospitals', {
                 url: "/emergency-hospitals",
 				cache: false,
@@ -39,7 +39,7 @@ angular.module('starter')
                 url: "/network",
 				cache: false,
                 params:{
-                    isAnimated: true,
+                    isAnimated: false,
                 },
                 views: {
                     'menuContent': {
@@ -52,12 +52,25 @@ angular.module('starter')
                 url: "/network/procedure",
 				cache: false,
                 params:{
-                    isAnimated: true,
+                    isAnimated: false,
                 },
                 views: {
                     'menuContent': {
                         templateUrl: "templates/dashboard/network/procedure/procedure.html",
                         controller: 'procedureController'
+                    }
+                }
+            })
+			.state('app.dashboard::network::medical-specialty', {
+                url: "/network/medical-specialty",
+				cache: false,
+                params:{
+                    isAnimated: false,
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/dashboard/network/medical-specialty/medical-specialty.html",
+                        controller: 'medicalSpecialtyController'
                     }
                 }
             })

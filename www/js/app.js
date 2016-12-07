@@ -102,7 +102,7 @@ angular.module('starter')
 
 			// TODO: Testar se o token do usuário esta válido
 
-            $state.go('app.dashboard::emergencyHospitals');
+            // $state.go('app.dashboard::emergencyHospitals');
 
 			// if (!authService.isLoggedIn()) {
 			// 	$state.go('app.login');
