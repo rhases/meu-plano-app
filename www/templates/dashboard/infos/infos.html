@@ -1,0 +1,40 @@
+<!--View Information-->
+<!--View name : Dashboard-->
+<!--Controller name : dashboardCtrl-->
+<!--Controller path : www/templates/dashboard/js/controllers.js-->
+<!--State name : app.dashboard-->
+<!--URL : #app/dashboard-->
+
+<ion-view>
+	<ion-nav-title>
+      &nbsp;<i class="icon fa fa-address-card"></i>&nbsp;&nbsp;Meu Plano
+    </ion-nav-title>
+	<ion-nav-view>
+		<!-- <button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive spin" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add"> -->
+		<tabs-menu state="my-plan"></tabs-menu>
+
+		<ion-content id="dashboard-content">
+
+			<div class="card">
+			  <div class="item item-text-wrap">
+					Plano: {{ healthPlan.name }}
+                    <br />
+                    Cobertura: {{ coverageTypes() }}
+                    <br />
+                    Acomodação: {{ healthPlan.accomodation }}
+                    <br />
+                    Cooparticipação: {{ healthPlan.moderatorFactor ? 'Sim' : 'Não' }}
+                    <br />
+                    Contrato: {{ healthPlan.contractType }}
+                    <br />
+                    Área de Cobertura: {{ healthPlan.coverageAreaType }}
+                    <br />
+                    Preço Máximo: R$ {{ maxPrice() }}
+			  </div>
+			</div>
+
+		</ion-content>
+
+	</ion-nav-view>
+
+</ion-view>

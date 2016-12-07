@@ -61,6 +61,16 @@ angular.module('starter')
                     }
                 }
             })
+            .state('app.dashboard::infos', {
+                url: "/infos",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/dashboard/infos/infos.html",
+                        controller: 'infosCtrl'
+                    }
+                }
+            })
 
         //Use $urlRouterProvider.otherwise(Url);
         // $urlRouterProvider.otherwise(localStorage['AUTH_TOKEN'] ? '/app/dashboard' : '/app/login');
