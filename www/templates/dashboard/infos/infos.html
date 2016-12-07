@@ -15,22 +15,66 @@
 
 		<ion-content id="dashboard-content">
 
-			<div class="card">
-			  <div class="item item-text-wrap">
-					Plano: {{ healthPlan.name }}
-                    <br />
-                    Cobertura: {{ coverageTypes() }}
-                    <br />
-                    Acomodação: {{ healthPlan.accomodation }}
-                    <br />
-                    Cooparticipação: {{ healthPlan.moderatorFactor ? 'Sim' : 'Não' }}
-                    <br />
-                    Contrato: {{ healthPlan.contractType }}
-                    <br />
-                    Área de Cobertura: {{ healthPlan.coverageAreaType }}
-                    <br />
-                    Preço Máximo: R$ {{ maxPrice() }}
-			  </div>
+			<div class="list card">
+				<ion-item style="padding-bottom: 0px;">
+					<span>{{ healthPlan.name }}</span>
+				</ion-item>
+				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+					<i class="icon fa fa-credit-card"></i>
+					<ion-list>
+						<ion-item>
+							Bradesco
+							<br />
+		                    {{ coverageTypes() }}
+							<br />
+							{{ healthPlan.contractType }}
+							<br />
+		                    {{ healthPlan.moderatorFactor ? 'Com Cooparticipação' : '' }}
+						</ion-item>
+					</ion-list>
+				</ion-item>
+			</div>
+
+			<div class="list card">
+				<ion-item style="padding-bottom: 0px;">
+					<span>Acomodação</span>
+				</ion-item>
+				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+					<i class="icon fa fa-suitcase"></i>
+					<ion-list>
+						<ion-item>
+							{{ healthPlan.accomodation }}
+						</ion-item>
+					</ion-list>
+				</ion-item>
+			</div>
+
+			<div class="list card">
+				<ion-item style="padding-bottom: 0px;">
+					<span>Preço Máximo</span>
+				</ion-item>
+				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+					<i class="icon fa fa-money"></i>
+					<ion-list>
+						<ion-item>
+							R$ {{ maxPrice() }}
+						</ion-item>
+					</ion-list>
+				</ion-item>
+			</div>
+
+			<div class="list card">
+				<ion-item style="padding-bottom: 0px;">
+					<span>Área de Cobertura</span>
+				</ion-item>
+				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+					<i class="icon ion-map"></i>
+					<ion-list>
+						<ion-item>
+							{{ healthPlan.coverageAreaType }}
+						</ion-item>
+					</ion-list>
+				</ion-item>
 			</div>
 
 		</ion-content>
