@@ -33,27 +33,13 @@
 
 			<div class="list card">
 				<ion-item style="padding-bottom: 0px;">
-					<span>Acomodação</span>
+					<span>Onde cobre?</span>
 				</ion-item>
 				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-bed"></i>
+					<i class="icon ion-map"></i>
 					<ion-list>
 						<ion-item>
-							{{ healthPlan.accomodation }}
-						</ion-item>
-					</ion-list>
-				</ion-item>
-			</div>
-
-			<div class="list card" ng-if="showMaxPrice()">
-				<ion-item style="padding-bottom: 0px;">
-					<span>Preço Máximo</span>
-				</ion-item>
-				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-money"></i>
-					<ion-list>
-						<ion-item>
-							R$ {{ maxPrice() }}
+							{{ prettyCoverageAreaType() }}
 						</ion-item>
 					</ion-list>
 				</ion-item>
@@ -61,13 +47,55 @@
 
 			<div class="list card">
 				<ion-item style="padding-bottom: 0px;">
-					<span>Área de Cobertura</span>
+					<span>Onde ficaria internado?</span>
 				</ion-item>
 				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon ion-map"></i>
+					<i class="icon fa fa-bed"></i>
 					<ion-list>
 						<ion-item>
-							{{ healthPlan.coverageAreaType }}
+							{{ prettyAccomodation() }}
+						</ion-item>
+					</ion-list>
+				</ion-item>
+			</div>
+
+			<div class="list card" ng-if="showMaxPrice()">
+				<ion-item style="padding-bottom: 0px;">
+					<span>Qual a mensalidade?</span>
+				</ion-item>
+				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+					<i class="icon fa fa-dollar"></i>
+					<ion-list>
+						<ion-item>
+							No máximo: R$ {{ maxPrice() }}
+						</ion-item>
+					</ion-list>
+				</ion-item>
+			</div>
+
+			<div class="list card" ng-if="showMaxPrice()">
+				<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
+					<span>É necessário pagar ao utilizar o plano?</span>
+				</ion-item>
+				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+					<i class="icon fa fa-money"></i>
+					<ion-list>
+						<ion-item style="overflow: visible; white-space: normal;">
+							{{ prettyModeratorFactor() }}
+						</ion-item>
+					</ion-list>
+				</ion-item>
+			</div>
+
+			<div class="list card" ng-if="showMaxPrice()">
+				<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
+					<span>Qual o registro do plano?</span>
+				</ion-item>
+				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+					<i class="icon fa fa-credit-card-alt"></i>
+					<ion-list>
+						<ion-item style="overflow: visible; white-space: normal;">
+							{{ healthPlan._id }}
 						</ion-item>
 					</ion-list>
 				</ion-item>
