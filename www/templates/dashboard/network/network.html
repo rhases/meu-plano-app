@@ -5,12 +5,12 @@
 <!--State name : app.dashboard-->
 <!--URL : #app/dashboard-->
 
-<ion-view title="Hospitais com emergência">
+<ion-view title="Rede">
 	<ion-nav-title>
-	  &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Hospitais com emergência
-	</ion-nav-title>
+      &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Rede
+    </ion-nav-title>
 	<ion-nav-view>
-		<tabs-menu state="emergency"></tabs-menu>
+		<tabs-menu state="network"></tabs-menu>
 	</ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
@@ -23,24 +23,11 @@
 
 		<!-- CARDS APPOINTMENT REQUEST -->
 		<div class="animate-fade-slide-in">
-			<div class="list card">
 
-				<div class="item item-avatar">
-					<img src="https://dummyimage.com/100x100/38ff6d/fff&text=Hospital">
-					<h2>Pretty Hate Machine</h2>
-					<p>Nine Inch Nails</p>
-				</div>
+			<ion-item>
+				<ion-input type="text" placeholder="cardiologista, mamografia, ..."></ion-input>
+			</ion-item>
 
-				<div class="item item-body">
-					<p>content</p>
-				</div>
-
-				<a class="item item-icon-left assertive" href="#">
-					<i class="icon ion-music-note"></i>
-					Start listening
-				</a>
-
-			</div>
 		</div>
-	</ion-content>
+    </ion-content>
 </ion-view>
