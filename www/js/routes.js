@@ -21,20 +21,7 @@ angular.module('starter')
                 controller: 'menuCtrl'
             })
 
-			// DASHBOARD
-            .state('app.dashboard', {
-                url: "/dashboard",
-				cache: false,
-                params: {
-                    isAnimated: true
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/dashboard/dashboard.html",
-                        controller: 'dashboardController'
-                    }
-                }
-            })
+			// DASHBOARD 
             .state('app.dashboard::emergencyHospitals', {
                 url: "/emergency-hospitals",
 				cache: false,
