@@ -102,14 +102,16 @@ angular.module('starter')
 
 			// TODO: Testar se o token do usuário esta válido
 
-			if (!authService.isLoggedIn()) {
-				$state.go('app.login');
-				console.log("Don't have user logged yet!");
-			} else {
-				$ionicLoading.show();
-				checkLogin()
-					.then(function() { $ionicLoading.hide(); });
-			}
+            $state.go('app.dashboard:emergencyHospitals');
+
+			// if (!authService.isLoggedIn()) {
+			// 	$state.go('app.login');
+			// 	console.log("Don't have user logged yet!");
+			// } else {
+			// 	$ionicLoading.show();
+			// 	checkLogin()
+			// 		.then(function() { $ionicLoading.hide(); });
+			// }
 
 			$rootScope.$on("login:successful", function(userId) {
 				$ionicLoading.show();
