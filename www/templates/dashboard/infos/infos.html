@@ -11,20 +11,7 @@
     </ion-nav-title>
 	<ion-nav-view>
 		<!-- <button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive spin" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add"> -->
-		<div class="tabs tabs-icon-top">
-		  <a class="tab-item active">
-			<i class="icon fa fa-address-card"></i>
-			Meu Plano
-		  </a>
-		  <a class="tab-item">
-			<i class="icon fa fa-hospital-o"></i>
-			Rede
-		  </a>
-		  <a class="tab-item">
-			<i class="icon fa fa-ambulance"></i>
-			Emergência
-		  </a>
-		</div>
+		<tabs-menu state="my-plan"></tabs-menu>
 
 		<ion-content id="dashboard-content">
 
@@ -40,7 +27,7 @@
                     <br />
                     Contrato: {{ healthPlan.contractType }}
                     <br />
-                    
+
 			  </div>
 			</div>
 
