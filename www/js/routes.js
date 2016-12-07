@@ -36,6 +36,17 @@ angular.module('starter')
                 }
             })
 
+            .state('app.infos', {
+                url: "/infos",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/dashboard/infos/infos.html",
+                        controller: 'infosCtrl'
+                    }
+                }
+            })
+
 			// REGISTER
 			.state('app.register::infos', {
                 url: "/register/infos",
