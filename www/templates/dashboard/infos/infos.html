@@ -15,21 +15,17 @@
 
 		<ion-content id="dashboard-content">
 
+			<h2 class="text-center">{{ healthPlan.name }}</h2>
+
 			<div class="list card">
 				<ion-item style="padding-bottom: 0px;">
-					<span>{{ healthPlan.name }}</span>
+					<span>O que cobre?</span>
 				</ion-item>
 				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-credit-card"></i>
-					<ion-list>
-						<ion-item>
-							Bradesco
-							<br />
-		                    {{ coverageTypes() }}
-							<br />
-							{{ healthPlan.contractType }}
-							<br />
-		                    {{ healthPlan.moderatorFactor ? 'Com Cooparticipação' : '' }}
+					<i class="icon fa fa-stethoscope"></i>
+					<ion-list ng-repeat="coverageType in healthPlan.coverageTypes">
+						<ion-item style="padding-bottom: 1px;">
+							{{ prettyCoverageType(coverageType) }}
 						</ion-item>
 					</ion-list>
 				</ion-item>
@@ -40,7 +36,7 @@
 					<span>Acomodação</span>
 				</ion-item>
 				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-suitcase"></i>
+					<i class="icon fa fa-bed"></i>
 					<ion-list>
 						<ion-item>
 							{{ healthPlan.accomodation }}
@@ -49,7 +45,7 @@
 				</ion-item>
 			</div>
 
-			<div class="list card" ng-show="showMaxPrice()">
+			<div class="list card" ng-if="showMaxPrice()">
 				<ion-item style="padding-bottom: 0px;">
 					<span>Preço Máximo</span>
 				</ion-item>

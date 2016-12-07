@@ -18,6 +18,18 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
             return lodash.join(coverageTypes, ', ');
         }
 
+        $scope.prettyCoverageType = function(coverageType) {
+            if(coverageType === 'ambulatorial')
+                return 'Consultas/Exames e Emergência';
+            if(coverageType === 'hospitalar')
+                return 'Cirurgia e Internação';
+            if(coverageType === 'obstetricia')
+                return 'Parto';
+            if(coverageType === 'odontologia')
+                return 'Odontologia';
+            return '';
+        }
+
         $scope.showMaxPrice = function() {
             if ($scope.healthPlan.maxPrice)
                 return true;
