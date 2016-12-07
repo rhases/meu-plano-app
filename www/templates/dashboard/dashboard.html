@@ -5,180 +5,39 @@
 <!--State name : app.dashboard-->
 <!--URL : #app/dashboard-->
 
-<ion-view title="Suas consultas">
+<ion-view>
 	<ion-nav-title>
-      &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Minhas consultas
+      &nbsp;<i class="icon fa fa-address-card"></i>&nbsp;&nbsp;Meu Plano
     </ion-nav-title>
 	<ion-nav-view>
 		<!-- <button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive spin" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add"> -->
-		<button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive drop" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add">
-			<i class="icon ion-plus-round"></i>
-		</button>
-		<!-- button button-fab button-fab-top-right expanded button-energized-900 drop -->
-	</ion-nav-view>
-	<!--dashboard section-->
-	<ion-content id="dashboard-content">
-		<!-- COMPONENTE DO REFRESH -->
-		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()" spinner="ripple"></ion-refresher>
-		<div class="text-center padding-vertical" ng-if="loading">
-			<br />
-			<ion-spinner icon="ripple"></ion-spinner>
+		<div class="tabs tabs-icon-top">
+		  <a class="tab-item">
+			<i class="icon fa fa-address-card"></i>
+			Meu Plano
+		  </a>
+		  <a class="tab-item">
+			<i class="icon fa fa-hospital-o"></i>
+			Rede
+		  </a>
+		  <a class="tab-item">
+			<i class="icon fa fa-ambulance"></i>
+			Emergência
+		  </a>
 		</div>
 
-		<!-- AVISO QUANDO NÃO SE TEM APPOINMENTS -->
-		<div ng-if="newAppointmentRequests.length == 0 && scheduledAppointments.length == 0 && acceptedAppointments.length == 0 && confirmedAppointments.length == 0"
-			class="text-center padding" style="opacity: 0.55; color: gray;">
-			<br />
-			<br />
-			<br />
-			<i class="icon fa fa-stethoscope fa-5x padding-vertical"></i>
-			<br />
-			<br />
-			<br />
-			<h3 style="color: gray;">Marque sua consulta</h3>
-			<br />
-			<br />
-			<p>Clique no + abaixo, escolha a especialidade, o dia da semana e os horários disponíveis e nós encontramos o melhor médico para te atender.</p>
-		</div>
+		<ion-content id="dashboard-content">
 
-		<!-- CARDS APPOINTMENT REQUEST -->
-		<div class="animate-fade-slide-in">
-
-			<!-- APPOINTMENT REQUEST -->
-	        <div class="list card" ng-repeat="request in appointmentRequests | showOnlyIfStatusIs:'NEW' as newAppointmentRequests">
-				<div class="item item-icon-left ink">
-					<i class="icon fa fa-clock-o positive"></i>
-					<h2 class="positive"><strong>{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(request.speciality) }} Solicitado</strong><h2>
+			<div class="card">
+			  <div class="item item-text-wrap">
+			  	<div class="text-center">
+					Teste conteúdo
 				</div>
-				<div class="item item-body">
-					<h3>Sua consulta será agendada em até 1 dia útil.</h3>
-					<p><i class="icon fa fa-calendar"></i> Pedido feito em <strong>{{ formatDate(request.createdAt) }}</strong>.</p>
-				</div>
-				<div class="row text-center">
-					<div class="col-50">
-						<a class="item icon-left ion-close" ng-click="cancelRequest(request)">
-							&nbsp; Cancelar
-						</a>
-					</div>
-					<div class="col-50">
-						<a class="item icon-left ion-ios-information-outline" ng-click="moreDetails(request)">
-							&nbsp; Detalhes
-						</a>
-					</div>
-				</div>
-	        </div>
-
-			<!-- TODO Criar componente -->
-	        <!-- CARDS DE APPOINTMENT SCHEDULED -->
-	        <div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'SCHEDULED' as scheduledAppointments">
-				<div class="item item-icon-left ink">
-					<i class="icon fa fa-question energized"></i>
-					<h2 class="energized"><strong>Confirmação de {{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality) }}</strong><h2>
-				</div>
-				<div class="item item-body">
-					<h3>Já agendamos sua consulta! Agora só falta confirmar.</h3>
-					<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }} </strong></h3>
-					<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
-					<h3>Quando</h3>
-					<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
-					<h3>Onde</h3>
-					<p>
-						<a href="geo:0,0?q={{ makeAddressClinic(appointment.clinic) }}" />
-							<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.unit.address }}
-						</a>
-					</p>
-					<p>
-						<a href="tel:{{ appointment.clinic.phone }}">
-							<i class="icon fa fa-phone fa-lg"></i> {{ appointment.clinic.phone }}
-						</a>
-					</p>
-				</div>
-				<div class="row text-center">
-					<div class="col-50">
-						<a class="item icon-left ion-close" ng-click="goToCancel(appointment)">
-							&nbsp; Recusar
-						</a>
-					</div>
-					<div class="col-50">
-						<a class="item icon-left ion-checkmark" ng-click="accept(appointment)">
-							&nbsp; Aceitar
-						</a>
-					</div>
-				</div>
-	        </div>
-
-			<!-- CARDS DE APPOINTMENTS ACCEPTED -->
-			<div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'ACCEPTED' as acceptedAppointments">
-				<div class="item item-icon-left">
-					<i class="icon fa fa-calendar-check-o balanced"></i>
-					<h2 class="balanced"><strong>{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality) }} Agendado</strong><h2>
-				</div>
-				<div class="item item-body">
-					<h3 ng-if="!outdatedDate(appointment.when)">Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
-					<h3 ng-if="outdatedDate(appointment.when)">Sua consulta era <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
-					<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }}</strong></h3>
-					<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
-					<h3>Quando</h3>
-					<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
-					<h3>Onde</h3>
-					<p>
-						<a href="geo:0,0?q={{ makeAddressClinic(appointment.clinic) }}" />
-							<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.unit.address }}
-						</a>
-					</p>
-					<p>
-						<a href="tel:{{ appointment.clinic.phone }}">
-							<i class="icon fa fa-phone fa-lg"></i> {{ appointment.clinic.phone }}
-						</a>
-					</p>
-				</div>
-				<div class="row text-center">
-					<div class="col-50">
-							<a class="item icon-left ion-close" ng-click="goToCancel(appointment)">
-							&nbsp; Desmarcar
-						</a>
-					</div>
-					<div class="col-50" ng-if='canConfirm(appointment)'>
-						<a class="item icon-left ion-checkmark" ng-click="confirm(appointment)">
-							&nbsp; Confirmar
-						</a>
-					</div>
-				</div>
-	        </div>
-
-			<!-- CARDS DE APPOINTMENTS ACCEPTED -->
-			<div class="list card" ng-repeat="appointment in appointments | showOnlyIfStatusIs:'CONFIRMED' as confirmedAppointments">
-				<div class="item item-icon-left">
-					<i class="icon fa fa-calendar-check-o balanced"></i>
-					<h2 class="balanced"><strong>{{ TRANSFORM_UTILS.getMedicalSpecialtyLabelByCod(appointment.doctor.speciality) }} Agendado</strong><h2>
-				</div>
-				<div class="item item-body">
-					<h3 ng-if="!outdatedDate(appointment.when)">Você tem uma consulta <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
-					<h3 ng-if="outdatedDate(appointment.when)">Sua consulta era <strong>{{ relativeDateFormat(appointment.when) }}</strong></h3>
-					<h3><strong><i class="icon fa fa-hospital-o fa-lg"></i> {{ appointment.clinic.name }}</strong></h3>
-					<h3><strong><i class="icon fa fa-stethoscope fa-lg"></i> Dr(a) {{ appointment.doctor.name }}</strong></h3>
-					<h3>Quando</h3>
-					<p><i class="icon fa fa-calendar"></i> {{ formatDate(appointment.when) }}</p>
-					<h3>Onde</h3>
-					<p>
-						<a href="geo:0,0?q={{ makeAddressClinic(appointment.clinic) }}">
-							<i class="icon fa fa-map-marker"></i> {{ appointment.clinic.unit.address }}
-						</a>
-					</p>
-					<p>
-						<a href="tel:{{ appointment.clinic.phone }}">
-							<i class="icon fa fa-phone fa-lg"></i> {{ appointment.clinic.phone }}
-						</a>
-					</p>
-				</div>
-				<div class="row text-center">
-					<div class="col-50">
-						<a class="item icon-left ion-close" ng-click="goToCancel(appointment)">
-							&nbsp; Desmarcar
-						</a>
-					</div>
-				</div>
+			  </div>
 			</div>
-		</div>
-    </ion-content><!--end dashboard section-->
+
+		</ion-content>
+
+	</ion-nav-view>
+
 </ion-view>
