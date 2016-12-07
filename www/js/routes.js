@@ -34,9 +34,13 @@ angular.module('starter')
 				}
 			})
 
+			// Infos
             .state('app.tabs.infos', {
                 url: "/infos",
                 cache: false,
+				params:{
+					isAnimated: false,
+				},
                 views: {
                     'tab-infos': {
                         templateUrl: "templates/dashboard/infos/infos.html",
@@ -45,11 +49,12 @@ angular.module('starter')
                 }
             })
 
+			// Network
 			.state('app.tabs.network', {
                 url: "/network",
 				cache: false,
                 params:{
-                    isAnimated: false,
+                    isAnimated: true,
                 },
                 views: {
                     'tab-network': {
@@ -58,24 +63,11 @@ angular.module('starter')
                     }
                 }
             })
-			.state('app.tabs.network.procedure', {
-                url: "/procedure",
+			.state('app.tabs.network::medical-specialty', {
+                url: "/network/medical-specialty",
 				cache: false,
                 params:{
-                    isAnimated: false,
-                },
-                views: {
-                    'tab-network': {
-                        templateUrl: "templates/dashboard/network/procedure/procedure.html",
-                        controller: 'procedureController'
-                    }
-                }
-            })
-			.state('app.tabs.network.medical-specialty', {
-                url: "/medical-specialty",
-				cache: false,
-                params:{
-                    isAnimated: false,
+                    isAnimated: true,
                 },
                 views: {
                     'tab-network': {
@@ -84,7 +76,21 @@ angular.module('starter')
                     }
                 }
             })
+			.state('app.tabs.network::procedure', {
+				url: "/network/procedure",
+				cache: false,
+				params:{
+					isAnimated: true,
+				},
+				views: {
+					'tab-network': {
+						templateUrl: "templates/dashboard/network/procedure/procedure.html",
+						controller: 'procedureController'
+					}
+				}
+			})
 
+			// Emergency
             .state('app.tabs.emergency-hospitals', {
                 url: "/emergency-hospitals",
 				cache: false,
