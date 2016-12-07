@@ -4,7 +4,28 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
-	$scope.emergencyHospitals = [];
+	$scope.emergencyHospitals = [{
+        "_id": 3019608,
+        "name": "HOSPITAL SANTA HELENA",
+        "image": "",
+        "address":  {
+    	    "label": "sede",
+    	    "name": "",
+    	    "state": "df",
+    	    "city": "brasilia",
+    	    "area": "Asa Norte",
+    	    "address": "SHLN 516 CONJUNTO D",
+    	    "zip":  "70770560",
+    	    "phones": ["3215-0150"],
+    	},
+        "operators": [ 5711 ],
+        "healthPlans": [{
+    		"plan": 471802140,
+            "services": [ "pronto-socorro" ],
+            "medicalSpecialties": [],
+            "procedures": [],
+        }]
+    }];
 
 	// getHospitals()
 	// 	.then(function(emergencyHospitals) {

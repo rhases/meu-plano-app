@@ -21,26 +21,31 @@
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
 
+		map
+
 		<!-- CARDS APPOINTMENT REQUEST -->
 		<div class="animate-fade-slide-in">
-			<div class="list card">
 
-				<div class="item item-avatar">
-					<img src="https://dummyimage.com/100x100/38ff6d/fff&text=Hospital">
-					<h2>Pretty Hate Machine</h2>
-					<p>Nine Inch Nails</p>
+			<div class="list card" ng-repeat="hospital in emergencyHospitals">
+
+				<div class="item item-avatar" style="white-space: normal !important">
+					<img ng-src="{{ hospital.image ? hospital.image : 'img/icons/hospital.ico' }}">
+					<h2>{{ hospital.name }}</h2>
+					<p ng-repeat="phone in hospital.address.phones">
+    					<i class="fa fa-phone"></i>&nbsp;
+						{{ phone }}
+					</p>
+
+					<p>
+						<i class="fa fa-map-marker"></i>&nbsp;
+						{{ hospital.address.area }}&nbsp;-&nbsp;
+						{{ hospital.address.address}}&nbsp;-&nbsp;
+						{{ hospital.address.zip }}
+					</p>
 				</div>
-
-				<div class="item item-body">
-					<p>content</p>
-				</div>
-
-				<a class="item item-icon-left assertive" href="#">
-					<i class="icon ion-music-note"></i>
-					Start listening
-				</a>
 
 			</div>
+
 		</div>
 	</ion-content>
 </ion-view>
