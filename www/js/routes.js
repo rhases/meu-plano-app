@@ -63,7 +63,7 @@ angular.module('starter')
                     }
                 }
             })
-			.state('app.tabs.network::medical-specialty', {
+			.state('app.tabs.network-medical-specialty', {
                 url: "/network/medical-specialty",
 				cache: false,
                 params:{
@@ -76,7 +76,7 @@ angular.module('starter')
                     }
                 }
             })
-			.state('app.tabs.network::procedure', {
+			.state('app.tabs.network-procedure', {
 				url: "/network/procedure",
 				cache: false,
 				params:{
