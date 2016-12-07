@@ -1,10 +1,10 @@
 <div class="tabs-striped tabs-color-balanced">
     <div class="tabs tabs-icon-top">
-        <a class="tab-item" ng-class="{ 'active' : state == 'my-plan'} ">
+        <a class="tab-item" ui-sref="app.dashboard:emergencyHospitals" ng-class="{ 'active' : state == 'my-plan'} ">
             <i class="icon fa fa-address-card"></i>
             Meu Plano
         </a>
-        <a class="tab-item" ng-class="{ 'active' : state == 'network'} ">
+        <a class="tab-item" ui-sref="app.dashboard::network" ng-class="{ 'active' : state == 'network'} ">
             <i class="icon fa fa-hospital-o"></i>
             Rede
         </a>
