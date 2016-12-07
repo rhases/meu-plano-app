@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('networkController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, appointmentService, appointmentRequestService, ionicMaterialMotion, ionicMaterialInk, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
+appControllers.controller('networkController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, ionicMaterialMotion, ionicMaterialInk, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.

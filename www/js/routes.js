@@ -35,7 +35,7 @@ angular.module('starter')
                     }
                 }
             })
-            .state('app.dashboard:emergencyHospitals', {
+            .state('app.dashboard::emergencyHospitals', {
                 url: "/emergency-hospitals",
 				cache: false,
                 params:{
