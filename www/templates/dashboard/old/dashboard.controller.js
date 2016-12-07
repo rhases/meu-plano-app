@@ -8,7 +8,8 @@ appControllers.controller('dashboardController', function ($http, $scope, $rootS
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
     $scope.appointmentRequests = [];
-
+	$scope.scheduledAppointments = [];
+	$scope.acceptedAppointments = [];
 
 	$rootScope.$on('rhases:appointment:accept', function(event, appointmentId) {
 		$scope.refresh()
