@@ -3,10 +3,9 @@ appControllers.directive('tabsMenu', function() {
             restrict: 'E',
             templateUrl: 'templates/dashboard/components/tabs-menu/tabs-menu.html',
             scope: {
-                "state": "="
+                "state": "@"
             },
             controller: function() {
-
             }
         };
     });
