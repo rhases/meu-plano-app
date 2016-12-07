@@ -2,9 +2,6 @@
 	<ion-nav-title>
       &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Rede
     </ion-nav-title>
-	<ion-nav-view>
-		<tabs-menu state="network"></tabs-menu>
-	</ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="network-content">
 		<!-- COMPONENTE DO REFRESH -->
@@ -28,12 +25,12 @@
 			<div class="list">
 
 				<div class="item item-divider"> Consultas </div>
-				<a class="item" ui-sref="app.dashboard::network::medical-specialty" ng-repeat="medicalSpecialty in medicalSpecialties | filter:searchText">
+				<a class="item" ui-sref="app.tabs.network-medical-specialty" ng-repeat="medicalSpecialty in medicalSpecialties | filter:searchText">
 					{{ medicalSpecialty.name }}
 				</a>
 
 				<div class="item item-divider"> Procedimentos </div>
-				<a class="item" ui-sref="app.dashboard::network::procedure" ng-repeat="procedure in procedures | filter:searchText" style="white-space: normal">
+				<a class="item" ui-sref="app.tabs.network-procedure" ng-repeat="procedure in procedures | filter:searchText" style="white-space: normal">
 					{{ procedure.mainDescription }}
 				</a>
 
