@@ -14,31 +14,25 @@
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
 
-		<div class="list">
-			<label class="item item-input">
-				<i class="icon ion-search placeholder-icon"></i>
-				<input type="text" placeholder="Search">
-			</label>
-		</div>
+		<h2> {{ procedure.mainDescription }} </h2>
+
+		<h3>
+			<small ng-repeat="desc in procedure.descriptions">{{ desc }}</small>
+		</h3>
 
 		<!-- CARDS APPOINTMENT REQUEST -->
 		<!-- <div class="animate-fade-slide-in"> -->
 		<div>
 
-			<div class="list" style="white-space: normal">
+			<div class="list">
 
-				<div class="item item-divider"> Consultas </div>
-				<a class="item" href="#" ng-repeat="medicalSpecialty in medicalSpecialties">
-					{{ medicalSpecialty.name }}
-				</a>
-
-				<div class="item item-divider"> Procedimentos </div>
-				<a class="item" href="#" ng-repeat="procedure in procedures">
-					{{ procedure.mainDescription }}
-				</a>
 
 			</div>
 
 		</div>
+
+		<button class="button button-block button-positive">
+			Solicitar Rede
+		</button>
     </ion-content>
 </ion-view>

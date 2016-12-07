@@ -61,6 +61,19 @@ angular.module('starter')
                     }
                 }
             })
+			.state('app.dashboard::network::procedure', {
+                url: "/network/procedure",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/dashboard/network/procedure/procedure.html",
+                        controller: 'procedureController'
+                    }
+                }
+            })
             .state('app.dashboard::infos', {
                 url: "/infos",
                 cache: false,
