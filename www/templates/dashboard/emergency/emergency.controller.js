@@ -1,39 +1,17 @@
 // Controller of dashboard.
-appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, ionicMaterialMotion, ionicMaterialInk, APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading, Hospitals) {
+appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, toasts, $ionicPopup, $ionicModal, $ionicLoading, Hospitals, $cordovaGeolocation) {
 
-    //$scope.isAnimated is the variable that use for receive object data from state params.
-    //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
-	$scope.emergencyHospitals = [{
-        "_id": 3019608,
-        "name": "HOSPITAL SANTA HELENA",
-        "image": "",
-        "address":  {
-    	    "label": "sede",
-    	    "name": "",
-    	    "state": "df",
-    	    "city": "brasilia",
-    	    "area": "Asa Norte",
-    	    "address": "SHLN 516 CONJUNTO D",
-    	    "zip":  "70770560",
-    	    "phones": ["3215-0150"],
-    	},
-        "operators": [ 5711 ],
-        "healthPlans": [{
-    		"plan": 471802140,
-            "services": [ "pronto-socorro" ],
-            "medicalSpecialties": [],
-            "procedures": [],
-        }]
-    }];
 
-	// getHospitals()
-	// 	.then(function(emergencyHospitals) {
-	// 		$scope.emergencyHospitals = emergencyHospitals;
-	// 	})
-	// 	.cathc(function(error) {
-	// 		console.log(error);
-	// 	});
+    $scope.emergencyHospitals = [];
+
+    getHospitals()
+        .then(function(hospitals) {
+            return $q.when()
+                .then(getCurrentPosition())
+                .then(createMap())
+                .then(populateHospitals(hospitals));
+        })
 
 	$scope.doRefresh = function() {
 		return appointmentRequestService.get({tryReloadFirst: true})
@@ -118,7 +96,100 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 	}
 
 	function getHospitals() {
-		return Hospitals.getEmergencyHospitals($scope.userProfile);
+		// return Hospitals.getEmergencyHospitals($scope.userProfile);
+        return $q.when([{
+            "_id": 3019608,
+            "name": "HOSPITAL SANTA HELENA",
+            "image": "",
+            "address":  {
+        	    "label": "sede",
+        	    "name": "",
+        	    "state": "df",
+        	    "city": "brasilia",
+        	    "area": "Asa Norte",
+        	    "address": "SHLN 516 CONJUNTO D",
+        	    "zip":  "70770560",
+        	    "phones": ["3215-0150"],
+                "geo": {
+        			"latitude": -15.8413844,
+        			"longitude":  -47.8857227
+        		}
+        	},
+            "operators": [ 5711 ],
+            "healthPlans": [{
+        		"plan": 471802140,
+                "services": [ "pronto-socorro" ],
+                "medicalSpecialties": [],
+                "procedures": [],
+            }]
+        }])
+        .then(function(hospitals) {
+            $scope.emergencyHospitals = hospitals;
+            return hospitals;
+        });
 	}
 
+    function getCurrentPosition() {
+        var options = {timeout: 10000, enableHighAccuracy: true};
+
+        return function() {
+            return $cordovaGeolocation.getCurrentPosition(options);
+        }
+    }
+
+    function createMap() {
+        return function(position) {
+            var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+            var mapOptions = {
+                center: latLng,
+                zoom: 13,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+
+            $scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+            google.maps.event.addListenerOnce($scope.map, 'idle', function() {
+                var marker = new google.maps.Marker({
+                    map: $scope.map,
+                    animation: google.maps.Animation.DROP,
+                    position: latLng
+                });
+
+                var infoWindow = new google.maps.InfoWindow({
+                    content: "Você"
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.open($scope.map, marker);
+                });
+            });
+        }
+    }
+
+    function populateHospitals(hospitals) {
+        return function() {
+            console.log(hospitals);
+            angular.forEach(hospitals, function(hospital) {
+                var latLng = new google.maps.LatLng(hospital.address.geo.latitude, hospital.address.geo.longitude);
+
+                google.maps.event.addListenerOnce($scope.map, 'idle', function() {
+                    var marker = new google.maps.Marker({
+                        map: $scope.map,
+                        animation: google.maps.Animation.DROP,
+                        position: latLng,
+                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                    });
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: hospital.name
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infoWindow.open($scope.map, marker);
+                    });
+                });
+            });
+        }
+    }
 });
