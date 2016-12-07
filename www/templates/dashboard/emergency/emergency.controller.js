@@ -1,13 +1,21 @@
 // Controller of dashboard.
-appControllers.controller('emergencyHospitalsController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams,
+appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams,
 	$q, lodash, appointmentService, appointmentRequestService, ionicMaterialMotion, ionicMaterialInk,
 	APPOINTMENT_STATUS, APPOINTMENT_REQUEST_STATUS, transformUtils, toasts,
-	$ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
+	$ionicHistory, $ionicPopup, $ionicModal, $ionicLoading, Hospitals) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
 	$scope.emergencyHospitals = [];
+
+	getHospitals()
+		.then(function(emergencyHospitals) {
+			$scope.emergencyHospitals = emergencyHospitals;
+		})
+		.cathc(function(error) {
+			console.log(error);
+		});
 
 	$scope.doRefresh = function() {
 		return appointmentRequestService.get({tryReloadFirst: true})
@@ -89,6 +97,10 @@ appControllers.controller('emergencyHospitalsController', function ($http, $scop
 			ionicMaterialMotion.fadeSlideIn();
 			ionicMaterialInk.displayEffect();
 		}, 100);
+	}
+
+	function getHospitals() {
+		return Hospitals.getEmergencyHospitals();
 	}
 
 }); // End of dashboard controller.
