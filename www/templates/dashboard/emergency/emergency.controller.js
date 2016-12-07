@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, toasts, $ionicPopup, $ionicModal, $ionicLoading, Hospitals, $cordovaGeolocation) {
+appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, toasts, $ionicPopup, $ionicModal, $ionicLoading, $cordovaGeolocation, Providers) {
 
     $scope.isAnimated =  $stateParams.isAnimated;
 
@@ -96,37 +96,12 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 	}
 
 	function getHospitals() {
-		// return Hospitals.getEmergencyHospitals($scope.userProfile);
-        return $q.when([{
-            "_id": 3019608,
-            "name": "HOSPITAL SANTA HELENA",
-            "image": "",
-            "address":  {
-        	    "label": "sede",
-        	    "name": "",
-        	    "state": "df",
-        	    "city": "brasilia",
-        	    "area": "Asa Norte",
-        	    "address": "SHLN 516 CONJUNTO D",
-        	    "zip":  "70770560",
-        	    "phones": ["3215-0150"],
-                "geo": {
-        			"latitude": -15.8413844,
-        			"longitude":  -47.8857227
-        		}
-        	},
-            "operators": [ 5711 ],
-            "healthPlans": [{
-        		"plan": 471802140,
-                "services": [ "pronto-socorro" ],
-                "medicalSpecialties": [],
-                "procedures": [],
-            }]
-        }])
-        .then(function(hospitals) {
-            $scope.emergencyHospitals = hospitals;
-            return hospitals;
-        });
+
+        return Providers.getHospitals({'state': 'df', 'city': 'brasilia', 'plan': 471802140}).$promise
+                .then(function(hospitals) {
+                    $scope.emergencyHospitals = hospitals;
+                    return hospitals;
+                });
 	}
 
     function getCurrentPosition() {
@@ -169,8 +144,10 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 
     function populateHospitals(hospitals) {
         return function() {
-            console.log(hospitals);
             angular.forEach(hospitals, function(hospital) {
+                if (!hospital.address.geo)
+                    return;
+
                 var latLng = new google.maps.LatLng(hospital.address.geo.latitude, hospital.address.geo.longitude);
 
                 google.maps.event.addListenerOnce($scope.map, 'idle', function() {
