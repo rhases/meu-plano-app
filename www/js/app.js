@@ -7,12 +7,12 @@ angular.module('starter')
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
             if(typeof cordova !== 'undefined'){
-              cordova.getAppVersion((version) => {
-                $rootScope.appVersion = version;
-              });
-		  } else {
-			  $rootScope.appVersion = 'x.y.z';
-		  }
+				cordova.getAppVersion((version) => {
+					$rootScope.appVersion = version;
+				});
+			} else {
+				$rootScope.appVersion = 'x.y.z';
+			}
         };
 
         function configSplashScreen() {
@@ -69,7 +69,7 @@ angular.module('starter')
 
 					// Go to dashboard
 					else {
-						$state.go('app.dashboard');
+						$state.go('app.dashboard:emergencyHospitals');
 						console.log("The user '" + appUser.name + "' successful logged!");
             			analyticsService.track.user(appUser);
 					}

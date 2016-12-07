@@ -5,12 +5,12 @@
 <!--State name : app.dashboard-->
 <!--URL : #app/dashboard-->
 
-<ion-view title="Hospitais com emergência">
+<ion-view title="Rede">
 	<ion-nav-title>
-      &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Hospitais com emergência
+      &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Rede
     </ion-nav-title>
 	<ion-nav-view>
-		<tabs-menu state="emergency"></tabs-menu>
+		<tabs-menu state="network"></tabs-menu>
 	</ion-nav-view>
 	<!--dashboard section-->
 	<ion-content id="dashboard-content">
@@ -23,6 +23,10 @@
 
 		<!-- CARDS APPOINTMENT REQUEST -->
 		<div class="animate-fade-slide-in">
+
+			<ion-item>
+				<ion-input type="text" placeholder="cardiologista, mamografia, ..."></ion-input>
+			</ion-item>
 
 		</div>
     </ion-content>
