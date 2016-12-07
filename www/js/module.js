@@ -10,6 +10,7 @@ angular.module('starter',
 		'ngCordova',
 		'ngLodash',
 		'ngMask',
+		'ngResource'
 	]
 )
 
