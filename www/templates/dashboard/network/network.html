@@ -1,10 +1,3 @@
-<!--View Information-->
-<!--View name : Dashboard-->
-<!--Controller name : dashboardCtrl-->
-<!--Controller path : www/templates/dashboard/js/controllers.js-->
-<!--State name : app.dashboard-->
-<!--URL : #app/dashboard-->
-
 <ion-view title="Rede">
 	<ion-nav-title>
       &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Rede
@@ -13,7 +6,7 @@
 		<tabs-menu state="network"></tabs-menu>
 	</ion-nav-view>
 	<!--dashboard section-->
-	<ion-content id="dashboard-content">
+	<ion-content id="network-content">
 		<!-- COMPONENTE DO REFRESH -->
 		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="doRefresh()" spinner="ripple"></ion-refresher>
 		<div class="text-center padding-vertical" ng-if="loading">
@@ -21,12 +14,30 @@
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
 
-		<!-- CARDS APPOINTMENT REQUEST -->
-		<div class="animate-fade-slide-in">
+		<div class="list" style="margin-bottom: 0px;">
+			<label class="item item-input">
+				<i class="icon ion-search placeholder-icon"></i>
+				<input type="text" placeholder="Search" ng-model="searchText">
+			</label>
+		</div>
 
-			<ion-item>
-				<ion-input type="text" placeholder="cardiologista, mamografia, ..."></ion-input>
-			</ion-item>
+		<!-- CARDS APPOINTMENT REQUEST -->
+		<!-- <div class="animate-fade-slide-in"> -->
+		<div>
+
+			<div class="list">
+
+				<div class="item item-divider"> Consultas </div>
+				<a class="item" ui-sref="app.dashboard::network::medical-specialty" ng-repeat="medicalSpecialty in medicalSpecialties | filter:searchText">
+					{{ medicalSpecialty.name }}
+				</a>
+
+				<div class="item item-divider"> Procedimentos </div>
+				<a class="item" ui-sref="app.dashboard::network::procedure" ng-repeat="procedure in procedures | filter:searchText" style="white-space: normal">
+					{{ procedure.mainDescription }}
+				</a>
+
+			</div>
 
 		</div>
     </ion-content>
