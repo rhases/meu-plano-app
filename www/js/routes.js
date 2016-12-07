@@ -21,76 +21,6 @@ angular.module('starter')
                 controller: 'menuCtrl'
             })
 
-<<<<<<< HEAD
-			// LOGIN
-			.state('app.login', {
-                url: "/login",
-				cache: false,
-                params:{
-                    isAnimated: false
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/login/login.html",
-                        controller: 'loginCtrl'
-                    }
-                }
-            })
-
-            .state('app.infos', {
-                url: "/infos",
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/dashboard/infos/infos.html",
-                        controller: 'infosCtrl'
-                    }
-                }
-            })
-
-			// REGISTER
-			.state('app.register::infos', {
-                url: "/register/infos",
-				cache: false,
-                params:{
-                    isAnimated: false
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/register/infos/infos.html",
-                        controller: 'registerCtrl'
-                    }
-                }
-            })
-			.state('app.register::profile', {
-                url: "/register/profile",
-				cache: false,
-                params:{
-                    isAnimated: false
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/register/profile/profile.html",
-                        controller: 'profileCtrl'
-                    }
-                }
-            })
-			.state('app.register::notInvited', {
-                url: "/register/not-invited",
-				cache: false,
-                params:{
-                    isAnimated: false
-                },
-                views: {
-                    'menuContent': {
-                        templateUrl: "templates/register/not-invited/not-invited.html",
-                        controller: 'notInvitedCtrl'
-                    }
-                }
-            })
-
-=======
->>>>>>> 870e753205858fe9df8312a21fa9e79923e7381d
 			// DASHBOARD
             .state('app.dashboard', {
                 url: "/dashboard",
@@ -128,6 +58,16 @@ angular.module('starter')
                     'menuContent': {
                         templateUrl: "templates/dashboard/network/network.html",
                         controller: 'networkController'
+                    }
+                }
+            })
+            .state('app.dashboard::infos', {
+                url: "/infos",
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: "templates/dashboard/infos/infos.html",
+                        controller: 'infosCtrl'
                     }
                 }
             })
