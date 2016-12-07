@@ -21,21 +21,26 @@
 			<ion-spinner icon="ripple"></ion-spinner>
 		</div>
 
-
+		map
 
 		<!-- CARDS APPOINTMENT REQUEST -->
 		<div class="animate-fade-slide-in">
 
 			<div class="list card" ng-repeat="hospital in emergencyHospitals">
 
-				<div class="item item-avatar">
+				<div class="item item-avatar" style="white-space: normal !important">
 					<img ng-src="{{ hospital.image ? hospital.image : 'img/icons/hospital.ico' }}">
 					<h2>{{ hospital.name }}</h2>
-				</div>
+					<p ng-repeat="phone in hospital.address.phones">
+    					<i class="fa fa-phone"></i>&nbsp;
+						{{ phone }}
+					</p>
 
-				<div class="item item-body">
 					<p>
-						{{ hospital.address.area }}
+						<i class="fa fa-map-marker"></i>&nbsp;
+						{{ hospital.address.area }}&nbsp;-&nbsp;
+						{{ hospital.address.address}}&nbsp;-&nbsp;
+						{{ hospital.address.zip }}
 					</p>
 				</div>
 
