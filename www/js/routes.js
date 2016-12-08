@@ -78,7 +78,7 @@ angular.module('starter')
                 }
             })
 			.state('app.tabs.network-medical-specialty', {
-                url: "/network/medical-specialty",
+                url: "/network/medical-specialty/:id",
 				cache: false,
                 params:{
                     isAnimated: true,
@@ -91,7 +91,7 @@ angular.module('starter')
                 }
             })
 			.state('app.tabs.network-procedure', {
-				url: "/network/procedure",
+				url: "/network/procedure/:id",
 				cache: false,
 				params:{
 					isAnimated: true,

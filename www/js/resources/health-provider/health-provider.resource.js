@@ -1,6 +1,6 @@
 'use strict';
 angular.module('starter')
-    .factory('HealthProvider', function($resource, ANS_WS_URI) {
+    .factory('HealthProvider', function($resource, ANS_WS_URI, $q) {
 
         // return $resource(ANS_WS_URI + 'providers/:plan/:state/:city/:type', {},
 	    //     {
@@ -17,7 +17,7 @@ angular.module('starter')
 	    //             cache: true,
 	    //             isArray: true,
 	    //             params: {
-		// 				type: 'hospital'
+		// 				type: 'clinic'
 		// 			}
 	    //         }
 	    //     });
@@ -39,7 +39,7 @@ angular.module('starter')
 			    "zip":  "70770560",
 			    "phones": ["3215-0150"],
 				"geo": {
-					"latitude": -15.8414079
+					"latitude": -15.8414079,
 					"longitude":  -47.8877947
 				}
 			},
@@ -53,14 +53,15 @@ angular.module('starter')
 		}]
 
 		return {
-			'get': function() { return MOCK_DATA[0]; },
+			'get': function() { return { $promise: $q.when(MOCK_DATA[0]) }; },
 			'save': function() {},
-			'query': function() { return MOCK_DATA; },
+			'query': function() { return { $promise: $q.when(MOCK_DATA) }; },
 			'remove': function() {},
 			'delete': function() {},
-			'getHospitals': function() { return MOCK_DATA },
-			'getProviders': function() { return undefined; }
-
+			'getHospitals': function() { return { $promise: $q.when(MOCK_DATA) }; },
+			'getProviders': function() { return { $promise: $q.when() };; },
+			'queryByHealthPlanAndProcedure': function() { return { $promise: $q.when(MOCK_DATA) }; },
+			'queryByHealthPlanAndMedicalSpecialty': function() { return { $promise: $q.when() }; },
 		}
 
     });

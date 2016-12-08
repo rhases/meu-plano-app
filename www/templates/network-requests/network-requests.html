@@ -1,6 +1,6 @@
-<ion-view title="Rede">
+<ion-view title="Solicitações">
 	<ion-nav-title>
-      &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Rede
+      &nbsp;<i class="icon fa fa-envelope-o"></i>&nbsp;&nbsp;Solicitações
     </ion-nav-title>
 	<!--dashboard section-->
 	<ion-content id="network-content">
@@ -19,15 +19,22 @@
 
 				<div class="card" ng-repeat="networkRequest in networkRequests">
 					<div class="item item-text-wrap">
+						Solicitação de rede para:
 						<div ng-if="networkRequest.procedure">
-							<strong> {{ networkRequest.procedure.mainDescription }} </strong>
+							<strong ui-sref="app.tabs.network-procedure({ id: networkRequest.procedure._id })"> {{ networkRequest.procedure.mainDescription }} </strong>
 						</div>
 						<div ng-if="networkRequest.medicalSpecialty">
-							<strong> {{ networkRequest.medicalSpecialty.name }} </strong>
+							<strong ui-sref="app.tabs.network-medical-specialty({ id: networkRequest.medicalSpecialty._id })"> {{ networkRequest.medicalSpecialty.name }} </strong>
 						</div>
 
-						<strong class="assertive"> {{ networkRequest.status }} </strong>
+						<br>
 
+						<span ng-switch="networkRequest.status" class="pull-right">
+							<strong class="energized" ng-switch-when="new"> Nova </strong>
+							<strong class="balanced" ng-switch-when="anwsered"> Respondida </strong>
+						</span>
+
+						<br>
 					</div>
 				</div>
 

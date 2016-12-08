@@ -1,18 +1,18 @@
 'use strict';
 angular.module('starter')
-    .factory('MedicalSpecialty', function($resource, ANS_WS_URI) {
+    .factory('MedicalSpecialty', function($resource, ANS_WS_URI, $q) {
         // return $resource(ANS_WS_URI + 'medical-specialty/:id', {}, {});
 
 		// TODO: Usar só a linha de cima. Usado só para testar por enquanto.
 		var MOCK_DATA = [{
 		    "_id": 123123,
-		    "name": "cardiologista",
+		    "name": "Cardiologista",
 		}]
 
 		return {
-			'get': function() { return MOCK_DATA[0]; },
+			'get': function() { return { $promise: $q.when(MOCK_DATA[0]) }; },
 			'save': function() {},
-			'query': function() { return MOCK_DATA; },
+			'query': function() { return { $promise: $q.when(MOCK_DATA) };; },
 			'remove': function() {},
 			'delete': function() {}
 		}

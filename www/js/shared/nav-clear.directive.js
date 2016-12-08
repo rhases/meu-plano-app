@@ -24,5 +24,3 @@ appServices.directive('navClear', function($ionicHistory, $timeout) {
 		}
 	};
 });
-
-console.log("===> REGISTROU NAV CLEAR!!!")

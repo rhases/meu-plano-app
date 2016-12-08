@@ -1,6 +1,6 @@
 'use strict';
 angular.module('starter')
-    .factory('NetworkRequest', function($resource, ANS_WS_URI) {
+    .factory('NetworkRequest', function($resource, ANS_WS_URI, $q) {
         // return $resource(ANS_WS_URI + 'network/request/:id', {}, {});
 
 
@@ -17,9 +17,9 @@ angular.module('starter')
 		}]
 
 		return {
-			'get': function() { return MOCK_DATA[0]; },
+			'get': function() { return { $promise: $q.when(MOCK_DATA[0]) }; },
 			'save': function() {},
-			'query': function() { return MOCK_DATA; },
+			'query': function() { return { $promise: $q.when(MOCK_DATA) };; },
 			'remove': function() {},
 			'delete': function() {}
 		}

@@ -27,7 +27,7 @@ function(GA_TRACKING_ID) {
   // log in console if can access analytics (browser, for example)
   function _log(group, ...params){
     return function(...params){
-        console.log(group, params);
+        // console.log(group, params);
     }
   }
 

@@ -25,10 +25,18 @@
 			<br />
             <ion-list class="menu-list">
               <div class="list">
+				<ion-item menu-close class="item item-complex ink">
+                  <div ui-sref="app.tabs">
+                    <a class="item-content">
+                      <i class="fa fa-home"></i>
+                      <span>&nbsp;&nbsp; Início</span>
+                    </a>
+                  </div>
+                </ion-item>
                 <ion-item menu-close class="item item-complex ink">
                   <div ui-sref="app.network-requests">
                     <a class="item-content">
-                      <i class="fa fa-mail"></i>
+                      <i class="fa fa-envelope-o"></i>
                       <span>&nbsp;&nbsp; Minhas Requisições</span>
                     </a>
                   </div>
@@ -46,12 +54,6 @@
                 		<i class="fa fa-envelope"></i>
                 		<span>&nbsp;&nbsp; Fale com a gente</span>
                 	</a>
-                </ion-item>
-                <ion-item menu-close nav-clear class="ink">
-                  <a class="item-content" ng-click="logout()">
-                    <i class="fa fa-sign-out"></i>
-                    <span>&nbsp;&nbsp; Sair</span>
-                  </a>
                 </ion-item>
               </div>
             </ion-list>
