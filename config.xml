@@ -106,7 +106,7 @@
     </plugin>
     <plugin name="cordova-plugin-facebook4" spec="~1.7.1">
         <variable name="APP_ID" value="1702791466664692" />
-        <variable name="APP_NAME" value="Rhases" />
+        <variable name="APP_NAME" value="Meu Plano" />
     </plugin>
     <plugin name="cordova-plugin-device" spec="~1.1.2" />
     <plugin name="cordova-plugin-transport-security" spec="~0.1.2" />
@@ -114,4 +114,7 @@
     <plugin name="cordova-plugin-google-analytics" spec="~0.8.1" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.8" />
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.GeoBroker" />
+    </feature>
 </widget>

@@ -10,7 +10,15 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
             return $q.when()
                 .then(getCurrentPosition())
                 .then(createMap())
-                .then(populateHospitals(hospitals));
+                .then(populateHospitals(hospitals))
+                .catch(function(error) {
+                    console.log('emergencyHospitalsController ');
+                    console.log(error.message);
+                });
+        })
+        .catch(function(error) {
+            console.log('emergencyHospitalsController ');
+            console.log(error.message);
         })
 
 	$scope.doRefresh = function() {
@@ -96,7 +104,6 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 	}
 
 	function getHospitals() {
-
         return Providers.getHospitals({'state': 'df', 'city': 'brasilia', 'plan': 471802140}).$promise
                 .then(function(hospitals) {
                     $scope.emergencyHospitals = hospitals;
