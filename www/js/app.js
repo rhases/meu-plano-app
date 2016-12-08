@@ -113,6 +113,15 @@ angular.module('starter')
 			// 		.then(function() { $ionicLoading.hide(); });
 			// }
 
+			$rootScope.userProfile = {
+				_id: "contato@rhases.com.br", // email
+				state: "df",
+				city: "brasilia",
+				name: "Marvio Lúcio Silva",
+				hasHealthPlan: true,
+				healthPlan: 463945116
+			};
+
 			$rootScope.$on("login:successful", function(userId) {
 				$ionicLoading.show();
 				checkLogin()

@@ -7,21 +7,53 @@
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
             </ion-nav-buttons>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-android-mail" ui-sref="app.network-requests"></button>
+            </ion-nav-buttons>
         </ion-nav-bar>
         <!-- <ion-nav-view name="fabContent"></ion-nav-view> -->
         <ion-nav-view name="menuContent" ng-class="{ expanded: isExpanded }" ></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="left">
+        <ion-header-bar class="dark-bg expanded" style="background-size: cover; background:url('img/athos_sidemenu_dark_green.jpg')">
+          <span class="avatar user-img" style="background-image: url('{{ appUser.picture }}');">
+          </span>
+          <h2 class="title">{{ appUser.name }}</h2>
+        </ion-header-bar>
         <ion-content class="has-expanded-header stable-bg">
           <div class="scroll">
 			<br />
             <ion-list class="menu-list">
               <div class="list">
-                <ion-item menu-close nav-clear class="ink">
-                  <a class="item-content" ng-click="logout()">
-                    <i class="fa fa-sign-out"></i>
-                    <span>&nbsp;&nbsp; Sair</span>
-                  </a>
+				<ion-item menu-close class="item item-complex ink">
+                  <div ui-sref="app.tabs">
+                    <a class="item-content">
+                      <i class="fa fa-home"></i>
+                      <span>&nbsp;&nbsp; Início</span>
+                    </a>
+                  </div>
+                </ion-item>
+                <ion-item menu-close class="item item-complex ink">
+                  <div ui-sref="app.network-requests">
+                    <a class="item-content">
+                      <i class="fa fa-envelope-o"></i>
+                      <span>&nbsp;&nbsp; Minhas Requisições</span>
+                    </a>
+                  </div>
+                </ion-item>
+                <ion-item menu-close class="ink">
+                  <div>
+        			<a class="item-content" href="market://details?id=br.com.rhases.app">
+                      <i class="fa fa-star"></i>
+                      <span>&nbsp;&nbsp; Avalie-nos na Store</span>
+        			</a>
+                  </div>
+                </ion-item>
+                <ion-item menu-close class="ink">
+                	<a class="item-content" ui-sref="app.talkWithUs">
+                		<i class="fa fa-envelope"></i>
+                		<span>&nbsp;&nbsp; Fale com a gente</span>
+                	</a>
                 </ion-item>
               </div>
             </ion-list>

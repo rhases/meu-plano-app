@@ -1,15 +1,14 @@
 // Controller of dashboard.
-appControllers.controller('networkController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, ionicMaterialMotion, ionicMaterialInk, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
+appControllers.controller('networkController', function ($scope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, MedicalSpecialty, Procedure) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
 
-	$scope.search = search;
-	search();
+	$scope.search = _search;
+	_search();
 
-
-	function search() {
+	function _search() {
 		return $q.when()
 			.then(getMedicalSpecialties())
 			.then(getProcedures())
@@ -33,28 +32,19 @@ appControllers.controller('networkController', function ($http, $scope, $rootSco
 
 	function getMedicalSpecialties() {
 		return function() {
-			$scope.medicalSpecialties = [
-				{
-					"_id": 123,
-					"name": "Cardiologista"
-				}
-			];
+			return MedicalSpecialty.query().$promise
+				.then(function(medicalSpecialties) {
+					$scope.medicalSpecialties = medicalSpecialties;
+				})
 		}
 	}
 
 	function getProcedures() {
 		return function() {
-			$scope.procedures = [
-				{
-				    "_id": 4902,
-				    "mainDescription": "IMPLANTE DE PRÓTESE SEMI-RÍGIDA (EXCLUI PRÓTESES INFLÁVEIS)",
-				    "coverageTypes": [ {} ],
-				    "descriptions": [
-						"implante (colocação cirúrgica) de prótese semi-rígida (exclui próteses infláveis)",
-						"31206140 - Implante de prótese semi-rígida (exclui próteses infláveis)"
-					],
-				}
-			]
+			return Procedure.query().$promise
+				.then(function(procedures) {
+					$scope.procedures = procedures;
+				})
 		}
 	}
 

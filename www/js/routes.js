@@ -34,6 +34,20 @@ angular.module('starter')
 				}
 			})
 
+			.state('app.network-requests', {
+				url: "/network-requests",
+				cache: false,
+				params:{
+					isAnimated: true,
+				},
+				views: {
+					'menuContent': {
+						templateUrl: "templates/network-requests/network-requests.html",
+						controller: "networkRequestsController",
+					}
+				}
+			})
+
 			// Infos
             .state('app.tabs.infos', {
                 url: "/infos",
@@ -64,7 +78,7 @@ angular.module('starter')
                 }
             })
 			.state('app.tabs.network-medical-specialty', {
-                url: "/network/medical-specialty",
+                url: "/network/medical-specialty/:id",
 				cache: false,
                 params:{
                     isAnimated: true,
@@ -77,7 +91,7 @@ angular.module('starter')
                 }
             })
 			.state('app.tabs.network-procedure', {
-				url: "/network/procedure",
+				url: "/network/procedure/:id",
 				cache: false,
 				params:{
 					isAnimated: true,

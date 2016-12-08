@@ -21,10 +21,17 @@
 
 		<br>
 
-		Rede:
 
-		<div class="animate-fade-slide-in">
-
+		<div ng-if="!healthProviders || healthProviders.length == 0" class="text-center">
+			<br>
+			<br>
+			<span class="assertive"> Não temos informação dessa rede ainda. </span>
+			<br>
+			Solicite essa rede clicando aqui em baixo.
+			<i class="fa fa-level-down"></i>
+		</div>
+		<div class="animate-fade-slide-in" ng-if="healthProviders.length > 0">
+			Rede:
 			<div class="list card" ng-repeat="healthProvider in healthProviders">
 
 				<div class="item item-avatar" style="white-space: normal !important">

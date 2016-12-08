@@ -1,13 +1,10 @@
 // Controller of dashboard.
-appControllers.controller('medicalSpecialtyController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, ionicMaterialMotion, ionicMaterialInk, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading) {
+appControllers.controller('medicalSpecialtyController', function ($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, MedicalSpecialty, HealthProvider) {
 
-	$scope.medicalSpecialty =
-		{
-			"_id": 123,
-			"name": "Cardiologista"
-		}
-
-	$q.when()
+	MedicalSpecialty.get({ id: $stateParams.id }).$promise
+		.then(function (medicalSpecialty) {
+			$scope.medicalSpecialty = medicalSpecialty;
+		})
 		.then(getHealthProviders())
 		.then(function() {
 			animateList();
@@ -28,31 +25,11 @@ appControllers.controller('medicalSpecialtyController', function ($http, $scope,
 
 	function getHealthProviders() {
 		return function() {
-			$scope.healthProviders = [
-				{
-				    "_id": 3019608,
-				    "name": "HOSPITAL SANTA HELENA",
-				    "image": "",
-					"type": "hospital",
-				    "address":  {
-					    "label": "sede",
-					    "name": "",
-					    "state": "df",
-					    "city": "brasilia",
-					    "area": "Asa Norte",
-					    "address": "SHLN 516 CONJUNTO D",
-					    "zip":  "70770560",
-					    "phones": ["3215-0150"],
-					},
-				    "operators": [ 5711 ],
-				    "healthPlans": [{
-						"plan": 471802140,
-				        "services": [ "pronto-socorro" ],
-				        "medicalSpecialties": [],
-				        "procedures": [],
-				    }]
-				}
-			];
+			return HealthProvider.queryByHealthPlanAndMedicalSpecialty({ heathPlan: $rootScope.userProfile.healthPlan, medicalSpecialty: $scope.medicalSpecialty._id }).$promise
+				.then(function(healthProviders) {
+					console.log(healthProviders)
+					$scope.healthProviders = healthProviders;
+				})
 		}
 	}
 
