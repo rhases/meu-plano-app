@@ -73,7 +73,6 @@ appControllers.controller('procedureController', function ($http, $scope, $rootS
 				})
 				.then(function(modal) {
 					var commentModal = {
-						title: "Requisição de rede",
 						ok: function() {
 							modal.remove();
 							resolve($scope.commentModal);
@@ -91,5 +90,5 @@ appControllers.controller('procedureController', function ($http, $scope, $rootS
 				});
 		})
 	}
-	
+
 }); // End of dashboard controller.

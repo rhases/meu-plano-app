@@ -29,7 +29,7 @@ angular.module('starter')
 				},
 				views: {
 					'menuContent': {
-						templateUrl: "templates/dashboard/components/tabs-menu/tabs-menu.html",
+						templateUrl: "templates/menu/tabs-menu/tabs-menu.html",
 					}
 				}
 			})
