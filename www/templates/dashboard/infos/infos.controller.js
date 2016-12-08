@@ -26,26 +26,26 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
         }
 
         $scope.prettyCoverageAreaType = function() {
-            if ($scope.healthPlan.coverageAreaType === 'nacional')
+            if ($scope.healthPlan && $scope.healthPlan.coverageAreaType === 'nacional')
                 return 'Em todo território nacional';
         }
 
         $scope.prettyAccomodation = function() {
-            if ($scope.healthPlan.accomodation === 'coletiva')
+            if ($scope.healthPlan && $scope.healthPlan.accomodation === 'coletiva')
                 return 'Enfermaria';
             else
                 return 'Quarto privado';
         }
 
         $scope.prettyModeratorFactor = function() {
-            if ($scope.healthPlan.moderatorFactor)
+            if ($scope.healthPlan && $scope.healthPlan.moderatorFactor)
                 return 'Sim, seu plano possui coopartição';
             else
                 return 'Não é preciso pagar nada quando utilizar o plano';
         }
 
         $scope.showMaxPrice = function() {
-            if ($scope.healthPlan.maxPrice)
+            if ($scope.healthPlan && $scope.healthPlan.maxPrice)
                 return true;
             else
                 return false;
