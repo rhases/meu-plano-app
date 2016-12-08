@@ -1,9 +1,14 @@
 // Controller of dashboard.
-appControllers.controller('networkController', function ($scope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, MedicalSpecialty, Procedure) {
+appControllers.controller('networkController', function ($scope, $timeout, $state, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, MedicalSpecialty, Procedure) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
     $scope.isAnimated =  $stateParams.isAnimated;
+
+	if ($stateParams.searchText) {
+		$scope.searchText = $stateParams.searchText;
+	}
+
 
 	$scope.search = _search;
 	_search();

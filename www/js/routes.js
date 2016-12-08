@@ -65,7 +65,7 @@ angular.module('starter')
 
 			// Network
 			.state('app.tabs.network', {
-                url: "/network",
+                url: "/network?searchText",
 				cache: false,
                 params:{
                     isAnimated: true,

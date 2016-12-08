@@ -27,5 +27,6 @@ i.fa-big-icon {
   padding-right: 1rem; }
 
 .tab-item .icon.fa {
-  font-size: 25px;
-  height: 29px; }
+  font-size: 22px;
+  height: 25px;
+  padding-top: 2px; }

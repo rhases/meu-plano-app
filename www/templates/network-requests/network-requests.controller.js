@@ -9,7 +9,7 @@ appControllers.controller('networkRequestsController', function ($http, $scope, 
 	_loadNetworkRequests();
 
 	function _loadNetworkRequests() {
-		return NetworkRequest.query().$promise
+		return NetworkRequest.queryByUser().$promise
 			.then(populate())
 			.then(function(networkRequests) {
 				console.log(networkRequests)
