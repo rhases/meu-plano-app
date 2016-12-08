@@ -34,6 +34,20 @@ angular.module('starter')
 				}
 			})
 
+			.state('app.network-requests', {
+				url: "/network-requests",
+				cache: false,
+				params:{
+					isAnimated: true,
+				},
+				views: {
+					'menuContent': {
+						templateUrl: "templates/network-requests/network-requests.html",
+						controller: "networkRequestsController",
+					}
+				}
+			})
+
 			// Infos
             .state('app.tabs.infos', {
                 url: "/infos",

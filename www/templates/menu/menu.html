@@ -7,6 +7,9 @@
             <ion-nav-buttons side="left">
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
             </ion-nav-buttons>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-android-mail" ui-sref="app.network-requests"></button>
+            </ion-nav-buttons>
         </ion-nav-bar>
         <!-- <ion-nav-view name="fabContent"></ion-nav-view> -->
         <ion-nav-view name="menuContent" ng-class="{ expanded: isExpanded }" ></ion-nav-view>
@@ -23,10 +26,10 @@
             <ion-list class="menu-list">
               <div class="list">
                 <ion-item menu-close class="item item-complex ink">
-                  <div ui-sref="app.dashboard">
+                  <div ui-sref="app.network-requests">
                     <a class="item-content">
-                      <i class="fa fa-stethoscope"></i>
-                      <span>&nbsp;&nbsp; Minhas Consultas</span>
+                      <i class="fa fa-mail"></i>
+                      <span>&nbsp;&nbsp; Minhas Requisições</span>
                     </a>
                   </div>
                 </ion-item>

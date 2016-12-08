@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, toasts, $ionicPopup, $ionicModal, $ionicLoading, $cordovaGeolocation, Providers) {
+appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, toasts, $ionicPopup, $ionicModal, $ionicLoading, $cordovaGeolocation, HealthProvider) {
 
     $scope.isAnimated =  $stateParams.isAnimated;
 
@@ -97,7 +97,7 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 
 	function getHospitals() {
 
-        return Providers.getHospitals({'state': 'df', 'city': 'brasilia', 'plan': 471802140}).$promise
+        return HealthProvider.getHospitals({'state': 'df', 'city': 'brasilia', 'plan': 471802140}).$promise
                 .then(function(hospitals) {
                     $scope.emergencyHospitals = hospitals;
                     return hospitals;

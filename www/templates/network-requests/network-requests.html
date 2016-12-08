@@ -1,0 +1,38 @@
+<ion-view title="Rede">
+	<ion-nav-title>
+      &nbsp;<i class="icon fa fa-stethoscope"></i>&nbsp;&nbsp;Rede
+    </ion-nav-title>
+	<!--dashboard section-->
+	<ion-content id="network-content">
+		<!-- COMPONENTE DO REFRESH -->
+		<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="loadNetworkRequests()" spinner="ripple"></ion-refresher>
+		<div class="text-center padding-vertical" ng-if="loading">
+			<br />
+			<ion-spinner icon="ripple"></ion-spinner>
+		</div>
+
+		<!-- CARDS APPOINTMENT REQUEST -->
+		<!-- <div class="animate-fade-slide-in"> -->
+		<div>
+
+			<div class="list">
+
+				<div class="card" ng-repeat="networkRequest in networkRequests">
+					<div class="item item-text-wrap">
+						<div ng-if="networkRequest.procedure">
+							<strong> {{ networkRequest.procedure.mainDescription }} </strong>
+						</div>
+						<div ng-if="networkRequest.medicalSpecialty">
+							<strong> {{ networkRequest.medicalSpecialty.name }} </strong>
+						</div>
+
+						<strong class="assertive"> {{ networkRequest.status }} </strong>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+    </ion-content>
+</ion-view>
