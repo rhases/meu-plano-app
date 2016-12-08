@@ -13,9 +13,35 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
 
         console.log($scope.healthPlan);
 
-        $scope.coverageTypes = function() {
-            var coverageTypes =  $scope.healthPlan.coverageTypes;
-            return lodash.join(coverageTypes, ', ');
+        $scope.prettyCoverageType = function(coverageType) {
+            if(coverageType === 'ambulatorial')
+                return 'Consultas/Exames e Emergência';
+            if(coverageType === 'hospitalar')
+                return 'Cirurgia e Internação';
+            if(coverageType === 'obstetricia')
+                return 'Parto';
+            if(coverageType === 'odontologia')
+                return 'Odontologia';
+            return '';
+        }
+
+        $scope.prettyCoverageAreaType = function() {
+            if ($scope.healthPlan.coverageAreaType === 'nacional')
+                return 'Em todo território nacional';
+        }
+
+        $scope.prettyAccomodation = function() {
+            if ($scope.healthPlan.accomodation === 'coletiva')
+                return 'Enfermaria';
+            else
+                return 'Quarto privado';
+        }
+
+        $scope.prettyModeratorFactor = function() {
+            if ($scope.healthPlan.moderatorFactor)
+                return 'Sim, seu plano possui coopartição';
+            else
+                return 'Não é preciso pagar nada quando utilizar o plano';
         }
 
         $scope.showMaxPrice = function() {
