@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('procedureController', function($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, Procedure, HealthProvider) {
+appControllers.controller('procedureController', function($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, Procedure, HealthProvider, NetworkRequest) {
 
 	Procedure.get({ id: $stateParams.id }).$promise
 		.then(function (procedure) {
@@ -34,7 +34,23 @@ appControllers.controller('procedureController', function($scope, $rootScope, $t
 	}
 
 	$scope.requestNetwork = function() {
-		showModalComment();
+		showModalComment()
+			.then(function(comment) {
+				return NetworkRequest.save({
+					user: $rootScope.userProfile._id,
+					healthPlan: $rootScope.userProfile.healthPlan,
+
+					medicalSpecialty: undefined,
+					procedure: $scope.procedure._id,
+
+					comment: comment,
+
+					status: "new" // new, answered
+				}).$promise
+				.then(function() {
+					toasts.showSimple('Rede solicitada. :)')
+				})
+			})
 	}
 
 	function showModalComment() {

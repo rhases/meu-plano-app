@@ -28,10 +28,14 @@
 						</div>
 
 						<br>
+						
+						<p>{{ networkRequest.comment }}</p>
+
+						<br>
 
 						<span ng-switch="networkRequest.status" class="pull-right">
 							<strong class="energized" ng-switch-when="new"> Nova </strong>
-							<strong class="balanced" ng-switch-when="anwsered"> Respondida </strong>
+							<strong class="balanced" ng-switch-when="answered"> Respondida </strong>
 						</span>
 
 						<br>

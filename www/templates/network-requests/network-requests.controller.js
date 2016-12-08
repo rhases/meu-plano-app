@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('networkRequestsController', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, ionicMaterialMotion, ionicMaterialInk, transformUtils, toasts, $ionicHistory, $ionicPopup, $ionicModal, $ionicLoading, NetworkRequest, Procedure) {
+appControllers.controller('networkRequestsController', function ($scope, $rootScope, $timeout, $state, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicHistory, NetworkRequest, Procedure) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -9,7 +9,7 @@ appControllers.controller('networkRequestsController', function ($http, $scope, 
 	_loadNetworkRequests();
 
 	function _loadNetworkRequests() {
-		return NetworkRequest.queryByUser().$promise
+		return NetworkRequest.queryByUser($rootScope.userProfile._id).$promise
 			.then(populate())
 			.then(function(networkRequests) {
 				console.log(networkRequests)
