@@ -25,3 +25,7 @@ i.fa-big-icon {
 .popup-buttons button {
   padding-left: 1rem;
   padding-right: 1rem; }
+
+.tab-item .icon.fa {
+  font-size: 25px;
+  height: 29px; }
