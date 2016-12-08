@@ -40,8 +40,8 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 					user: $rootScope.userProfile._id,
 					healthPlan: $rootScope.userProfile.healthPlan,
 
-					medicalSpecialty: undefined,
-					procedure: $scope.procedure._id,
+					medicalSpecialty: $scope.medicalSpecialty._id,
+					procedure: undefined,
 
 					comment: comment,
 
@@ -61,10 +61,9 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 				})
 				.then(function(modal) {
 					var commentModal = {
-						title: "Requisição de rede",
 						ok: function() {
 							modal.remove();
-							resolve($scope.commentModal);
+							resolve($scope.commentModal.comment);
 							delete $scope.commentModal;
 						},
 						cancel: function() {

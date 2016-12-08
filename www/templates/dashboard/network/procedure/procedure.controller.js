@@ -63,7 +63,7 @@ appControllers.controller('procedureController', function($scope, $rootScope, $t
 					var commentModal = {
 						ok: function() {
 							modal.remove();
-							resolve($scope.commentModal);
+							resolve($scope.commentModal.comment);
 							delete $scope.commentModal;
 						},
 						cancel: function() {

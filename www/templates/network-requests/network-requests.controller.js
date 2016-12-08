@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('networkRequestsController', function ($scope, $rootScope, $timeout, $state, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicHistory, NetworkRequest, Procedure) {
+appControllers.controller('networkRequestsController', function ($scope, $rootScope, $timeout, $state, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicHistory, NetworkRequest, Procedure, MedicalSpecialty) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -36,11 +36,19 @@ appControllers.controller('networkRequestsController', function ($scope, $rootSc
 	function populate() {
 		return function(networkRequests) {
 			return $q.all(networkRequests.map(function(networkRequest) {
-				return Procedure.get({ id: networkRequest.procedure }).$promise
-					.then(function(procedure) {
-						networkRequest.procedure = procedure;
-						return networkRequest;
-					})
+				if (networkRequest.procedure) {
+					return Procedure.get({ id: networkRequest.procedure }).$promise
+						.then(function(procedure) {
+							networkRequest.procedure = procedure;
+							return networkRequest;
+						})
+				} else if (networkRequest.medicalSpecialty) {
+						return MedicalSpecialty.get({ id: networkRequest.medicalSpecialty }).$promise
+							.then(function(medicalSpecialty) {
+								networkRequest.medicalSpecialty = medicalSpecialty;
+								return networkRequest;
+							})
+				}
 			}))
 		}
 	}
