@@ -1,5 +1,6 @@
 // Controller of dashboard.
 appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, toasts, $ionicPopup, $ionicModal, $ionicLoading, $cordovaGeolocation, HealthProvider) {
+    var geocoder = new google.maps.Geocoder();
 
     $scope.isAnimated =  $stateParams.isAnimated;
 
@@ -10,7 +11,15 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
             return $q.when()
                 .then(getCurrentPosition())
                 .then(createMap())
-                .then(populateHospitals(hospitals));
+                .then(populateHospitals(hospitals))
+                .catch(function(error) {
+                    console.log('emergencyHospitalsController ');
+                    console.log(error.message);
+                });
+        })
+        .catch(function(error) {
+            console.log('emergencyHospitalsController ');
+            console.log(error.message);
         })
 
 	$scope.doRefresh = function() {
@@ -96,7 +105,6 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 	}
 
 	function getHospitals() {
-
         return HealthProvider.getHospitals({'state': 'df', 'city': 'brasilia', 'plan': 471802140}).$promise
                 .then(function(hospitals) {
                     $scope.emergencyHospitals = hospitals;
@@ -145,26 +153,35 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
     function populateHospitals(hospitals) {
         return function() {
             angular.forEach(hospitals, function(hospital) {
-                if (!hospital.address.geo)
+                if (!hospital.address)
                     return;
 
-                var latLng = new google.maps.LatLng(hospital.address.geo.latitude, hospital.address.geo.longitude);
+                var address = hospital.address.address + ', ';
+                address += hospital.address.city + ', ';
+                address += hospital.address.state + ', ';
+                address += hospital.address.zip + ', BR';
 
-                google.maps.event.addListenerOnce($scope.map, 'idle', function() {
-                    var marker = new google.maps.Marker({
-                        map: $scope.map,
-                        animation: google.maps.Animation.DROP,
-                        position: latLng,
-                        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
-                    });
+                geocoder.geocode( { 'address': address }, function(results, status) {
+                    if (status == google.maps.GeocoderStatus.OK) {
+                        google.maps.event.addListenerOnce($scope.map, 'idle', function() {
+                            var marker = new google.maps.Marker({
+                                map: $scope.map,
+                                animation: google.maps.Animation.DROP,
+                                position: results[0].geometry.location,
+                                icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+                            });
 
-                    var infoWindow = new google.maps.InfoWindow({
-                        content: hospital.name
-                    });
+                            var infoWindow = new google.maps.InfoWindow({
+                                content: hospital.name
+                            });
 
-                    google.maps.event.addListener(marker, 'click', function () {
-                        infoWindow.open($scope.map, marker);
-                    });
+                            google.maps.event.addListener(marker, 'click', function () {
+                                infoWindow.open($scope.map, marker);
+                            });
+                        });
+                    } else {
+                        alert("Geocode was not successful for the following reason: " + status);
+                    }
                 });
             });
         }
