@@ -24,11 +24,11 @@
 							<strong ui-sref="app.tabs.network({ searchText: networkRequest.procedure.mainDescription })"> {{ networkRequest.procedure.mainDescription }} </strong>
 						</div>
 						<div ng-if="networkRequest.medicalSpecialty">
-							<strong ui-sref="app.tabs.network-medical-specialty({ searchText: networkRequest.medicalSpecialty.name })"> {{ networkRequest.medicalSpecialty.name }} </strong>
+							<strong ui-sref="app.tabs.network({ searchText: networkRequest.medicalSpecialty.name })"> {{ networkRequest.medicalSpecialty.name }} </strong>
 						</div>
 
 						<br>
-						
+
 						<p>{{ networkRequest.comment }}</p>
 
 						<br>
