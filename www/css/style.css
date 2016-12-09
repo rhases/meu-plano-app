@@ -1,10 +1,6 @@
 p {
   color: #555; }
 
-.bar.bar-balanced {
-  background-color: #4CAF50;
-  color: #fff; }
-
 p.big-text {
   font-size: 16px;
   line-height: 150%;
@@ -16,18 +12,8 @@ h2.big-text {
 i.fa-big-icon {
   font-size: 10em; }
 
-.appointment-details-list .item .icon {
-  font-size: 22px; }
-
-.button.button-positive.facebook-background {
-  background-color: #3c5c99; }
-
-.popup-buttons button {
-  padding-left: 1rem;
-  padding-right: 1rem; }
-
 .tab-item .icon.fa {
   font-size: 22px;
   height: 30px;
   padding-top: 5px;
-  padding-bottom: 3px;}
+  padding-bottom: 3px; }

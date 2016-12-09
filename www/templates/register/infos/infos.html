@@ -1,0 +1,24 @@
+<ion-view title="Complete o seu registro">
+	<ion-nav-buttons></ion-nav-buttons> <!-- Needed to not show menu or back button -->
+
+	<ion-content id="register-content" padding="true" scrollbar-x="false">
+    	<form name="registerUser">
+			<ion-list>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Nome</span>
+					<input ng-model="appUser.name" name="name" required placeholder="Nome" type="text">
+				</label>
+				<label class="item item-input item-floating-label">
+					<span class="input-label">Email</span>
+					<input ng-model="appUser.email" name="email" required placeholder="Email" type="email">
+				</label>
+			</ion-list>
+
+			<br />
+
+			<button class="button button-block button-positive button-balanced" nav-clear ng-disabled="!(registerUser.name.$valid && registerUser.email.$valid)" ng-click="save()">
+				Continuar
+			</button>
+    	</form>
+	</ion-content>
+</ion-view>

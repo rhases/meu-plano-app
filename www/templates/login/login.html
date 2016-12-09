@@ -5,8 +5,10 @@
 <!--State name : app.facebookLogin-->
 <!--URL : #app/facebookLogin-->
 
-<ion-view title="Bem vindo à Rhases" >
-	<ion-nav-buttons></ion-nav-buttons> <!-- Needed to not show menu -->
+<ion-view title="Bem vindo ao Meu Plano" >
+	<ion-nav-title>
+		Bem vindo ao Meu Plano
+	</ion-nav-title>
 	<!--login content section-->
     <ion-content scroll-x="false" padding="true">
         <form class="text-center">
@@ -20,25 +22,17 @@
 
 			<br />
 
-            <h3>Podemos agendar a sua consulta?</h3>
+            <h3>Visualize os dados do seu plano</h3>
 
 			<br />
 			<br />
-
-            <div class="padding-top">
-                <a class="button button-block button-positive facebook-background" nav-clear ng-click="facebookSignIn()">
-					<i class="fa fa-facebook fa-lg"></i>
-					&nbsp;
-                    Continuar com o Facebook
-                </a>
-            </div>
 
 			<div class="padding-top">
-                <a class="button button-block button-positive" nav-clear ng-click="testLogin()">
-                    Login de Teste
+                <a class="button button-block button-positive" nav-clear ui-sref="app.registerInfos">
+                    Cadastre-se no sitema
                 </a>
             </div>
-			
+
         </form>
     </ion-content><!--end login content section-->
 </ion-view>

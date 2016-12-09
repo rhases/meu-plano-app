@@ -119,6 +119,35 @@ angular.module('starter')
                 }
             })
 
+            // Login
+            .state('app.login', {
+                url: "/login",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+					'menuContent': {
+                        templateUrl: "templates/login/login.html",
+                        controller: "loginCtrl"
+					}
+				}
+            })
+
+            .state('app.registerInfos', {
+                url: "/register-infos",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+					'menuContent': {
+                        templateUrl: "templates/register/infos/infos.html",
+                        controller: "registerCtrl"
+					}
+				}
+            })
+
         //Use $urlRouterProvider.otherwise(Url);
         // $urlRouterProvider.otherwise(localStorage['AUTH_TOKEN'] ? '/app/dashboard' : '/app/login');
         $urlRouterProvider.otherwise('/app/tabs');
