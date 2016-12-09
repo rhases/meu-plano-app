@@ -52,7 +52,7 @@ angular.module('starter')
 			}]
 
 		return {
-			'get': function() { return { $promise: $q.when(MOCK_DATA[0]) }; },
+			'get': function() { return { $promise: $q.when(MOCK_DATA[1]) }; },
 			'save': function() {},
 			'query': function() { return { $promise: $q.when(MOCK_DATA) }; },
 			'remove': function() {},
