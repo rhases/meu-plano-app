@@ -25,7 +25,7 @@
 					<ion-list ng-repeat="coverageType in healthPlan.coverageTypes">
 						<p style="padding-bottom: 4px; padding-left: 16px; font-size: 16px;">
 							{{ prettyCoverageType(coverageType) }}
-							<i class="fa fa-info-circle pull-right" ng-click="openPopover($event)"></i>
+							<i class="fa fa-info-circle pull-right" style="font-size: 18px;" ng-click="openCoverageTypePopover($event, coverageType)"></i>
 						</ion-item>
 					</ion-list>
 				</ion-item>
