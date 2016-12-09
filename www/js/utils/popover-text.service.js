@@ -1,26 +1,19 @@
 angular.module('starter').factory('popoverText', function(lodash) {
     var service = {};
 
-    service.getMedicalSpecialtyLabelByCod = function(specialityCod) {
-        var speciality = medicalInfos.getByCod(String(specialityCod));
-
-        if (!speciality)
-	        return;
-
-        return speciality.label;
-    }
-
     service.coverageTypeText = function(coverageType) {
         if(coverageType === 'ambulatorial')
             return 'Consultas médicas em clínicas ou consultórios, exames, tratamentos e demais procedimentos ambulatoriais. Os atendimentos de emergência estão limitados até as primeiras 12 horas do atendimento. <br /> <br /> Não cobre internação.';
         if(coverageType === 'hospitalar')
-            return 'Cirurgia e Internação';
+            return 'Internação hospitalar sem limite de tempo. <br /> <br /> Não cobre partos.';
         if(coverageType === 'obstetricia')
-            return 'Parto';
+            return 'Cobertura assistencial ao recém-nascido filho natural ou adotivo, ou do dependente, durante os primeiros 30 dias após o parto.';
         if(coverageType === 'odontologia')
-            return 'Odontologia';
+            return 'Consultas, exames, atendimentos de urgência e emergência odontológicos, exames auxiliares ou complementares, tratamentos e demais procedimentos.';
         return '';
     }
+
+    
 
     return service;
 });

@@ -98,7 +98,7 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
         });
 
         $scope.openCoverageTypePopover = function($event, coverageType) {
-            $scope.popoverText = popoverText.coverageTypeText(coverageType);;
+            $scope.popoverText = popoverText.coverageTypeText(coverageType);
             $scope.openPopover($event);
         }
 
