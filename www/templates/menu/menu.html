@@ -8,7 +8,7 @@
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
-                <button class="button button-icon button-clear ion-android-mail" ui-sref="app.network-requests"></button>
+                <a class="button button-icon button-clear ion-android-mail" ui-sref="app.network-requests"></a>
             </ion-nav-buttons>
         </ion-nav-bar>
         <!-- <ion-nav-view name="fabContent"></ion-nav-view> -->
@@ -21,61 +21,56 @@
           <h2 class="title">{{ appUser.name }}</h2>
         </ion-header-bar>
         <ion-content class="has-expanded-header stable-bg">
-          <div class="scroll">
-			<br />
-            <ion-list class="menu-list">
-              <div class="list">
-				<ion-item menu-close class="item item-complex ink">
-                  <div ui-sref="app.tabs">
-                    <a class="item-content">
-                      <i class="fa fa-home"></i>
-                      <span>&nbsp;&nbsp; Início</span>
-                    </a>
-                  </div>
-                </ion-item>
-                <ion-item menu-close class="item item-complex ink">
-                  <div ui-sref="app.network-requests">
-                    <a class="item-content">
-                      <i class="fa fa-envelope-o"></i>
-                      <span>&nbsp;&nbsp; Minhas Requisições</span>
-                    </a>
-                  </div>
-                </ion-item>
-                <ion-item menu-close class="ink">
-                  <div>
-        			<a class="item-content" href="market://details?id=br.com.rhases.app">
-                      <i class="fa fa-star"></i>
-                      <span>&nbsp;&nbsp; Avalie-nos na Store</span>
-        			</a>
-                  </div>
-                </ion-item>
-                <ion-item menu-close class="ink">
-                	<a class="item-content" ui-sref="app.talkWithUs">
-                		<i class="fa fa-envelope"></i>
-                		<span>&nbsp;&nbsp; Fale com a gente</span>
-                	</a>
-                </ion-item>
-              </div>
-            </ion-list>
-      			<br/>
-      			<br/>
-      			<br/>
-      			<div style="border-style:none" class="item row menu-item text-right">
-      				<p>
-      					Feito com amor em Brasília, DF, Brasil.
-      					<br>
-      					<small>
-      						Todos os direitos reservados
-      						<br>
-      						© Rhases Soluções em Tecnologia LTDA
-      						<br>
-      						<small>CNPJ 23.821.354/0001-00</small>
-      						<br>
-      						v{{appVersion}}
-      					</small>
-      				</p>
-      			</div>
-          </div>
+			<div class="scroll">
+				<br />
+				<ion-list class="menu-list">
+					<div class="list">
+						<ion-item menu-close class="item item-complex ink">
+							<div ui-sref="app.tabs">
+								<a class="item-content">
+									<i class="fa fa-home"></i>
+									<span>&nbsp;&nbsp; Início</span>
+								</a>
+							</div>
+						</ion-item>
+						<ion-item menu-close class="item item-complex ink">
+							<div ui-sref="app.network-requests">
+								<a class="item-content">
+									<i class="fa fa-envelope-o"></i>
+									<span>&nbsp;&nbsp; Minhas Requisições</span>
+								</a>
+							</div>
+						</ion-item>
+						<ion-item menu-close class="ink">
+							<a class="item-content" href="market://details?id=br.com.rhases.app">
+								<i class="fa fa-star"></i>
+								<span>&nbsp;&nbsp; Avalie-nos na Store</span>
+							</a>
+						</ion-item>
+						<ion-item menu-close class="ink">
+							<a class="item-content" ui-sref="app.talkWithUs">
+								<i class="fa fa-envelope"></i>
+								<span>&nbsp;&nbsp; Fale com a gente</span>
+							</a>
+						</ion-item>
+					</div>
+				</ion-list>
+				<div style="border-style:none" class="item row menu-item text-right">
+				<p>
+				Feito com amor em Brasília, DF, Brasil.
+				<br>
+				<small>
+					Todos os direitos reservados
+					<br>
+					© Rhases Soluções em Tecnologia LTDA
+					<br>
+					<small>CNPJ 23.821.354/0001-00</small>
+					<br>
+					v{{appVersion}}
+				</small>
+				</p>
+				</div>
+			</div>
         </ion-content>
     </ion-side-menu>
 </ion-side-menus>

@@ -3,6 +3,17 @@ angular.module('starter')
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
+		// FIXME
+		$rootScope.userProfile = {
+			_id: "contato@rhases.com.br", // email
+			state: "df",
+			city: "brasilia",
+			name: "Marvio Lúcio Silva",
+			hasHealthPlan: true,
+			healthPlan: 463945116
+		};
+
+
         function initialRootScope() {
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
@@ -112,15 +123,6 @@ angular.module('starter')
 			// 	checkLogin()
 			// 		.then(function() { $ionicLoading.hide(); });
 			// }
-
-			$rootScope.userProfile = {
-				_id: "contato@rhases.com.br", // email
-				state: "df",
-				city: "brasilia",
-				name: "Marvio Lúcio Silva",
-				hasHealthPlan: true,
-				healthPlan: 463945116
-			};
 
 			$rootScope.$on("login:successful", function(userId) {
 				$ionicLoading.show();

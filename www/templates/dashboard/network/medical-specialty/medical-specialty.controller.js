@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('medicalSpecialtyController', function ($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, MedicalSpecialty, HealthProvider) {
+appControllers.controller('medicalSpecialtyController', function ($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, MedicalSpecialty, HealthProvider, NetworkRequest) {
 
 	MedicalSpecialty.get({ id: $stateParams.id }).$promise
 		.then(function (medicalSpecialty) {
@@ -34,7 +34,23 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 	}
 
 	$scope.requestNetwork = function() {
-		showModalComment();
+		showModalComment()
+			.then(function(comment) {
+				return NetworkRequest.save({
+					user: $rootScope.userProfile._id,
+					healthPlan: $rootScope.userProfile.healthPlan,
+
+					medicalSpecialty: $scope.medicalSpecialty._id,
+					procedure: undefined,
+
+					comment: comment,
+
+					status: "new" // new, answered
+				}).$promise
+				.then(function() {
+					toasts.showSimple('Rede solicitada. :)')
+				})
+			})
 	}
 
 	function showModalComment() {
@@ -45,10 +61,9 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 				})
 				.then(function(modal) {
 					var commentModal = {
-						title: "Requisição de rede",
 						ok: function() {
 							modal.remove();
-							resolve($scope.commentModal);
+							resolve($scope.commentModal.comment);
 							delete $scope.commentModal;
 						},
 						cancel: function() {
