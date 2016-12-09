@@ -12,6 +12,7 @@ appControllers.controller('profileCtrl', function ($scope, $state, authService, 
 
 			if(!$scope.appUser.profile)
 				$scope.appUser.profile = {};
+
 			if(!$scope.appUser.profile.healthPlan)
 				$scope.appUser.profile.healthPlan = {};
 		})
@@ -26,14 +27,10 @@ appControllers.controller('profileCtrl', function ($scope, $state, authService, 
 
 	$scope.save = function() {
 		$ionicLoading.show();
-		console.log($scope.appUser)
+
 		authService.saveAppUser($scope.appUser)
 			.then(function(appUser) {
-				if (!appUser.isInvited) {
-					$state.go('app.register::notInvited');
-				} else {
-					$state.go('app.dashboard');
-				}
+				$state.go('app.registerOperator');
 			})
 			.catch(function(ignore) {
 				toasts.showSimple('Não foi possível comunicar com o servidor. Tente novamente mais tarde!');
@@ -46,9 +43,11 @@ appControllers.controller('profileCtrl', function ($scope, $state, authService, 
 	$scope.states = brazilianInfos.statesAndCities;
 
 	$scope.cities = function() {
-		if (!$scope.appUser || !$scope.appUser.profile || !$scope.appUser.profile.state)
+		if (!$scope.appUser || !$scope.appUser.state)
 			return [];
-		return brazilianInfos.getStateByCod($scope.appUser.profile.state).cities;
+		return brazilianInfos.getStateByCod($scope.appUser.state).cities;
 	}
-	
+
+
+
 });

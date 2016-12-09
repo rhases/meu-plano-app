@@ -3,6 +3,14 @@ angular.module('starter')
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
+        $rootScope.userProfile = {
+    		_id: "contato@rhases.com.br", // email
+    		state: "df",
+    		city: "brasilia",
+    		name: "Marvio Lúcio Silva",
+    		healthPlan: 463945116
+    	};
+
         function initialRootScope() {
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.

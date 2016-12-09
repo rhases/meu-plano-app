@@ -1,0 +1,18 @@
+<ion-view title="Selecione seu plano">
+	<ion-nav-buttons></ion-nav-buttons> <!-- Needed to not show menu or back button -->
+
+	<ion-content id="register-content" padding="false" scrollbar-x="false">
+        <div class="list" style="margin-bottom: 0px;">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Pesquise seu plano" ng-model="searchText">
+            </label>
+        </div>
+        <br>
+        <ion-list>
+            <ion-item ng-repeat="healthPlan in healthPlans | filter:searchText" ng-click="select(healthPlan)">
+                {{ healthPlan.name }}&nbsp;-&nbsp;{{ healthPlan._id }}
+            </ion-item>
+        </ion-list>
+	</ion-content>
+</ion-view>

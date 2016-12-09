@@ -52,14 +52,7 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	}
 
 	function _saveAppUser(appUser) {
-		// user profile
-		var userProfile = lodash.clone(appUser.profile);
-		if (userProfile)
-			userProfile._id = appUser.email;
-
-		// user
-		var user = lodash.clone(appUser);
-		delete user.profile;
+		$rootScope.appUser = appUser;
 
 		return $q.when(_storeAuthToken(JSON.stringify(appUser)));
 		// return userService.save(user)
