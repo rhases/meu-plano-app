@@ -23,8 +23,9 @@
 				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
 					<i class="icon fa fa-stethoscope"></i>
 					<ion-list ng-repeat="coverageType in healthPlan.coverageTypes">
-						<ion-item style="padding-bottom: 1px;">
+						<p style="padding-bottom: 4px; padding-left: 16px; font-size: 16px;">
 							{{ prettyCoverageType(coverageType) }}
+							<i class="fa fa-info-circle pull-right" ng-click="openPopover($event)"></i>
 						</ion-item>
 					</ion-list>
 				</ion-item>
