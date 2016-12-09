@@ -1,4 +1,4 @@
-appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan) {
+appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText) {
 
         $scope.userProfile = {
             "age": 35
@@ -90,4 +90,27 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
     			return FULL_LIFE_RANGE_KEYS[9];
     		}
     	}
+
+        $ionicPopover.fromTemplateUrl('templates/dashboard/infos/info-popover.html', {
+            scope: $scope
+        }).then(function(popover) {
+            $scope.popover = popover;
+        });
+
+        $scope.openCoverageTypePopover = function($event, coverageType) {
+            $scope.popoverText = popoverText.coverageTypeText(coverageType);
+            $scope.openPopover($event);
+        }
+
+        $scope.openPopover = function($event) {
+            $scope.popover.show($event);
+        };
+
+        $scope.closePopover = function() {
+            $scope.popover.hide();
+        };
+
+        $scope.$on('$destroy', function() {
+            $scope.popover.remove();
+        });
 });
