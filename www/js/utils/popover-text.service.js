@@ -13,7 +13,5 @@ angular.module('starter').factory('popoverText', function(lodash) {
         return '';
     }
 
-    
-
     return service;
 });
