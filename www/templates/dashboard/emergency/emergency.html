@@ -26,6 +26,12 @@
 
 		<div class="animate-fade-slide-in">
 
+			<div class="padding text-center" ng-if="!emergencyHospitals || emergencyHospitals.length == 0">
+				<br>
+				<span class="assertive">Não há nenhum hospital que atenda pronto socorro pelo seu plano na sua região. :(</span>
+				<br>
+			</div>
+
 			<div class="list card" ng-repeat="hospital in emergencyHospitals">
 
 				<div class="item item-avatar" style="white-space: normal !important">
