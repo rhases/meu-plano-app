@@ -4,5 +4,11 @@ appControllers
 		return {
 			restrict: 'E', // E = Element, A = Attribute, C = Class, M = Comment
 			templateUrl: 'templates/menu/left-menu/left-menu.html',
+			controller: function($scope, authService, $state) {
+				$scope.logout = function () {
+					authService.logout();
+					$state.go("app.login");
+				}
+			}
 		}
 	});

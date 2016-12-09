@@ -1,0 +1,37 @@
+<ion-view title="Perfil">
+	<ion-nav-buttons></ion-nav-buttons> <!-- Needed to not show menu or back button -->
+
+	<ion-content padding="true" scrollbar-x="false">
+		<form name="registerUserProfile">
+			<!-- <code>{{ appUser }}</code> -->
+			<section class="text-center">
+				<h4>Mora em?</h4>
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Estado
+					</div>
+					<select ng-model="appUser.state" name="state" required>
+				    	<option ng-repeat="state in states" ng-value="state.cod">{{ state.cod | uppercase }}</option>
+					</select>
+				</label>
+			</section>
+
+			<br />
+
+			<section ng-if="appUser.state" class="text-center">
+				<label class="item item-input item-select">
+					<div class="input-label">
+						Cidade
+					</div>
+					<select ng-model="appUser.city" name="city" required>
+						<option ng-repeat="city in cities()" ng-value="city.cod">{{ city.label }}</option>
+					</select>
+				</label>
+
+				<button class="button button-block button-positive button-balanced" nav-clear ng-disabled="!(registerUserProfile.state.$valid && registerUserProfile.city.$valid)" ng-click="save()">
+					Concluir
+				</button>
+			</section>
+		</form>
+	</ion-content>
+</ion-view>
