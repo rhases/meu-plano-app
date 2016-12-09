@@ -2,30 +2,30 @@
 angular.module('starter')
     .factory('HealthProvider', function($resource, ANS_WS_URI, $q) {
 
-        return $resource(ANS_WS_URI + 'providers/:id', {},
-	        {
-	            'queryAllHospitalsByHealthPlan': {
-					url: ANS_WS_URI + 'providers/:plan/:state/:city/:type',
-	                method: 'GET',
-	                cache: true,
-	                isArray: true,
-	                params: {
-						type: 'hospital'
-					}
-	            },
-				'queryByHealthPlanAndProcedure': {
-					url: ANS_WS_URI + 'providers/:plan/:state/:city/procedure/:procedure',
-	                method: 'GET',
-	                cache: true,
-	                isArray: true
-	            },
-				'queryByHealthPlanAndMedicalSpecialty': {
-					url: ANS_WS_URI + 'providers/:plan/:state/:city/medical-specialty/:medicalSpecialty',
-	                method: 'GET',
-	                cache: true,
-	                isArray: true
-	            }
-	        });
+        // return $resource(ANS_WS_URI + 'health-providers/:id', {},
+	    //     {
+	    //         'queryAllHospitalsByHealthPlan': {
+		// 			url: ANS_WS_URI + 'health-providers/:plan/:state/:city/:type',
+	    //             method: 'GET',
+	    //             cache: true,
+	    //             isArray: true,
+	    //             params: {
+		// 				type: 'hospital'
+		// 			}
+	    //         },
+		// 		'queryByHealthPlanAndProcedure': {
+		// 			url: ANS_WS_URI + 'health-providers/:plan/:state/:city/procedure/:procedure',
+	    //             method: 'GET',
+	    //             cache: true,
+	    //             isArray: true
+	    //         },
+		// 		'queryByHealthPlanAndMedicalSpecialty': {
+		// 			url: ANS_WS_URI + 'health-providers/:plan/:state/:city/medical-specialty/:medicalSpecialty',
+	    //             method: 'GET',
+	    //             cache: true,
+	    //             isArray: true
+	    //         }
+	    //     });
 
 
 		// TODO: Usar só a linha de cima. Usado só para testar por enquanto.
