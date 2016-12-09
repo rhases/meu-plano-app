@@ -9,10 +9,11 @@ appControllers.controller('rightMenuController', function ($scope, $rootScope, $
 	_loadNetworkRequests();
 
 	function _loadNetworkRequests() {
-		return NetworkRequest.queryByUser($rootScope.userProfile._id).$promise
+		if (!$rootScope.userProfile)
+			return;
+		return NetworkRequest.queryByUser({ userId: $rootScope.userProfile._id }).$promise
 			.then(populate())
 			.then(function(networkRequests) {
-				console.log(networkRequests)
 				$scope.networkRequests = networkRequests;
 			})
 			.then(function() {

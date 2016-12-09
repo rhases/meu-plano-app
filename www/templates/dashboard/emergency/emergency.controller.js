@@ -13,7 +13,6 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
                 .then(createMap())
                 .then(populateHospitals(hospitals))
                 .catch(function(error) {
-                    console.log('emergencyHospitalsController ');
                     console.log(error.message);
                 });
         })

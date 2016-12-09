@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('networkController', function ($scope, $timeout, $state, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, MedicalSpecialty, Procedure) {
+appControllers.controller('networkController', function ($scope, $timeout, $state, $stateParams, $q, $ionicLoading, toasts, MedicalSpecialty, Procedure) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -14,11 +14,12 @@ appControllers.controller('networkController', function ($scope, $timeout, $stat
 	_search();
 
 	function _search() {
+		$ionicLoading.show();
 		return $q.when()
 			.then(getMedicalSpecialties())
 			.then(getProcedures())
 			.then(function() {
-				animateList();
+				$ionicLoading.hide();
 			})
 	        .catch(function(err) {
 				toasts.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.')
@@ -26,13 +27,6 @@ appControllers.controller('networkController', function ($scope, $timeout, $stat
 			.then(function() {
 				$scope.$broadcast('scroll.refreshComplete'); // Stop the ion-refresher from spinning
 			});
-	}
-
-	function animateList() {
-	    $timeout(function() {
-			ionicMaterialMotion.fadeSlideIn();
-			ionicMaterialInk.displayEffect();
-		}, 100);
 	}
 
 	function getMedicalSpecialties() {

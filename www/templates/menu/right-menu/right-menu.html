@@ -12,6 +12,12 @@
 
 		<div class="list">
 
+			<div class="padding" ng-if="!networkRequests || networkRequests.length == 0">
+				<br>
+				<span class="assertive">Você não tem nenhuma solicitação de rede para a sua operadora. :)</span>
+				<br>
+			</div>
+
 			<div class="card" ng-repeat="networkRequest in networkRequests">
 				<div class="item item-text-wrap">
 					Solicitação de rede para:
