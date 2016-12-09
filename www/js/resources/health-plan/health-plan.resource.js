@@ -53,9 +53,9 @@ angular.module('starter')
 
 		return {
 			'get': function() { return { $promise: $q.when(MOCK_DATA[0]) }; },
-			'save': function() {},
+			// 'save': function() {},
 			'query': function() { return { $promise: $q.when(MOCK_DATA) }; },
-			'remove': function() {},
-			'delete': function() {}
+			// 'remove': function() {},
+			// 'delete': function() {}
 		}
     });

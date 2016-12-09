@@ -1,6 +1,7 @@
 <ion-side-menus enable-menu-with-back-views="false">
+
     <ion-side-menu-content drag-content="slideSideMenu">
-        <!-- <ion-nav-bar class="bar-assertive-900" ng-class="{expanded: isExpanded, 'has-header-fab-left': hasHeaderFabLeft, 'has-header-fab-left': hasHeaderFableft}" align-title="left"> -->
+		<!-- HEADER BAR -->
 		<ion-nav-bar class="bar-balanced" align-title="center">
             <ion-nav-back-button class="no-text">
             </ion-nav-back-button>
@@ -8,69 +9,24 @@
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
             </ion-nav-buttons>
             <ion-nav-buttons side="right">
-                <a class="button button-icon button-clear ion-android-mail" ui-sref="app.network-requests"></a>
+				<!-- // ui-sref="app.network-requests" -->
+                <a class="button button-icon button-clear ion-android-mail" menu-toggle="right"></a>
             </ion-nav-buttons>
         </ion-nav-bar>
-        <!-- <ion-nav-view name="fabContent"></ion-nav-view> -->
+
+		<!-- CONTENT -->
         <ion-nav-view name="menuContent" ng-class="{ expanded: isExpanded }" ></ion-nav-view>
+
     </ion-side-menu-content>
+
+	<!-- LEFT MENU -->
     <ion-side-menu side="left">
-        <ion-header-bar class="dark-bg expanded" style="background-size: cover; background:url('img/athos_sidemenu_dark_green.jpg')">
-          <span class="avatar user-img" style="background-image: url('{{ appUser.picture }}');">
-          </span>
-          <h2 class="title">{{ appUser.name }}</h2>
-        </ion-header-bar>
-        <ion-content class="has-expanded-header stable-bg">
-			<div class="scroll">
-				<br />
-				<ion-list class="menu-list">
-					<div class="list">
-						<ion-item menu-close class="item item-complex ink">
-							<div ui-sref="app.tabs">
-								<a class="item-content">
-									<i class="fa fa-home"></i>
-									<span>&nbsp;&nbsp; Início</span>
-								</a>
-							</div>
-						</ion-item>
-						<ion-item menu-close class="item item-complex ink">
-							<div ui-sref="app.network-requests">
-								<a class="item-content">
-									<i class="fa fa-envelope-o"></i>
-									<span>&nbsp;&nbsp; Minhas Requisições</span>
-								</a>
-							</div>
-						</ion-item>
-						<ion-item menu-close class="ink">
-							<a class="item-content" href="market://details?id=br.com.rhases.app">
-								<i class="fa fa-star"></i>
-								<span>&nbsp;&nbsp; Avalie-nos na Store</span>
-							</a>
-						</ion-item>
-						<ion-item menu-close class="ink">
-							<a class="item-content" ui-sref="app.talkWithUs">
-								<i class="fa fa-envelope"></i>
-								<span>&nbsp;&nbsp; Fale com a gente</span>
-							</a>
-						</ion-item>
-					</div>
-				</ion-list>
-				<div style="border-style:none" class="item row menu-item text-right">
-				<p>
-				Feito com amor em Brasília, DF, Brasil.
-				<br>
-				<small>
-					Todos os direitos reservados
-					<br>
-					© Rhases Soluções em Tecnologia LTDA
-					<br>
-					<small>CNPJ 23.821.354/0001-00</small>
-					<br>
-					v{{appVersion}}
-				</small>
-				</p>
-				</div>
-			</div>
-        </ion-content>
+        <left-menu></left-menu>
+    </ion-side-menu>
+
+
+	<!-- RIGHT MENU -->
+    <ion-side-menu side="right">
+		<right-menu></right-menu>
     </ion-side-menu>
 </ion-side-menus>
