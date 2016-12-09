@@ -24,7 +24,7 @@
 					<i class="icon fa fa-stethoscope"></i>
 					<div class="row" ng-repeat="coverageType in healthPlan.coverageTypes">
 						<div class="col col-75">
-							<p class="itemWithHelp" style="overflow: visible; white-space: normal;">
+							<p class="itemWithHelp">
 								{{ prettyCoverageType(coverageType) }}
 							</p>
 						</div>
@@ -73,7 +73,7 @@
 					<i class="icon fa fa-dollar"></i>
 					<ion-list>
 						<ion-item>
-							No máximo: R$ {{ maxPrice() }}
+							No máximo R$ {{ maxPrice() }} para beneficiários de {{ userProfile.age }} anos.
 						</ion-item>
 					</ion-list>
 				</ion-item>
@@ -95,13 +95,18 @@
 
 			<div class="list card" ng-if="showMaxPrice()">
 				<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
-					<span>Qual o registro do plano?</span>
+					<span>Qual o registro do plano na ANS?</span>
 				</ion-item>
 				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
 					<i class="icon fa fa-credit-card-alt"></i>
 					<ion-list>
-						<ion-item style="overflow: visible; white-space: normal;">
-							{{ healthPlan._id }}
+						<ion-item>
+							<p class="itemInfo">
+								Operadora: {{ healthPlan.operator._id }}
+							</p>
+							<p class="itemInfo">
+								Plano: {{ healthPlan._id }}
+							</p>
 						</ion-item>
 					</ion-list>
 				</ion-item>
