@@ -1,4 +1,4 @@
-appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover) {
+appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText) {
 
         $scope.userProfile = {
             "age": 35
@@ -98,14 +98,14 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
         });
 
         $scope.openCoverageTypePopover = function($event, coverageType) {
-            $scope.popoverText = coverageType;
+            $scope.popoverText = popoverText.coverageTypeText(coverageType);;
             $scope.openPopover($event);
         }
 
         $scope.openPopover = function($event) {
             $scope.popover.show($event);
         };
-        
+
         $scope.closePopover = function() {
             $scope.popover.hide();
         };
