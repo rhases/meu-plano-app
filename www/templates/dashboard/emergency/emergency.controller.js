@@ -31,7 +31,7 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
                     .then(populateHospitals(hospitals))
                     .then(function() {
         				$scope.$broadcast('scroll.refreshComplete'); // Stop the ion-refresher from spinning
-                        animateList();  
+                        animateList();
         			})
                     .catch(function(error) {
                         console.log('emergencyHospitalsController ');
@@ -53,7 +53,7 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 	}
 
 	function getHospitals() {
-        return HealthProvider.getHospitals({'state': 'df', 'city': 'brasilia', 'plan': 471802140}).$promise
+        return HealthProvider.queryAllHospitalsByHealthPlan({'state': 'df', 'city': 'brasilia', 'plan': 471802140}).$promise
                 .then(function(hospitals) {
                     $scope.emergencyHospitals = hospitals;
                     return hospitals;

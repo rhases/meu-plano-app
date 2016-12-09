@@ -1,0 +1,41 @@
+<ion-header-bar class="dark-bg expanded" style="background-size: cover; background:url('img/athos_sidemenu_dark_green.jpg')">
+	<span class="avatar user-img" style="background-image: url('{{ appUser.picture }}');">
+	</span>
+	<h2 class="title">{{ appUser.name }}</h2>
+</ion-header-bar>
+<ion-content class="has-expanded-header stable-bg">
+	<div class="scroll">
+		<br />
+		<ion-list class="menu-list">
+			<div class="list">
+				<ion-item menu-close class="ink">
+					<a class="item-content" href="market://details?id=br.com.rhases.app">
+						<i class="fa fa-star"></i>
+						<span>&nbsp;&nbsp; Avalie-nos na Store</span>
+					</a>
+				</ion-item>
+				<ion-item menu-close class="ink">
+					<a class="item-content" ui-sref="app.talkWithUs">
+						<i class="fa fa-envelope"></i>
+						<span>&nbsp;&nbsp; Fale com a gente</span>
+					</a>
+				</ion-item>
+			</div>
+		</ion-list>
+		<div style="border-style:none" class="item row menu-item text-right">
+		<p>
+		Feito com amor em Brasília, DF, Brasil.
+		<br>
+		<small>
+			Todos os direitos reservados
+			<br>
+			© Rhases Soluções em Tecnologia LTDA
+			<br>
+			<small>CNPJ 23.821.354/0001-00</small>
+			<br>
+			v{{appVersion}}
+		</small>
+		</p>
+		</div>
+	</div>
+</ion-content>

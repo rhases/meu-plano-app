@@ -3,11 +3,11 @@ angular.module('starter')
     .factory('HealthPlan', function($resource, ANS_WS_URI, $q) {
         // return $resource(ANS_WS_URI + 'health-plans/:id', {});
 
-		// TODO: Usar só a linha de cima. Usado só para testar por enquanto.
+		// TODO: Usar sÃ³ a linha de cima. Usado sÃ³ para testar por enquanto.
 		var MOCK_DATA = [
 			{
 			    "_id": 463945116,
-			    "name": "Bradesco Saúde Nacional Flex Q CE B",
+			    "name": "Bradesco SaÃºde Nacional Flex Q CE B",
 			    "status": "liberada",
 
 			    "operator":  5711,
@@ -24,7 +24,7 @@ angular.module('starter')
 			},
 			{
 			    "_id": 471802140,
-			    "name": "Bradesco Saúde Top Nacional 2 E CA copart",
+			    "name": "Bradesco SaÃºde Top Nacional 2 E CA copart",
 			    "status": "liberada",
 
 			    "operator":  5711,
@@ -52,10 +52,10 @@ angular.module('starter')
 			}]
 
 		return {
-			'get': function() { return { $promise: $q.when(MOCK_DATA[1]) }; },
-			'save': function() {},
+			'get': function() { return { $promise: $q.when(MOCK_DATA[0]) }; },
+			// 'save': function() {},
 			'query': function() { return { $promise: $q.when(MOCK_DATA) }; },
-			'remove': function() {},
-			'delete': function() {}
+			// 'remove': function() {},
+			// 'delete': function() {}
 		}
     });
