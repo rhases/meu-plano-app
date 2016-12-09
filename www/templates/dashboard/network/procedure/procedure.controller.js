@@ -25,7 +25,7 @@ appControllers.controller('procedureController', function($scope, $rootScope, $t
 
 	function getHealthProviders() {
 		return function() {
-			return HealthProvider.queryByHealthPlanAndProcedure({ heathPlan: $rootScope.userProfile.healthPlan, procedure: $scope.procedure._id }).$promise
+			return HealthProvider.queryByHealthPlanAndProcedure({ state: $rootScope.userProfile.state, city: $rootScope.userProfile.city, plan: $rootScope.userProfile.healthPlan, procedure: $scope.procedure._id }).$promise
 				.then(function(healthProviders) {
 					console.log(healthProviders)
 					$scope.healthProviders = healthProviders;

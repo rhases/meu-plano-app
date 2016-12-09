@@ -1,0 +1,43 @@
+<ion-content id="network-content">
+	<!-- COMPONENTE DO REFRESH -->
+	<ion-refresher pulling-text="Puxe para atualizar..." on-refresh="loadNetworkRequests()" spinner="ripple"></ion-refresher>
+	<div class="text-center padding-vertical" ng-if="loading">
+		<br />
+		<ion-spinner icon="ripple"></ion-spinner>
+	</div>
+
+	<!-- CARDS APPOINTMENT REQUEST -->
+	<!-- <div class="animate-fade-slide-in"> -->
+	<div>
+
+		<div class="list">
+
+			<div class="card" ng-repeat="networkRequest in networkRequests">
+				<div class="item item-text-wrap">
+					Solicitação de rede para:
+					<div ng-if="networkRequest.procedure">
+						<strong menu-close ui-sref="app.tabs.network({ searchText: networkRequest.procedure.mainDescription })"> {{ networkRequest.procedure.mainDescription }} </strong>
+					</div>
+					<div ng-if="networkRequest.medicalSpecialty">
+						<strong menu-close ui-sref="app.tabs.network({ searchText: networkRequest.medicalSpecialty.name })"> {{ networkRequest.medicalSpecialty.name }} </strong>
+					</div>
+
+					<br>
+
+					<p>{{ networkRequest.comment }}</p>
+
+					<br>
+
+					<span ng-switch="networkRequest.status" class="pull-right">
+						<strong class="energized" ng-switch-when="new"> Nova </strong>
+						<strong class="balanced" ng-switch-when="answered"> Respondida </strong>
+					</span>
+
+					<br>
+				</div>
+			</div>
+
+		</div>
+
+	</div>
+</ion-content>

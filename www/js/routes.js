@@ -29,21 +29,7 @@ angular.module('starter')
 				},
 				views: {
 					'menuContent': {
-						templateUrl: "templates/menu/tabs-menu/tabs-menu.html",
-					}
-				}
-			})
-
-			.state('app.network-requests', {
-				url: "/network-requests",
-				cache: false,
-				params:{
-					isAnimated: true,
-				},
-				views: {
-					'menuContent': {
-						templateUrl: "templates/network-requests/network-requests.html",
-						controller: "networkRequestsController",
+						templateUrl: "templates/menu/tabs/tabs.html",
 					}
 				}
 			})

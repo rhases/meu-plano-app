@@ -25,7 +25,7 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 
 	function getHealthProviders() {
 		return function() {
-			return HealthProvider.queryByHealthPlanAndMedicalSpecialty({ heathPlan: $rootScope.userProfile.healthPlan, medicalSpecialty: $scope.medicalSpecialty._id }).$promise
+			return HealthProvider.queryByHealthPlanAndMedicalSpecialty({ state: $rootScope.userProfile.state, city: $rootScope.userProfile.city, plan: $rootScope.userProfile.healthPlan, medicalSpecialty: $scope.medicalSpecialty._id }).$promise
 				.then(function(healthProviders) {
 					console.log(healthProviders)
 					$scope.healthProviders = healthProviders;

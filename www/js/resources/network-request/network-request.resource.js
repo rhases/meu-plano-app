@@ -33,9 +33,9 @@ angular.module('starter')
 		return {
 			'get': function() { return { $promise: $q.when(MOCK_DATA[0]) }; },
 			'save': function(data) { MOCK_DATA.push(data); return { $promise: $q.when() }; },
-			'query': function() { return { $promise: $q.when(MOCK_DATA) };; },
+			// 'query': function() { return { $promise: $q.when(MOCK_DATA) };; },
 			'queryByUser': function() { return { $promise: $q.when(MOCK_DATA) };; },
-			'remove': function() {},
-			'delete': function() {}
+			// 'remove': function() {},
+			// 'delete': function() {}
 		}
     });
