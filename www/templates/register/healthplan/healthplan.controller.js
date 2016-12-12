@@ -23,7 +23,7 @@ appControllers.controller('healthplanRegisterCtrl', function ($scope, authServic
         })
         .then(function() {
             $ionicLoading.hide();
-            $scope.isLoading = true;
+            $scope.isLoading = false;
         });
 
 	$scope.select = function(healthPlan) {
