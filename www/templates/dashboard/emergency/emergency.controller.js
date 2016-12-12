@@ -38,10 +38,6 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 				if (!city)
 					city = brazilianInfos.getCityByCod(state, geolocation.administrative_area_level_2);
 
-
-				console.log(state);
-				console.log(city);
-
 		    	return HealthProvider.queryAllHospitalsByHealthPlan({'state': state.cod, 'city': city.cod, 'plan': 471802140}).$promise
 		            .then(function(hospitals) {
 		                $scope.emergencyHospitals = hospitals;
