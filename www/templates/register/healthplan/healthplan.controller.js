@@ -4,7 +4,7 @@ appControllers.controller('healthplanRegisterCtrl', function ($scope, authServic
     $ionicLoading.show();
 
     $scope.isLoading = true;
-
+    $scope.appUser = {};
     $scope.healthPlans = [];
     var operatorId = null;
 
@@ -13,7 +13,9 @@ appControllers.controller('healthplanRegisterCtrl', function ($scope, authServic
 
     authService.getAppUser()
 		.then(function(appUser) {
-            return HealthPlan.queryByStateCityAndOperator({'state': appUser.state, 'city': appUser.city, 'operator': operatorId}).$promise;
+            // return HealthPlan.queryByStateCityAndOperator({'state': appUser.state, 'city': appUser.city, 'operator': operatorId}).$promise;
+            $scope.appUser = appUser;
+            return HealthPlan.query().$promise;
         })
         .then(function(healthPlans) {
             $scope.healthPlans = healthPlans;
@@ -29,9 +31,9 @@ appControllers.controller('healthplanRegisterCtrl', function ($scope, authServic
 	$scope.select = function(healthPlan) {
 		$ionicLoading.show();
 
-        $rootScope.appUser.healthPlan = healthPlan._id;
+        $scope.appUser.healthPlan = healthPlan._id;
 
-		authService.saveAppUser($rootScope.appUser)
+		authService.saveAppUser($scope.appUser)
 			.then(function(user) {
                 $rootScope.appUser = user;
 				$state.go('app.tabs.infos');

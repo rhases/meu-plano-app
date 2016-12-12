@@ -11,14 +11,16 @@
 				</label>
 			</div>
 			<br>
-			<ion-list >
-				<ion-item ng-repeat="healthPlan in healthPlans | filter:searchText" ng-click="select(healthPlan)">
-					{{ healthPlan.name }}&nbsp;-&nbsp;{{ healthPlan._id }}
+			<ion-list ng-repeat="healthPlan in healthPlans | filter:searchText | limitTo: 10" ng-click="select(healthPlan)">
+				<ion-item>
+					<h2>{{ healthPlan._id.operator.name }}</h2>
+					<h2 class="text_wrap">{{ healthPlan.name }}</h2>
+					<p> {{ healthPlan._id.cod }}</p>
 				</ion-item>
 			</ion-list>
 		</section>
 
-		<section class="padding text-center" ng-if="healthPlans.length == 0 && isLoading">
+		<section class="padding text-center" ng-if="healthPlans.length == 0 && !isLoading">
 			<br>
 			<span class="assertive">Não há nenhum plano que atenda em sua região. :(</span>
 			<br>

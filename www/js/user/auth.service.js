@@ -81,11 +81,12 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	}
 
 	function _isLoggedIn() {
-		if(!_getAuthToken()) {
-			return false;
-		}
+		var res = JSON.parse(_getAuthToken());
 
-		return true;
+		if (res && res.healthPlan)
+			return true;
+		else
+			return false;
 	}
 
 	function _logout() {
