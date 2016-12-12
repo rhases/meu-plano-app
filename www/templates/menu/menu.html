@@ -11,7 +11,12 @@
             </ion-nav-buttons>
 
             <ion-nav-buttons side="right">
-                <button ng-show="canShowMenu()" class="button button-icon button-clear ion-android-mail" menu-toggle="right"></button>
+                <button ng-show="canShowMenu()" class="button button-icon button-clear ion-android-mail" menu-toggle="right">
+                	<span class="badge badge-assertive header-badge">
+						<span ng-show="!countingNetworkRequests">{{ openedRequestCount }}</span>
+						<span ng-show="countingNetworkRequests">?</span>
+					</span>
+                </button>
             </ion-nav-buttons>
 
         </ion-nav-bar>

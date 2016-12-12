@@ -33,6 +33,7 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 				}).$promise
 				.then(function() {
 					toasts.showSimple('Rede solicitada. :)')
+					$rootScope.$emit('app.new-network-request')
 				})
 			})
 	}

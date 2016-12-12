@@ -8,7 +8,12 @@ appControllers.controller('rightMenuController', function ($scope, $rootScope, $
 	$scope.loadNetworkRequests = _loadNetworkRequests;
 	_loadNetworkRequests();
 
+	$rootScope.$on('app.new-network-request', function() {
+        _loadNetworkRequests();
+    });
+
 	function _loadNetworkRequests() {
+		$scope.loading = true;
 		return authService.getAppUser()
 			.then(function(appUser) {
 				if (!appUser || !appUser._id)
@@ -23,6 +28,7 @@ appControllers.controller('rightMenuController', function ($scope, $rootScope, $
 					})
 					.then(function() {
 						animateList();
+						$scope.loading = false;
 					})
 			})
 	        .catch(function(err) {

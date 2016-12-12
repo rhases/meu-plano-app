@@ -33,6 +33,7 @@ appControllers.controller('procedureController', function($scope, $rootScope, $t
 				}).$promise
 				.then(function() {
 					toasts.showSimple('Rede solicitada. :)')
+					$rootScope.$emit('app.new-network-request')
 				})
 			})
 	}

@@ -12,7 +12,7 @@
 
 		<div class="list">
 
-			<div class="padding" ng-if="!networkRequests || networkRequests.length == 0">
+			<div class="padding" ng-if="(!networkRequests || networkRequests.length == 0) && !loading">
 				<br>
 				<span class="assertive">Você não tem nenhuma solicitação de rede para a sua operadora. :)</span>
 				<br>
