@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('rightMenuController', function ($scope, $rootScope, $timeout, $state, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicHistory, NetworkRequest, Procedure, MedicalSpecialty) {
+appControllers.controller('rightMenuController', function ($scope, $rootScope, $timeout, $state, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicHistory, NetworkRequest, Procedure, MedicalSpecialty, authService) {
 
     //$scope.isAnimated is the variable that use for receive object data from state params.
     //For enable/disable row animation.
@@ -9,15 +9,21 @@ appControllers.controller('rightMenuController', function ($scope, $rootScope, $
 	_loadNetworkRequests();
 
 	function _loadNetworkRequests() {
-		if (!$rootScope.userProfile)
-			return;
-		return NetworkRequest.queryByUser({ userId: $rootScope.userProfile._id }).$promise
-			.then(populate())
-			.then(function(networkRequests) {
-				$scope.networkRequests = networkRequests;
-			})
-			.then(function() {
-				animateList();
+		return authService.getAppUser()
+			.then(function(appUser) {
+				if (!appUser || !appUser._id)
+					return;
+
+				$scope.appUser = appUser;
+
+				NetworkRequest.queryByUser({ userId: $scope.appUser._id }).$promise
+					.then(populate())
+					.then(function(networkRequests) {
+						$scope.networkRequests = networkRequests;
+					})
+					.then(function() {
+						animateList();
+					})
 			})
 	        .catch(function(err) {
 				toasts.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.')
@@ -51,6 +57,13 @@ appControllers.controller('rightMenuController', function ($scope, $rootScope, $
 							})
 				}
 			}))
+		}
+	}
+
+
+	function getAppUser() {
+		return function() {
+			return
 		}
 	}
 
