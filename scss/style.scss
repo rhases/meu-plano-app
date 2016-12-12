@@ -42,6 +42,12 @@ i.fa-big-icon {
     white-space: normal;
 }
 
+.text_wrap {
+    overflow: visible;
+    white-space: normal !important;
+    text-overflow: none !important;
+}
+
 ion-popover-view.fit {
   height: auto !important;
 }
