@@ -11,8 +11,8 @@
 				</label>
 			</div>
 			<br>
-			<ion-list ng-repeat="healthPlan in healthPlans | filter:searchText | limitTo: 10" ng-click="select(healthPlan)">
-				<ion-item>
+			<ion-list style="cursor:pointer;">
+				<ion-item ng-repeat="healthPlan in healthPlans | filter:searchText | limitTo: 10" ng-click="select(healthPlan)">
 					<h2 class="text_wrap">{{ healthPlan.name }}</h2>
 					<p> {{ healthPlan._id.cod }}</p>
 				</ion-item>
