@@ -7,10 +7,14 @@ appControllers.controller('healthplanRegisterCtrl', function ($scope, authServic
 
     $scope.healthPlans = [];
     var operatorId = null;
+
     if ($stateParams.operator)
         operatorId= $stateParams.operator;
 
-    HealthPlan.queryByStateCityAndOperator({'state': $rootScope.appUser.state, 'city': $rootScope.appUser.city, 'operator': operatorId}).$promise
+    authService.getAppUser()
+		.then(function(appUser) {
+            return HealthPlan.queryByStateCityAndOperator({'state': appUser.state, 'city': appUser.city, 'operator': operatorId}).$promise;
+        })
         .then(function(healthPlans) {
             $scope.healthPlans = healthPlans;
         })
