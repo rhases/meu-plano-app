@@ -13,9 +13,8 @@ appControllers.controller('healthplanRegisterCtrl', function ($scope, authServic
 
     authService.getAppUser()
 		.then(function(appUser) {
-            // return HealthPlan.queryByStateCityAndOperator({'state': appUser.state, 'city': appUser.city, 'operator': operatorId}).$promise;
-            $scope.appUser = appUser;
-            return HealthPlan.query().$promise;
+			$scope.appUser = appUser;
+            return HealthPlan.queryByStateCityAndOperator({'state': appUser.state, 'city': appUser.city, 'operator': operatorId}).$promise;
         })
         .then(function(healthPlans) {
             $scope.healthPlans = healthPlans;
