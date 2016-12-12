@@ -2,6 +2,7 @@
 	<ion-nav-buttons></ion-nav-buttons> <!-- Needed to not show menu or back button -->
 
 	<ion-content id="register-content" padding="false" scrollbar-x="false">
+
 		<section ng-if="healthPlans && healthPlans.length > 0">
 			<div class="list" style="margin-bottom: 0px;">
 				<label class="item item-input">
@@ -17,7 +18,7 @@
 			</ion-list>
 		</section>
 
-		<section class="padding text-center" ng-if="!(healthPlans || healthPlans.length == 0) && isLoading">
+		<section class="padding text-center" ng-if="healthPlans.length == 0 && isLoading">
 			<br>
 			<span class="assertive">Não há nenhum plano que atenda em sua região. :(</span>
 			<br>

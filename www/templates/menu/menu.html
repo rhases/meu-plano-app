@@ -5,12 +5,15 @@
 		<ion-nav-bar class="bar-balanced" align-title="center">
             <ion-nav-back-button class="no-text">
             </ion-nav-back-button>
-            <ion-nav-buttons side="left" ng-if="!(!CURRENT_STATE || CURRENT_STATE == 'app.login' || CURRENT_STATE == 'app.registerInfos' || CURRENT_STATE == 'app.registerProfile' || CURRENT_STATE == 'app.registerOperator' || CURRENT_STATE == 'app.registerHealthplan')">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">{{ CURRENT_STATE }}</button>
-            </ion-nav-buttons>
-            <ion-nav-buttons side="right" ng-if="!(!CURRENT_STATE || CURRENT_STATE == 'app.login' || CURRENT_STATE == 'app.registerInfos' || CURRENT_STATE == 'app.registerProfile' || CURRENT_STATE == 'app.registerOperator' || CURRENT_STATE == 'app.registerHealthplan')">
-                <button class="button button-icon button-clear ion-android-mail" menu-toggle="right">{{ CURRENT_STATE }}</button>
-            </ion-nav-buttons>
+            <div ng-if="!(!CURRENT_STATE || CURRENT_STATE == 'app.login' || CURRENT_STATE == 'app.registerInfos' || CURRENT_STATE == 'app.registerProfile' || CURRENT_STATE == 'app.registerOperator' || CURRENT_STATE == 'app.registerHealthplan')">
+                <ion-nav-buttons side="left">
+                    <button class="button button-icon button-clear ion-navicon" menu-toggle="left">{{ CURRENT_STATE }}</button>
+                </ion-nav-buttons>
+
+                <ion-nav-buttons side="right">
+                    <button class="button button-icon button-clear ion-android-mail" menu-toggle="right">{{ CURRENT_STATE }}</button>
+                </ion-nav-buttons>
+            </div>
         </ion-nav-bar>
 
 		<!-- CONTENT -->
