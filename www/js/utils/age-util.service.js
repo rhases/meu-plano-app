@@ -4,6 +4,10 @@ angular.module('starter').factory('ageUtil', function(lodash) {
     var FULL_LIFE_RANGE_KEYS =
         ['a18orLess', 'a19to23', 'a24to28', 'a29to33', 'a34to38', 'a39to43', 'a44to48', 'a49to53', 'a54to58', 'a59orMore'];
 
+    service.getAgeFromDate = function(date) {
+        return moment().diff(date, 'years');
+    }
+
     service.getAgeRange = function(age) {
         if (age <= 18) {
             return FULL_LIFE_RANGE_KEYS[0];
