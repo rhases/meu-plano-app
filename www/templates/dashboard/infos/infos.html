@@ -16,8 +16,15 @@
 			<section ng-if="!isLoading">
 				<br />
 				<img ng-src=" {{ healthPlan._id.operator.image }}" class="padding" style="width:80%; margin: auto; display: block;">
-				<h2 class="text-center padding-left padding-right ">{{ healthPlan.name }}</h2>
+				<br />
+				<div>
+					<rating class="rating" style="margin: auto; width: 14.4524rem;" ng-model="operatorRating" max="MAX_RATING" readOnly="true"></rating>
+				</div>
+				<br />
 
+				<hr style="border: 0;    border-bottom: 2px solid #eaeaea; margin: 0 10px;"/>
+
+				<h2 class="text-center padding-left padding-right ">{{ healthPlan.name }}</h2>
 
 				<div class="list card">
 					<ion-item style="padding-bottom: 0px;">
