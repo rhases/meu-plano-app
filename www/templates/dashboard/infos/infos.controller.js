@@ -4,6 +4,9 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
         $scope.isLoading = true;
         $ionicLoading.show();
 
+        $scope.rating = {};
+        $scope.rating.max = 1;
+
         authService.getAppUser()
             .then(function (_appUser) {
                 appUser = _appUser;
@@ -12,6 +15,7 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
             })
             .then(function(healthPlan) {
                 $scope.healthPlan = healthPlan;
+                $scope.rating.rate = healthPlan._id.operator.ansQualification;
             })
             .catch(function() {
                 toasts.showSimple('Algum erro aconteceu! :(');
