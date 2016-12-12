@@ -1,6 +1,8 @@
-appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil, authService) {
+appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil, authService, toasts, $ionicLoading) {
 
         var appUser;
+        $scope.isLoading = true;
+        $ionicLoading.show();
 
         authService.getAppUser()
             .then(function (_appUser) {
@@ -10,6 +12,13 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
             })
             .then(function(healthPlan) {
                 $scope.healthPlan = healthPlan;
+            })
+            .catch(function() {
+                toasts.showSimple('Algum erro aconteceu! :(');
+            })
+            .then(function() {
+                $scope.isLoading = false;
+                $ionicLoading.hide();
             });
 
         // $scope.userAge = ageUtil.getAgeFromDate('1988-06-20T03:00:00.000Z');

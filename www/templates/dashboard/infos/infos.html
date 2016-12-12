@@ -13,117 +13,118 @@
 		<!-- <button id="new-appointment" class="button button-fab button-fab-bottom-right expanded button-positive spin" ng-class="{ on: !loading }" ui-sref="app.scheduleAppointment" aria-label="Add"> -->
 
 		<ion-content id="dashboard-content">
+			<section ng-if="!isLoading">
+				<br />
+				<img ng-src=" {{ healthPlan.operator.image }}" class="padding" style="width:80%; margin: auto; display: block;">
+				<h2 class="text-center">{{ healthPlan.name }}</h2>
 
-			<br />
-			<img ng-src=" {{ healthPlan.operator.image }}" class="padding" style="width:80%; margin: auto; display: block;">
-			<h2 class="text-center">{{ healthPlan.name }}</h2>
 
-
-			<div class="list card">
-				<ion-item style="padding-bottom: 0px;">
-					<span>O que cobre?</span>
-				</ion-item>
-				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-stethoscope"></i>
-					<div class="row padding" ng-repeat="coverageType in healthPlan.coverageTypes">
-						<div class="col col-75">
-							<p class="itemInfo">
-								{{ prettyCoverageType(coverageType) }}
-							</p>
+				<div class="list card">
+					<ion-item style="padding-bottom: 0px;">
+						<span>O que cobre?</span>
+					</ion-item>
+					<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+						<i class="icon fa fa-stethoscope"></i>
+						<div class="row padding" ng-repeat="coverageType in healthPlan.coverageTypes">
+							<div class="col col-75">
+								<p class="itemInfo">
+									{{ prettyCoverageType(coverageType) }}
+								</p>
+							</div>
+							<div class="col">
+								<a class="button button-clear button-dark pull-right" ng-click="openCoverageTypePopover($event, coverageType)">
+									<i class="fa fa-info-circle" style="font-size: 16px;"></i>
+								</a>
+							</div>
 						</div>
-						<div class="col">
-							<a class="button button-clear button-dark pull-right" ng-click="openCoverageTypePopover($event, coverageType)">
-								<i class="fa fa-info-circle" style="font-size: 16px;"></i>
-							</a>
+					</ion-item>
+				</div>
+
+				<div class="list card">
+					<ion-item style="padding-bottom: 0px;">
+						<span>Onde cobre?</span>
+					</ion-item>
+					<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+						<i class="icon ion-map"></i>
+						<ion-list>
+							<ion-item>
+								{{ prettyCoverageAreaType() }}
+							</ion-item>
+						</ion-list>
+					</ion-item>
+				</div>
+
+				<div class="list card">
+					<ion-item style="padding-bottom: 0px;">
+						<span>Onde ficaria internado?</span>
+					</ion-item>
+					<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+						<i class="icon fa fa-bed"></i>
+						<ion-list>
+							<ion-item>
+								{{ prettyAccomodation() }}
+							</ion-item>
+						</ion-list>
+					</ion-item>
+				</div>
+
+				<div class="list card" ng-if="showMaxPrice()">
+					<ion-item style="padding-bottom: 0px;">
+						<span>Qual a mensalidade?</span>
+					</ion-item>
+					<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+						<i class="icon fa fa-dollar"></i>
+						<ion-list>
+							<ion-item style="overflow: visible;
+						    white-space: normal;">
+								No máximo R$ {{ maxPrice() }} para beneficiários de {{ userAge }} anos
+							</ion-item>
+						</ion-list>
+					</ion-item>
+				</div>
+
+				<div class="list card" ng-if="showMaxPrice()">
+					<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
+						<span>É necessário pagar ao utilizar o plano?</span>
+					</ion-item>
+					<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+						<i class="icon fa fa-money"></i>
+
+						<div class="row padding">
+							<div class="col col-75">
+								<p class="itemInfo">
+									{{ prettyModeratorFactor() }}
+								</p>
+							</div>
+							<div class="col">
+								<a class="button button-clear button-dark pull-right" ng-click="openModeratorFactorPopover($event)">
+									<i class="fa fa-info-circle" style="font-size: 16px;"></i>
+								</a>
+							</div>
 						</div>
-					</div>
-				</ion-item>
-			</div>
 
-			<div class="list card">
-				<ion-item style="padding-bottom: 0px;">
-					<span>Onde cobre?</span>
-				</ion-item>
-				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon ion-map"></i>
-					<ion-list>
-						<ion-item>
-							{{ prettyCoverageAreaType() }}
-						</ion-item>
-					</ion-list>
-				</ion-item>
-			</div>
+					</ion-item>
+				</div>
 
-			<div class="list card">
-				<ion-item style="padding-bottom: 0px;">
-					<span>Onde ficaria internado?</span>
-				</ion-item>
-				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-bed"></i>
-					<ion-list>
-						<ion-item>
-							{{ prettyAccomodation() }}
-						</ion-item>
-					</ion-list>
-				</ion-item>
-			</div>
-
-			<div class="list card" ng-if="showMaxPrice()">
-				<ion-item style="padding-bottom: 0px;">
-					<span>Qual a mensalidade?</span>
-				</ion-item>
-				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-dollar"></i>
-					<ion-list>
-						<ion-item style="overflow: visible;
-					    white-space: normal;">
-							No máximo R$ {{ maxPrice() }} para beneficiários de {{ userAge }} anos
-						</ion-item>
-					</ion-list>
-				</ion-item>
-			</div>
-
-			<div class="list card" ng-if="showMaxPrice()">
-				<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
-					<span>É necessário pagar ao utilizar o plano?</span>
-				</ion-item>
-				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-money"></i>
-
-					<div class="row padding">
-						<div class="col col-75">
-							<p class="itemInfo">
-								{{ prettyModeratorFactor() }}
-							</p>
-						</div>
-						<div class="col">
-							<a class="button button-clear button-dark pull-right" ng-click="openModeratorFactorPopover($event)">
-								<i class="fa fa-info-circle" style="font-size: 16px;"></i>
-							</a>
-						</div>
-					</div>
-
-				</ion-item>
-			</div>
-
-			<div class="list card" ng-if="showMaxPrice()">
-				<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
-					<span>Qual o registro do plano na ANS?</span>
-				</ion-item>
-				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
-					<i class="icon fa fa-credit-card-alt"></i>
-					<ion-list>
-						<ion-item>
-							<p class="itemInfo">
-								Plano: {{ healthPlan._id.cod }}
-							</p>
-							<p class="itemInfo">
-								Operadora: {{ healthPlan._id.operator._id }}
-							</p>
-						</ion-item>
-					</ion-list>
-				</ion-item>
-			</div>
+				<div class="list card" ng-if="showMaxPrice()">
+					<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
+						<span>Qual o registro do plano na ANS?</span>
+					</ion-item>
+					<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
+						<i class="icon fa fa-credit-card-alt"></i>
+						<ion-list>
+							<ion-item>
+								<p class="itemInfo">
+									Plano: {{ healthPlan._id.cod }}
+								</p>
+								<p class="itemInfo">
+									Operadora: {{ healthPlan._id.operator._id }}
+								</p>
+							</ion-item>
+						</ion-list>
+					</ion-item>
+				</div>
+			</section>
 
 		</ion-content>
 
