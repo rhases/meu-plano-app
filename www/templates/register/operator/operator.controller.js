@@ -2,6 +2,7 @@
 appControllers.controller('operatorRegisterCtrl', function ($scope, authService, toasts, $ionicLoading, $rootScope, Operator, $state) {
 
 	$ionicLoading.show();
+	$scope.isLoading = true;
 
     $scope.operators = [];
 
@@ -9,11 +10,13 @@ appControllers.controller('operatorRegisterCtrl', function ($scope, authService,
         .then(function(operators) {
             $scope.operators = operators;
         })
+		.catch(function() {
+			$ionicLoading.hide();
+			toasts.showSimple('Algum erro aconteceu! :(');
+		})
         .then(function() {
             $ionicLoading.hide();
-        })
-        .catch(function() {
-            toasts.showSimple('Algum erro aconteceu! :(');
+			$scope.isLoading = false;
         });
 
     $scope.select = function(operator) {

@@ -17,7 +17,7 @@
 			</ion-list>
 		</div>
 
-		<div class="padding text-center" ng-if="!operators || operators.length == 0">
+		<div class="padding text-center" ng-if="!(operators || operators.length == 0) && isLoading">
 			<br>
 			<span class="assertive">Não há nenhuma operadora que atenda em sua região. :(</span>
 			<br>
