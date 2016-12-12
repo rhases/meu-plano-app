@@ -28,14 +28,15 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 
 	function _getAppUser() {
 		// user
-		return $q.when(function() {
-			var appUser = JSON.parse(_getAuthToken());
+		return $q.when()
+			.then(function() {
+				var appUser = JSON.parse(_getAuthToken());
 
-			if (appUser.birthdate)
-				appUser.birthdate = new Date(appUser.birthdate);
+				if (appUser && appUser.birthdate)
+					appUser.birthdate = new Date(appUser.birthdate);
 
-			return appUser;
-		});
+				return appUser;
+			});
 		// return userService.get(params)
 		// 	.then(function(user) {
 		// 		return userProfileService.get(user.email, params)
