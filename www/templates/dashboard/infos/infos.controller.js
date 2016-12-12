@@ -3,7 +3,7 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
         $scope.userAge = ageUtil.getAgeFromDate($rootScope.appUser.birthdate);
 
         // $scope.healthPlan = healthPlanService.getById('463945116');
-        HealthPlan.get({ id: '471802140' }).$promise
+        HealthPlan.get({ operatorId: '5711', codId: '421545991' }).$promise
         .then(function(healthPlan) {
             if (healthPlan)
                 $scope.healthPlan = healthPlan;

@@ -1,7 +1,7 @@
 'use strict';
 angular.module('starter')
     .factory('HealthPlan', function($resource, ANS_WS_URI, $q) {
-        return $resource(ANS_WS_URI + 'health-plans/:id', {}, {
+        return $resource(ANS_WS_URI + 'health-plans/:operatorId-:codId', {}, {
 			'queryByStateCityAndOperator': {
 				url: ANS_WS_URI + 'health-plans/state/:state/city/:city/operator/:operator',
 				method: 'GET',
