@@ -36,9 +36,9 @@
     <preference name="ShowSplashScreenSpinner" value="true" />
     <preference name="SplashScreen" value="screen" />
     <preference name="FadeSplashScreen" value="false" />
-    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-minSdkVersion" value="22" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="xwalkVersion" value="18+" />
+    <preference name="xwalkVersion" value="22+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
@@ -111,4 +111,11 @@
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <plugin name="cordova-plugin-geolocation" spec="~2.4.0" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="~2.2.0">
+        <variable name="XWALK_VERSION" value="22+" />
+        <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+" />
+        <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
+        <variable name="XWALK_MODE" value="embedded" />
+        <variable name="XWALK_MULTIPLEAPK" value="true" />
+    </plugin>
 </widget>
