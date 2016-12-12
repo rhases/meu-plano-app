@@ -1,7 +1,7 @@
-appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil) {
+appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil, authService) {
 
-        // $scope.userAge = ageUtil.getAgeFromDate($rootScope.appUser.birthdate);
         $scope.userAge = ageUtil.getAgeFromDate('1988-06-20T03:00:00.000Z');
+        // $scope.userAge = ageUtil.getAgeFromDate(authService.getAppUser().birthdate);
 
         // $scope.healthPlan = healthPlanService.getById('463945116');
         HealthPlan.get({ id: '471802140' }).$promise
