@@ -25,7 +25,7 @@
 				</ion-item>
 				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
 					<i class="icon fa fa-stethoscope"></i>
-					<div class="row" ng-repeat="coverageType in healthPlan.coverageTypes">
+					<div class="row padding" ng-repeat="coverageType in healthPlan.coverageTypes">
 						<div class="col col-75">
 							<p class="itemWithHelp">
 								{{ prettyCoverageType(coverageType) }}
@@ -89,11 +89,20 @@
 				</ion-item>
 				<ion-item style="padding-top: 0px; padding-bottom: 0px;" class="item-icon-left">
 					<i class="icon fa fa-money"></i>
-					<ion-list>
-						<ion-item style="overflow: visible; white-space: normal;">
-							{{ prettyModeratorFactor() }}
-						</ion-item>
-					</ion-list>
+
+					<div class="row padding">
+						<div class="col col-75">
+							<p class="itemInfo">
+								{{ prettyModeratorFactor() }}
+							</p>
+						</div>
+						<div class="col">
+							<a class="button button-clear button-dark pull-right" ng-click="openModeratorFactorPopover($event)">
+								<i class="fa fa-info-circle" style="font-size: 16px;"></i>
+							</a>
+						</div>
+					</div>
+
 				</ion-item>
 			</div>
 

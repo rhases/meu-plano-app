@@ -1,6 +1,7 @@
 appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil) {
 
-        $scope.userAge = ageUtil.getAgeFromDate($rootScope.appUser.birthdate);
+        // $scope.userAge = ageUtil.getAgeFromDate($rootScope.appUser.birthdate);
+        $scope.userAge = ageUtil.getAgeFromDate('1988-06-20T03:00:00.000Z');
 
         // $scope.healthPlan = healthPlanService.getById('463945116');
         HealthPlan.get({ id: '471802140' }).$promise
@@ -37,16 +38,13 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
 
         $scope.prettyModeratorFactor = function() {
             if ($scope.healthPlan && $scope.healthPlan.moderatorFactor)
-                return 'Sim, seu plano possui coopartição';
+                return 'Sim, seu plano possui coparticipação';
             else
                 return 'Não é preciso pagar nada quando utilizar o plano';
         }
 
         $scope.showMaxPrice = function() {
-            if ($scope.healthPlan && $scope.healthPlan.maxPrice)
-                return true;
-            else
-                return false;
+            return $scope.healthPlan && $scope.healthPlan.maxPrice;
         }
 
         $scope.maxPrice = function() {
@@ -69,6 +67,11 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
 
         $scope.openCoverageTypePopover = function($event, coverageType) {
             $scope.popoverText = popoverText.coverageTypeText(coverageType);
+            $scope.openPopover($event);
+        }
+
+        $scope.openModeratorFactorPopover = function($event) {
+            $scope.popoverText = popoverText.moderatorFactorText();
             $scope.openPopover($event);
         }
 
