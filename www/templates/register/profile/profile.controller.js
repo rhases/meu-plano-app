@@ -9,12 +9,6 @@ appControllers.controller('profileCtrl', function ($scope, $state, authService, 
 	authService.getAppUser()
 		.then(function(appUser) {
 			$scope.appUser = appUser || {};
-
-			if(!$scope.appUser.profile)
-				$scope.appUser.profile = {};
-
-			if(!$scope.appUser.profile.healthPlan)
-				$scope.appUser.profile.healthPlan = {};
 		})
 		.catch(function() {
 			$scope.appUser = {};
