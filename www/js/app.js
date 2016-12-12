@@ -3,10 +3,12 @@ angular.module('starter')
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
+        $rootScope.CURRENT_STATE = undefined;
+
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
             // event.preventDefault();
             if (fromState.name)
-                $rootScope.currentState = fromState.name;
+                $rootScope.CURRENT_STATE = fromState.name;
         });
 
         function initialRootScope() {
