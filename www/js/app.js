@@ -40,6 +40,7 @@ angular.module('starter')
             initialRootScope();
 
 			if (!authService.isLoggedIn()) {
+                authService.logout();
 				$state.go('app.login');
 				console.log("Don't have user logged yet!");
 			} else {
