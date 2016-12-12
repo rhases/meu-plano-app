@@ -13,7 +13,8 @@ appControllers.controller('healthplanRegisterCtrl', function ($scope, authServic
 
     authService.getAppUser()
 		.then(function(appUser) {
-			$scope.appUser = appUser;
+            $scope.appUser = appUser;
+
             return HealthPlan.queryByStateCityAndOperator({'state': appUser.state, 'city': appUser.city, 'operator': operatorId}).$promise;
         })
         .then(function(healthPlans) {
@@ -30,11 +31,10 @@ appControllers.controller('healthplanRegisterCtrl', function ($scope, authServic
 	$scope.select = function(healthPlan) {
 		$ionicLoading.show();
 
-        $scope.appUser.healthPlan = healthPlan._id;
+        $scope.appUser.healthPlan = {'cod': healthPlan._id.cod, 'operator': healthPlan._id.operator._id};
 
 		authService.saveAppUser($scope.appUser)
 			.then(function(user) {
-                $rootScope.appUser = user;
 				$state.go('app.tabs.infos');
 			})
 			.then(function() {
