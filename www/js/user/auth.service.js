@@ -28,7 +28,15 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 
 	function _getAppUser() {
 		// user
-		return $q.when(JSON.parse(_getAuthToken()));
+		return $q.when()
+			.then(function() {
+				var appUser = JSON.parse(_getAuthToken());
+
+				if (appUser && appUser.birthdate)
+					appUser.birthdate = new Date(appUser.birthdate);
+
+				return appUser;
+			});
 		// return userService.get(params)
 		// 	.then(function(user) {
 		// 		return userProfileService.get(user.email, params)
@@ -52,8 +60,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	}
 
 	function _saveAppUser(appUser) {
-		$rootScope.appUser = appUser;
-
 		return $q.when(_storeAuthToken(JSON.stringify(appUser)));
 		// return userService.save(user)
 		// 	.then(function(token) {
@@ -72,33 +78,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 		// 		return appUser;
 		// 	})
 
-	}
-
-	// *********************************************************
-
-	function _facebookSignUp(facebookInfo) {
-		console.log(JSON.stringify(facebookInfo));
-
-		var authUser = {
-		    name: facebookInfo.name,
-		    email: facebookInfo.email,
-			picture : "https://graph.facebook.com/" + facebookInfo.id + "/picture?type=large",
-		    facebook: facebookInfo,
-		};
-
-		// Salva o authUser lá no rhases-auth.
-		return userService.save(authUser)
-			.then(function(token) {
-				_storeAuthToken(token);
-				return userService.load(); // NECESSÁRIO!!! Garante que foi realmente criado salvo e está realmente logado
-			})
-			.then(function(user) {
-				return _getAppUser();
-			})
-			.then(function(appUser) {
-				$rootScope.appUser = appUser;
-				return appUser;
-			})
 	}
 
 	function _isLoggedIn() {
@@ -120,12 +99,9 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 		$ionicHistory.clearHistory();
 
 		$state.go('app.login');
-
-		$rootScope.appUser = undefined;
 	}
 
 	return {
-		facebookSignUp: _facebookSignUp,
 		logout: _logout,
 		isLoggedIn: _isLoggedIn,
 		getAppUser: _getAppUser,
