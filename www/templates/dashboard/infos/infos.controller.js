@@ -1,11 +1,8 @@
-appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil, authService, toasts, $ionicLoading) {
+appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil, authService, toasts, $ionicLoading, MAX_RATING) {
 
         var appUser;
         $scope.isLoading = true;
         $ionicLoading.show();
-
-        $scope.rating = {};
-        $scope.rating.max = 1;
 
         authService.getAppUser()
             .then(function (_appUser) {
@@ -15,7 +12,7 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
             })
             .then(function(healthPlan) {
                 $scope.healthPlan = healthPlan;
-                $scope.rating.rate = healthPlan._id.operator.ansQualification;
+                $scope.operatorRating = healthPlan._id.operator.ansQualification * MAX_RATING;
             })
             .catch(function() {
                 toasts.showSimple('Algum erro aconteceu! :(');

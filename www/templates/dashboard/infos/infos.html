@@ -16,7 +16,7 @@
 			<section ng-if="!isLoading">
 				<br />
 				<img ng-src=" {{ healthPlan._id.operator.image }}" class="padding" style="width:80%; margin: auto; display: block;">
-				<rating ng-model="rating.rate" max="rating.max"></rating>
+				<rating ng-model="operatorRating" max="MAX_RATING" readOnly="true"></rating>
 				<br /><br />
 				<h2 class="text-center padding-left padding-right ">{{ healthPlan.name }}</h2>
 
