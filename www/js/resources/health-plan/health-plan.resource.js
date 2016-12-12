@@ -2,6 +2,12 @@
 angular.module('starter')
     .factory('HealthPlan', function($resource, ANS_WS_URI, $q) {
         return $resource(ANS_WS_URI + 'health-plans/:operatorId-:codId', {}, {
+			'query': {
+				url: ANS_WS_URI + 'health-plans',
+				method: 'GET',
+				cache: true,
+				isArray: true
+			},
 			'queryByStateCityAndOperator': {
 				url: ANS_WS_URI + 'health-plans/state/:state/city/:city/operator/:operator',
 				method: 'GET',
