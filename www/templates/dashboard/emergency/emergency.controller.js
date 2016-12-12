@@ -6,69 +6,95 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 
     $scope.emergencyHospitals = [];
 
-    getHospitals()
-        .then(function(hospitals) {
-            return $q.when()
-                .then(getCurrentPosition())
-                .then(createMap())
-                .then(populateHospitals(hospitals))
-                .catch(function(error) {
-                    console.log(error.message);
-                });
-        })
-        .catch(function(error) {
-            console.log('emergencyHospitalsController ');
-            console.log(error.message);
-        })
+	$scope.doRefresh = _doRefresh;
+	_doRefresh();
 
-	$scope.doRefresh = function() {
-        getHospitals()
-            .then(function(hospitals) {
-                return $q.when()
-                    .then(getCurrentPosition())
-                    .then(createMap())
-                    .then(populateHospitals(hospitals))
-                    .then(function() {
-        				$scope.$broadcast('scroll.refreshComplete'); // Stop the ion-refresher from spinning
-                        animateList();
-        			})
-                    .catch(function(error) {
-                        console.log('emergencyHospitalsController ');
-                        console.log(error.message);
-                    });
-            })
-            .catch(function(error) {
-                console.log('emergencyHospitalsController ');
-                console.log(error.message);
-                toasts.showSimple('Algo ruim aconteceu! Verifique sua conexão com a internet.')
-            });
+	function _doRefresh() {
+        return $q.when()
+				.then(getCurrentPosition())
+		        .then(function(position) {
+		            return $q.when()
+		                .then(createMap(position))
+						.then(getHospitals(position))
+		                .then(populateHospitals())
+		        })
+				.then(function() {
+					$scope.$broadcast('scroll.refreshComplete'); // Stop the ion-refresher from spinning
+				})
+		        .catch(function(error) {
+		            console.log(error);
+		        })
 	}
 
-	function animateList() {
-	    $timeout(function() {
-			ionicMaterialMotion.fadeSlideIn();
-			ionicMaterialInk.displayEffect();
-		}, 100);
+	function getHospitals(position) {
+		return getCityAndStateByGeocode(position)
+			.then(function(geolocation) {
+
+				var state = brazilianInfos.getStateByLabel(geolocation.administrative_area_level_1);
+				if (!state)
+					state = brazilianInfos.getStateByCod(geolocation.administrative_area_level_1);
+
+				var city = brazilianInfos.getCityByLabel(state, geolocation.administrative_area_level_2);
+				if (!city)
+					city = brazilianInfos.getCityByCod(state, geolocation.administrative_area_level_2);
+
+
+				console.log(state);
+				console.log(city);
+
+		    	return HealthProvider.queryAllHospitalsByHealthPlan({'state': state.cod, 'city': city.cod, 'plan': 471802140}).$promise
+		            .then(function(hospitals) {
+		                $scope.emergencyHospitals = hospitals;
+		                return hospitals;
+		            });
+			});
 	}
 
-	function getHospitals() {
-        return HealthProvider.queryAllHospitalsByHealthPlan({'state': 'df', 'city': 'brasilia', 'plan': 471802140}).$promise
-                .then(function(hospitals) {
-                    $scope.emergencyHospitals = hospitals;
-                    return hospitals;
-                });
+	function getCityAndStateByGeocode(position) {
+		var geocoder = new google.maps.Geocoder;
+
+		// console.log(position);
+		var deferred = $q.defer();
+
+		if (position && position.coords) {
+			geocoder.geocode({ 'location': { lat: position.coords.latitude, lng: position.coords.longitude } },
+				function(results, status) {
+					// console.log(results);
+					if (status === google.maps.GeocoderStatus.OK) {
+						if (results[0]) {
+							var compiledResult = results[0].address_components
+								.map(function(e) {
+									var a = {};
+									a[e.types[0]] = e.long_name;
+									return a; })
+								.reduce(function(previousValue, currentValue, index) {
+									if(!previousValue) previousValue = {};
+									_.merge(previousValue, currentValue);
+									return previousValue;
+								});
+
+							deferred.resolve(compiledResult)
+						} else {
+							deferred.reject(new Error('No results found'));
+						}
+					} else {
+						deferred.reject(new Error('Geocoder failed due to: ' + status));
+					}
+				});
+		}
+
+		return deferred.promise;
 	}
 
     function getCurrentPosition() {
-        var options = {timeout: 10000, enableHighAccuracy: true};
-
         return function() {
-            return $cordovaGeolocation.getCurrentPosition(options);
+            return $cordovaGeolocation.getCurrentPosition({ timeout: 10000, enableHighAccuracy: true });
         }
     }
 
-    function createMap() {
-        return function(position) {
+    function createMap(position) {
+        return function() {
+
             var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
             var mapOptions = {
@@ -97,8 +123,8 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
         }
     }
 
-    function populateHospitals(hospitals) {
-        return function() {
+    function populateHospitals() {
+        return function(hospitals) {
             angular.forEach(hospitals, function(hospital) {
                 if (!hospital.address)
                     return;
