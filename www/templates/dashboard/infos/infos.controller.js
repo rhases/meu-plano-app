@@ -1,15 +1,18 @@
-appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil) {
+appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil, authService) {
 
-        $scope.userAge = ageUtil.getAgeFromDate($rootScope.appUser.birthdate);
+        var appUser;
 
-        // $scope.healthPlan = healthPlanService.getById('463945116');
-        HealthPlan.get({ operatorId: '5711', codId: '421545991' }).$promise
-        .then(function(healthPlan) {
-            if (healthPlan)
+        authService.getAppUser()
+            .then(function (_appUser) {
+                appUser = _appUser;
+                $scope.userAge = ageUtil.getAgeFromDate(appUser.birthdate);
+                return HealthPlan.get({codId: appUser.healthPlan.cod, operatorId: appUser.healthPlan.operator }).$promise;
+            })
+            .then(function(healthPlan) {
                 $scope.healthPlan = healthPlan;
-        });
+            });
 
-        console.log($scope.healthPlan);
+        // $scope.userAge = ageUtil.getAgeFromDate('1988-06-20T03:00:00.000Z');
 
         $scope.prettyCoverageType = function(coverageType) {
             if(coverageType === 'ambulatorial')
@@ -37,16 +40,13 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
 
         $scope.prettyModeratorFactor = function() {
             if ($scope.healthPlan && $scope.healthPlan.moderatorFactor)
-                return 'Sim, seu plano possui coopartição';
+                return 'Sim, seu plano possui coparticipação';
             else
                 return 'Não é preciso pagar nada quando utilizar o plano';
         }
 
         $scope.showMaxPrice = function() {
-            if ($scope.healthPlan && $scope.healthPlan.maxPrice)
-                return true;
-            else
-                return false;
+            return $scope.healthPlan && $scope.healthPlan.maxPrice;
         }
 
         $scope.maxPrice = function() {
@@ -69,6 +69,11 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
 
         $scope.openCoverageTypePopover = function($event, coverageType) {
             $scope.popoverText = popoverText.coverageTypeText(coverageType);
+            $scope.openPopover($event);
+        }
+
+        $scope.openModeratorFactorPopover = function($event) {
+            $scope.popoverText = popoverText.moderatorFactorText();
             $scope.openPopover($event);
         }
 
