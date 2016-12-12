@@ -13,7 +13,14 @@ appControllers.controller('menuCtrl', function ($scope, $state, $rootScope, $ion
 	$ionicHistory.nextViewOptions({
     	disableBack: true
   	});
-
 	$ionicHistory.clearHistory();
+
+	$scope.canShowMenu = function() {
+		return !($scope.CURRENT_STATE == 'app.login'
+			|| $scope.CURRENT_STATE == 'app.registerInfos'
+			|| $scope.CURRENT_STATE == 'app.registerProfile'
+			|| $scope.CURRENT_STATE == 'app.registerOperator'
+			|| $scope.CURRENT_STATE == 'app.registerHealthplan');
+	}
 
 });

@@ -7,7 +7,6 @@ appControllers
 			controller: function($scope, authService, $state) {
 				$scope.logout = function () {
 					authService.logout();
-					$state.go("app.login");
 				}
 			}
 		}
