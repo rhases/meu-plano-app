@@ -8,5 +8,4 @@ appControllers.controller('menuCtrl', function ($scope, $state, $rootScope, $ion
 
 	$ionicHistory.clearHistory();
 
-	$state.go('app.login');
 });

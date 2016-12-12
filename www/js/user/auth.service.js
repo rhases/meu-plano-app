@@ -1,4 +1,4 @@
-angular.module('starter').service('authService', function($rootScope, $q, $http, localStorage, userService, userProfileService, inviteService, lodash) {
+angular.module('starter').service('authService', function($rootScope, $q, $http, $ionicHistory, localStorage, lodash, $state) {
 
 	var AUTH_TOKEN_KEY = "AUTH_TOKEN";
 
@@ -90,6 +90,15 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 
 	function _logout() {
 		localStorage.removeAll();
+		$ionicHistory.nextViewOptions({
+			historyRoot: true,
+			expire: 300,
+			disableBack: true
+		});
+
+		$ionicHistory.clearHistory();
+
+		$state.go('app.login');
 	}
 
 	return {

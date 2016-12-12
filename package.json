@@ -1,7 +1,7 @@
 {
-  "name": "rhases-app",
-  "version": "1.1.1",
-  "description": "rhases-app: An Ionic project",
+  "name": "rhases-my-plan-app",
+  "version": "0.0.1",
+  "description": "A project to know everything about your health plan.",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^2.0.4",
@@ -20,23 +20,8 @@
     "cordova-plugin-email-composer",
     "cordova-plugin-whitelist",
     "cordova-plugin-device",
-    {
-      "variables": {
-        "SENDER_ID": "835746108347"
-      },
-      "locator": "phonegap-plugin-push",
-      "id": "phonegap-plugin-push"
-    },
     "cordova-plugin-transport-security",
     "cordova-plugin-statusbar",
-    {
-      "variables": {
-        "APP_ID": "1702791466664692",
-        "APP_NAME": "Rhases - Test"
-      },
-      "locator": "cordova-plugin-facebook4",
-      "id": "cordova-plugin-facebook4"
-    },
     "cordova-plugin-google-analytics",
     "ionic-plugin-keyboard",
     "cordova-plugin-app-version"

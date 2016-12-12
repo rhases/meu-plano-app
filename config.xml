@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="br.com.rhases.app" version="0.1.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="br.com.rhases.app.my-plan" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Meu Plano</name>
     <description>
 		Um aplicativo para você ter o melhor do seu plano de saúde.
@@ -36,9 +36,9 @@
     <preference name="ShowSplashScreenSpinner" value="true" />
     <preference name="SplashScreen" value="screen" />
     <preference name="FadeSplashScreen" value="false" />
-    <preference name="android-minSdkVersion" value="16" />
+    <preference name="android-minSdkVersion" value="22" />
     <preference name="BackupWebStorage" value="none" />
-    <preference name="xwalkVersion" value="18+" />
+    <preference name="xwalkVersion" value="22+" />
     <preference name="xwalkCommandLine" value="--disable-pull-to-refresh-effect" />
     <preference name="xwalkMode" value="embedded" />
     <preference name="xwalkMultipleApk" value="true" />
@@ -97,24 +97,25 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
-    <plugin name="cordova-plugin-console" spec="~1.0.3" />
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.GeoBroker" />
+    </feature>
+    <plugin name="cordova-plugin-console" spec="~1.0.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~3.2.2" />
     <plugin name="cordova-plugin-email-composer" spec="~0.8.3" />
     <plugin name="cordova-plugin-whitelist" spec="~1.2.2" />
-    <plugin name="phonegap-plugin-push" spec="~1.7.4">
-        <variable name="SENDER_ID" value="835746108347" />
-    </plugin>
-    <plugin name="cordova-plugin-facebook4" spec="~1.7.1">
-        <variable name="APP_ID" value="1702791466664692" />
-        <variable name="APP_NAME" value="Meu Plano" />
-    </plugin>
-    <plugin name="cordova-plugin-device" spec="~1.1.2" />
+    <plugin name="cordova-plugin-device" spec="~1.1.3" />
     <plugin name="cordova-plugin-transport-security" spec="~0.1.2" />
     <plugin name="cordova-plugin-statusbar" spec="~2.1.3" />
     <plugin name="cordova-plugin-google-analytics" spec="~0.8.1" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
-    <plugin name="cordova-plugin-app-version" spec="~0.1.8" />
-    <feature name="Geolocation">
-        <param name="android-package" value="org.apache.cordova.GeoBroker" />
-    </feature>
+    <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
+    <plugin name="cordova-plugin-geolocation" spec="~2.4.0" />
+    <plugin name="cordova-plugin-crosswalk-webview" spec="~2.2.0">
+        <variable name="XWALK_VERSION" value="22+" />
+        <variable name="XWALK_LITEVERSION" value="xwalk_core_library_canary:17+" />
+        <variable name="XWALK_COMMANDLINE" value="--disable-pull-to-refresh-effect" />
+        <variable name="XWALK_MODE" value="embedded" />
+        <variable name="XWALK_MULTIPLEAPK" value="true" />
+    </plugin>
 </widget>

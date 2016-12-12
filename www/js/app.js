@@ -49,10 +49,7 @@ angular.module('starter')
 
 			if (!authService.isLoggedIn()) {
                 authService.logout();
-				$state.go('app.login');
 				console.log("Don't have user logged yet!");
-			} else {
-                $state.go('app.tabs.infos');
 			}
 
 			// $rootScope.$on("login:successful", function(userId) {
