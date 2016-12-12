@@ -3,6 +3,12 @@ angular.module('starter')
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
+        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
+            // event.preventDefault();
+            if (fromState.name)
+                $rootScope.currentState = fromState.name;
+        });
+
         function initialRootScope() {
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
