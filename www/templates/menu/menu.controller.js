@@ -4,6 +4,7 @@ appControllers.controller('menuCtrl', function ($scope, $state, $rootScope, $ion
 
 		//disable slide side and back
     $rootScope.slideSideMenu = false;
+	
 		$ionicHistory.nextViewOptions({
 	    	disableBack: true
 	  	});

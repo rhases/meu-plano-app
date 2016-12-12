@@ -6,21 +6,11 @@ appControllers.controller('registerCtrl', function ($scope, $state, authService,
 
 	$scope.appUser = {};
 
-	// $rootScope.userProfile = {
-	// 	_id: "contato@rhases.com.br", // email
-	// 	state: "df",
-	// 	city: "brasilia",
-	// 	name: "Marvio Lúcio Silva",
-	// 	healthPlan: 463945116
-	// };
-
 	$ionicLoading.show();
 
 	authService.getAppUser()
 		.then(function(appUser) {
 			$scope.appUser = appUser || {};
-
-			console.log($scope.appUser)
 		})
 		.catch(function() {
 			$scope.appUser = {};
