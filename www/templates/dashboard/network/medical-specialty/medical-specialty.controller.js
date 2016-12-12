@@ -1,10 +1,11 @@
 // Controller of dashboard.
-appControllers.controller('medicalSpecialtyController', function ($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, MedicalSpecialty, HealthProvider, NetworkRequest) {
+appControllers.controller('medicalSpecialtyController', function ($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, MedicalSpecialty, HealthProvider, NetworkRequest, authService) {
 
 	MedicalSpecialty.get({ id: $stateParams.id }).$promise
 		.then(function (medicalSpecialty) {
 			$scope.medicalSpecialty = medicalSpecialty;
 		})
+		.then(getAppUser())
 		.then(getHealthProviders())
 		.then(function() {
 			animateList();
@@ -16,29 +17,12 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 			$scope.$broadcast('scroll.refreshComplete'); // Stop the ion-refresher from spinning
 		});
 
-	function animateList() {
-	    $timeout(function() {
-			ionicMaterialMotion.fadeSlideIn();
-			ionicMaterialInk.displayEffect();
-		}, 100);
-	}
-
-	function getHealthProviders() {
-		return function() {
-			return HealthProvider.queryByHealthPlanAndMedicalSpecialty({ state: $rootScope.userProfile.state, city: $rootScope.userProfile.city, plan: $rootScope.userProfile.healthPlan, medicalSpecialty: $scope.medicalSpecialty._id }).$promise
-				.then(function(healthProviders) {
-					console.log(healthProviders)
-					$scope.healthProviders = healthProviders;
-				})
-		}
-	}
-
 	$scope.requestNetwork = function() {
 		showModalComment()
 			.then(function(comment) {
 				return NetworkRequest.save({
-					user: $rootScope.userProfile._id,
-					healthPlan: $rootScope.userProfile.healthPlan,
+					user: $scope.appUser._id,
+					healthPlan: $scope.appUser.healthPlan,
 
 					medicalSpecialty: $scope.medicalSpecialty._id,
 					procedure: undefined,
@@ -51,6 +35,32 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 					toasts.showSimple('Rede solicitada. :)')
 				})
 			})
+	}
+
+	function animateList() {
+	    $timeout(function() {
+			ionicMaterialMotion.fadeSlideIn();
+			ionicMaterialInk.displayEffect();
+		}, 100);
+	}
+
+	function getHealthProviders() {
+		return function() {
+			return HealthProvider.queryByHealthPlanAndMedicalSpecialty({ state: $scope.appUser.state, city: $scope.appUser.city, plan: $scope.appUser.healthPlan, medicalSpecialty: $scope.medicalSpecialty._id }).$promise
+				.then(function(healthProviders) {
+					console.log(healthProviders)
+					$scope.healthProviders = healthProviders;
+				})
+		}
+	}
+
+	function getAppUser() {
+		return function() {
+			return authService.getAppUser()
+				.then(function(appUser) {
+					$scope.appUser = appUser;
+				})
+		}
 	}
 
 	function showModalComment() {
