@@ -1,8 +1,6 @@
 appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, HealthPlan, $ionicPopover, popoverText, ageUtil) {
 
-        $scope.userProfile = {
-            "age": 35
-        }
+        $scope.userAge = ageUtil.getAgeFromDate($rootScope.appUser.birthdate);
 
         // $scope.healthPlan = healthPlanService.getById('463945116');
         HealthPlan.get({ id: '471802140' }).$promise
@@ -59,8 +57,7 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
 
         function retrieveMaxPrice() {
             var maxPrice = $scope.healthPlan.maxPrice;
-            var userAge = $scope.userProfile.age;
-            var ageRange = ageUtil.getAgeRange(userAge);
+            var ageRange = ageUtil.getAgeRange($scope.userAge);
             return maxPrice[ageRange];
         }
 
