@@ -5,7 +5,7 @@ angular.module('starter')
             'queryByUser': {
 				url: ANS_WS_URI + 'network-requests/user/:userId',
                 method: 'GET',
-                cache: true,
+                cache: false,
                 isArray: true
             }
 		});

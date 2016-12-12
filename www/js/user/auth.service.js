@@ -99,7 +99,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 			expire: 300,
 			disableBack: true
 		});
-
 		$ionicHistory.clearHistory();
 
 		$state.go('app.login');
