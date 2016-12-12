@@ -11,6 +11,9 @@ appControllers.controller('rightMenuController', function ($scope, $rootScope, $
 	function _loadNetworkRequests() {
 		return authService.getAppUser()
 			.then(function(appUser) {
+				if (!appUser || !appUser._id)
+					return;
+
 				$scope.appUser = appUser;
 
 				NetworkRequest.queryByUser({ userId: $scope.appUser._id }).$promise
