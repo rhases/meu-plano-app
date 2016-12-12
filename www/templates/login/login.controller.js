@@ -1,3 +1,4 @@
-appControllers.controller('loginCtrl', function($scope, $state, $q, $ionicLoading, authService, analyticsService, $rootScope, toasts) {
-
+appControllers.controller('loginCtrl', function($scope, authService, $rootScope) {
+    if (!$rootScope.appUser || !$rootScope.appUser.healthPlan)
+        authService.logout();
 });
