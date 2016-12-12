@@ -4,3 +4,4 @@ angular.module("starter")
 
 	.constant("GCM_SENDER_ID", "XXX")
     .constant('GA_TRACKING_ID', 'XXX')
+	.constant('MAX_RATING', 5);

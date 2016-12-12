@@ -10,7 +10,8 @@ angular.module('starter',
 		'ngCordova',
 		'ngLodash',
 		'ngMask',
-		'ngResource'
+		'ngResource',
+		'ionic.rating'
 	]
 )
 

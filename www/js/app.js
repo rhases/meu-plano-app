@@ -1,9 +1,11 @@
 angular.module('starter')
-    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $ionicLoading, $http, authService, analyticsService, transformUtils) {
+    .run(function ($ionicPlatform, $cordovaSQLite, $rootScope, $ionicHistory, $state, $ionicLoading, $http, authService, analyticsService, transformUtils, MAX_RATING) {
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
         $rootScope.CURRENT_STATE = undefined;
+
+        $rootScope.MAX_RATING = MAX_RATING;
 
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
             // event.preventDefault();
