@@ -7,8 +7,9 @@ angular.module('starter')
 
         $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options) {
             // event.preventDefault();
-            if (fromState.name)
-                $rootScope.CURRENT_STATE = fromState.name;
+            console.log(toState.name);
+            if (toState.name)
+                $rootScope.CURRENT_STATE = toState.name;
         });
 
         function initialRootScope() {

@@ -60,6 +60,9 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	}
 
 	function _saveAppUser(appUser) {
+		if (appUser && !appUser._id)
+			appUser._id = appUser.email;
+
 		return $q.when(_storeAuthToken(JSON.stringify(appUser)));
 		// return userService.save(user)
 		// 	.then(function(token) {
