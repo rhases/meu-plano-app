@@ -105,6 +105,78 @@ angular.module('starter')
                 }
             })
 
+            // Login
+            .state('app.login', {
+                url: "/login",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+					'menuContent': {
+                        templateUrl: "templates/login/login.html",
+                        controller: "loginCtrl"
+					}
+				}
+            })
+
+            .state('app.registerInfos', {
+                url: "/register-infos",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+					'menuContent': {
+                        templateUrl: "templates/register/infos/infos.html",
+                        controller: "registerCtrl"
+					}
+				}
+            })
+
+            .state('app.registerProfile', {
+                url: "/register-profile",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                },
+                views: {
+					'menuContent': {
+                        templateUrl: "templates/register/profile/profile.html",
+                        controller: "profileCtrl"
+					}
+				}
+            })
+
+            .state('app.registerOperator', {
+                url: "/register-operator",
+				cache: false,
+                params:{
+                    isAnimated: true
+                },
+                views: {
+					'menuContent': {
+                        templateUrl: "templates/register/operator/operator.html",
+                        controller: "operatorRegisterCtrl"
+					}
+				}
+            })
+
+            .state('app.registerHealthplan', {
+                url: "/register-healthplan",
+				cache: false,
+                params:{
+                    isAnimated: true,
+                    operator: null
+                },
+                views: {
+					'menuContent': {
+                        templateUrl: "templates/register/healthplan/healthplan.html",
+                        controller: "healthplanRegisterCtrl"
+					}
+				}
+            })
+
         //Use $urlRouterProvider.otherwise(Url);
         // $urlRouterProvider.otherwise(localStorage['AUTH_TOKEN'] ? '/app/dashboard' : '/app/login');
         $urlRouterProvider.otherwise('/app/tabs');

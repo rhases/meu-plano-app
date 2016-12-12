@@ -3,16 +3,13 @@ angular.module('starter')
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
-		// FIXME
-		$rootScope.userProfile = {
-			_id: "contato@rhases.com.br", // email
-			state: "df",
-			city: "brasilia",
-			name: "Marvio Lúcio Silva",
-			hasHealthPlan: true,
-			healthPlan: 463945116
-		};
-
+        $rootScope.userProfile = {
+    		_id: "contato@rhases.com.br", // email
+    		state: "df",
+    		city: "brasilia",
+    		name: "Marvio Lúcio Silva",
+    		healthPlan: 463945116
+    	};
 
         function initialRootScope() {
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
@@ -36,63 +33,6 @@ angular.module('starter')
             }, 100);
         };
 
-		function checkLogin() {
-			return authService.getAppUser({tryReloadFirst: true})
-				.then(function(appUser) {
-					$ionicHistory.nextViewOptions({
-						historyRoot: true,
-						expire: 300
-					});
-
-					// If can not load app user
-					if(!appUser) {
-						authService.logout();
-						$state.go('app.login');
-						console.log("App User not found! Go to login.");
-						return;
-					}
-
-					$rootScope.appUser = appUser;
-
-					// Need to complete the registration
-					if (!appUser.name
-						|| !appUser.email
-						|| !appUser.phone
-						|| !appUser.birthdate
-						|| !appUser.gender) {
-						$state.go('app.register::infos');
-					}
-
-					// Need to complete the profile
-					else if(!appUser.profile.state
-						|| !appUser.profile.city
-						|| !appUser.profile.hasHealthPlan
-						|| !appUser.profile.healthPlan
-						|| !appUser.profile.healthPlan.name
-						|| !appUser.profile.healthPlan.number) {
-						$state.go('app.register::profile');
-					}
-
-					// Check invite status status
-					else if (!appUser.isInvited) {
-						$state.go('app.register::notInvited');
-					}
-
-					// Go to dashboard
-					else {
-						$state.go('app.dashboard::emergencyHospitals');
-						console.log("The user '" + appUser.name + "' successful logged!");
-            			analyticsService.track.user(appUser);
-					}
-				})
-				.catch(function(err) {
-					console.log(err);
-					authService.logout();
-					$state.go('app.login');
-					console.log("App User not found! Go to login.");
-				})
-		}
-
         $ionicPlatform.ready(function () {
             configSplashScreen();
 
@@ -115,20 +55,18 @@ angular.module('starter')
 
             // $state.go('app.dashboard::emergencyHospitals');
 
-			// if (!authService.isLoggedIn()) {
-			// 	$state.go('app.login');
-			// 	console.log("Don't have user logged yet!");
-			// } else {
+			if (!authService.isLoggedIn()) {
+				$state.go('app.login');
+				console.log("Don't have user logged yet!");
+			} else {
+                $state.go('app.tabs.infos');
+			}
+
+			// $rootScope.$on("login:successful", function(userId) {
 			// 	$ionicLoading.show();
 			// 	checkLogin()
 			// 		.then(function() { $ionicLoading.hide(); });
-			// }
-
-			$rootScope.$on("login:successful", function(userId) {
-				$ionicLoading.show();
-				checkLogin()
-					.then(function() { $ionicLoading.hide(); });
-			})
+			// })
         });
 
     })

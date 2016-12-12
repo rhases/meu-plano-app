@@ -1,7 +1,14 @@
 'use strict';
 angular.module('starter')
     .factory('Operator', function($resource, ANS_WS_URI, $q) {
-        return $resource(ANS_WS_URI + 'operator/:id', {}, {});
+        return $resource(ANS_WS_URI + 'operator/:id', {}, {
+			'queryByStateAndCity': {
+				url: ANS_WS_URI + 'operator/:state/:city',
+                method: 'GET',
+                cache: true,
+                isArray: true
+            }
+		});
 
 		// // TODO: Usar só a linha de cima. Usado só para testar por enquanto.
 		// var MOCK_DATA = [{
