@@ -29,7 +29,7 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	function _getAppUser() {
 		// user
 		return $q.when(function() {
-			var appUser = JSON.parse(_getAuthToken()));
+			var appUser = JSON.parse(_getAuthToken());
 
 			if (appUser.birthdate)
 				appUser.birthdate = new Date(appUser.birthdate);
@@ -59,8 +59,6 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 	}
 
 	function _saveAppUser(appUser) {
-		$rootScope.appUser = appUser;
-
 		return $q.when(_storeAuthToken(JSON.stringify(appUser)));
 		// return userService.save(user)
 		// 	.then(function(token) {
@@ -80,7 +78,7 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 		// 	})
 
 	}
-	
+
 	function _isLoggedIn() {
 		if(!_getAuthToken()) {
 			return false;
@@ -91,11 +89,9 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 
 	function _logout() {
 		localStorage.removeAll();
-		$rootScope.appUser = undefined;
 	}
 
 	return {
-		facebookSignUp: _facebookSignUp,
 		logout: _logout,
 		isLoggedIn: _isLoggedIn,
 		getAppUser: _getAppUser,
