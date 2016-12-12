@@ -3,14 +3,6 @@ angular.module('starter')
 
         $rootScope.TRANSFORM_UTILS = transformUtils;
 
-        $rootScope.userProfile = {
-    		_id: "contato@rhases.com.br", // email
-    		state: "df",
-    		city: "brasilia",
-    		name: "Marvio Lúcio Silva",
-    		healthPlan: 463945116
-    	};
-
         function initialRootScope() {
             $rootScope.isAndroid = ionic.Platform.isAndroid();// Check platform of running device is android or not.
             $rootScope.isIOS = ionic.Platform.isIOS();// Check platform of running device is ios or not.
@@ -47,15 +39,8 @@ angular.module('starter')
 
             initialRootScope();
 
-			// Existe um variavel q diz se está com internet ou não!!!
-			// TODO: checkInternet()
-			// 	.catch( toasts.show("Sem conexão com a internet.") );
-
-			// TODO: Testar se o token do usuário esta válido
-
-            // $state.go('app.dashboard::emergencyHospitals');
-
 			if (!authService.isLoggedIn()) {
+                authService.logout();
 				$state.go('app.login');
 				console.log("Don't have user logged yet!");
 			} else {

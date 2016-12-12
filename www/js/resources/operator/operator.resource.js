@@ -1,9 +1,9 @@
 'use strict';
 angular.module('starter')
     .factory('Operator', function($resource, ANS_WS_URI, $q) {
-        return $resource(ANS_WS_URI + 'operator/:id', {}, {
+        return $resource(ANS_WS_URI + 'operators/:id', {}, {
 			'queryByStateAndCity': {
-				url: ANS_WS_URI + 'operator/:state/:city',
+				url: ANS_WS_URI + 'operators/:state/:city',
                 method: 'GET',
                 cache: true,
                 isArray: true

@@ -178,7 +178,7 @@ angular.module('starter')
             })
 
         //Use $urlRouterProvider.otherwise(Url);
-        // $urlRouterProvider.otherwise(localStorage['AUTH_TOKEN'] ? '/app/dashboard' : '/app/login');
-        $urlRouterProvider.otherwise('/app/tabs');
+        $urlRouterProvider.otherwise(localStorage['AUTH_TOKEN'] ? '/app/tabs' : '/app/login');
+        // $urlRouterProvider.otherwise('/app/login');
 
     });
