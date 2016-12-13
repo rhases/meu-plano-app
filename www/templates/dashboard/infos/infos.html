@@ -24,7 +24,7 @@
 						Avaliação oficial {{ healthPlan._id.operator.ansQualification }}/1.0
 						&nbsp;
 
-						<i style="cursor: pointer; font-size: 16px;" class="fa fa-info-circle" ng-click="openModeratorFactorPopover($event)"></i>
+						<i style="cursor: pointer; font-size: 16px;" class="fa fa-info-circle" ng-click="openAnsQualificationPopover($event)"></i>
 					</p>
 				</div>
 
@@ -94,7 +94,7 @@
 					</ion-item>
 				</div>
 
-				<div class="list card" ng-if="showMaxPrice()">
+				<div class="list card">
 					<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
 						<span>É necessário pagar ao utilizar o plano?</span>
 					</ion-item>
@@ -107,7 +107,7 @@
 									{{ prettyModeratorFactor() }}
 								</p>
 							</div>
-							<div class="col">
+							<div class="col" ng-if="healthPlan.moderatorFactor">
 								<a class="button button-clear button-dark pull-right" ng-click="openModeratorFactorPopover($event)">
 									<i class="fa fa-info-circle" style="font-size: 16px;"></i>
 								</a>
@@ -117,7 +117,7 @@
 					</ion-item>
 				</div>
 
-				<div class="list card" ng-if="showMaxPrice()">
+				<div class="list card">
 					<ion-item style="padding-bottom: 0px; overflow: visible; white-space: normal;">
 						<span>Qual o registro do plano na ANS?</span>
 					</ion-item>

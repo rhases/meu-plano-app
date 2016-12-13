@@ -1,5 +1,5 @@
 // Controller of dashboard.
-appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, toasts, $ionicPopup, $ionicModal, $ionicLoading, $cordovaGeolocation, HealthProvider) {
+appControllers.controller('emergencyHospitalsController', function($http, $scope, $rootScope, $timeout, $state, $stateParams, $q, lodash, toasts, $ionicPopup, $ionicModal, $ionicLoading, $cordovaGeolocation, HealthProvider, authService) {
     var geocoder = new google.maps.Geocoder();
 
     $scope.isAnimated =  $stateParams.isAnimated;
@@ -11,6 +11,7 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 
 	function _doRefresh() {
         return $q.when()
+				.then(getAppUser())
 				.then(getCurrentPosition())
 		        .then(function(position) {
 		            return $q.when()
@@ -38,7 +39,7 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 				if (!city)
 					city = brazilianInfos.getCityByCod(state, geolocation.administrative_area_level_2);
 
-		    	return HealthProvider.queryAllHospitalsByHealthPlan({'state': state.cod, 'city': city.cod, 'plan': 471802140}).$promise
+		    	return HealthProvider.queryAllHospitalsByHealthPlan({ 'state': state.cod, 'city': city.cod, 'planOperatorId': $scope.appUser.healthPlan.operator , 'planoCodId': $scope.appUser.healthPlan.cod }).$promise
 		            .then(function(hospitals) {
 		                $scope.emergencyHospitals = hospitals;
 		                return hospitals;
@@ -155,4 +156,14 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
             });
         }
     }
+
+
+	function getAppUser() {
+		return function() {
+			return authService.getAppUser()
+				.then(function(appUser) {
+					$scope.appUser = appUser;
+				})
+		}
+	}
 });

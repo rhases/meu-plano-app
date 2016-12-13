@@ -47,9 +47,8 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 
 	function getHealthProviders() {
 		return function() {
-			return HealthProvider.queryByHealthPlanAndMedicalSpecialty({ state: $scope.appUser.state, city: $scope.appUser.city, plan: $scope.appUser.healthPlan, medicalSpecialty: $scope.medicalSpecialty._id }).$promise
+			return HealthProvider.queryByHealthPlanAndMedicalSpecialty({ state: $scope.appUser.state, city: $scope.appUser.city, planOperatorId: $scope.appUser.healthPlan.operator, planoCodId: $scope.appUser.healthPlan.cod, medicalSpecialty: $scope.medicalSpecialty._id }).$promise
 				.then(function(healthProviders) {
-					console.log(healthProviders)
 					$scope.healthProviders = healthProviders;
 				})
 		}
