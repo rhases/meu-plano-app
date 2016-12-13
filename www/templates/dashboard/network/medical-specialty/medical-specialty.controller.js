@@ -1,5 +1,8 @@
 // Controller of dashboard.
-appControllers.controller('medicalSpecialtyController', function ($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, MedicalSpecialty, HealthProvider, NetworkRequest, authService) {
+appControllers.controller('medicalSpecialtyController', function ($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, MedicalSpecialty, HealthProvider, NetworkRequest, authService, $ionicLoading) {
+
+	$scope.isLoading = true;
+	$ionicLoading.show();
 
 	MedicalSpecialty.get({ id: $stateParams.id }).$promise
 		.then(function (medicalSpecialty) {
@@ -8,6 +11,8 @@ appControllers.controller('medicalSpecialtyController', function ($scope, $rootS
 		.then(getAppUser())
 		.then(getHealthProviders())
 		.then(function() {
+			$scope.isLoading = false;
+			$ionicLoading.hide();
 			animateList();
 		})
         .catch(function(err) {
