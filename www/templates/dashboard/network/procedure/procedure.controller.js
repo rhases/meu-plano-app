@@ -1,5 +1,8 @@
 // Controller of dashboard.
-appControllers.controller('procedureController', function($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, Procedure, HealthProvider, NetworkRequest, authService) {
+appControllers.controller('procedureController', function($scope, $rootScope, $timeout, $stateParams, $q, ionicMaterialMotion, ionicMaterialInk, toasts, $ionicModal, Procedure, HealthProvider, NetworkRequest, authService, $ionicLoading) {
+
+	$scope.isLoading = true;
+	$ionicLoading.show();
 
 	Procedure.get({ id: $stateParams.id }).$promise
 		.then(function (procedure) {
@@ -8,6 +11,8 @@ appControllers.controller('procedureController', function($scope, $rootScope, $t
 		.then(getAppUser())
 		.then(getHealthProviders())
 		.then(function() {
+			$scope.isLoading = false;
+			$ionicLoading.hide();
 			animateList();
 		})
         .catch(function(err) {
