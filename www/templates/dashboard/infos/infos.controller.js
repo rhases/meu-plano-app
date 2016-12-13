@@ -82,6 +82,11 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
             $scope.popover = popover;
         });
 
+        $scope.openAnsQualificationPopover = function($event) {
+            $scope.popoverText = popoverText.ansQualificationText();
+            $scope.openPopover($event);
+        }
+
         $scope.openCoverageTypePopover = function($event, coverageType) {
             $scope.popoverText = popoverText.coverageTypeText(coverageType);
             $scope.openPopover($event);
