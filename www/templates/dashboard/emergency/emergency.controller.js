@@ -16,17 +16,14 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 			.then(getAppUser())
 			.then(getCurrentPosition())
 	        .then(function(position) {
-				console.log(position)
 	            return $q.when()
 	                .then(createMap(position))
 					.then(getHospitals(position))
 	                .then(populateHospitals())
 					.then(function() {
-						console.log('OK 1 !!!');
 					})
 	        })
 			.then(function() {
-				console.log('OK 2!!!');
 				$scope.loading = false;
 				$ionicLoading.hide();
 				$scope.$broadcast('scroll.refreshComplete'); // Stop the ion-refresher from spinning
@@ -139,7 +136,7 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 			var promises = [];
 
 			var index = 0;
-            angular.forEach(hospitals.slice(0, 5), function(hospital) {
+            angular.forEach(hospitals, function(hospital) {
 				// var hospital = hospitals[0]
                 if (!hospital.address)
                     return;
@@ -181,11 +178,10 @@ appControllers.controller('emergencyHospitalsController', function($http, $scope
 						infoWindow.open($scope.map, marker);
 					});
 
-					console.log("RESOLVE");
 					deferred.resolve();
 				} else {
-					console.log("REJECT");
-					deferred.reject("Geocode was not successful for the following reason: " + status);
+					console.log("Geocode was not successful for the following reason: " + status)
+					deferred.resolve("Geocode was not successful for the following reason: " + status);
 				}
 			});
 		}, index % 5 * 100);
