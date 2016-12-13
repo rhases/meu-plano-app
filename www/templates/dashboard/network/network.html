@@ -14,7 +14,7 @@
 		<div class="list" style="margin-bottom: 0px;">
 			<label class="item item-input">
 				<i class="icon ion-search placeholder-icon"></i>
-				<input type="text" placeholder="Search" ng-model="searchText">
+				<input type="text" placeholder="Digite a consulta ou procedimento" ng-model="searchText">
 			</label>
 		</div>
 
@@ -25,7 +25,7 @@
 			<div class="list">
 
 				<div class="item item-divider"> Consultas </div>
-				<a class="item" ui-sref="app.tabs.network-medical-specialty({ id: medicalSpecialty._id })" ng-repeat="medicalSpecialty in medicalSpecialties | filter:searchText | limitTo:30">
+				<a class="item" ui-sref="app.tabs.network-medical-specialty({ id: medicalSpecialty._id })" ng-repeat="medicalSpecialty in medicalSpecialties | filter:searchText | limitTo:5">
 					{{ medicalSpecialty.name }}
 				</a>
 
