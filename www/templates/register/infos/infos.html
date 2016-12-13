@@ -13,6 +13,10 @@
 					<input ng-model="appUser.email" name="email" required placeholder="Email" type="email">
 				</label>
 				<label class="item item-input item-stacked-label">
+					<span class="input-label">Número da carteirinha</span>
+					<input ng-model="appUser.healthPlanCard" name="healthPlanCard" required placeholder="Número da carteirinha do plano de saúde" type="text">
+				</label>
+				<label class="item item-input item-stacked-label">
 					<span class="input-label">Nascimento</span>
 					<input ng-model="appUser.birthdate" name="birthdate" required placeholder="Data de Nascimento" type="date">
 				</label>
@@ -20,7 +24,7 @@
 
 			<br />
 
-			<button class="button button-block button-positive button-balanced" nav-clear ng-disabled="!(registerUser.name.$valid && registerUser.email.$valid && registerUser.birthdate.$valid)" ng-click="save()">
+			<button class="button button-block button-positive button-balanced" nav-clear ng-disabled="!(registerUser.name.$valid && registerUser.email.$valid && registerUser.birthdate.$valid && registerUser.healthPlanCard.$valid)" ng-click="save()">
 				Continuar
 			</button>
     	</form>
