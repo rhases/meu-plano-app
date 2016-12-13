@@ -2,6 +2,7 @@
   "name": "rhases-my-plan-app",
   "version": "0.0.1",
   "description": "A project to know everything about your health plan.",
+  "license": "CC-BY-4.0",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",
