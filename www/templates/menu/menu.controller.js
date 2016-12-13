@@ -32,6 +32,9 @@ appControllers.controller('menuCtrl', function ($scope, $state, $rootScope, $ion
 		$scope.countingNetworkRequests = true;
 		return NetworkRequest.queryByUser({ userId: $scope.appUser._id }).$promise
 			.then(function(networkRequests) {
+                if (!networkRequests || networkRequests.length == 0)
+                    return 0;
+                    
 				$scope.openedRequestCount = networkRequests
 					.map(function(element) {
 						return element.status == 'new' ? 1 : 0

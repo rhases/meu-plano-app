@@ -1,24 +1,24 @@
-angular.module('starter').service('authService', function($rootScope, $q, $http, $ionicHistory, localStorage, lodash, $state) {
+angular.module('starter').service('authService', function($rootScope, $q, $http, $ionicHistory, localStorage, lodash, $state, UserProfile) {
 
-	var AUTH_TOKEN_KEY = "AUTH_TOKEN";
+	var USER = "APP_USER";
 
 	// Token de autenticacao retornado pelo rhases-auth
-	var _authToken;
+	var _user;
 
 	// Save auth toke
-	function _storeAuthToken(token) {
-		_authToken = token;
-		localStorage.set(AUTH_TOKEN_KEY, _authToken);
-		console.log('Auth Token stored: ' + JSON.stringify(_authToken));
-		return _authToken;
+	function _storeUserToken(token) {
+		_user = token;
+		localStorage.set(USER, _user);
+		console.log('Auth Token stored: ' + JSON.stringify(_user));
+		return _user;
 	}
 
 	// Get/Recovery auth token
 	function _getAuthToken() {
-		if(!_authToken) {
-			_authToken = localStorage.get(AUTH_TOKEN_KEY);
+		if(!_user) {
+			_user = localStorage.get(USER);
 		}
-		return lodash.clone(_authToken);
+		return lodash.clone(_user);
 	}
 
 	// *********************************************************
@@ -37,50 +37,35 @@ angular.module('starter').service('authService', function($rootScope, $q, $http,
 
 				return appUser;
 			});
-		// return userService.get(params)
-		// 	.then(function(user) {
-		// 		return userProfileService.get(user.email, params)
-		// 			.then(function(userProfile) {
-		// 				user.profile = userProfile; // user profile
-		// 				return inviteService.status(user.email)
-		// 					.then(function(status) {
-		// 						user.isInvited = (status === 'invited' || status === 'registered');
-		// 						user.status = status;
-		// 						return user;
-		// 					})
-		// 					.catch(function(err) {
-		// 						console.log("Can not load invite status. " + err);
-		// 					});
-		// 			})
-		// 			.catch(function(err) {
-		// 				user.profile = { _id: user.email };
-		// 				return user;
-		// 			})
-		// 	})
 	}
 
 	function _saveAppUser(appUser) {
+		var def = $q.defer();
+
 		if (appUser && !appUser._id)
 			appUser._id = appUser.email;
 
-		return $q.when(_storeAuthToken(JSON.stringify(appUser)));
-		// return userService.save(user)
-		// 	.then(function(token) {
-		// 		_storeAuthToken(token);
-		// 		if (userProfile) {
-		// 			return userProfileService.save(userProfile);
-		// 		} else {
-		// 			return undefined;
-		// 		}
-		// 	})
-		// 	.then(function() {
-		// 		return _getAppUser();
-		// 	})
-		// 	.then(function(appUser) { // TODO melhor fazer isso com evento.
-		// 		$rootScope.appUser = appUser;
-		// 		return appUser;
-		// 	})
+		UserProfile.save(appUser).$promise
+			.then(function(saveUser) {
+				if (!saveUser)
+					def.reject('UserNotFound');
 
+				_storeUserToken(JSON.stringify(saveUser));
+				def.resolve(saveUser);
+			})
+			.catch(function(err) {
+				UserProfile.update({'id': appUser._id}, appUser).$promise
+					.then(function(updateUser) {
+						_storeUserToken(JSON.stringify(updateUser));
+
+						def.resolve(updateUser);
+					})
+					.catch(function(err) {
+						def.reject(err);
+					});
+			});
+
+		return def.promise;
 	}
 
 	function _isLoggedIn() {

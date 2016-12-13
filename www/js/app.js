@@ -53,13 +53,10 @@ angular.module('starter')
                 authService.logout();
 				$state.go('app.login');
 				console.log("Don't have user logged yet!");
-			}
-
-			// $rootScope.$on("login:successful", function(userId) {
-			// 	$ionicLoading.show();
-			// 	checkLogin()
-			// 		.then(function() { $ionicLoading.hide(); });
-			// })
+			} else {
+                // precisa disso, não tirar ;D
+                $state.go('app.tabs.infos');
+            }
         });
 
     })
