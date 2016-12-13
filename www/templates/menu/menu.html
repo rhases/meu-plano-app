@@ -12,7 +12,7 @@
 
             <ion-nav-buttons side="right">
                 <button ng-show="canShowMenu()" class="button button-icon button-clear ion-android-mail" menu-toggle="right">
-                	<span class="badge badge-assertive header-badge">
+                	<span class="badge badge-assertive header-badge" ng-if="openedRequestCount >= 0">
 						<span ng-show="!countingNetworkRequests">{{ openedRequestCount }}</span>
 						<span ng-show="countingNetworkRequests">?</span>
 					</span>

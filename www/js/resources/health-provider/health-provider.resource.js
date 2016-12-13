@@ -16,13 +16,13 @@ angular.module('starter')
 				'queryByHealthPlanAndProcedure': {
 					url: ANS_WS_URI + 'health-providers/:planOperatorId-:planoCodId/:state/:city/procedure/:procedure',
 	                method: 'GET',
-	                cache: true,
+	                cache: false,
 	                isArray: true
 	            },
 				'queryByHealthPlanAndMedicalSpecialty': {
 					url: ANS_WS_URI + 'health-providers/:planOperatorId-:planoCodId/:state/:city/medical-specialty/:medicalSpecialty',
 	                method: 'GET',
-	                cache: true,
+	                cache: false,
 	                isArray: true
 	            }
 	        });
