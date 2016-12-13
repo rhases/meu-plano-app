@@ -11,8 +11,9 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
                 return HealthPlan.get({codId: appUser.healthPlan.cod, operatorId: appUser.healthPlan.operator }).$promise;
             })
             .then(function(healthPlan) {
-                $scope.healthPlan = healthPlan;
                 $scope.operatorRating = healthPlan._id.operator.ansQualification * MAX_RATING;
+                $scope.healthPlan = healthPlan;
+                removeReferenciaCoverageTypeIfPresent();
             })
             .catch(function() {
                 toasts.showSimple('Algum erro aconteceu! :(');
@@ -22,7 +23,11 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
                 $ionicLoading.hide();
             });
 
-        // $scope.userAge = ageUtil.getAgeFromDate('1988-06-20T03:00:00.000Z');
+
+        var removeReferenciaCoverageTypeIfPresent = function() {
+            // mutates $scope.healthPlan.coverageTypes
+            lodash.pull($scope.healthPlan.coverageTypes, 'referencia');
+        }
 
         $scope.prettyCoverageType = function(coverageType) {
             if(coverageType === 'ambulatorial')
