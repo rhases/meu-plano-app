@@ -47,9 +47,8 @@ appControllers.controller('procedureController', function($scope, $rootScope, $t
 
 	function getHealthProviders() {
 		return function() {
-			return HealthProvider.queryByHealthPlanAndProcedure({ state: $scope.appUser.state, city: $scope.appUser.city, plan: $scope.appUser.healthPlan, procedure: $scope.procedure._id }).$promise
+			return HealthProvider.queryByHealthPlanAndProcedure({ state: $scope.appUser.state, city: $scope.appUser.city, planOperatorId: $scope.appUser.healthPlan.operator, planoCodId: $scope.appUser.healthPlan.cod, procedure: $scope.procedure._id }).$promise
 				.then(function(healthProviders) {
-					console.log(healthProviders)
 					$scope.healthProviders = healthProviders;
 				})
 		}

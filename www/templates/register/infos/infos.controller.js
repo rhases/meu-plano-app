@@ -7,10 +7,8 @@ appControllers.controller('registerCtrl', function ($scope, $state, authService,
 	$scope.appUser = {};
 
 	$ionicLoading.show();
-
 	authService.getAppUser()
 		.then(function(appUser) {
-			console.log(appUser);
 			$scope.appUser = appUser || {};
 		})
 		.catch(function() {
