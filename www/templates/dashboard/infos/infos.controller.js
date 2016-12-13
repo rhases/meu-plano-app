@@ -8,6 +8,7 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
             .then(function (_appUser) {
                 appUser = _appUser;
                 $scope.userAge = ageUtil.getAgeFromDate(appUser.birthdate);
+                $scope.healthPlanCard = appUser.healthPlanCard;
                 return HealthPlan.get({codId: appUser.healthPlan.cod, operatorId: appUser.healthPlan.operator }).$promise;
             })
             .then(function(healthPlan) {
@@ -22,7 +23,6 @@ appControllers.controller('infosCtrl', function ($http, $scope, $rootScope, $tim
                 $scope.isLoading = false;
                 $ionicLoading.hide();
             });
-
 
         var removeReferenciaCoverageTypeIfPresent = function() {
             // mutates $scope.healthPlan.coverageTypes

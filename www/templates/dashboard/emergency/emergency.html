@@ -26,7 +26,7 @@
 
 		<div class="animate-fade-slide-in">
 
-			<div class="padding text-center" ng-if="!emergencyHospitals || emergencyHospitals.length == 0">
+			<div class="padding text-center" ng-if="(!emergencyHospitals || emergencyHospitals.length == 0) && !loading">
 				<br>
 				<span class="assertive">Não há nenhum hospital que atenda pronto socorro pelo seu plano na sua região. :(</span>
 				<br>
