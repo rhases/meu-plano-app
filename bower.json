@@ -23,7 +23,8 @@
     "ionic-material": "^0.4.2",
     "snackbarjs": "^1.1.0",
     "angular-messages": "^1.5.7",
-    "angular-resource": "^1.5.7"
+    "angular-resource": "^1.5.7",
+    "ionic-rating": "^0.3.0"
   },
   "resolutions": {
     "angular": "^1.5.7",
